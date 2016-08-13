@@ -16,7 +16,7 @@ export function loginRequest()
 		return axios.post('http://bad.watch/api/session')
 			.then((response) => {
 				let data = response.data;
-				if(data.responseCode == 18)
+				if(data.responseCode == 42)
 				{
 					dispatch(loginSuccess(response.data.userData));
 				}
@@ -38,7 +38,7 @@ export function logoutRequest()
 		return axios.post('http://bad.watch/api/logout')
 			.then((response) => {
 				let data = response.data;
-				if(data.responseCode == 20)
+				if(data.responseCode == 43)
 				{
 					dispatch(logoutSuccess());
 				}

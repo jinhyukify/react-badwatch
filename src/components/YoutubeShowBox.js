@@ -1,11 +1,14 @@
 import React from 'react';
 import axios from 'axios';
+import Title from './Title';
+import YoutubeCommentBox from './YoutubeCommentBox';
 class YoutubeShowBox extends React.Component {
     constructor(props) {
         super(props);
         this.displayName = 'YoutubeShowBox';
         this.state = {
-        	youtube: {}
+        	youtube: {},
+            comments: []
         };
     }
 
@@ -29,14 +32,23 @@ class YoutubeShowBox extends React.Component {
                     )
                     return;
     			}
-    		})
+    		});   
     }
 
     render() {
         return (
+            <div>
+                <Title title={this.state.youtube.title} 
+                       comment_count={this.state.youtube.comment_count}
+                       hit_count={this.state.youtube.hit_count}
+                       like_count={this.state.youtube.like_count}
+                       written_time={this.state.youtube.written_time} 
+                       name={this.state.youtube.name}/>
         		<div className="video-container">
-		        <iframe width="853" height="480" src={"//www.youtube.com/embed/"+this.state.youtube.youtube_key} frameBorder="0" allowFullScreen></iframe>
-		      </div>
+		           <iframe width="853" height="480" src={"//www.youtube.com/embed/"+this.state.youtube.youtube_key} frameBorder="0" allowFullScreen></iframe>
+		        </div>
+                <YoutubeCommentBox id={this.props.params.id}/>
+            </div>               
         	);
     }
 }

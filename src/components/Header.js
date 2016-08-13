@@ -45,6 +45,7 @@ class Header extends React.Component {
 				<li><Link to="/">Home</Link></li>
     			<li><a onClick={this._popLogin}>Login</a></li>
     			<li><Link to="/youtube?page=1">Youtube</Link></li>
+                <li><Link to="/chat">채팅</Link></li>
 			</ul>
     	);
 
@@ -53,7 +54,7 @@ class Header extends React.Component {
 				<li><Link to="/">Home</Link></li>
 				<li><a>{this.props.authentication.status.current_user.battletag}</a></li>
     			<li><a onClick={this._handleLogout}>Logout</a></li>
-    			<li><Link to="/youtube?page=1">Youtube</Link></li>
+    			<li><Link to="/chat">채팅</Link></li>
 			</ul>
     		
     	);

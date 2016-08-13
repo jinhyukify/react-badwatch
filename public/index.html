@@ -7,11 +7,20 @@
 	  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/css/materialize.min.css">
 	  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/sweetalert2/4.1.2/sweetalert2.min.css">
+	  <!-- Include Editor style. -->
+	  <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+	  <link href="https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.3.4/css/froala_editor.min.css" rel="stylesheet" type="text/css" />
+	  <link href="https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.3.4/css/froala_style.min.css" rel="stylesheet" type="text/css" />
+
+
 	  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 	  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/es6-promise/3.2.2/es6-promise.min.js"></script>
 	  <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 	  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/js/materialize.min.js"></script>
 	  <script type="text/javascript" src="https://cdn.jsdelivr.net/sweetalert2/4.1.2/sweetalert2.js"></script>
+	  <!-- Include JS file. -->
+	  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.3.4/js/froala_editor.min.js"></script>
+	  
 	  <script type="text/javascript">
 	 	if (!String.prototype.includes) {
 		     String.prototype.includes = function() {
@@ -20,12 +29,17 @@
 		     };
 		 }
 	  </script> 
+	  
    </head>
 
    <body>
       <div id="root"></div>
       <script src="/bundle.js"></script> 	
-
+      <script type="text/javascript">
+	  	$(function() {
+          $('#edit').froalaEditor()
+      });
+	  </script>
    </body>
 
 </html>
