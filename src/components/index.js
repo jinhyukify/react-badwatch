@@ -6,5 +6,7 @@ import UserDetailBox from './UserDetailBox';
 import UserDetailCard from './UserDetailCard';
 import YoutubeBox from './YoutubeBox';
 import YoutubeShowBox from './YoutubeShowBox';
+import YoutubeEditBox from './YoutubeEditBox'
 
-export { Header, UserDataBox, UserProfile, UserGameData, UserDetailBox, UserDetailCard, YoutubeBox ,YoutubeShowBox };
+
+export { Header, UserDataBox, UserProfile, UserGameData, UserDetailBox, UserDetailCard, YoutubeBox ,YoutubeShowBox, YoutubeEditBox };

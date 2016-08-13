@@ -44,7 +44,7 @@ class Header extends React.Component {
     		<ul id="nav-mobile" className="right hide-on-med-and-down">
 				<li><Link to="/">Home</Link></li>
     			<li><a onClick={this._popLogin}>Login</a></li>
-    			<li><Link to="/youtube?page=1">Youtube</Link></li>
+    			<li><Link to="/youtube">Youtube</Link></li>
                 <li><Link to="/chat">채팅</Link></li>
 			</ul>
     	);

@@ -46,7 +46,7 @@
 
 	__webpack_require__(1);
 	__webpack_require__(298);
-	module.exports = __webpack_require__(662);
+	module.exports = __webpack_require__(664);
 
 
 /***/ },
@@ -8139,15 +8139,15 @@
 
 	var _components = __webpack_require__(534);
 
-	var _reactRedux = __webpack_require__(573);
+	var _reactRedux = __webpack_require__(575);
 
-	var _redux = __webpack_require__(580);
+	var _redux = __webpack_require__(582);
 
-	var _reducers = __webpack_require__(659);
+	var _reducers = __webpack_require__(661);
 
 	var _reducers2 = _interopRequireDefault(_reducers);
 
-	var _reduxThunk = __webpack_require__(661);
+	var _reduxThunk = __webpack_require__(663);
 
 	var _reduxThunk2 = _interopRequireDefault(_reduxThunk);
 
@@ -8175,7 +8175,8 @@
 					_reactRouter.Route,
 					{ path: 'youtube', component: _containers.Youtube },
 					_react2.default.createElement(_reactRouter.IndexRoute, { component: _components.YoutubeBox }),
-					_react2.default.createElement(_reactRouter.Route, { path: 'show/:id', component: _components.YoutubeShowBox })
+					_react2.default.createElement(_reactRouter.Route, { path: 'show/:id', component: _components.YoutubeShowBox }),
+					_react2.default.createElement(_reactRouter.Route, { path: 'edit/:id', component: _components.YoutubeEditBox })
 				)
 			)
 		)
@@ -34721,27 +34722,27 @@
 
 	var _App2 = _interopRequireDefault(_App);
 
-	var _Home = __webpack_require__(603);
+	var _Home = __webpack_require__(605);
 
 	var _Home2 = _interopRequireDefault(_Home);
 
-	var _Login = __webpack_require__(604);
+	var _Login = __webpack_require__(606);
 
 	var _Login2 = _interopRequireDefault(_Login);
 
-	var _Register = __webpack_require__(605);
+	var _Register = __webpack_require__(607);
 
 	var _Register2 = _interopRequireDefault(_Register);
 
-	var _User = __webpack_require__(606);
+	var _User = __webpack_require__(608);
 
 	var _User2 = _interopRequireDefault(_User);
 
-	var _Youtube = __webpack_require__(607);
+	var _Youtube = __webpack_require__(609);
 
 	var _Youtube2 = _interopRequireDefault(_Youtube);
 
-	var _Chat = __webpack_require__(608);
+	var _Chat = __webpack_require__(610);
 
 	var _Chat2 = _interopRequireDefault(_Chat);
 
@@ -34773,9 +34774,9 @@
 
 	var _components = __webpack_require__(534);
 
-	var _reactRedux = __webpack_require__(573);
+	var _reactRedux = __webpack_require__(575);
 
-	var _authentication = __webpack_require__(601);
+	var _authentication = __webpack_require__(603);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -34879,7 +34880,7 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.YoutubeShowBox = exports.YoutubeBox = exports.UserDetailCard = exports.UserDetailBox = exports.UserGameData = exports.UserProfile = exports.UserDataBox = exports.Header = undefined;
+	exports.YoutubeEditBox = exports.YoutubeShowBox = exports.YoutubeBox = exports.UserDetailCard = exports.UserDetailBox = exports.UserGameData = exports.UserProfile = exports.UserDataBox = exports.Header = undefined;
 
 	var _Header = __webpack_require__(535);
 
@@ -34913,6 +34914,10 @@
 
 	var _YoutubeShowBox2 = _interopRequireDefault(_YoutubeShowBox);
 
+	var _YoutubeEditBox = __webpack_require__(574);
+
+	var _YoutubeEditBox2 = _interopRequireDefault(_YoutubeEditBox);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	exports.Header = _Header2.default;
@@ -34923,6 +34928,7 @@
 	exports.UserDetailCard = _UserDetailCard2.default;
 	exports.YoutubeBox = _YoutubeBox2.default;
 	exports.YoutubeShowBox = _YoutubeShowBox2.default;
+	exports.YoutubeEditBox = _YoutubeEditBox2.default;
 
 /***/ },
 /* 535 */
@@ -35022,7 +35028,7 @@
 	                    null,
 	                    _react2.default.createElement(
 	                        _reactRouter.Link,
-	                        { to: '/youtube?page=1' },
+	                        { to: '/youtube' },
 	                        'Youtube'
 	                    )
 	                ),
@@ -37087,6 +37093,76 @@
 	    }, {
 	        key: 'render',
 	        value: function render() {
+	            var create_modal = _react2.default.createElement(
+	                'div',
+	                { id: 'modal1', className: 'modal' },
+	                _react2.default.createElement(
+	                    'div',
+	                    { className: 'modal-content' },
+	                    _react2.default.createElement(
+	                        'h5',
+	                        null,
+	                        '제목(생략가능)'
+	                    ),
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'input-field col s10' },
+	                        _react2.default.createElement('input', { type: 'text',
+	                            name: 'title',
+	                            value: this.state.title,
+	                            onChange: this._handleChange }),
+	                        _react2.default.createElement(
+	                            'label',
+	                            null,
+	                            '제목'
+	                        )
+	                    ),
+	                    _react2.default.createElement(
+	                        'h5',
+	                        null,
+	                        '유튜브 동영상 링크'
+	                    ),
+	                    _react2.default.createElement(
+	                        'p',
+	                        null,
+	                        'ex) https://www.youtube.com/watch?v=nxoAEKVPVF8'
+	                    ),
+	                    _react2.default.createElement(
+	                        'p',
+	                        null,
+	                        'ex) https://youtu.be/nxoAEKVPVF8'
+	                    ),
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'input-field col s10' },
+	                        _react2.default.createElement('input', { type: 'text',
+	                            name: 'url',
+	                            value: this.state.url,
+	                            onChange: this._handleChange }),
+	                        _react2.default.createElement(
+	                            'label',
+	                            null,
+	                            '링크'
+	                        )
+	                    )
+	                ),
+	                _react2.default.createElement(
+	                    'div',
+	                    { className: 'modal-footer' },
+	                    _react2.default.createElement(
+	                        'a',
+	                        { onClick: this._onSubmitYoutube,
+	                            className: 'waves-effect waves-light btn' },
+	                        '글작성'
+	                    ),
+	                    _react2.default.createElement(
+	                        'a',
+	                        { className: 'modal-action modal-close waves-effect waves-green btn-flat' },
+	                        '닫기'
+	                    )
+	                )
+	            );
+
 	            return _react2.default.createElement(
 	                'div',
 	                null,
@@ -37095,75 +37171,7 @@
 	                    { className: 'modal-trigger waves-effect waves-light btn', onClick: this._openModal },
 	                    '글쓰기'
 	                ),
-	                _react2.default.createElement(
-	                    'div',
-	                    { id: 'modal1', className: 'modal' },
-	                    _react2.default.createElement(
-	                        'div',
-	                        { className: 'modal-content' },
-	                        _react2.default.createElement(
-	                            'h5',
-	                            null,
-	                            '제목(생략가능)'
-	                        ),
-	                        _react2.default.createElement(
-	                            'div',
-	                            { className: 'input-field col s10' },
-	                            _react2.default.createElement('input', { type: 'text',
-	                                name: 'title',
-	                                value: this.state.title,
-	                                onChange: this._handleChange }),
-	                            _react2.default.createElement(
-	                                'label',
-	                                null,
-	                                '제목'
-	                            )
-	                        ),
-	                        _react2.default.createElement(
-	                            'h5',
-	                            null,
-	                            '유튜브 동영상 링크'
-	                        ),
-	                        _react2.default.createElement(
-	                            'p',
-	                            null,
-	                            'ex) https://www.youtube.com/watch?v=nxoAEKVPVF8'
-	                        ),
-	                        _react2.default.createElement(
-	                            'p',
-	                            null,
-	                            'ex) https://youtu.be/nxoAEKVPVF8'
-	                        ),
-	                        _react2.default.createElement(
-	                            'div',
-	                            { className: 'input-field col s10' },
-	                            _react2.default.createElement('input', { type: 'text',
-	                                name: 'url',
-	                                value: this.state.url,
-	                                onChange: this._handleChange }),
-	                            _react2.default.createElement(
-	                                'label',
-	                                null,
-	                                '링크'
-	                            )
-	                        )
-	                    ),
-	                    _react2.default.createElement(
-	                        'div',
-	                        { className: 'modal-footer' },
-	                        _react2.default.createElement(
-	                            'a',
-	                            { onClick: this._onSubmitYoutube,
-	                                className: 'waves-effect waves-light btn' },
-	                            '글작성'
-	                        ),
-	                        _react2.default.createElement(
-	                            'a',
-	                            { className: 'modal-action modal-close waves-effect waves-green btn-flat' },
-	                            '닫기'
-	                        )
-	                    )
-	                ),
+	                create_modal,
 	                _react2.default.createElement(
 	                    'div',
 	                    { className: 'row' },
@@ -37308,6 +37316,16 @@
 
 	var _YoutubeCommentBox2 = _interopRequireDefault(_YoutubeCommentBox);
 
+	var _LikeBox = __webpack_require__(573);
+
+	var _LikeBox2 = _interopRequireDefault(_LikeBox);
+
+	var _reactRouter = __webpack_require__(469);
+
+	var _reactAddonsUpdate = __webpack_require__(571);
+
+	var _reactAddonsUpdate2 = _interopRequireDefault(_reactAddonsUpdate);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -37329,18 +37347,81 @@
 	            youtube: {},
 	            comments: []
 	        };
+	        _this._onDeleteYoutube = _this._onDeleteYoutube.bind(_this);
+	        _this._onDisLike = _this._onDisLike.bind(_this);
+	        _this._onLike = _this._onLike.bind(_this);
 	        return _this;
 	    }
 
 	    _createClass(YoutubeShowBox, [{
+	        key: '_onLike',
+	        value: function _onLike() {
+	            var _this2 = this;
+
+	            _axios2.default.get('http://bad.watch/api/youtube-like/' + this.props.params.id).then(function (response) {
+	                var data = response.data;
+	                if (data.responseCode == 50) {
+	                    //좋아요 성공
+	                    _this2.setState({
+	                        youtube: (0, _reactAddonsUpdate2.default)(_this2.state.youtube, {
+	                            like_count: { $set: data.like_count },
+	                            like_status: { $set: true }
+	                        })
+	                    });
+	                } else if (data.responseCode == 49) {
+	                    sweetAlert('', '이미 좋아요를 하셨습니다.', 'error');
+	                    return;
+	                } else {
+	                    sweetAlert('', '실패했습니다.', 'error');
+	                    return;
+	                }
+	            });
+	        }
+	    }, {
+	        key: '_onDisLike',
+	        value: function _onDisLike() {
+	            var _this3 = this;
+
+	            _axios2.default.get('http://bad.watch/api/youtube-dislike/' + this.props.params.id).then(function (response) {
+	                var data = response.data;
+	                if (data.responseCode == 52) {
+	                    //좋아요 취소 성공
+	                    _this3.setState({
+	                        youtube: (0, _reactAddonsUpdate2.default)(_this3.state.youtube, {
+	                            like_count: { $set: data.like_count },
+	                            like_status: { $set: false }
+	                        })
+	                    });
+	                } else {
+	                    sweetAlert('', '오류가 발생했습니다.', 'error');
+	                    return;
+	                }
+	            });
+	        }
+	    }, {
+	        key: '_onDeleteYoutube',
+	        value: function _onDeleteYoutube() {
+	            _axios2.default.delete('http://bad.watch/api/youtube/' + this.props.params.id).then(function (response) {
+	                var data = response.data;
+	                if (data.responseCode == 47) {
+	                    sweetAlert('', '글이 삭제되었습니다.', 'success');
+	                    _reactRouter.browserHistory.push('/youtube');
+	                    return;
+	                } else {
+	                    sweetAlert('', '권한이 없습니다.', 'error');
+	                    return;
+	                }
+	            });
+	        }
+	    }, {
 	        key: 'componentDidMount',
 	        value: function componentDidMount() {
-	            var _this2 = this;
+	            var _this4 = this;
 
 	            _axios2.default.get('http://bad.watch/api/youtube/' + this.props.params.id).then(function (response) {
 	                var data = response.data;
 	                if (data.responseCode == 6) {
-	                    _this2.setState({
+	                    _this4.setState({
 	                        youtube: data.youtubeData
 	                    });
 	                } else {
@@ -37352,6 +37433,20 @@
 	    }, {
 	        key: 'render',
 	        value: function render() {
+	            var auth_box = _react2.default.createElement(
+	                'div',
+	                null,
+	                _react2.default.createElement(
+	                    _reactRouter.Link,
+	                    { to: "/youtube/edit/" + this.props.params.id, className: 'btn' },
+	                    '수정'
+	                ),
+	                _react2.default.createElement(
+	                    'a',
+	                    { onClick: this._onDeleteYoutube, className: 'btn' },
+	                    '삭제'
+	                )
+	            );
 	            return _react2.default.createElement(
 	                'div',
 	                null,
@@ -37366,6 +37461,11 @@
 	                    { className: 'video-container' },
 	                    _react2.default.createElement('iframe', { width: '853', height: '480', src: "//www.youtube.com/embed/" + this.state.youtube.youtube_key, frameBorder: '0', allowFullScreen: true })
 	                ),
+	                _react2.default.createElement(_LikeBox2.default, { like_count: this.state.youtube.like_count,
+	                    handleLike: this._onLike,
+	                    handleDisLike: this._onDisLike,
+	                    like_status: this.state.youtube.like_status }),
+	                this.state.youtube.authentication ? auth_box : undefined,
 	                _react2.default.createElement(_YoutubeCommentBox2.default, { id: this.props.params.id })
 	            );
 	        }
@@ -38072,14 +38172,256 @@
 
 	'use strict';
 
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(299);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var LikeBox = function (_React$Component) {
+	    _inherits(LikeBox, _React$Component);
+
+	    function LikeBox(props) {
+	        _classCallCheck(this, LikeBox);
+
+	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(LikeBox).call(this, props));
+
+	        _this.displayName = 'LikeBox';
+	        return _this;
+	    }
+
+	    _createClass(LikeBox, [{
+	        key: 'render',
+	        value: function render() {
+	            var like_true = _react2.default.createElement(
+	                'div',
+	                null,
+	                _react2.default.createElement(
+	                    'a',
+	                    { onClick: this.props.handleDisLike, className: 'waves-effect waves-light btn' },
+	                    _react2.default.createElement(
+	                        'i',
+	                        { className: 'material-icons left' },
+	                        'thumb_up'
+	                    ),
+	                    '좋아요 취소'
+	                )
+	            );
+	            var like_false = _react2.default.createElement(
+	                'div',
+	                null,
+	                _react2.default.createElement(
+	                    'a',
+	                    { onClick: this.props.handleLike, className: 'waves-effect waves-light btn' },
+	                    _react2.default.createElement(
+	                        'i',
+	                        { className: 'material-icons left' },
+	                        'thumb_up'
+	                    ),
+	                    '좋아요 ',
+	                    this.props.like_count,
+	                    '개'
+	                )
+	            );
+	            return _react2.default.createElement(
+	                'div',
+	                null,
+	                this.props.like_status ? like_true : like_false
+	            );
+	        }
+	    }]);
+
+	    return LikeBox;
+	}(_react2.default.Component);
+
+	LikeBox.propTypes = {
+	    handleLike: _react2.default.PropTypes.func,
+	    hadleDisLike: _react2.default.PropTypes.func,
+	    like_count: _react2.default.PropTypes.number,
+	    like_status: _react2.default.PropTypes.number
+	};
+
+	exports.default = LikeBox;
+
+/***/ },
+/* 574 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(299);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _axios = __webpack_require__(536);
+
+	var _axios2 = _interopRequireDefault(_axios);
+
+	var _reactRouter = __webpack_require__(469);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var YoutubeEditBox = function (_React$Component) {
+	    _inherits(YoutubeEditBox, _React$Component);
+
+	    function YoutubeEditBox(props) {
+	        _classCallCheck(this, YoutubeEditBox);
+
+	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(YoutubeEditBox).call(this, props));
+
+	        _this.displayName = 'YoutubeEditBox';
+	        _this.state = {
+	            title: '',
+	            url: ''
+	        };
+	        _this._handleChange = _this._handleChange.bind(_this);
+	        _this._onEditYoutube = _this._onEditYoutube.bind(_this);
+	        return _this;
+	    }
+
+	    _createClass(YoutubeEditBox, [{
+	        key: '_handleChange',
+	        value: function _handleChange(e) {
+	            var nextState = {};
+	            nextState[e.target.name] = e.target.value;
+	            this.setState(nextState);
+	        }
+	    }, {
+	        key: '_onEditYoutube',
+	        value: function _onEditYoutube() {
+	            var _this2 = this;
+
+	            _axios2.default.put('http://bad.watch/api/youtube/' + this.props.params.id, {
+	                title: this.state.title,
+	                url: this.state.url
+	            }).then(function (response) {
+	                var data = response.data;
+	                if (data.responseCode == 45) {
+	                    _reactRouter.browserHistory.push('/youtube/show/' + _this2.props.params.id);
+	                    return;
+	                } else {
+	                    sweetAlert('글을 수정하는데 실패했습니다.', 'error');
+	                    return;
+	                }
+	            });
+	        }
+	    }, {
+	        key: 'componentDidMount',
+	        value: function componentDidMount() {
+	            var _this3 = this;
+
+	            _axios2.default.get('http://bad.watch/api/youtube/' + this.props.params.id).then(function (response) {
+	                var data = response.data;
+	                if (data.responseCode == 6) {
+	                    _this3.setState({
+	                        title: data.youtubeData.title,
+	                        url: "https://www.youtube.com/watch?v=" + data.youtubeData.youtube_key
+	                    });
+	                } else {
+	                    sweetAlert('데이터를 불러오는데 오류가 발생했습니다.', '잠시후 다시시도해주세요.', 'error');
+	                    return;
+	                }
+	            });
+	        }
+	    }, {
+	        key: 'render',
+	        value: function render() {
+	            return _react2.default.createElement(
+	                'div',
+	                null,
+	                _react2.default.createElement(
+	                    'div',
+	                    { className: 'input-field col s10' },
+	                    _react2.default.createElement('input', { type: 'text',
+	                        name: 'title',
+	                        value: this.state.title,
+	                        onChange: this._handleChange }),
+	                    _react2.default.createElement(
+	                        'label',
+	                        null,
+	                        '제목'
+	                    )
+	                ),
+	                _react2.default.createElement(
+	                    'h5',
+	                    null,
+	                    '유튜브 동영상 링크'
+	                ),
+	                _react2.default.createElement(
+	                    'p',
+	                    null,
+	                    'ex) https://www.youtube.com/watch?v=nxoAEKVPVF8'
+	                ),
+	                _react2.default.createElement(
+	                    'p',
+	                    null,
+	                    'ex) https://youtu.be/nxoAEKVPVF8'
+	                ),
+	                _react2.default.createElement(
+	                    'div',
+	                    { className: 'input-field col s10' },
+	                    _react2.default.createElement('input', { type: 'text',
+	                        name: 'url',
+	                        value: this.state.url,
+	                        onChange: this._handleChange }),
+	                    _react2.default.createElement(
+	                        'label',
+	                        null,
+	                        '링크'
+	                    )
+	                ),
+	                _react2.default.createElement(
+	                    'button',
+	                    { onClick: this._onEditYoutube },
+	                    '수정'
+	                )
+	            );
+	        }
+	    }]);
+
+	    return YoutubeEditBox;
+	}(_react2.default.Component);
+
+	exports.default = YoutubeEditBox;
+
+/***/ },
+/* 575 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
 	exports.__esModule = true;
 	exports.connect = exports.Provider = undefined;
 
-	var _Provider = __webpack_require__(574);
+	var _Provider = __webpack_require__(576);
 
 	var _Provider2 = _interopRequireDefault(_Provider);
 
-	var _connect = __webpack_require__(577);
+	var _connect = __webpack_require__(579);
 
 	var _connect2 = _interopRequireDefault(_connect);
 
@@ -38089,7 +38431,7 @@
 	exports.connect = _connect2["default"];
 
 /***/ },
-/* 574 */
+/* 576 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -38099,11 +38441,11 @@
 
 	var _react = __webpack_require__(299);
 
-	var _storeShape = __webpack_require__(575);
+	var _storeShape = __webpack_require__(577);
 
 	var _storeShape2 = _interopRequireDefault(_storeShape);
 
-	var _warning = __webpack_require__(576);
+	var _warning = __webpack_require__(578);
 
 	var _warning2 = _interopRequireDefault(_warning);
 
@@ -38173,7 +38515,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(294)))
 
 /***/ },
-/* 575 */
+/* 577 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -38189,7 +38531,7 @@
 	});
 
 /***/ },
-/* 576 */
+/* 578 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -38218,7 +38560,7 @@
 	}
 
 /***/ },
-/* 577 */
+/* 579 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -38230,31 +38572,31 @@
 
 	var _react = __webpack_require__(299);
 
-	var _storeShape = __webpack_require__(575);
+	var _storeShape = __webpack_require__(577);
 
 	var _storeShape2 = _interopRequireDefault(_storeShape);
 
-	var _shallowEqual = __webpack_require__(578);
+	var _shallowEqual = __webpack_require__(580);
 
 	var _shallowEqual2 = _interopRequireDefault(_shallowEqual);
 
-	var _wrapActionCreators = __webpack_require__(579);
+	var _wrapActionCreators = __webpack_require__(581);
 
 	var _wrapActionCreators2 = _interopRequireDefault(_wrapActionCreators);
 
-	var _warning = __webpack_require__(576);
+	var _warning = __webpack_require__(578);
 
 	var _warning2 = _interopRequireDefault(_warning);
 
-	var _isPlainObject = __webpack_require__(594);
+	var _isPlainObject = __webpack_require__(596);
 
 	var _isPlainObject2 = _interopRequireDefault(_isPlainObject);
 
-	var _hoistNonReactStatics = __webpack_require__(599);
+	var _hoistNonReactStatics = __webpack_require__(601);
 
 	var _hoistNonReactStatics2 = _interopRequireDefault(_hoistNonReactStatics);
 
-	var _invariant = __webpack_require__(600);
+	var _invariant = __webpack_require__(602);
 
 	var _invariant2 = _interopRequireDefault(_invariant);
 
@@ -38617,7 +38959,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(294)))
 
 /***/ },
-/* 578 */
+/* 580 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -38648,7 +38990,7 @@
 	}
 
 /***/ },
-/* 579 */
+/* 581 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -38656,7 +38998,7 @@
 	exports.__esModule = true;
 	exports["default"] = wrapActionCreators;
 
-	var _redux = __webpack_require__(580);
+	var _redux = __webpack_require__(582);
 
 	function wrapActionCreators(actionCreators) {
 	  return function (dispatch) {
@@ -38665,7 +39007,7 @@
 	}
 
 /***/ },
-/* 580 */
+/* 582 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -38673,27 +39015,27 @@
 	exports.__esModule = true;
 	exports.compose = exports.applyMiddleware = exports.bindActionCreators = exports.combineReducers = exports.createStore = undefined;
 
-	var _createStore = __webpack_require__(581);
+	var _createStore = __webpack_require__(583);
 
 	var _createStore2 = _interopRequireDefault(_createStore);
 
-	var _combineReducers = __webpack_require__(589);
+	var _combineReducers = __webpack_require__(591);
 
 	var _combineReducers2 = _interopRequireDefault(_combineReducers);
 
-	var _bindActionCreators = __webpack_require__(591);
+	var _bindActionCreators = __webpack_require__(593);
 
 	var _bindActionCreators2 = _interopRequireDefault(_bindActionCreators);
 
-	var _applyMiddleware = __webpack_require__(592);
+	var _applyMiddleware = __webpack_require__(594);
 
 	var _applyMiddleware2 = _interopRequireDefault(_applyMiddleware);
 
-	var _compose = __webpack_require__(593);
+	var _compose = __webpack_require__(595);
 
 	var _compose2 = _interopRequireDefault(_compose);
 
-	var _warning = __webpack_require__(590);
+	var _warning = __webpack_require__(592);
 
 	var _warning2 = _interopRequireDefault(_warning);
 
@@ -38717,7 +39059,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(294)))
 
 /***/ },
-/* 581 */
+/* 583 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -38726,11 +39068,11 @@
 	exports.ActionTypes = undefined;
 	exports["default"] = createStore;
 
-	var _isPlainObject = __webpack_require__(582);
+	var _isPlainObject = __webpack_require__(584);
 
 	var _isPlainObject2 = _interopRequireDefault(_isPlainObject);
 
-	var _symbolObservable = __webpack_require__(587);
+	var _symbolObservable = __webpack_require__(589);
 
 	var _symbolObservable2 = _interopRequireDefault(_symbolObservable);
 
@@ -38984,12 +39326,12 @@
 	}
 
 /***/ },
-/* 582 */
+/* 584 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var getPrototype = __webpack_require__(583),
-	    isHostObject = __webpack_require__(585),
-	    isObjectLike = __webpack_require__(586);
+	var getPrototype = __webpack_require__(585),
+	    isHostObject = __webpack_require__(587),
+	    isObjectLike = __webpack_require__(588);
 
 	/** `Object#toString` result references. */
 	var objectTag = '[object Object]';
@@ -39060,10 +39402,10 @@
 
 
 /***/ },
-/* 583 */
+/* 585 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var overArg = __webpack_require__(584);
+	var overArg = __webpack_require__(586);
 
 	/* Built-in method references for those with the same name as other `lodash` methods. */
 	var nativeGetPrototype = Object.getPrototypeOf;
@@ -39081,7 +39423,7 @@
 
 
 /***/ },
-/* 584 */
+/* 586 */
 /***/ function(module, exports) {
 
 	/**
@@ -39102,7 +39444,7 @@
 
 
 /***/ },
-/* 585 */
+/* 587 */
 /***/ function(module, exports) {
 
 	/**
@@ -39128,7 +39470,7 @@
 
 
 /***/ },
-/* 586 */
+/* 588 */
 /***/ function(module, exports) {
 
 	/**
@@ -39163,18 +39505,18 @@
 
 
 /***/ },
-/* 587 */
+/* 589 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {/* global window */
 	'use strict';
 
-	module.exports = __webpack_require__(588)(global || window || this);
+	module.exports = __webpack_require__(590)(global || window || this);
 
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 588 */
+/* 590 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -39199,7 +39541,7 @@
 
 
 /***/ },
-/* 589 */
+/* 591 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -39207,13 +39549,13 @@
 	exports.__esModule = true;
 	exports["default"] = combineReducers;
 
-	var _createStore = __webpack_require__(581);
+	var _createStore = __webpack_require__(583);
 
-	var _isPlainObject = __webpack_require__(582);
+	var _isPlainObject = __webpack_require__(584);
 
 	var _isPlainObject2 = _interopRequireDefault(_isPlainObject);
 
-	var _warning = __webpack_require__(590);
+	var _warning = __webpack_require__(592);
 
 	var _warning2 = _interopRequireDefault(_warning);
 
@@ -39332,7 +39674,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(294)))
 
 /***/ },
-/* 590 */
+/* 592 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -39362,7 +39704,7 @@
 	}
 
 /***/ },
-/* 591 */
+/* 593 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -39418,7 +39760,7 @@
 	}
 
 /***/ },
-/* 592 */
+/* 594 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -39429,7 +39771,7 @@
 
 	exports["default"] = applyMiddleware;
 
-	var _compose = __webpack_require__(593);
+	var _compose = __webpack_require__(595);
 
 	var _compose2 = _interopRequireDefault(_compose);
 
@@ -39481,7 +39823,7 @@
 	}
 
 /***/ },
-/* 593 */
+/* 595 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -39526,12 +39868,12 @@
 	}
 
 /***/ },
-/* 594 */
+/* 596 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var getPrototype = __webpack_require__(595),
-	    isHostObject = __webpack_require__(597),
-	    isObjectLike = __webpack_require__(598);
+	var getPrototype = __webpack_require__(597),
+	    isHostObject = __webpack_require__(599),
+	    isObjectLike = __webpack_require__(600);
 
 	/** `Object#toString` result references. */
 	var objectTag = '[object Object]';
@@ -39602,10 +39944,10 @@
 
 
 /***/ },
-/* 595 */
+/* 597 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var overArg = __webpack_require__(596);
+	var overArg = __webpack_require__(598);
 
 	/* Built-in method references for those with the same name as other `lodash` methods. */
 	var nativeGetPrototype = Object.getPrototypeOf;
@@ -39623,7 +39965,7 @@
 
 
 /***/ },
-/* 596 */
+/* 598 */
 /***/ function(module, exports) {
 
 	/**
@@ -39644,7 +39986,7 @@
 
 
 /***/ },
-/* 597 */
+/* 599 */
 /***/ function(module, exports) {
 
 	/**
@@ -39670,7 +40012,7 @@
 
 
 /***/ },
-/* 598 */
+/* 600 */
 /***/ function(module, exports) {
 
 	/**
@@ -39705,7 +40047,7 @@
 
 
 /***/ },
-/* 599 */
+/* 601 */
 /***/ function(module, exports) {
 
 	/**
@@ -39761,7 +40103,7 @@
 
 
 /***/ },
-/* 600 */
+/* 602 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/**
@@ -39819,7 +40161,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(294)))
 
 /***/ },
-/* 601 */
+/* 603 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -39835,7 +40177,7 @@
 	exports.logout = logout;
 	exports.logoutSuccess = logoutSuccess;
 
-	var _ActionTypes = __webpack_require__(602);
+	var _ActionTypes = __webpack_require__(604);
 
 	var _axios = __webpack_require__(536);
 
@@ -39907,7 +40249,7 @@
 	}
 
 /***/ },
-/* 602 */
+/* 604 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -39923,7 +40265,7 @@
 	var AUTH_LOGOUT_SUCCESS = exports.AUTH_LOGOUT_SUCCESS = "AUTH_LOGOUT_SUCCESS";
 
 /***/ },
-/* 603 */
+/* 605 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -40091,7 +40433,7 @@
 	exports.default = Home;
 
 /***/ },
-/* 604 */
+/* 606 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -40143,7 +40485,7 @@
 	exports.default = Login;
 
 /***/ },
-/* 605 */
+/* 607 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -40195,7 +40537,7 @@
 	exports.default = Register;
 
 /***/ },
-/* 606 */
+/* 608 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -40339,7 +40681,7 @@
 	exports.default = User;
 
 /***/ },
-/* 607 */
+/* 609 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -40396,7 +40738,7 @@
 	exports.default = Youtube;
 
 /***/ },
-/* 608 */
+/* 610 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -40411,7 +40753,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _socket = __webpack_require__(609);
+	var _socket = __webpack_require__(611);
 
 	var _socket2 = _interopRequireDefault(_socket);
 
@@ -40555,7 +40897,7 @@
 	exports.default = Chat;
 
 /***/ },
-/* 609 */
+/* 611 */
 /***/ function(module, exports, __webpack_require__) {
 
 	
@@ -40563,10 +40905,10 @@
 	 * Module dependencies.
 	 */
 
-	var url = __webpack_require__(610);
-	var parser = __webpack_require__(615);
-	var Manager = __webpack_require__(623);
-	var debug = __webpack_require__(612)('socket.io-client');
+	var url = __webpack_require__(612);
+	var parser = __webpack_require__(617);
+	var Manager = __webpack_require__(625);
+	var debug = __webpack_require__(614)('socket.io-client');
 
 	/**
 	 * Module exports.
@@ -40648,12 +40990,12 @@
 	 * @api public
 	 */
 
-	exports.Manager = __webpack_require__(623);
-	exports.Socket = __webpack_require__(651);
+	exports.Manager = __webpack_require__(625);
+	exports.Socket = __webpack_require__(653);
 
 
 /***/ },
-/* 610 */
+/* 612 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {
@@ -40661,8 +41003,8 @@
 	 * Module dependencies.
 	 */
 
-	var parseuri = __webpack_require__(611);
-	var debug = __webpack_require__(612)('socket.io-client:url');
+	var parseuri = __webpack_require__(613);
+	var debug = __webpack_require__(614)('socket.io-client:url');
 
 	/**
 	 * Module exports.
@@ -40736,7 +41078,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 611 */
+/* 613 */
 /***/ function(module, exports) {
 
 	/**
@@ -40781,7 +41123,7 @@
 
 
 /***/ },
-/* 612 */
+/* 614 */
 /***/ function(module, exports, __webpack_require__) {
 
 	
@@ -40791,7 +41133,7 @@
 	 * Expose `debug()` as the module.
 	 */
 
-	exports = module.exports = __webpack_require__(613);
+	exports = module.exports = __webpack_require__(615);
 	exports.log = log;
 	exports.formatArgs = formatArgs;
 	exports.save = save;
@@ -40955,7 +41297,7 @@
 
 
 /***/ },
-/* 613 */
+/* 615 */
 /***/ function(module, exports, __webpack_require__) {
 
 	
@@ -40971,7 +41313,7 @@
 	exports.disable = disable;
 	exports.enable = enable;
 	exports.enabled = enabled;
-	exports.humanize = __webpack_require__(614);
+	exports.humanize = __webpack_require__(616);
 
 	/**
 	 * The currently active debug mode names, and names to skip.
@@ -41158,7 +41500,7 @@
 
 
 /***/ },
-/* 614 */
+/* 616 */
 /***/ function(module, exports) {
 
 	/**
@@ -41289,7 +41631,7 @@
 
 
 /***/ },
-/* 615 */
+/* 617 */
 /***/ function(module, exports, __webpack_require__) {
 
 	
@@ -41297,12 +41639,12 @@
 	 * Module dependencies.
 	 */
 
-	var debug = __webpack_require__(612)('socket.io-parser');
-	var json = __webpack_require__(616);
-	var isArray = __webpack_require__(619);
-	var Emitter = __webpack_require__(620);
-	var binary = __webpack_require__(621);
-	var isBuf = __webpack_require__(622);
+	var debug = __webpack_require__(614)('socket.io-parser');
+	var json = __webpack_require__(618);
+	var isArray = __webpack_require__(621);
+	var Emitter = __webpack_require__(622);
+	var binary = __webpack_require__(623);
+	var isBuf = __webpack_require__(624);
 
 	/**
 	 * Protocol version.
@@ -41695,14 +42037,14 @@
 
 
 /***/ },
-/* 616 */
+/* 618 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_RESULT__;/* WEBPACK VAR INJECTION */(function(module, global) {/*! JSON v3.3.2 | http://bestiejs.github.io/json3 | Copyright 2012-2014, Kit Cambridge | http://kit.mit-license.org */
 	;(function () {
 	  // Detect the `define` function exposed by asynchronous module loaders. The
 	  // strict `define` check is necessary for compatibility with `r.js`.
-	  var isLoader = "function" === "function" && __webpack_require__(618);
+	  var isLoader = "function" === "function" && __webpack_require__(620);
 
 	  // A set of types used to distinguish objects from primitives.
 	  var objectTypes = {
@@ -42601,10 +42943,10 @@
 	  }
 	}).call(this);
 
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(617)(module), (function() { return this; }())))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(619)(module), (function() { return this; }())))
 
 /***/ },
-/* 617 */
+/* 619 */
 /***/ function(module, exports) {
 
 	module.exports = function(module) {
@@ -42620,7 +42962,7 @@
 
 
 /***/ },
-/* 618 */
+/* 620 */
 /***/ function(module, exports) {
 
 	/* WEBPACK VAR INJECTION */(function(__webpack_amd_options__) {module.exports = __webpack_amd_options__;
@@ -42628,7 +42970,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, {}))
 
 /***/ },
-/* 619 */
+/* 621 */
 /***/ function(module, exports) {
 
 	module.exports = Array.isArray || function (arr) {
@@ -42637,7 +42979,7 @@
 
 
 /***/ },
-/* 620 */
+/* 622 */
 /***/ function(module, exports) {
 
 	
@@ -42807,7 +43149,7 @@
 
 
 /***/ },
-/* 621 */
+/* 623 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {/*global Blob,File*/
@@ -42816,8 +43158,8 @@
 	 * Module requirements
 	 */
 
-	var isArray = __webpack_require__(619);
-	var isBuf = __webpack_require__(622);
+	var isArray = __webpack_require__(621);
+	var isBuf = __webpack_require__(624);
 
 	/**
 	 * Replaces every Buffer | ArrayBuffer in packet with a numbered placeholder.
@@ -42955,7 +43297,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 622 */
+/* 624 */
 /***/ function(module, exports) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {
@@ -42975,7 +43317,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 623 */
+/* 625 */
 /***/ function(module, exports, __webpack_require__) {
 
 	
@@ -42983,15 +43325,15 @@
 	 * Module dependencies.
 	 */
 
-	var eio = __webpack_require__(624);
-	var Socket = __webpack_require__(651);
-	var Emitter = __webpack_require__(652);
-	var parser = __webpack_require__(615);
-	var on = __webpack_require__(654);
-	var bind = __webpack_require__(655);
-	var debug = __webpack_require__(612)('socket.io-client:manager');
-	var indexOf = __webpack_require__(649);
-	var Backoff = __webpack_require__(658);
+	var eio = __webpack_require__(626);
+	var Socket = __webpack_require__(653);
+	var Emitter = __webpack_require__(654);
+	var parser = __webpack_require__(617);
+	var on = __webpack_require__(656);
+	var bind = __webpack_require__(657);
+	var debug = __webpack_require__(614)('socket.io-client:manager');
+	var indexOf = __webpack_require__(651);
+	var Backoff = __webpack_require__(660);
 
 	/**
 	 * IE6+ hasOwnProperty
@@ -43538,19 +43880,19 @@
 
 
 /***/ },
-/* 624 */
+/* 626 */
 /***/ function(module, exports, __webpack_require__) {
 
 	
-	module.exports =  __webpack_require__(625);
+	module.exports =  __webpack_require__(627);
 
 
 /***/ },
-/* 625 */
+/* 627 */
 /***/ function(module, exports, __webpack_require__) {
 
 	
-	module.exports = __webpack_require__(626);
+	module.exports = __webpack_require__(628);
 
 	/**
 	 * Exports parser
@@ -43558,25 +43900,25 @@
 	 * @api public
 	 *
 	 */
-	module.exports.parser = __webpack_require__(633);
+	module.exports.parser = __webpack_require__(635);
 
 
 /***/ },
-/* 626 */
+/* 628 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {/**
 	 * Module dependencies.
 	 */
 
-	var transports = __webpack_require__(627);
-	var Emitter = __webpack_require__(642);
-	var debug = __webpack_require__(612)('engine.io-client:socket');
-	var index = __webpack_require__(649);
-	var parser = __webpack_require__(633);
-	var parseuri = __webpack_require__(611);
-	var parsejson = __webpack_require__(650);
-	var parseqs = __webpack_require__(643);
+	var transports = __webpack_require__(629);
+	var Emitter = __webpack_require__(644);
+	var debug = __webpack_require__(614)('engine.io-client:socket');
+	var index = __webpack_require__(651);
+	var parser = __webpack_require__(635);
+	var parseuri = __webpack_require__(613);
+	var parsejson = __webpack_require__(652);
+	var parseqs = __webpack_require__(645);
 
 	/**
 	 * Module exports.
@@ -43700,9 +44042,9 @@
 	 */
 
 	Socket.Socket = Socket;
-	Socket.Transport = __webpack_require__(632);
-	Socket.transports = __webpack_require__(627);
-	Socket.parser = __webpack_require__(633);
+	Socket.Transport = __webpack_require__(634);
+	Socket.transports = __webpack_require__(629);
+	Socket.parser = __webpack_require__(635);
 
 	/**
 	 * Creates transport of the given type.
@@ -44297,17 +44639,17 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 627 */
+/* 629 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {/**
 	 * Module dependencies
 	 */
 
-	var XMLHttpRequest = __webpack_require__(628);
-	var XHR = __webpack_require__(630);
-	var JSONP = __webpack_require__(646);
-	var websocket = __webpack_require__(647);
+	var XMLHttpRequest = __webpack_require__(630);
+	var XHR = __webpack_require__(632);
+	var JSONP = __webpack_require__(648);
+	var websocket = __webpack_require__(649);
 
 	/**
 	 * Export transports.
@@ -44357,11 +44699,11 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 628 */
+/* 630 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// browser shim for xmlhttprequest module
-	var hasCORS = __webpack_require__(629);
+	var hasCORS = __webpack_require__(631);
 
 	module.exports = function(opts) {
 	  var xdomain = opts.xdomain;
@@ -44399,7 +44741,7 @@
 
 
 /***/ },
-/* 629 */
+/* 631 */
 /***/ function(module, exports) {
 
 	
@@ -44422,18 +44764,18 @@
 
 
 /***/ },
-/* 630 */
+/* 632 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {/**
 	 * Module requirements.
 	 */
 
-	var XMLHttpRequest = __webpack_require__(628);
-	var Polling = __webpack_require__(631);
-	var Emitter = __webpack_require__(642);
-	var inherit = __webpack_require__(644);
-	var debug = __webpack_require__(612)('engine.io-client:polling-xhr');
+	var XMLHttpRequest = __webpack_require__(630);
+	var Polling = __webpack_require__(633);
+	var Emitter = __webpack_require__(644);
+	var inherit = __webpack_require__(646);
+	var debug = __webpack_require__(614)('engine.io-client:polling-xhr');
 
 	/**
 	 * Module exports.
@@ -44841,19 +45183,19 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 631 */
+/* 633 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * Module dependencies.
 	 */
 
-	var Transport = __webpack_require__(632);
-	var parseqs = __webpack_require__(643);
-	var parser = __webpack_require__(633);
-	var inherit = __webpack_require__(644);
-	var yeast = __webpack_require__(645);
-	var debug = __webpack_require__(612)('engine.io-client:polling');
+	var Transport = __webpack_require__(634);
+	var parseqs = __webpack_require__(645);
+	var parser = __webpack_require__(635);
+	var inherit = __webpack_require__(646);
+	var yeast = __webpack_require__(647);
+	var debug = __webpack_require__(614)('engine.io-client:polling');
 
 	/**
 	 * Module exports.
@@ -44866,7 +45208,7 @@
 	 */
 
 	var hasXHR2 = (function() {
-	  var XMLHttpRequest = __webpack_require__(628);
+	  var XMLHttpRequest = __webpack_require__(630);
 	  var xhr = new XMLHttpRequest({ xdomain: false });
 	  return null != xhr.responseType;
 	})();
@@ -45094,15 +45436,15 @@
 
 
 /***/ },
-/* 632 */
+/* 634 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * Module dependencies.
 	 */
 
-	var parser = __webpack_require__(633);
-	var Emitter = __webpack_require__(642);
+	var parser = __webpack_require__(635);
+	var Emitter = __webpack_require__(644);
 
 	/**
 	 * Module exports.
@@ -45255,19 +45597,19 @@
 
 
 /***/ },
-/* 633 */
+/* 635 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {/**
 	 * Module dependencies.
 	 */
 
-	var keys = __webpack_require__(634);
-	var hasBinary = __webpack_require__(635);
-	var sliceBuffer = __webpack_require__(637);
-	var base64encoder = __webpack_require__(638);
-	var after = __webpack_require__(639);
-	var utf8 = __webpack_require__(640);
+	var keys = __webpack_require__(636);
+	var hasBinary = __webpack_require__(637);
+	var sliceBuffer = __webpack_require__(639);
+	var base64encoder = __webpack_require__(640);
+	var after = __webpack_require__(641);
+	var utf8 = __webpack_require__(642);
 
 	/**
 	 * Check if we are running an android browser. That requires us to use
@@ -45324,7 +45666,7 @@
 	 * Create a blob api even for blob builder when vendor prefixes exist
 	 */
 
-	var Blob = __webpack_require__(641);
+	var Blob = __webpack_require__(643);
 
 	/**
 	 * Encodes a packet.
@@ -45856,7 +46198,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 634 */
+/* 636 */
 /***/ function(module, exports) {
 
 	
@@ -45881,7 +46223,7 @@
 
 
 /***/ },
-/* 635 */
+/* 637 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {
@@ -45889,7 +46231,7 @@
 	 * Module requirements.
 	 */
 
-	var isArray = __webpack_require__(636);
+	var isArray = __webpack_require__(638);
 
 	/**
 	 * Module exports.
@@ -45946,7 +46288,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 636 */
+/* 638 */
 /***/ function(module, exports) {
 
 	module.exports = Array.isArray || function (arr) {
@@ -45955,7 +46297,7 @@
 
 
 /***/ },
-/* 637 */
+/* 639 */
 /***/ function(module, exports) {
 
 	/**
@@ -45990,7 +46332,7 @@
 
 
 /***/ },
-/* 638 */
+/* 640 */
 /***/ function(module, exports) {
 
 	/*
@@ -46055,7 +46397,7 @@
 
 
 /***/ },
-/* 639 */
+/* 641 */
 /***/ function(module, exports) {
 
 	module.exports = after
@@ -46089,7 +46431,7 @@
 
 
 /***/ },
-/* 640 */
+/* 642 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_RESULT__;/* WEBPACK VAR INJECTION */(function(module, global) {/*! https://mths.be/utf8js v2.0.0 by @mathias */
@@ -46335,10 +46677,10 @@
 
 	}(this));
 
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(617)(module), (function() { return this; }())))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(619)(module), (function() { return this; }())))
 
 /***/ },
-/* 641 */
+/* 643 */
 /***/ function(module, exports) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {/**
@@ -46441,7 +46783,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 642 */
+/* 644 */
 /***/ function(module, exports) {
 
 	
@@ -46611,7 +46953,7 @@
 
 
 /***/ },
-/* 643 */
+/* 645 */
 /***/ function(module, exports) {
 
 	/**
@@ -46654,7 +46996,7 @@
 
 
 /***/ },
-/* 644 */
+/* 646 */
 /***/ function(module, exports) {
 
 	
@@ -46666,7 +47008,7 @@
 	};
 
 /***/ },
-/* 645 */
+/* 647 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -46740,7 +47082,7 @@
 
 
 /***/ },
-/* 646 */
+/* 648 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {
@@ -46748,8 +47090,8 @@
 	 * Module requirements.
 	 */
 
-	var Polling = __webpack_require__(631);
-	var inherit = __webpack_require__(644);
+	var Polling = __webpack_require__(633);
+	var inherit = __webpack_require__(646);
 
 	/**
 	 * Module exports.
@@ -46985,19 +47327,19 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 647 */
+/* 649 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {/**
 	 * Module dependencies.
 	 */
 
-	var Transport = __webpack_require__(632);
-	var parser = __webpack_require__(633);
-	var parseqs = __webpack_require__(643);
-	var inherit = __webpack_require__(644);
-	var yeast = __webpack_require__(645);
-	var debug = __webpack_require__(612)('engine.io-client:websocket');
+	var Transport = __webpack_require__(634);
+	var parser = __webpack_require__(635);
+	var parseqs = __webpack_require__(645);
+	var inherit = __webpack_require__(646);
+	var yeast = __webpack_require__(647);
+	var debug = __webpack_require__(614)('engine.io-client:websocket');
 	var BrowserWebSocket = global.WebSocket || global.MozWebSocket;
 
 	/**
@@ -47009,7 +47351,7 @@
 	var WebSocket = BrowserWebSocket;
 	if (!WebSocket && typeof window === 'undefined') {
 	  try {
-	    WebSocket = __webpack_require__(648);
+	    WebSocket = __webpack_require__(650);
 	  } catch (e) { }
 	}
 
@@ -47280,13 +47622,13 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 648 */
+/* 650 */
 /***/ function(module, exports) {
 
 	/* (ignored) */
 
 /***/ },
-/* 649 */
+/* 651 */
 /***/ function(module, exports) {
 
 	
@@ -47301,7 +47643,7 @@
 	};
 
 /***/ },
-/* 650 */
+/* 652 */
 /***/ function(module, exports) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {/**
@@ -47339,7 +47681,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 651 */
+/* 653 */
 /***/ function(module, exports, __webpack_require__) {
 
 	
@@ -47347,13 +47689,13 @@
 	 * Module dependencies.
 	 */
 
-	var parser = __webpack_require__(615);
-	var Emitter = __webpack_require__(652);
-	var toArray = __webpack_require__(653);
-	var on = __webpack_require__(654);
-	var bind = __webpack_require__(655);
-	var debug = __webpack_require__(612)('socket.io-client:socket');
-	var hasBin = __webpack_require__(656);
+	var parser = __webpack_require__(617);
+	var Emitter = __webpack_require__(654);
+	var toArray = __webpack_require__(655);
+	var on = __webpack_require__(656);
+	var bind = __webpack_require__(657);
+	var debug = __webpack_require__(614)('socket.io-client:socket');
+	var hasBin = __webpack_require__(658);
 
 	/**
 	 * Module exports.
@@ -47757,7 +48099,7 @@
 
 
 /***/ },
-/* 652 */
+/* 654 */
 /***/ function(module, exports) {
 
 	
@@ -47924,7 +48266,7 @@
 
 
 /***/ },
-/* 653 */
+/* 655 */
 /***/ function(module, exports) {
 
 	module.exports = toArray
@@ -47943,7 +48285,7 @@
 
 
 /***/ },
-/* 654 */
+/* 656 */
 /***/ function(module, exports) {
 
 	
@@ -47973,7 +48315,7 @@
 
 
 /***/ },
-/* 655 */
+/* 657 */
 /***/ function(module, exports) {
 
 	/**
@@ -48002,7 +48344,7 @@
 
 
 /***/ },
-/* 656 */
+/* 658 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {
@@ -48010,7 +48352,7 @@
 	 * Module requirements.
 	 */
 
-	var isArray = __webpack_require__(657);
+	var isArray = __webpack_require__(659);
 
 	/**
 	 * Module exports.
@@ -48068,7 +48410,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 657 */
+/* 659 */
 /***/ function(module, exports) {
 
 	module.exports = Array.isArray || function (arr) {
@@ -48077,7 +48419,7 @@
 
 
 /***/ },
-/* 658 */
+/* 660 */
 /***/ function(module, exports) {
 
 	
@@ -48168,7 +48510,7 @@
 
 
 /***/ },
-/* 659 */
+/* 661 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -48177,11 +48519,11 @@
 		value: true
 	});
 
-	var _authentication = __webpack_require__(660);
+	var _authentication = __webpack_require__(662);
 
 	var _authentication2 = _interopRequireDefault(_authentication);
 
-	var _redux = __webpack_require__(580);
+	var _redux = __webpack_require__(582);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -48190,7 +48532,7 @@
 	});
 
 /***/ },
-/* 660 */
+/* 662 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -48200,7 +48542,7 @@
 	});
 	exports.default = authentication;
 
-	var _ActionTypes = __webpack_require__(602);
+	var _ActionTypes = __webpack_require__(604);
 
 	var types = _interopRequireWildcard(_ActionTypes);
 
@@ -48270,7 +48612,7 @@
 	}
 
 /***/ },
-/* 661 */
+/* 663 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -48298,7 +48640,7 @@
 	exports['default'] = thunk;
 
 /***/ },
-/* 662 */
+/* 664 */
 /***/ function(module, exports) {
 
 	/* WEBPACK VAR INJECTION */(function(__dirname) {'use strict';

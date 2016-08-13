@@ -3,7 +3,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Router, Route, browserHistory, IndexRoute } from 'react-router';
 import { App, Home, Login, Register, User, Youtube, Chat } from './containers';
-import { YoutubeBox, YoutubeShowBox } from './components';
+import { YoutubeBox, YoutubeShowBox, YoutubeEditBox } from './components';
 //Redux
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
@@ -25,6 +25,7 @@ ReactDOM.render(
 					<Route path="youtube" component={Youtube}>
 						<IndexRoute component={YoutubeBox}/>
 						<Route path="show/:id" component={YoutubeShowBox}/>
+						<Route path="edit/:id" component={YoutubeEditBox} />
 					</Route>
 
 				</Route>

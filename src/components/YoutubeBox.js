@@ -80,10 +80,8 @@ class YoutubeBox extends React.Component {
     }
 
     render() {  
-        return (
-                <div>
-                    <a className="modal-trigger waves-effect waves-light btn" onClick={this._openModal}>글쓰기</a>
-                    <div id="modal1" className="modal">
+      const create_modal = (
+                  <div id="modal1" className="modal">
                         <div className="modal-content">
                           <h5>제목(생략가능)</h5>
                            <div className="input-field col s10">
@@ -110,6 +108,13 @@ class YoutubeBox extends React.Component {
                           <a className="modal-action modal-close waves-effect waves-green btn-flat">닫기</a>
                         </div>
                     </div>
+        );
+
+
+        return (
+                <div>
+                    <a className="modal-trigger waves-effect waves-light btn" onClick={this._openModal}>글쓰기</a>
+                    {create_modal}
             		<div className="row">
                     {this.state.youtubes.map((youtube) => {
                         return (
