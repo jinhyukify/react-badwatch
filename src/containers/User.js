@@ -6,8 +6,12 @@ class User extends React.Component {
         super(props);
         this.displayName = 'User';
         this.state = {
-        	quickUserData: {},
-        	rankUserData: {},
+        	quickUserData: {
+        		heros: []
+        	},
+        	rankUserData: {
+        		heros: []
+        	},
         	quick_mode: true
         };
         this._onQuick = this._onQuick.bind(this);
@@ -29,7 +33,7 @@ class User extends React.Component {
     	if(!this.state.quick_mode)
     		return;
 
- 		if(!Object.keys(this.state.rankUserData).length) 
+ 		if(Object.keys(this.state.rankUserData).length <= 1) 
  		{
  			this._getUserRankData().then( data => {
  				this.setState({

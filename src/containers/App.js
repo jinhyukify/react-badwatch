@@ -1,8 +1,7 @@
 import React from 'react';
-import { Header } from '../components';
+import { Header, Footer } from '../components';
 import { connect } from 'react-redux';
 import { loginRequest, logoutRequest } from '../actions/authentication';
-
 class App extends React.Component {
     constructor(props) {
         super(props);
@@ -48,14 +47,16 @@ class App extends React.Component {
     }
 
     render() {
+        let isUser = false;
+        if(this.props.location.pathname == '/')
+            isUser = true;
         return (
         		<div>
-	        		<Header onLogin={this._handleLogin} 
-                            onLogout={this._handleLogout}
-                            authentication={this.props.authentication}/>
+
 	        		<div className="container body-container">
+                        { isUser? undefined: <Header location={this.props.location}/> }
 	        			{this.props.children}
-	        		</div>     		
+	        		</div>  
         		</div>
         	);
     }
@@ -79,4 +80,4 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);;
+export default connect(mapStateToProps, mapDispatchToProps)(App);

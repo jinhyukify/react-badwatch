@@ -7,6 +7,21 @@ import UserDetailCard from './UserDetailCard';
 import YoutubeBox from './YoutubeBox';
 import YoutubeShowBox from './YoutubeShowBox';
 import YoutubeEditBox from './YoutubeEditBox'
-
-
-export { Header, UserDataBox, UserProfile, UserGameData, UserDetailBox, UserDetailCard, YoutubeBox ,YoutubeShowBox, YoutubeEditBox };
+import LoginButton from './LoginButton';
+import Footer from './Footer';
+import UserList from './UserList';
+import Menu from './Menu';
+export { Header, 
+	UserDataBox, 
+	UserProfile, 
+	UserGameData, 
+	UserDetailBox, 
+	UserDetailCard, 
+	YoutubeBox ,
+	YoutubeShowBox, 
+	YoutubeEditBox, 
+	LoginButton, 
+	Footer,
+	UserList,
+	Menu
+	};

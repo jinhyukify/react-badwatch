@@ -1,6 +1,6 @@
 import React from 'react';
 import UserDetailCard from './UserDetailCard';
-
+import HeroCard from './HeroCard';
 class UserDetailBox extends React.Component {
     constructor(props) {
         super(props);
@@ -62,8 +62,16 @@ class UserDetailBox extends React.Component {
     	}
 
         return (
-        	<div className="row">
-        		{userDetailBox}
+        	<div>
+	        	<div className="row">
+	        		{userDetailBox}
+	        	</div>
+	        	{userData.heros.map((hero, i)=> {
+	        		return (
+	        				<HeroCard key={i}
+	        				  		  hero={hero}/>
+	        			);
+	        	})}
         	</div>
         	);
     }

@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link, browserHistory } from 'react-router';
+import { LoginButton } from '../components';
 class Home extends React.Component {
     constructor(props) {
         super(props);
@@ -57,38 +58,41 @@ class Home extends React.Component {
     	}
     	else
     	{
-    		
+    		browserHistory.push('/userByName/' + this.state.userName);
     	}
     }
 
     render() {
         return (
         	<div>
-        		<center>
-	        		<a className="main-black-button">전적 검색</a>		
-	        		<span className="menu-dot">····</span>
-	        		<a className="main-black-button">파티 매칭</a>	
-	        		<span className="menu-dot">····</span>
-	        		<div className="inline user-search-box">
-	        			<div className="row">
-			        		<div className="input-field col s8 offset-s2">
-						        <input type="text" 
-						          	     name="user"
-						          		 id="main-search" 
-						          		 className="validate" 
-						          		 onChange={this._handleChange}
-						          		 value={this.state.userName}
-						          		 onKeyPress={this._handleKeyPress}/>
-						         <label className="text-left">닉네임#배틀태그</label>
-						         <i className="small material-icons" onClick={this._onSearchUser}>search</i>
-						    </div>
-			       	 	</div>
-	        		</div>
-	        		<span className="menu-dot">····</span>
-	        		<Link to="youtube" className="main-black-button">동영상</Link>	
-	        		<span className="menu-dot">····</span>
-	        		<a className="main-black-button">커뮤니티</a>	
-        		</center>
+                <div className="right-align">
+                    <LoginButton />
+                </div>
+        		<center className="main-center">
+                    <img src="/asset/images/logo.png" className="logo"/> 
+                    <span className="main-divider"></span>   
+                    <div className="input-wrapper">
+                        <input type="text" 
+                               name="user"
+                               className="search-input" 
+                               placeholder="닉네임#배틀태그"
+                               onChange={this._handleChange}
+                               onKeyPress={this._handleKeyPress}/>  
+                        <img src="/asset/images/search-icon.png" 
+                             className="search-icon" 
+                             onClick={this._onSearchUser}/>
+                    </div>
+                    <br/>
+                    <span className="main-letter">
+                        최초검색 1회후 닉네임으로만 검색할 수 있습니다.
+                    </span>
+                    <br/>
+                    <Link to="youtube" className="main-link link-left">전적검색</Link>
+                    <Link to="youtube" className="main-link link-right">파티매칭</Link>
+                    <br/>
+                    <Link to="youtube" className="main-link link-left">동영상</Link>
+                    <Link to="youtube" className="main-link link-right">커뮤니티</Link>                    
+                </center>
         		<br/><br/>
         		<div>
         			
