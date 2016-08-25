@@ -91,7 +91,7 @@ class Home extends React.Component {
                     <Link to="youtube" className="main-link link-right">파티매칭</Link>
                     <br/>
                     <Link to="youtube" className="main-link link-left">동영상</Link>
-                    <Link to="youtube" className="main-link link-right">커뮤니티</Link>                    
+                    <Link to="board/free/page/1" className="main-link link-right">커뮤니티</Link>                  
                 </center>
         		<br/><br/>
         		<div>
