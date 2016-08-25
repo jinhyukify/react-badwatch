@@ -35,7 +35,7 @@ LikeBox.propTypes = {
 	handleLike: React.PropTypes.func,
 	hadleDisLike: React.PropTypes.func,
 	like_count: React.PropTypes.number,
-	like_status: React.PropTypes.number
+	like_status: React.PropTypes.bool
 };
 
 export default LikeBox;

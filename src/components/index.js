@@ -11,6 +11,11 @@ import LoginButton from './LoginButton';
 import Footer from './Footer';
 import UserList from './UserList';
 import Menu from './Menu';
+import SearchUserInput from './SearchUserInput';
+import Navbar from './Navbar';
+import SideNavbar from './SideNavbar';
+import ChatRoom from './ChatRoom';
+import RoomList from './RoomList';
 export { Header, 
 	UserDataBox, 
 	UserProfile, 
@@ -23,5 +28,10 @@ export { Header,
 	LoginButton, 
 	Footer,
 	UserList,
-	Menu
+	Menu,
+	SearchUserInput,
+	Navbar,
+	SideNavbar,
+	ChatRoom,
+	RoomList
 	};

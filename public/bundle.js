@@ -46,7 +46,7 @@
 
 	__webpack_require__(1);
 	__webpack_require__(298);
-	module.exports = __webpack_require__(664);
+	module.exports = __webpack_require__(678);
 
 
 /***/ },
@@ -8139,15 +8139,15 @@
 
 	var _components = __webpack_require__(534);
 
-	var _reactRedux = __webpack_require__(575);
+	var _reactRedux = __webpack_require__(569);
 
-	var _redux = __webpack_require__(582);
+	var _redux = __webpack_require__(576);
 
-	var _reducers = __webpack_require__(661);
+	var _reducers = __webpack_require__(674);
 
 	var _reducers2 = _interopRequireDefault(_reducers);
 
-	var _reduxThunk = __webpack_require__(663);
+	var _reduxThunk = __webpack_require__(677);
 
 	var _reduxThunk2 = _interopRequireDefault(_reduxThunk);
 
@@ -8169,6 +8169,7 @@
 				_react2.default.createElement(_reactRouter.IndexRoute, { component: _containers.Home }),
 				_react2.default.createElement(_reactRouter.Route, { path: 'home', component: _containers.Home }),
 				_react2.default.createElement(_reactRouter.Route, { path: 'user/:userName', component: _containers.User }),
+				_react2.default.createElement(_reactRouter.Route, { path: 'userByName/:userName', component: _containers.UserByName }),
 				_react2.default.createElement(_reactRouter.Route, { path: 'login', component: _containers.Login }),
 				_react2.default.createElement(_reactRouter.Route, { path: 'chat', component: _containers.Chat }),
 				_react2.default.createElement(
@@ -34716,35 +34717,39 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.Chat = exports.Youtube = exports.User = exports.Register = exports.Login = exports.Home = exports.App = undefined;
+	exports.UserByName = exports.Chat = exports.Youtube = exports.User = exports.Register = exports.Login = exports.Home = exports.App = undefined;
 
 	var _App = __webpack_require__(533);
 
 	var _App2 = _interopRequireDefault(_App);
 
-	var _Home = __webpack_require__(605);
+	var _Home = __webpack_require__(617);
 
 	var _Home2 = _interopRequireDefault(_Home);
 
-	var _Login = __webpack_require__(606);
+	var _Login = __webpack_require__(618);
 
 	var _Login2 = _interopRequireDefault(_Login);
 
-	var _Register = __webpack_require__(607);
+	var _Register = __webpack_require__(619);
 
 	var _Register2 = _interopRequireDefault(_Register);
 
-	var _User = __webpack_require__(608);
+	var _User = __webpack_require__(620);
 
 	var _User2 = _interopRequireDefault(_User);
 
-	var _Youtube = __webpack_require__(609);
+	var _Youtube = __webpack_require__(621);
 
 	var _Youtube2 = _interopRequireDefault(_Youtube);
 
-	var _Chat = __webpack_require__(610);
+	var _Chat = __webpack_require__(622);
 
 	var _Chat2 = _interopRequireDefault(_Chat);
+
+	var _UserByName = __webpack_require__(673);
+
+	var _UserByName2 = _interopRequireDefault(_UserByName);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -34755,6 +34760,7 @@
 	exports.User = _User2.default;
 	exports.Youtube = _Youtube2.default;
 	exports.Chat = _Chat2.default;
+	exports.UserByName = _UserByName2.default;
 
 /***/ },
 /* 533 */
@@ -34774,9 +34780,9 @@
 
 	var _components = __webpack_require__(534);
 
-	var _reactRedux = __webpack_require__(575);
+	var _reactRedux = __webpack_require__(569);
 
-	var _authentication = __webpack_require__(603);
+	var _authentication = __webpack_require__(610);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -34831,17 +34837,28 @@
 	            });
 	        }
 	    }, {
+	        key: 'componentDidMount',
+	        value: function componentDidMount() {
+	            console.log("app.js mount");
+	            this._handleLogin();
+	            $('#mobile-top-open').sideNav({
+	                closeOnClick: true
+	            });
+	        }
+	    }, {
 	        key: 'render',
 	        value: function render() {
+	            var isUser = false;
+	            if (this.props.location.pathname == '/') isUser = true;
 	            return _react2.default.createElement(
 	                'div',
 	                null,
-	                _react2.default.createElement(_components.Header, { onLogin: this._handleLogin,
-	                    onLogout: this._handleLogout,
-	                    authentication: this.props.authentication }),
+	                _react2.default.createElement(_components.Navbar, null),
+	                _react2.default.createElement(_components.SideNavbar, { location: this.props.location }),
 	                _react2.default.createElement(
 	                    'div',
 	                    { className: 'container body-container' },
+	                    isUser ? undefined : _react2.default.createElement(_components.Header, { location: this.props.location }),
 	                    this.props.children
 	                )
 	            );
@@ -34869,7 +34886,6 @@
 	};
 
 	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(App);
-	;
 
 /***/ },
 /* 534 */
@@ -34878,9 +34894,9 @@
 	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
-	  value: true
+		value: true
 	});
-	exports.YoutubeEditBox = exports.YoutubeShowBox = exports.YoutubeBox = exports.UserDetailCard = exports.UserDetailBox = exports.UserGameData = exports.UserProfile = exports.UserDataBox = exports.Header = undefined;
+	exports.SideNavbar = exports.Navbar = exports.SearchUserInput = exports.Menu = exports.UserList = exports.Footer = exports.LoginButton = exports.YoutubeEditBox = exports.YoutubeShowBox = exports.YoutubeBox = exports.UserDetailCard = exports.UserDetailBox = exports.UserGameData = exports.UserProfile = exports.UserDataBox = exports.Header = undefined;
 
 	var _Header = __webpack_require__(535);
 
@@ -34906,17 +34922,45 @@
 
 	var _UserDetailCard2 = _interopRequireDefault(_UserDetailCard);
 
-	var _YoutubeBox = __webpack_require__(563);
+	var _YoutubeBox = __webpack_require__(567);
 
 	var _YoutubeBox2 = _interopRequireDefault(_YoutubeBox);
 
-	var _YoutubeShowBox = __webpack_require__(565);
+	var _YoutubeShowBox = __webpack_require__(599);
 
 	var _YoutubeShowBox2 = _interopRequireDefault(_YoutubeShowBox);
 
-	var _YoutubeEditBox = __webpack_require__(574);
+	var _YoutubeEditBox = __webpack_require__(608);
 
 	var _YoutubeEditBox2 = _interopRequireDefault(_YoutubeEditBox);
+
+	var _LoginButton = __webpack_require__(609);
+
+	var _LoginButton2 = _interopRequireDefault(_LoginButton);
+
+	var _Footer = __webpack_require__(611);
+
+	var _Footer2 = _interopRequireDefault(_Footer);
+
+	var _UserList = __webpack_require__(612);
+
+	var _UserList2 = _interopRequireDefault(_UserList);
+
+	var _Menu = __webpack_require__(613);
+
+	var _Menu2 = _interopRequireDefault(_Menu);
+
+	var _SearchUserInput = __webpack_require__(614);
+
+	var _SearchUserInput2 = _interopRequireDefault(_SearchUserInput);
+
+	var _Navbar = __webpack_require__(615);
+
+	var _Navbar2 = _interopRequireDefault(_Navbar);
+
+	var _SideNavbar = __webpack_require__(616);
+
+	var _SideNavbar2 = _interopRequireDefault(_SideNavbar);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -34929,6 +34973,13 @@
 	exports.YoutubeBox = _YoutubeBox2.default;
 	exports.YoutubeShowBox = _YoutubeShowBox2.default;
 	exports.YoutubeEditBox = _YoutubeEditBox2.default;
+	exports.LoginButton = _LoginButton2.default;
+	exports.Footer = _Footer2.default;
+	exports.UserList = _UserList2.default;
+	exports.Menu = _Menu2.default;
+	exports.SearchUserInput = _SearchUserInput2.default;
+	exports.Navbar = _Navbar2.default;
+	exports.SideNavbar = _SideNavbar2.default;
 
 /***/ },
 /* 535 */
@@ -34947,6 +34998,8 @@
 	var _react2 = _interopRequireDefault(_react);
 
 	var _reactRouter = __webpack_require__(469);
+
+	var _ = __webpack_require__(534);
 
 	var _axios = __webpack_require__(536);
 
@@ -34969,134 +35022,28 @@
 	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Header).call(this, props));
 
 	        _this.displayName = 'Header';
-	        _this._popLogin = _this._popLogin.bind(_this);
-	        _this._handleLogin = _this._handleLogin.bind(_this);
-	        _this._handleLogout = _this._handleLogout.bind(_this);
+
 	        return _this;
 	    }
 
 	    _createClass(Header, [{
-	        key: '_handleLogin',
-	        value: function _handleLogin() {
-	            this.props.onLogin().then(function (success) {});
-	        }
-	    }, {
-	        key: '_handleLogout',
-	        value: function _handleLogout() {
-	            this.props.onLogout().then(function (success) {});
-	        }
-	    }, {
-	        key: '_popLogin',
-	        value: function _popLogin() {
-	            var pop = window.open('http://bad.watch/api/auth/bnet', 'OAUTH_BATTLENET', 'width=450px, height=750px');
-	            pop.focus();
-	            console.log(this._handleLogin);
-	            var onClose = function onClose() {
-	                if (pop.closed !== false) {
-	                    window.clearInterval(pollTimer);
-	                    this._handleLogin();
-	                }
-	            };
-	            var pollTimer = window.setInterval(onClose.bind(this), 200);
-	        }
-	    }, {
 	        key: 'render',
 	        value: function render() {
-	            var loginView = _react2.default.createElement(
-	                'ul',
-	                { id: 'nav-mobile', className: 'right hide-on-med-and-down' },
-	                _react2.default.createElement(
-	                    'li',
-	                    null,
-	                    _react2.default.createElement(
-	                        _reactRouter.Link,
-	                        { to: '/' },
-	                        'Home'
-	                    )
-	                ),
-	                _react2.default.createElement(
-	                    'li',
-	                    null,
-	                    _react2.default.createElement(
-	                        'a',
-	                        { onClick: this._popLogin },
-	                        'Login'
-	                    )
-	                ),
-	                _react2.default.createElement(
-	                    'li',
-	                    null,
-	                    _react2.default.createElement(
-	                        _reactRouter.Link,
-	                        { to: '/youtube' },
-	                        'Youtube'
-	                    )
-	                ),
-	                _react2.default.createElement(
-	                    'li',
-	                    null,
-	                    _react2.default.createElement(
-	                        _reactRouter.Link,
-	                        { to: '/chat' },
-	                        '채팅'
-	                    )
-	                )
-	            );
-
-	            var logoutView = _react2.default.createElement(
-	                'ul',
-	                { id: 'nav-mobile', className: 'right hide-on-med-and-down' },
-	                _react2.default.createElement(
-	                    'li',
-	                    null,
-	                    _react2.default.createElement(
-	                        _reactRouter.Link,
-	                        { to: '/' },
-	                        'Home'
-	                    )
-	                ),
-	                _react2.default.createElement(
-	                    'li',
-	                    null,
-	                    _react2.default.createElement(
-	                        'a',
-	                        null,
-	                        this.props.authentication.status.current_user.battletag
-	                    )
-	                ),
-	                _react2.default.createElement(
-	                    'li',
-	                    null,
-	                    _react2.default.createElement(
-	                        'a',
-	                        { onClick: this._handleLogout },
-	                        'Logout'
-	                    )
-	                ),
-	                _react2.default.createElement(
-	                    'li',
-	                    null,
-	                    _react2.default.createElement(
-	                        _reactRouter.Link,
-	                        { to: '/chat' },
-	                        '채팅'
-	                    )
-	                )
-	            );
-
 	            return _react2.default.createElement(
-	                'nav',
-	                { id: 'watch-nav' },
+	                'div',
+	                { className: 'header mobile-hide' },
+	                _react2.default.createElement(
+	                    _reactRouter.Link,
+	                    { to: '/' },
+	                    _react2.default.createElement('img', { src: '/asset/images/logo.png', className: 'header-logo' })
+	                ),
 	                _react2.default.createElement(
 	                    'div',
-	                    { className: 'nav-wrapper' },
-	                    _react2.default.createElement(
-	                        _reactRouter.Link,
-	                        { to: '/', className: 'brand-logo' },
-	                        'BadWatch'
-	                    ),
-	                    this.props.authentication.login.status == 'SUCCESS' ? logoutView : loginView
-	                )
+	                    { className: 'header-title' },
+	                    _react2.default.createElement('img', { src: '/asset/images/typo.svg', className: 'typo' }),
+	                    _react2.default.createElement(_.LoginButton, null)
+	                ),
+	                _react2.default.createElement(_.Menu, { location: this.props.location })
 	            );
 	        }
 	    }]);
@@ -35105,8 +35052,7 @@
 	}(_react2.default.Component);
 
 	Header.propTypes = {
-	    onLogin: _react2.default.PropTypes.func,
-	    onLogout: _react2.default.PropTypes.func
+	    location: _react2.default.PropTypes.any
 	};
 
 	exports.default = Header;
@@ -36503,7 +36449,7 @@
 	        value: function render() {
 	            return _react2.default.createElement(
 	                'div',
-	                null,
+	                { className: 'user-data-box' },
 	                _react2.default.createElement(_index.UserProfile, { userData: this.props.userData }),
 	                _react2.default.createElement(_index.UserGameData, { onQuick: this._handleQuick,
 	                    onRank: this._handleRank,
@@ -36532,7 +36478,7 @@
 	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
-					value: true
+	    value: true
 	});
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -36540,6 +36486,10 @@
 	var _react = __webpack_require__(299);
 
 	var _react2 = _interopRequireDefault(_react);
+
+	var _axios = __webpack_require__(536);
+
+	var _axios2 = _interopRequireDefault(_axios);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -36550,66 +36500,179 @@
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 	var UserProfile = function (_React$Component) {
-					_inherits(UserProfile, _React$Component);
+	    _inherits(UserProfile, _React$Component);
 
-					function UserProfile(props) {
-									_classCallCheck(this, UserProfile);
+	    function UserProfile(props) {
+	        _classCallCheck(this, UserProfile);
 
-									var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(UserProfile).call(this, props));
+	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(UserProfile).call(this, props));
 
-									_this.displayName = 'UserProfile';
-									return _this;
-					}
+	        _this.displayName = 'UserProfile';
+	        _this._onRenew = _this._onRenew.bind(_this);
+	        _this.state = {
+	            renewStart: false
+	        };
+	        return _this;
+	    }
 
-					_createClass(UserProfile, [{
-									key: 'render',
-									value: function render() {
-													return _react2.default.createElement(
-																	'div',
-																	null,
-																	_react2.default.createElement(
-																					'div',
-																					null,
-																					_react2.default.createElement('img', { className: 'user-profile-img',
-																									src: this.props.userData.avatar }),
-																					_react2.default.createElement(
-																									'div',
-																									null,
-																									this.props.userData.name,
-																									'#',
-																									this.props.userData.battletag,
-																									_react2.default.createElement(
-																													'span',
-																													null,
-																													'Lv ',
-																													this.props.userData.level
-																									)
-																					),
-																					_react2.default.createElement(
-																									'div',
-																									null,
-																									this.props.userData.point,
-																									'점'
-																					)
-																	),
-																	_react2.default.createElement(
-																					'div',
-																					{ className: 'clear' },
-																					_react2.default.createElement(
-																									'h5',
-																									{ className: 'center-align' },
-																									'한줄평가'
-																					)
-																	)
-													);
-									}
-					}]);
+	    _createClass(UserProfile, [{
+	        key: '_dateFormat',
+	        value: function _dateFormat(date) {
+	            var today = new Date();
 
-					return UserProfile;
+	            var dateObj = new Date(date);
+	            var month = Math.floor((today.getTime() - dateObj.getTime()) / 1000 / 60 / 60 / 24 / 30);
+	            var day = Math.floor((today.getTime() - dateObj.getTime()) / 1000 / 60 / 60 / 24);
+	            var hour = Math.floor((today.getTime() - dateObj.getTime()) / 1000 / 60 / 60);
+	            var minute = Math.floor((today.getTime() - dateObj.getTime()) / 1000 / 60);
+
+	            if (month == 0) {
+	                if (day != 0) {
+	                    if (day == 1) return "어제";else return day + "일 전";
+	                } else {
+	                    if (hour != 0) return hour + "시간 전";else return minute + "분 전";
+	                }
+	            } else if (minute <= 0) {
+	                return "방금";
+	            } else {
+	                return month + "달 전";
+	            }
+	        }
+	    }, {
+	        key: '_onRenew',
+	        value: function _onRenew() {
+	            var _this2 = this;
+
+	            this.setState({
+	                renewStart: true
+	            });
+
+	            $('.renew-box').addClass('active');
+	            var url = "http://bad.watch/api/renew-user/" + this.props.userData.overwatch_id;
+	            _axios2.default.get(url).then(function (response) {
+	                var data = response.data;
+	                if (data.responseCode == 54) {
+	                    //갱신 성공
+	                    location.reload();
+	                } else if (data.responseCode == 55) {
+	                    //갱신실패
+	                    var last_renew_time = _this2._dateFormat(data.last_renew);
+	                    _this2.setState({
+	                        renewStart: false
+	                    });
+	                    $('.renew-box').removeClass('active');
+	                    sweetAlert('이미 ' + last_renew_time + '에 갱신하였습니다.', '10분마다 갱신하실 수 있습니다.', 'error');
+	                    return;
+	                }
+	            });
+	        }
+	    }, {
+	        key: 'render',
+	        value: function render() {
+	            var renewState = undefined;
+	            if (this.state.renewStart) {
+	                renewState = _react2.default.createElement(
+	                    'div',
+	                    { className: 'preloader-wrapper renew-loader active' },
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'spinner-layer spinner-white-only' },
+	                        _react2.default.createElement(
+	                            'div',
+	                            { className: 'circle-clipper left' },
+	                            _react2.default.createElement('div', { className: 'circle' })
+	                        ),
+	                        _react2.default.createElement(
+	                            'div',
+	                            { className: 'gap-patch' },
+	                            _react2.default.createElement('div', { className: 'circle' })
+	                        ),
+	                        _react2.default.createElement(
+	                            'div',
+	                            { className: 'circle-clipper right' },
+	                            _react2.default.createElement('div', { className: 'circle' })
+	                        )
+	                    )
+	                );
+	            } else {
+	                renewState = _react2.default.createElement('img', { src: '/asset/images/renew.png', className: 'renew-icon' });
+	            }
+	            return _react2.default.createElement(
+	                'div',
+	                null,
+	                _react2.default.createElement(
+	                    'div',
+	                    null,
+	                    _react2.default.createElement('img', { className: 'user-profile-img',
+	                        src: this.props.userData.avatar }),
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'profile-battletag' },
+	                        this.props.userData.name,
+	                        ' # ',
+	                        this.props.userData.battletag,
+	                        _react2.default.createElement('br', { className: 'computer-hide' }),
+	                        _react2.default.createElement(
+	                            'span',
+	                            { className: 'meta' },
+	                            '최근 갱신시간 : ',
+	                            this._dateFormat(this.props.userData.last_renew)
+	                        )
+	                    ),
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'profile-info' },
+	                        _react2.default.createElement(
+	                            'span',
+	                            null,
+	                            '레벨 ',
+	                            this.props.userData.level
+	                        ),
+	                        _react2.default.createElement('br', null),
+	                        _react2.default.createElement(
+	                            'span',
+	                            null,
+	                            '경쟁전 점수 ',
+	                            this.props.userData.point
+	                        ),
+	                        _react2.default.createElement('br', { className: 'computer-hide' }),
+	                        _react2.default.createElement('br', { className: 'computer-hide' }),
+	                        _react2.default.createElement(
+	                            'span',
+	                            { className: 'renew-box', onClick: this._onRenew },
+	                            renewState
+	                        ),
+	                        _react2.default.createElement('br', { className: 'computer-hide' }),
+	                        _react2.default.createElement(
+	                            'span',
+	                            { className: 'renew-ment' },
+	                            '! 게임종료 후 갱신해야 최신 기록이 업데이트됩니다.'
+	                        )
+	                    )
+	                ),
+	                _react2.default.createElement(
+	                    'div',
+	                    { className: 'clear' },
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'reputation-title' },
+	                        '배드워치 평가'
+	                    ),
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'reputation' },
+	                        this.props.userData.reputation
+	                    )
+	                )
+	            );
+	        }
+	    }]);
+
+	    return UserProfile;
 	}(_react2.default.Component);
 
 	UserProfile.propTypes = {
-					userData: _react2.default.PropTypes.object
+	    userData: _react2.default.PropTypes.object
 	};
 
 	exports.default = UserProfile;
@@ -36685,7 +36748,9 @@
 	                    '경쟁전'
 	                ),
 	                _react2.default.createElement(_UserDetailBox2.default, { userData: this.props.userData,
-	                    quick_mode: this.props.quick_mode })
+	                    quick_mode: this.props.quick_mode,
+	                    onQuick: this.props.onQuick,
+	                    onRank: this.props.onRank })
 	            );
 	        }
 	    }]);
@@ -36722,6 +36787,16 @@
 
 	var _UserDetailCard2 = _interopRequireDefault(_UserDetailCard);
 
+	var _UserMobileDetailCard = __webpack_require__(563);
+
+	var _UserMobileDetailCard2 = _interopRequireDefault(_UserMobileDetailCard);
+
+	var _functions = __webpack_require__(564);
+
+	var _HeroCard = __webpack_require__(565);
+
+	var _HeroCard2 = _interopRequireDefault(_HeroCard);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -36745,14 +36820,34 @@
 					_createClass(UserDetailBox, [{
 									key: 'render',
 									value: function render() {
+													var _this2 = this;
+
 													var userData = this.props.userData;
+													var heros = this.props.userData.heros.filter(function (hero) {
+																	return hero.playtime != 0;
+													});
+													var quick_image = _react2.default.createElement(
+																	'div',
+																	null,
+																	_react2.default.createElement('img', { src: '/asset/images/quick_open.png', className: 'quick_open' }),
+																	_react2.default.createElement('img', { src: '/asset/images/rank_close.png', className: 'rank_close', onClick: this.props.onRank })
+													);
+													var rank_image = _react2.default.createElement(
+																	'div',
+																	null,
+																	_react2.default.createElement('img', { src: '/asset/images/quick_close.png', className: 'quick_close', onClick: this.props.onQuick }),
+																	_react2.default.createElement('img', { src: '/asset/images/rank_open.png', className: 'rank_open' })
+													);
 													var winRate = function winRate(win, count) {
+																	if (count == 0) return "0%";
+
 																	return (win * 100 / count).toFixed(1) + "%";
 													};
 													var kda = function kda(kill, death) {
-																	return (kill * 100 / (kill + death)).toFixed(1) + "%";
+																	return (kill / death).toFixed(1);
 													};
 													var userDetailBox = void 0;
+													var userMobileDetailBox = void 0;
 													if (this.props.quick_mode) {
 																	userDetailBox = _react2.default.createElement(
 																					'div',
@@ -36799,18 +36894,18 @@
 																					),
 																					_react2.default.createElement(
 																									_UserDetailCard2.default,
-																									{ data: userData.quick_most_mission_time },
+																									{ data: (0, _functions.second_modify)(userData.quick_most_mission_time) },
 																									'임무기여 시간 최고기록'
 																					),
 																					_react2.default.createElement(
 																									_UserDetailCard2.default,
 																									{ data: userData.quick_most_onecombo },
-																									'동시처치 최고기록'
+																									'원콤보 최고기록'
 																					),
 																					_react2.default.createElement(
 																									_UserDetailCard2.default,
 																									{ data: userData.quick_most_lastshot },
-																									'막타먹어버리기 최고기록'
+																									'킬딸 최고기록'
 																					),
 																					_react2.default.createElement(
 																									_UserDetailCard2.default,
@@ -36819,11 +36914,85 @@
 																					),
 																					_react2.default.createElement(
 																									_UserDetailCard2.default,
-																									{ data: userData.quick_playtime },
+																									{ data: (0, _functions.hour_modify)(userData.quick_playtime) },
 																									'플레이 시간'
 																					),
 																					_react2.default.createElement(
 																									_UserDetailCard2.default,
+																									{ data: userData.quick_most_heal },
+																									'힐 최고기록'
+																					)
+																	);
+																	userMobileDetailBox = _react2.default.createElement(
+																					'div',
+																					null,
+																					_react2.default.createElement(
+																									_UserMobileDetailCard2.default,
+																									{ data: winRate(userData.quick_win, userData.quick_game_count) },
+																									'승률'
+																					),
+																					_react2.default.createElement(
+																									_UserMobileDetailCard2.default,
+																									{ data: kda(userData.quick_kill, userData.quick_death) },
+																									'킬뎃'
+																					),
+																					_react2.default.createElement(
+																									_UserMobileDetailCard2.default,
+																									{ data: userData.quick_gold_medal, average: userData.quick_gold_medal / userData.quick_game_count },
+																									'금메달'
+																					),
+																					_react2.default.createElement(
+																									_UserMobileDetailCard2.default,
+																									{ data: userData.quick_silver_medal, average: userData.quick_silver_medal / userData.quick_game_count },
+																									'은메달'
+																					),
+																					_react2.default.createElement(
+																									_UserMobileDetailCard2.default,
+																									{ data: userData.quick_bronze_medal, average: userData.quick_bronze_medal / userData.quick_game_count },
+																									'동메달'
+																					),
+																					_react2.default.createElement(
+																									_UserMobileDetailCard2.default,
+																									{ data: userData.quick_solo_kill, average: userData.quick_solo_kill / userData.quick_game_count },
+																									'솔킬'
+																					),
+																					_react2.default.createElement(
+																									_UserMobileDetailCard2.default,
+																									{ data: userData.quick_most_kill },
+																									'처치 최고기록'
+																					),
+																					_react2.default.createElement(
+																									_UserMobileDetailCard2.default,
+																									{ data: userData.quick_most_mission_kill },
+																									'임무처치 최고기록'
+																					),
+																					_react2.default.createElement(
+																									_UserMobileDetailCard2.default,
+																									{ data: (0, _functions.second_modify)(userData.quick_most_mission_time) },
+																									'임무기여 시간 최고기록'
+																					),
+																					_react2.default.createElement(
+																									_UserMobileDetailCard2.default,
+																									{ data: userData.quick_most_onecombo },
+																									'원콤보 최고기록'
+																					),
+																					_react2.default.createElement(
+																									_UserMobileDetailCard2.default,
+																									{ data: userData.quick_most_lastshot },
+																									'킬딸 최고기록'
+																					),
+																					_react2.default.createElement(
+																									_UserMobileDetailCard2.default,
+																									{ data: userData.quick_most_deal },
+																									'딜 최고기록'
+																					),
+																					_react2.default.createElement(
+																									_UserMobileDetailCard2.default,
+																									{ data: (0, _functions.hour_modify)(userData.quick_playtime) },
+																									'플레이 시간'
+																					),
+																					_react2.default.createElement(
+																									_UserMobileDetailCard2.default,
 																									{ data: userData.quick_most_heal },
 																									'힐 최고기록'
 																					)
@@ -36874,18 +37043,18 @@
 																					),
 																					_react2.default.createElement(
 																									_UserDetailCard2.default,
-																									{ data: userData.rank_most_mission_time },
+																									{ data: (0, _functions.second_modify)(userData.rank_most_mission_time) },
 																									'임무기여 시간 최고기록'
 																					),
 																					_react2.default.createElement(
 																									_UserDetailCard2.default,
 																									{ data: userData.rank_most_onecombo },
-																									'동시처치 최고기록'
+																									'원콤보 최고기록'
 																					),
 																					_react2.default.createElement(
 																									_UserDetailCard2.default,
 																									{ data: userData.rank_most_lastshot },
-																									'막타먹어버리기 최고기록'
+																									'킬딸 최고기록'
 																					),
 																					_react2.default.createElement(
 																									_UserDetailCard2.default,
@@ -36894,7 +37063,7 @@
 																					),
 																					_react2.default.createElement(
 																									_UserDetailCard2.default,
-																									{ data: userData.rank_playtime },
+																									{ data: (0, _functions.hour_modify)(userData.rank_playtime) },
 																									'플레이 시간'
 																					),
 																					_react2.default.createElement(
@@ -36903,12 +37072,112 @@
 																									'힐 최고기록'
 																					)
 																	);
+
+																	userMobileDetailBox = _react2.default.createElement(
+																					'div',
+																					null,
+																					_react2.default.createElement(
+																									_UserMobileDetailCard2.default,
+																									{ data: winRate(userData.rank_win, userData.rank_game_count) },
+																									'승률'
+																					),
+																					_react2.default.createElement(
+																									_UserMobileDetailCard2.default,
+																									{ data: kda(userData.rank_kill, userData.rank_death) },
+																									'킬뎃'
+																					),
+																					_react2.default.createElement(
+																									_UserMobileDetailCard2.default,
+																									{ data: userData.rank_gold_medal, average: userData.rank_gold_medal / userData.rank_game_count },
+																									'금메달'
+																					),
+																					_react2.default.createElement(
+																									_UserMobileDetailCard2.default,
+																									{ data: userData.rank_silver_medal, average: userData.rank_silver_medal / userData.rank_game_count },
+																									'은메달'
+																					),
+																					_react2.default.createElement(
+																									_UserMobileDetailCard2.default,
+																									{ data: userData.rank_bronze_medal, average: userData.rank_bronze_medal / userData.rank_game_count },
+																									'동메달'
+																					),
+																					_react2.default.createElement(
+																									_UserMobileDetailCard2.default,
+																									{ data: userData.rank_solo_kill, average: userData.rank_solo_kill / userData.rank_game_count },
+																									'솔킬'
+																					),
+																					_react2.default.createElement(
+																									_UserMobileDetailCard2.default,
+																									{ data: userData.rank_most_kill },
+																									'처치 최고기록'
+																					),
+																					_react2.default.createElement(
+																									_UserMobileDetailCard2.default,
+																									{ data: userData.rank_most_mission_kill },
+																									'임무처치 최고기록'
+																					),
+																					_react2.default.createElement(
+																									_UserMobileDetailCard2.default,
+																									{ data: (0, _functions.second_modify)(userData.rank_most_mission_time) },
+																									'임무기여 시간 최고기록'
+																					),
+																					_react2.default.createElement(
+																									_UserMobileDetailCard2.default,
+																									{ data: userData.rank_most_onecombo },
+																									'원콤보 최고기록'
+																					),
+																					_react2.default.createElement(
+																									_UserMobileDetailCard2.default,
+																									{ data: userData.rank_most_lastshot },
+																									'킬딸 최고기록'
+																					),
+																					_react2.default.createElement(
+																									_UserMobileDetailCard2.default,
+																									{ data: userData.rank_most_deal },
+																									'딜 최고기록'
+																					),
+																					_react2.default.createElement(
+																									_UserMobileDetailCard2.default,
+																									{ data: (0, _functions.hour_modify)(userData.rank_playtime) },
+																									'플레이 시간'
+																					),
+																					_react2.default.createElement(
+																									_UserMobileDetailCard2.default,
+																									{ data: userData.rank_most_heal },
+																									'힐 최고기록'
+																					)
+																	);
 													}
 
 													return _react2.default.createElement(
 																	'div',
-																	{ className: 'row' },
-																	userDetailBox
+																	null,
+																	_react2.default.createElement(
+																					'div',
+																					{ className: 'quick-choose' },
+																					this.props.quick_mode ? quick_image : rank_image,
+																					_react2.default.createElement(
+																									'div',
+																									{ className: 'row mobile-hide' },
+																									userDetailBox
+																					),
+																					_react2.default.createElement(
+																									'div',
+																									{ className: 'mobile-gamedata computer-hide' },
+																									userMobileDetailBox
+																					)
+																	),
+																	_react2.default.createElement(
+																					'h5',
+																					{ className: 'hero-list' },
+																					'영웅목록'
+																	),
+																	heros.map(function (hero, i) {
+																					return _react2.default.createElement(_HeroCard2.default, { key: _this2.props.quick_mode + hero.hero,
+																									hero: hero,
+																									quick_mode: _this2.props.quick_mode,
+																									overwatch_id: userData.overwatch_id });
+																	})
 													);
 									}
 					}]);
@@ -36918,7 +37187,9 @@
 
 	UserDetailBox.propTypes = {
 					userData: _react2.default.PropTypes.object,
-					quick_mode: _react2.default.PropTypes.bool
+					quick_mode: _react2.default.PropTypes.bool,
+					onQuick: _react2.default.PropTypes.func,
+					onRank: _react2.default.PropTypes.func
 	};
 
 	exports.default = UserDetailBox;
@@ -36964,13 +37235,20 @@
 	        value: function render() {
 	            return _react2.default.createElement(
 	                'div',
-	                { className: 'col s6 m2' },
-	                this.props.children,
-	                _react2.default.createElement('br', null),
-	                this.props.data,
+	                { className: 'col s6 h2 user-detail' },
 	                _react2.default.createElement(
 	                    'div',
-	                    null,
+	                    { className: 'data-title' },
+	                    this.props.children
+	                ),
+	                _react2.default.createElement(
+	                    'div',
+	                    { className: 'real-data' },
+	                    this.props.data
+	                ),
+	                _react2.default.createElement(
+	                    'div',
+	                    { className: 'box-average' },
 	                    this.props.average ? "한게임 평균 " + this.props.average.toFixed(1) : undefined
 	                ),
 	                _react2.default.createElement('br', null)
@@ -37004,7 +37282,668 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _YoutubeCard = __webpack_require__(564);
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var UserMobileDetailCard = function (_React$Component) {
+	    _inherits(UserMobileDetailCard, _React$Component);
+
+	    function UserMobileDetailCard(props) {
+	        _classCallCheck(this, UserMobileDetailCard);
+
+	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(UserMobileDetailCard).call(this, props));
+
+	        _this.displayName = 'UserMobileDetailCard';
+	        return _this;
+	    }
+
+	    _createClass(UserMobileDetailCard, [{
+	        key: 'render',
+	        value: function render() {
+	            return _react2.default.createElement(
+	                'div',
+	                null,
+	                _react2.default.createElement(
+	                    'div',
+	                    { className: 'real-title' },
+	                    _react2.default.createElement('span', { className: 'list-circle' }),
+	                    this.props.children
+	                ),
+	                _react2.default.createElement(
+	                    'div',
+	                    { className: 'real-data' },
+	                    this.props.data
+	                ),
+	                _react2.default.createElement('br', null)
+	            );
+	        }
+	    }]);
+
+	    return UserMobileDetailCard;
+	}(_react2.default.Component);
+
+	exports.default = UserMobileDetailCard;
+
+/***/ },
+/* 564 */
+/***/ function(module, exports) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	var mapHero = {
+		"리퍼": "reaper",
+		"트레이서": "tracer",
+		"메르시": "mercy",
+		"한조": "hanzo",
+		"토르비욘": "torbjon",
+		"라인하르트": "reinhardt",
+		"파라": "pharah",
+		"윈스턴": "winston",
+		"위도우메이커": "widowmaker",
+		"바스티온": "bastion",
+		"시메트라": "symmetra",
+		"젠야타": "zenyatta",
+		"겐지": "genji",
+		"로드호그": "roadhog",
+		"맥크리": "mccree",
+		"정크랫": "junkrat",
+		"자리야": "zarya",
+		"솔저:76": "soldier",
+		"루시우": "lucio",
+		"디바": "dva",
+		"메이": "mei",
+		"아나": "ana"
+	};
+	var list_right_title = ["플레이 시간", "게임당 폭주시간", "게임당 원콤보 처치", "게임당 딜량", "한목숨 킬 최고기록", "한게임 딜 최고기록", "임무기여처치 최고기록", "임무기여시간 최고기록"];
+
+	function hour_modify(hour) {
+		if (hour >= 1) return hour + " 시간";else {
+			var minute = hour * 60;
+			if (minute >= 1) return Math.round(minute) + " 분";else {
+				var second = minute * 60;
+				return Math.round(second) + " 초";
+			}
+		}
+	}
+
+	function second_modify(second) {
+		if (second < 60) return second + " 초";else {
+			var minute = Math.floor(second / 60);
+			var seconds = second % 60;
+			if (minute < 60) return minute + "분 " + seconds.toFixed(0) + "초";else {
+				var hour = Math.floor(minute / 60);
+				var minutes = minute % 60;
+				return hour + "시간 " + minutes + "분 " + seconds.toFixed(0) + "초";
+			}
+		}
+	}
+
+	function get_job_right_title(hero) {
+		switch (hero) {
+			case "리퍼":
+				return list_right_title.concat(["게임당 죽음의 꽃(Q)로 처치", "게임당 평균 거둔영혼", "죽음의 꽃(Q) 한게임 최고처치", "거둔영혼 한게임 최고기록"]);
+			case "트레이서":
+				return list_right_title.concat(["게임당 펄스폭탄(Q)로 처치", "게임당 펄스폭탄(Q)부착", "펄스폭탄(Q) 한게임 최고처치", "펄스폭탄(Q)부착 한게임 최고기록"]);
+			case "메르시":
+				return list_right_title.concat(["게임당 부활(Q)한 플레이어", "게임당 블라스터(2)으로 처치", "부활(Q)한 플레이어 한게임 최고기록", "블라스터(2) 한게임 최고처치", "치유(1) 한게임 최고기록"]);
+			case "한조":
+				return list_right_title.concat(["게임당 용의 일격(Q)로 처치", "게임당 갈래 화살(E)로 처치", "용의 일격(Q) 한게임 최고처치", "갈래 화살(Q) 한게임 최고처치", "처치시야지원(Shift) 한게임 최고기록"]);
+			case "토르비욘":
+				return list_right_title.concat(["게임당 생성한 방어구팩", "게임당 토르비욘이 직접처치", "게임당 포탑으로 처치", "게임당 초고열 용광로(Q)로 처치", "초고욜 용광로(Q) 한게임 최고처치"]);
+			case "라인하르트":
+				return list_right_title.concat(["게임당 막은피해(방벽)", "게임당 돌진(shift)으로 교통사고", "게임당 화염강타(E)로 처치", "게임당 대지분쇄(Q)로 처치", "막은피해(방벽) 한게임 최고기록"]);
+			case "파라":
+				return list_right_title.concat(["게임당 로켓 명중", "게임당 포화(Q)로 처치", "로켓 명중 한게임 최고기록", "포화(Q) 한게임 최고처치"]);
+			case "윈스턴":
+				return list_right_title.concat(["게임당 밀쳐낸 플레이어(Q)", "게임당 막은피해(E)", "게임당 점프 팩(Shift)로 처치", "게임당 원시의 분노(Q)로 처치", "막은피해(E) 한게임 최고기록", "점프 팩(Shift) 한게임 최고처치", "원시의 분노(Q) 한게임 최고처치"]);
+			case "위도우메이커":
+				return list_right_title.concat(["게임당 맹독 지뢰(E)로 처치", "게임당 저격치명타", "저격명중률", "저격명중률 한게임 최고기록", "저격치명타 한게임 최고기록", "처치시야지원(Q) 한게임 최고기록"]);
+			case "바스티온":
+				return list_right_title.concat(["게임당 수색모드로 처치", "게임당 경계모드(Shift)로 처치", "게임당 전차모드(Q)로 처치", "수색모드 한게임 최고처치", "게임당 자가치유(E)", "경계모드(Shift) 한게임 최고처치", "전차모드(Q) 한게임 최고처치"]);
+			case "시메트라":
+				return list_right_title.concat(["게임당 감시포탑(Shift)로 처치", "게임당 순간이동(Q)한 플레이어", "게임당 보호막 제공(E)", "게임당 순간이동기(Q) 가동시간", "순간이동(Q)한 플레이어 한게임 최고기록", "보호막(E)제공 한게임 최고기록", "순간이동기(Q) 가동시간 한게임 최고기록"]);
+			case "젠야타":
+				return list_right_title.concat(["게임당 초월(Q)로 치유", "초월(Q)로 치유 한게임 최고기록", "치유 한게임 최고기록"]);
+			case "겐지":
+				return list_right_title.concat(["게임당 용검(Q)으로 처치", "게임당 튕겨낸피해(E)", "게임당 근접 공격 결정타", "용검(Q) 한게임 최고처치", "튕겨낸피해(E) 한게임 최고기록"]);
+			case "로드호그":
+				return list_right_title.concat(["갈고리(Shift) 명중률", "게임당 갈고리(Shift)로 끌어오기", "게임당 돼재앙(Q)로 처치", "갈고리(Shift)명중률 한게임 최고기록", "갈고리(Shift)로 끌어오기 한게임 최고기록", "돼재앙(Q) 한게임 최고처치"]);
+			case "맥크리":
+				return list_right_title.concat(["게임당 황야의 무법자(Q)로 처치", "게임당 피스키퍼 난사(right)로 처치", "황야의무법자(Q) 한게임 최고처치", "피스키퍼 난사(right) 한게임 최고처치"]);
+			case "정크랫":
+				return list_right_title.concat(["게임당 덫(E)에 걸린 적", "게임당 죽이는 타이어(Q)로 처치", "덫(E)에 걸린 적 한게임 최고기록", "죽이는 타이어(Q) 한게임 최고처치"]);
+			case "자리야":
+				return list_right_title.concat(["게임당 막은피해(Shift)", "게임당 방벽씌우기(E)", "게임당 고에너지(right)로 처치", "게임당 중력탄(Q)으로 처치", "막은피해(Shift) 한게임 최고기록", "방벽씌우기(E) 한게임 최고기록", "고에너지(right) 한게임 최고처치", "중력탄(Q) 한게임 최고처치"]);
+			case "솔저:76":
+				return list_right_title.concat(["게임당 나선로켓(right)로 처치", "게임당 전술조준경(Q)로 처치", "게임당 생체장(E)으로 치유", "나선로켓(right) 한게임 최고처치", "전술조준경(Q) 한게임 최고처치"]);
+			case "루시우":
+				return list_right_title.concat(["게임당 소리방벽(Q) 제공", "게임당 자가치유", "소리방벽(Q) 한게임 최고기록", "치유 한게임 최고기록"]);
+			case "디바":
+				return list_right_title.concat(["게임당 호출한 로봇", "게임당 자폭(Q)으로 처치", "게임당 막은피해(right)", "게임당 파괴된 로봇", "자폭(Q) 한게임 최고처치", "막은피해(right) 한게임 최고기록"]);
+			case "메이":
+				return list_right_title.concat(["게임당 얼린 적", "게임당 눈보라(Q)로 처치", "게임당 막은 피해(Shift)", "얼린 적 한게임 최고기록", "눈보라(Q) 한게임 최고처치", "막은 피해(Shift) 한게임 최고기록"]);
+			case "아나":
+				return list_right_title.concat(["게임당 나노강화제(Q) 주입", "게임당 재운적(Shift)", "소총명중률", "저격 명중률", "재운적(Shift) 한게임 최고기록"]);
+		}
+	}
+
+	function get_job_right_value(quick_mode, hero, heroData) {
+		if (quick_mode) {
+			// 빠른대전
+
+			var per_game = function per_game(data) {
+				return heroData.quick_game_count == 0 ? 0 : (data / heroData.quick_game_count).toFixed(1);
+			};
+
+			var list_right_value = [hour_modify(heroData.quick_playtime), second_modify(per_game(heroData.quick_flood_time)), per_game(heroData.quick_onecombo) + "킬", per_game(heroData.quick_deal), heroData.quick_best_kill_in_life + "킬", heroData.quick_best_deal_in_game, heroData.quick_best_mission_kill_in_game + "킬", second_modify(heroData.quick_best_mission_time_in_game)];
+
+			switch (hero) {
+				case "리퍼":
+					return list_right_value.concat([per_game(heroData.quick_death_blossom_kill) + "킬", per_game(heroData.quick_soul_consumed) + "영혼", heroData.quick_most_death_blossom_kill + "킬", heroData.quick_most_soul_consumed + "영혼"]);
+				case "트레이서":
+					return list_right_value.concat([per_game(heroData.quick_pulse_bomb_kill) + "킬", per_game(heroData.quick_pulse_bomb_attached) + "개", heroData.quick_best_pulse_bomb_kill_in_game + "킬", heroData.quick_best_puls_bomb_attached_in_game + "개"]);
+				case "메르시":
+					return list_right_value.concat([per_game(heroData.quick_resurrected) + "명", per_game(heroData.quick_blaster_kill) + "킬", heroData.quick_best_resurrected_in_game + "명", heroData.quick_best_blaster_kill_in_game + "킬", heroData.quick_best_heal_in_game]);
+				case "한조":
+					return list_right_value.concat([per_game(heroData.quick_dragonstrike_kill) + "킬", per_game(heroData.quick_scatter_arrow_kill) + "킬", heroData.quick_best_dragonstrike_kill_in_game + "킬", heroData.quick_best_scatter_arrow_kill_in_game + "킬", heroData.quick_best_view_support_in_game + "회"]);
+				case "토르비욘":
+					return list_right_value.concat([per_game(heroData.quick_armor_pack_created) + "개", per_game(heroData.quick_torbjon_kill) + "킬", per_game(heroData.quick_turret_kill) + "킬", per_game(heroData.quick_molten_core_kill) + "킬", heroData.quick_best_molten_core_kill_in_game + "킬"]);
+				case "라인하르트":
+					return list_right_value.concat([per_game(heroData.quick_damage_blocked) + "막음", per_game(heroData.quick_charge_kill) + "킬", per_game(heroData.quick_fire_strike_kill) + "킬", per_game(heroData.quick_earthshatter_kill) + "킬", heroData.quick_best_damage_blocked_in_game + "막음"]);
+				case "파라":
+					return list_right_value.concat([per_game(heroData.quick_rocket_hit), per_game(heroData.quick_barrage_kill) + "킬", heroData.quick_best_rocket_hit_in_game, heroData.quick_best_barrage_kill_in_game + "킬"]);
+				case "윈스턴":
+					return list_right_value.concat([per_game(heroData.quick_knocked_back) + "회", per_game(heroData.quick_damage_blocked) + "막음", per_game(heroData.quick_jump_pack_kill) + "킬", per_game(heroData.quick_primal_rage_kill) + "킬", heroData.quick_best_damage_blocked_in_game + "막음", heroData.quick_best_jump_pack_kill_in_game + "킬", heroData.quick_best_primal_rage_kill_in_game + "킬"]);
+				case "위도우메이커":
+					return list_right_value.concat([per_game(heroData.quick_venom_mine_kill) + "킬", per_game(heroData.quick_scoped_critical), heroData.quick_scoped_accuracy + "%", heroData.quick_best_scoped_accuracy_in_game + "%", heroData.quick_best_scoped_critical_in_game, heroData.quick_best_view_support_in_game + "회"]);
+				case "바스티온":
+					return list_right_value.concat([per_game(heroData.quick_recon_kill) + "킬", per_game(heroData.quick_sentry_kill) + "킬", per_game(heroData.quick_tank_kill) + "킬", heroData.quick_best_recon_kill_in_game + "킬", per_game(heroData.quick_self_heal), heroData.quick_best_sentry_kill_in_game + "킬", heroData.quick_best_tank_kill_in_game + "킬"]);
+				case "시메트라":
+					return list_right_value.concat([per_game(heroData.quick_turret_kill) + "킬", per_game(heroData.quick_player_teleported) + "명", per_game(heroData.quick_shield_provided), second_modify(per_game(heroData.quick_teleport_uptime)), heroData.quick_best_player_teleported_in_game + "명", heroData.quick_best_shield_provided_in_game, second_modify(heroData.quick_best_teleport_uptime_in_game)]);
+				case "젠야타":
+					return list_right_value.concat([per_game(heroData.quick_transcendence_heal), heroData.quick_best_transcendence_heal, heroData.quick_best_heal_in_game]);
+				case "겐지":
+					return list_right_value.concat([per_game(heroData.quick_dragonblade_kill) + "킬", per_game(heroData.quick_damage_reflected), per_game(heroData.quick_melee_lastshot) + "킬", heroData.quick_best_dragonblade_kill_in_game + "킬", heroData.quick_best_damage_reflected_in_game]);
+				case "로드호그":
+					return list_right_value.concat([heroData.quick_hook_accuracy + "%", per_game(heroData.quick_hook) + "회", per_game(heroData.quick_wholehog_kill) + "킬", heroData.quick_best_hook_accuracy_in_game + "%", heroData.quick_best_hook_in_game + "회", heroData.quick_best_wholehog_kill_in_game + "킬"]);
+				case "맥크리":
+					return list_right_value.concat([per_game(heroData.quick_deadeye_kill) + "킬", per_game(heroData.quick_fan_the_hammer_kill) + "킬", heroData.quick_best_deadeye_kill_in_game + "킬", heroData.quick_best_fan_the_hammer_kill_in_game + "킬"]);
+				case "정크랫":
+					return list_right_value.concat([per_game(heroData.quick_trapped_enemy) + "명", per_game(heroData.quick_riptire_kill) + "킬", heroData.quick_best_trapped_enemy_in_game + "명", heroData.quick_best_riptire_kill_in_game + "킬"]);
+				case "자리야":
+					return list_right_value.concat([per_game(heroData.quick_damage_blocked) + "막음", per_game(heroData.quick_barrier) + "회", per_game(heroData.quick_high_energy_kill) + "킬", per_game(heroData.quick_graviton_surge_kill) + "킬", heroData.quick_best_damage_blocked_in_game + "막음", heroData.quick_best_barrier_in_game + "회", heroData.quick_best_high_energy_kill_in_game + "킬", heroData.quick_best_graviton_kill_in_game + "킬"]);
+				case "솔저:76":
+					return list_right_value.concat([per_game(heroData.quick_helix_rocket_kill) + "킬", per_game(heroData.quick_tactical_visor_kill) + "킬", per_game(heroData.quick_biotic_field_heal), heroData.quick_best_helix_rocket_kill_in_game + "킬", heroData.quick_best_tactical_visor_kill_in_game + "킬"]);
+				case "루시우":
+					return list_right_value.concat([per_game(heroData.quick_sound_barrier), per_game(heroData.quick_self_heal), heroData.quick_best_sound_barrier_in_game, heroData.quick_best_heal_in_game]);
+				case "디바":
+					return list_right_value.concat([per_game(heroData.quick_mech_called) + "회", per_game(heroData.quick_self_destruct_kill) + "킬", per_game(heroData.quick_damage_blocked) + "막음", per_game(heroData.quick_mech_destroyed), heroData.quick_best_self_destruct_kill + "킬", heroData.quick_best_damage_blocked_in_game + "막음"]);
+				case "메이":
+					return list_right_value.concat([per_game(heroData.quick_enemy_frozen) + "명", per_game(heroData.quick_blizzard_kill) + "킬", per_game(heroData.quick_damage_blocked) + "막음", heroData.quick_best_enemy_frozen_in_game + "명", heroData.quick_best_blizzard_kill_in_game + "킬", heroData.quick_best_damage_blocked_in_game + "막음"]);
+				case "아나":
+					return list_right_value.concat([per_game(heroData.quick_nano_boosts_applied), per_game(heroData.quick_enemy_slept) + "명", heroData.quick_unscoped_accuracy + "%", heroData.quick_scoped_accuracy + "%", heroData.quick_best_enemy_slept_in_game + "명"]);
+			}
+		} else {
+			//경쟁전
+			var _per_game = function _per_game(data) {
+				return heroData.rank_game_count == 0 ? 0 : (data / heroData.rank_game_count).toFixed(1);
+			};
+
+			var list_right_value = [hour_modify(heroData.rank_playtime), second_modify(_per_game(heroData.rank_flood_time)), _per_game(heroData.rank_onecombo) + "킬", _per_game(heroData.rank_deal), heroData.rank_best_kill_in_life + "킬", heroData.rank_best_deal_in_game, heroData.rank_best_mission_kill_in_game + "킬", second_modify(heroData.rank_best_mission_time_in_game)];
+			switch (hero) {
+				case "리퍼":
+					return list_right_value.concat([_per_game(heroData.rank_death_blossom_kill) + "킬", _per_game(heroData.rank_soul_consumed) + "영혼", heroData.rank_most_death_blossom_kill + "킬", heroData.rank_most_soul_consumed + "영혼"]);
+				case "트레이서":
+					return list_right_value.concat([_per_game(heroData.rank_pulse_bomb_kill) + "킬", _per_game(heroData.rank_pulse_bomb_attached) + "개", heroData.rank_best_pulse_bomb_kill_in_game + "킬", heroData.rank_best_puls_bomb_attached_in_game + "개"]);
+				case "메르시":
+					return list_right_value.concat([_per_game(heroData.rank_resurrected) + "명", _per_game(heroData.rank_blaster_kill) + "킬", heroData.rank_best_resurrected_in_game + "명", heroData.rank_best_blaster_kill_in_game + "킬", heroData.rank_best_heal_in_game]);
+				case "한조":
+					return list_right_value.concat([_per_game(heroData.rank_dragonstrike_kill) + "킬", _per_game(heroData.rank_scatter_arrow_kill) + "킬", heroData.rank_best_dragonstrike_kill_in_game + "킬", heroData.rank_best_scatter_arrow_kill_in_game + "킬", heroData.rank_best_view_support_in_game + "회"]);
+				case "토르비욘":
+					return list_right_value.concat([_per_game(heroData.rank_armor_pack_created) + "개", _per_game(heroData.rank_torbjon_kill) + "킬", _per_game(heroData.rank_turret_kill) + "킬", _per_game(heroData.rank_molten_core_kill) + "킬", heroData.rank_best_molten_core_kill_in_game + "킬"]);
+				case "라인하르트":
+					return list_right_value.concat([_per_game(heroData.rank_damage_blocked) + "막음", _per_game(heroData.rank_charge_kill) + "킬", _per_game(heroData.rank_fire_strike_kill) + "킬", _per_game(heroData.rank_earthshatter_kill) + "킬", heroData.rank_best_damage_blocked_in_game + "막음"]);
+				case "파라":
+					return list_right_value.concat([_per_game(heroData.rank_rocket_hit), _per_game(heroData.rank_barrage_kill) + "킬", heroData.rank_best_rocket_hit_in_game, heroData.rank_best_barrage_kill_in_game + "킬"]);
+				case "윈스턴":
+					return list_right_value.concat([_per_game(heroData.rank_knocked_back) + "회", _per_game(heroData.rank_damage_blocked) + "막음", _per_game(heroData.rank_jump_pack_kill) + "킬", _per_game(heroData.rank_primal_rage_kill) + "킬", heroData.rank_best_damage_blocked_in_game + "막음", heroData.rank_best_jump_pack_kill_in_game + "킬", heroData.rank_best_primal_rage_kill_in_game + "킬"]);
+				case "위도우메이커":
+					return list_right_value.concat([_per_game(heroData.rank_venom_mine_kill) + "킬", _per_game(heroData.rank_scoped_critical), heroData.rank_scoped_accuracy + "%", heroData.rank_best_scoped_accuracy_in_game + "%", heroData.rank_best_scoped_critical_in_game, heroData.rank_best_view_support_in_game + "회"]);
+				case "바스티온":
+					return list_right_value.concat([_per_game(heroData.rank_recon_kill) + "킬", _per_game(heroData.rank_sentry_kill) + "킬", _per_game(heroData.rank_tank_kill) + "킬", heroData.rank_best_recon_kill_in_game + "킬", _per_game(heroData.rank_self_heal), heroData.rank_best_sentry_kill_in_game + "킬", heroData.rank_best_tank_kill_in_game + "킬"]);
+				case "시메트라":
+					return list_right_value.concat([_per_game(heroData.rank_turret_kill) + "킬", _per_game(heroData.rank_player_teleported) + "명", _per_game(heroData.rank_shield_provided), second_modify(_per_game(heroData.rank_teleport_uptime)), heroData.rank_best_player_teleported_in_game + "명", heroData.rank_best_shield_provided_in_game, second_modify(heroData.rank_best_teleport_uptime_in_game)]);
+				case "젠야타":
+					return list_right_value.concat([_per_game(heroData.rank_transcendence_heal), heroData.rank_best_transcendence_heal, heroData.rank_best_heal_in_game]);
+				case "겐지":
+					return list_right_value.concat([_per_game(heroData.rank_dragonblade_kill) + "킬", _per_game(heroData.rank_damage_reflected), _per_game(heroData.rank_melee_lastshot) + "킬", heroData.rank_best_dragonblade_kill_in_game + "킬", heroData.rank_best_damage_reflected_in_game]);
+				case "로드호그":
+					return list_right_value.concat([heroData.rank_hook_accuracy + "%", _per_game(heroData.rank_hook) + "회", _per_game(heroData.rank_wholehog_kill) + "킬", heroData.rank_best_hook_accuracy_in_game + "%", heroData.rank_best_hook_in_game + "회", heroData.rank_best_wholehog_kill_in_game + "킬"]);
+				case "맥크리":
+					return list_right_value.concat([_per_game(heroData.rank_deadeye_kill) + "킬", _per_game(heroData.rank_fan_the_hammer_kill) + "킬", heroData.rank_best_deadeye_kill_in_game + "킬", heroData.rank_best_fan_the_hammer_kill_in_game + "킬"]);
+				case "정크랫":
+					return list_right_value.concat([_per_game(heroData.rank_trapped_enemy) + "명", _per_game(heroData.rank_riptire_kill) + "킬", heroData.rank_best_trapped_enemy_in_game + "명", heroData.rank_best_riptire_kill_in_game + "킬"]);
+				case "자리야":
+					return list_right_value.concat([_per_game(heroData.rank_damage_blocked) + "막음", _per_game(heroData.rank_barrier) + "회", _per_game(heroData.rank_high_energy_kill) + "킬", _per_game(heroData.rank_graviton_surge_kill) + "킬", heroData.rank_best_damage_blocked_in_game + "막음", heroData.rank_best_barrier_in_game + "회", heroData.rank_best_high_energy_kill_in_game + "킬", heroData.rank_best_graviton_kill_in_game + "킬"]);
+				case "솔저:76":
+					return list_right_value.concat([_per_game(heroData.rank_helix_rocket_kill) + "킬", _per_game(heroData.rank_tactical_visor_kill) + "킬", _per_game(heroData.rank_biotic_field_heal), heroData.rank_best_helix_rocket_kill_in_game + "킬", heroData.rank_best_tactical_visor_kill_in_game + "킬"]);
+				case "루시우":
+					return list_right_value.concat([_per_game(heroData.rank_sound_barrier), _per_game(heroData.rank_self_heal), heroData.rank_best_sound_barrier_in_game, heroData.rank_best_heal_in_game]);
+				case "디바":
+					return list_right_value.concat([_per_game(heroData.rank_mech_called) + "회", _per_game(heroData.rank_self_destruct_kill) + "킬", _per_game(heroData.rank_damage_blocked) + "막음", _per_game(heroData.rank_mech_destroyed), heroData.rank_best_self_destruct_kill + "킬", heroData.rank_best_damage_blocked_in_game + "막음"]);
+				case "메이":
+					return list_right_value.concat([_per_game(heroData.rank_enemy_frozen) + "명", _per_game(heroData.rank_blizzard_kill) + "킬", _per_game(heroData.rank_damage_blocked) + "막음", heroData.rank_best_enemy_frozen_in_game + "명", heroData.rank_best_blizzard_kill_in_game + "칼", heroData.rank_best_damage_blocked_in_game + "막음"]);
+				case "아나":
+					return list_right_value.concat([_per_game(heroData.rank_nano_boosts_applied), _per_game(heroData.rank_enemy_slept) + "명", heroData.rank_unscoped_accuracy + "%", heroData.rank_scoped_accuracy + "%", heroData.rank_best_enemy_slept_in_game + "명"]);
+			}
+		}
+	}
+	exports.mapHero = mapHero;
+	exports.get_job_right_title = get_job_right_title;
+	exports.get_job_right_value = get_job_right_value;
+	exports.hour_modify = hour_modify;
+	exports.second_modify = second_modify;
+
+/***/ },
+/* 565 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(299);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _functions = __webpack_require__(564);
+
+	var _HeroDetail = __webpack_require__(566);
+
+	var _HeroDetail2 = _interopRequireDefault(_HeroDetail);
+
+	var _axios = __webpack_require__(536);
+
+	var _axios2 = _interopRequireDefault(_axios);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var HeroCard = function (_React$Component) {
+		_inherits(HeroCard, _React$Component);
+
+		function HeroCard(props) {
+			_classCallCheck(this, HeroCard);
+
+			var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(HeroCard).call(this, props));
+
+			_this.displayName = 'HeroCard';
+			_this.state = {
+				detailOpen: false,
+				heroData: {}
+			};
+			_this._onDetail = _this._onDetail.bind(_this);
+			_this._onClose = _this._onClose.bind(_this);
+			return _this;
+		}
+
+		_createClass(HeroCard, [{
+			key: '_onDetail',
+			value: function _onDetail() {
+				var _this2 = this;
+
+				if (!Object.keys(this.state.heroData).length) {
+					var game_type = "quick";
+					if (!this.props.quick_mode) game_type = "rank";
+
+					var url = 'http://bad.watch/api/heros/' + game_type + '/' + _functions.mapHero[this.props.hero.hero] + '/' + this.props.overwatch_id;
+					_axios2.default.get(url).then(function (response) {
+						var data = response.data;
+						if (data.responseCode == 4) {
+							_this2.setState({
+								detailOpen: true,
+								heroData: data.heroData
+							});
+						} else {
+							sweetAlert('데이터를 불러오는데 오류가 발생했습니다.', '잠시후 다시시도해주세요.', 'error');
+							return;
+						}
+					});
+				} else {
+					this.setState({
+						detailOpen: true
+					});
+				}
+			}
+		}, {
+			key: '_onClose',
+			value: function _onClose() {
+				this.setState({
+					detailOpen: false
+				});
+			}
+		}, {
+			key: 'render',
+			value: function render() {
+				var hero = this.props.hero;
+				var heroDetail = _react2.default.createElement(_HeroDetail2.default, { quick_mode: this.props.quick_mode,
+					hero: this.state.heroData,
+					heroName: hero.hero });
+				var winRate = function winRate(win, count) {
+					if (count == 0) return "0%";
+
+					return (win * 100 / count).toFixed(1) + "%";
+				};
+				var kda = function kda(kill, death) {
+					if (death == 0) return "perfect";
+
+					return (kill / death).toFixed(2);
+				};
+				return _react2.default.createElement(
+					'div',
+					null,
+					_react2.default.createElement(
+						'div',
+						{ className: 'hero-div' },
+						_react2.default.createElement('img', { src: "/asset/images/heros/" + _functions.mapHero[hero.hero] + ".png",
+							className: 'hero-avatar' }),
+						_react2.default.createElement(
+							'div',
+							{ className: 'heroname' },
+							hero.hero
+						),
+						_react2.default.createElement('br', null),
+						_react2.default.createElement(
+							'div',
+							{ className: 'hero-data' },
+							'승률  ',
+							_react2.default.createElement(
+								'span',
+								{ className: 'right' },
+								winRate(hero.win, hero.game_count)
+							)
+						),
+						_react2.default.createElement('br', null),
+						_react2.default.createElement(
+							'div',
+							{ className: 'hero-data' },
+							'K / D  ',
+							_react2.default.createElement(
+								'span',
+								{ className: 'right' },
+								kda(hero.kill, hero.death)
+							)
+						),
+						_react2.default.createElement('br', null),
+						_react2.default.createElement(
+							'div',
+							{ className: 'hero-data' },
+							'플레이 시간 ',
+							_react2.default.createElement(
+								'span',
+								{ className: 'right' },
+								(0, _functions.hour_modify)(hero.playtime)
+							)
+						),
+						_react2.default.createElement(
+							'div',
+							{ className: 'hero-more valign-wrapper mobile-hide' },
+							_react2.default.createElement(
+								'div',
+								{ className: 'right-align' },
+								_react2.default.createElement(
+									'span',
+									{ className: 'check-repu' },
+									'평가를 확인해보세요!'
+								),
+								this.state.detailOpen ? _react2.default.createElement('img', { src: '/asset/images/arrow-up.png',
+									className: 'arrow',
+									onClick: this._onClose }) : _react2.default.createElement('img', { src: '/asset/images/arrow-down.png',
+									className: 'arrow',
+									onClick: this._onDetail })
+							)
+						),
+						_react2.default.createElement(
+							'div',
+							{ className: 'computer-hide mobile-hero-more' },
+							_react2.default.createElement(
+								'span',
+								{ className: 'check-repu' },
+								'평가를 확인해보세요!'
+							),
+							this.state.detailOpen ? _react2.default.createElement('img', { src: '/asset/images/arrow-up.png',
+								className: 'arrow',
+								onClick: this._onClose }) : _react2.default.createElement('img', { src: '/asset/images/arrow-down.png',
+								className: 'arrow',
+								onClick: this._onDetail })
+						)
+					),
+					this.state.detailOpen ? heroDetail : undefined
+				);
+			}
+		}]);
+
+		return HeroCard;
+	}(_react2.default.Component);
+
+	HeroCard.propTypes = {
+		hero: _react2.default.PropTypes.object,
+		quick_mode: _react2.default.PropTypes.bool,
+		overwatch_id: _react2.default.PropTypes.number
+	};
+
+	exports.default = HeroCard;
+
+/***/ },
+/* 566 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(299);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _functions = __webpack_require__(564);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var HeroDetail = function (_React$Component) {
+	    _inherits(HeroDetail, _React$Component);
+
+	    function HeroDetail(props) {
+	        _classCallCheck(this, HeroDetail);
+
+	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(HeroDetail).call(this, props));
+
+	        _this.displayName = 'HeroDetail';
+	        return _this;
+	    }
+
+	    _createClass(HeroDetail, [{
+	        key: 'render',
+	        value: function render() {
+	            var hero = this.props.hero;
+	            var list_left_value = [];
+	            var list_right_title = [];
+	            var list_right_value = [];
+	            var list_left_title = ["게임당 평균 K/D", "승률", "솔로킬", "게임당 임무 기여 처치", "명중률", "게임당 평균 킬딸", "게임당 평균 치유", "게임당 평균 치명타", "전체 킬", "전체 데스", "승리", "패배"];
+
+	            if (this.props.quick_mode) {
+	                list_left_value = [hero.quick_death == 0 ? "perfect" : (hero.quick_kill / hero.quick_death).toFixed(2), hero.quick_game_count == 0 ? "0%" : (hero.quick_win * 100 / hero.quick_game_count).toFixed(1) + "%", hero.quick_solo_kill + "킬", hero.quick_game_count == 0 ? 0 : (hero.quick_mission_kill / hero.quick_game_count).toFixed(1) + "킬", hero.quick_accuracy + "%", hero.quick_game_count == 0 ? 0 : (hero.quick_lastshot / hero.quick_game_count).toFixed(1) + "킬", hero.quick_game_count == 0 ? 0 : (hero.quick_heal / hero.quick_game_count).toFixed(1), hero.quick_game_count == 0 ? 0 : (hero.quick_critical / hero.quick_game_count).toFixed(1), hero.quick_kill + "킬", hero.quick_death + "데스", hero.quick_win + "승", hero.quick_game_count - hero.quick_win + "패"];
+	            } else {
+	                list_left_value = [(hero.rank_kill / hero.rank_death).toFixed(2), hero.rank_game_count == 0 ? "0%" : (hero.rank_win * 100 / hero.rank_game_count).toFixed(1) + "%", hero.rank_solo_kill + "킬", hero.rank_game_count == 0 ? 0 : (hero.rank_mission_kill / hero.rank_game_count).toFixed(1) + "킬", hero.rank_accuracy + "%", hero.rank_game_count == 0 ? 0 : (hero.rank_lastshot / hero.rank_game_count).toFixed(1) + "킬", hero.rank_game_count == 0 ? 0 : (hero.rank_heal / hero.rank_game_count).toFixed(1), hero.rank_game_count == 0 ? 0 : (hero.rank_critical / hero.rank_game_count).toFixed(1), hero.rank_kill + "킬", hero.rank_death + "데스", hero.rank_win + "승", hero.rank_game_count - hero.rank_win + "패"];
+	            }
+
+	            list_right_title = (0, _functions.get_job_right_title)(this.props.heroName);
+	            list_right_value = (0, _functions.get_job_right_value)(this.props.quick_mode, this.props.heroName, this.props.hero);
+	            return _react2.default.createElement(
+	                'div',
+	                null,
+	                _react2.default.createElement(
+	                    'div',
+	                    { className: 'reputation-div' },
+	                    _react2.default.createElement('img', { src: '/asset/images/evil.png', className: 'evil' }),
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'reputation-text' },
+	                        hero.reputation
+	                    )
+	                ),
+	                _react2.default.createElement(
+	                    'div',
+	                    { className: 'hero-data-div' },
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'hero-detail-1' },
+	                        _react2.default.createElement(
+	                            'div',
+	                            null,
+	                            _react2.default.createElement(
+	                                'div',
+	                                null,
+	                                _react2.default.createElement('span', { className: 'list-circle' }),
+	                                _react2.default.createElement(
+	                                    'span',
+	                                    { className: 'list-title' },
+	                                    '메달'
+	                                )
+	                            ),
+	                            _react2.default.createElement(
+	                                'div',
+	                                { className: 'medal' },
+	                                _react2.default.createElement(
+	                                    'span',
+	                                    { className: 'left inline' },
+	                                    _react2.default.createElement('img', { src: '/asset/images/gold-medal.png', className: 'gold-medal' }),
+	                                    _react2.default.createElement('br', null),
+	                                    this.props.quick_mode ? hero.quick_gold_medal : hero.rank_gold_medal
+	                                ),
+	                                _react2.default.createElement(
+	                                    'span',
+	                                    { className: 'inline' },
+	                                    _react2.default.createElement('img', { src: '/asset/images/silver-medal.png', className: 'silver-medal' }),
+	                                    _react2.default.createElement('br', null),
+	                                    this.props.quick_mode ? hero.quick_silver_medal : hero.rank_silver_medal
+	                                ),
+	                                _react2.default.createElement(
+	                                    'span',
+	                                    { className: 'right inline' },
+	                                    _react2.default.createElement('img', { src: '/asset/images/bronze-medal.png', className: 'bronze-medal' }),
+	                                    _react2.default.createElement('br', null),
+	                                    this.props.quick_mode ? hero.quick_bronze_medal : hero.rank_bronze_medal
+	                                )
+	                            )
+	                        ),
+	                        list_left_title.map(function (title, i) {
+	                            return _react2.default.createElement(
+	                                'div',
+	                                { className: 'hero-data-list', key: i },
+	                                _react2.default.createElement(
+	                                    'div',
+	                                    { className: 'hero-data-title' },
+	                                    _react2.default.createElement('span', { className: 'list-circle' }),
+	                                    _react2.default.createElement(
+	                                        'span',
+	                                        { className: 'list-title' },
+	                                        title
+	                                    )
+	                                ),
+	                                _react2.default.createElement(
+	                                    'span',
+	                                    { className: 'hero-data-num' },
+	                                    list_left_value[i]
+	                                )
+	                            );
+	                        })
+	                    ),
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'hero-detail-2' },
+	                        list_right_title.reverse().map(function (title, i) {
+	                            return _react2.default.createElement(
+	                                'div',
+	                                { className: 'hero-data-list', key: i },
+	                                _react2.default.createElement(
+	                                    'div',
+	                                    { className: 'hero-data-title' },
+	                                    _react2.default.createElement('span', { className: 'list-circle' }),
+	                                    _react2.default.createElement(
+	                                        'span',
+	                                        { className: 'list-title' },
+	                                        title
+	                                    )
+	                                ),
+	                                _react2.default.createElement(
+	                                    'span',
+	                                    { className: 'hero-data-num' },
+	                                    list_right_value[list_right_value.length - i - 1]
+	                                )
+	                            );
+	                        })
+	                    )
+	                )
+	            );
+	        }
+	    }]);
+
+	    return HeroDetail;
+	}(_react2.default.Component);
+
+	HeroDetail.propTypes = {
+	    hero: _react2.default.PropTypes.object,
+	    quick_mode: _react2.default.PropTypes.bool,
+	    heroName: _react2.default.PropTypes.string
+	};
+
+	exports.default = HeroDetail;
+
+/***/ },
+/* 567 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(299);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _YoutubeCard = __webpack_require__(568);
 
 	var _YoutubeCard2 = _interopRequireDefault(_YoutubeCard);
 
@@ -37013,6 +37952,10 @@
 	var _axios2 = _interopRequireDefault(_axios);
 
 	var _reactRouter = __webpack_require__(469);
+
+	var _reactRedux = __webpack_require__(569);
+
+	var _youtubes = __webpack_require__(597);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -37034,14 +37977,32 @@
 	        _this.state = {
 	            youtubes: [],
 	            title: '',
-	            url: ''
+	            url: '',
+	            order: 'new',
+	            loadingState: false,
+	            searchOpen: false
 	        };
+	        _this._selectChange = _this._selectChange.bind(_this);
 	        _this._handleChange = _this._handleChange.bind(_this);
 	        _this._onSubmitYoutube = _this._onSubmitYoutube.bind(_this);
+	        _this._openSearch = _this._openSearch.bind(_this);
 	        return _this;
 	    }
 
 	    _createClass(YoutubeBox, [{
+	        key: '_selectChange',
+	        value: function _selectChange(e) {
+	            var current_page = this.props.youtube[e.target.value].current_page;
+	            var youtubes = this.props.youtube[e.target.value].data;
+	            if (!youtubes.length) {
+	                this.props.getYoutubes(current_page + 1, e.target.value);
+	            }
+
+	            this.setState({
+	                order: e.target.value
+	            });
+	        }
+	    }, {
 	        key: '_openModal',
 	        value: function _openModal() {
 	            $('#modal1').openModal();
@@ -37056,7 +38017,6 @@
 	    }, {
 	        key: '_onSubmitYoutube',
 	        value: function _onSubmitYoutube() {
-	            console.log(1);
 	            _axios2.default.post('http://bad.watch/api/youtube', {
 	                title: this.state.title,
 	                url: this.state.url
@@ -37074,21 +38034,48 @@
 	            });
 	        }
 	    }, {
+	        key: '_openSearch',
+	        value: function _openSearch() {
+	            this.setState({
+	                searchOpen: !this.state.searchOpen
+	            });
+	        }
+	    }, {
 	        key: 'componentDidMount',
 	        value: function componentDidMount() {
 	            var _this2 = this;
 
-	            _axios2.default.get('http://bad.watch/api/youtube-list?value=' + Number.MAX_SAFE_INTEGER).then(function (response) {
-	                var data = response.data;
-	                if (data.responseCode == 6) {
-	                    _this2.setState({
-	                        youtubes: data.youtubeData
-	                    });
+	            console.log("YoutubeBox mounted");
+	            //const MAX_SAFE_INTEGER = 9007199254740991;
+	            if (!this.props.youtube[this.state.order].data.length) {
+	                this.props.getYoutubes(1, this.state.order);
+	            }
+
+	            $(window).scroll(function () {
+
+	                if ($(document).height() - $(window).height() - $(window).scrollTop() < 250) {
+	                    if (!_this2.state.loadingState) {
+
+	                        if (_this2.props.youtube[_this2.state.order].isEnd || _this2.props.youtube[_this2.state.order].current_page == 0) return;
+
+	                        _this2.props.getYoutubes(_this2.props.youtube[_this2.state.order].current_page + 1, _this2.state.order);
+	                        _this2.setState({
+	                            loadingState: true
+	                        });
+	                    }
 	                } else {
-	                    sweetAlert('데이터를 불러오는데 오류가 발생했습니다.', '잠시후 다시시도해주세요.', 'error');
-	                    return;
+	                    if (_this2.state.loadingState) {
+	                        _this2.setState({
+	                            loadingState: false
+	                        });
+	                    }
 	                }
 	            });
+	        }
+	    }, {
+	        key: 'componentWillUnmount',
+	        value: function componentWillUnmount() {
+	            $(window).unbind();
 	        }
 	    }, {
 	        key: 'render',
@@ -37163,23 +38150,109 @@
 	                )
 	            );
 
+	            var new_order = _react2.default.createElement(
+	                'div',
+	                { className: 'row' },
+	                this.props.youtube.new.data.map(function (youtube) {
+	                    return _react2.default.createElement(_YoutubeCard2.default, { key: youtube.youtube_id,
+	                        youtube: youtube });
+	                })
+	            );
+
+	            var like_order = _react2.default.createElement(
+	                'div',
+	                { className: 'row' },
+	                this.props.youtube.like.data.map(function (youtube) {
+	                    return _react2.default.createElement(_YoutubeCard2.default, { key: youtube.youtube_id,
+	                        youtube: youtube });
+	                })
+	            );
+
+	            var hit_order = _react2.default.createElement(
+	                'div',
+	                { className: 'row' },
+	                this.props.youtube.hit.data.map(function (youtube) {
+	                    return _react2.default.createElement(_YoutubeCard2.default, { key: youtube.youtube_id,
+	                        youtube: youtube });
+	                })
+	            );
+
+	            var youtube_search = _react2.default.createElement(
+	                'div',
+	                { className: 'youtube-search-box', id: 'youtube-search' },
+	                _react2.default.createElement(
+	                    'select',
+	                    { className: 'browser-default' },
+	                    _react2.default.createElement(
+	                        'option',
+	                        { value: 'new', defaultValue: true },
+	                        '글제목'
+	                    ),
+	                    _react2.default.createElement(
+	                        'option',
+	                        { value: 'like' },
+	                        '글작성자'
+	                    )
+	                ),
+	                _react2.default.createElement('input', { type: 'text',
+	                    className: 'youtube-search-input' }),
+	                _react2.default.createElement('img', { src: '/asset/images/youtube-search-icon.png', className: 'youtube-search-icon' })
+	            );
+	            var youtubes = undefined;
+
+	            if (this.state.order == 'new') {
+	                youtubes = new_order;
+	            } else if (this.state.order == 'like') {
+	                youtubes = like_order;
+	            } else if (this.state.order == 'hit') {
+	                youtubes = hit_order;
+	            }
+
 	            return _react2.default.createElement(
 	                'div',
 	                null,
 	                _react2.default.createElement(
-	                    'a',
-	                    { className: 'modal-trigger waves-effect waves-light btn', onClick: this._openModal },
-	                    '글쓰기'
+	                    'div',
+	                    { className: 'input-field youtube-select' },
+	                    _react2.default.createElement(
+	                        'select',
+	                        { className: 'browser-default',
+	                            onChange: this._selectChange,
+	                            value: this.state.order },
+	                        _react2.default.createElement(
+	                            'option',
+	                            { value: 'new', defaultValue: true },
+	                            '최신순'
+	                        ),
+	                        _react2.default.createElement(
+	                            'option',
+	                            { value: 'like' },
+	                            '인기순'
+	                        ),
+	                        _react2.default.createElement(
+	                            'option',
+	                            { value: 'hit' },
+	                            '조회순'
+	                        )
+	                    )
 	                ),
-	                create_modal,
 	                _react2.default.createElement(
 	                    'div',
-	                    { className: 'row' },
-	                    this.state.youtubes.map(function (youtube) {
-	                        return _react2.default.createElement(_YoutubeCard2.default, { key: youtube.youtube_id,
-	                            youtube: youtube });
-	                    })
-	                )
+	                    { className: 'youtube-fixed' },
+	                    _react2.default.createElement(
+	                        'a',
+	                        { className: 'modal-trigger youtube-write', onClick: this._openModal },
+	                        _react2.default.createElement('img', { src: '/asset/images/write-icon.png', className: 'write-icon' })
+	                    ),
+	                    _react2.default.createElement(
+	                        'a',
+	                        { className: 'youtube-search', onClick: this._openSearch },
+	                        _react2.default.createElement('img', { src: '/asset/images/youtube-search-icon.png', className: 'youtube-search-icon' })
+	                    ),
+	                    this.state.searchOpen ? youtube_search : undefined
+	                ),
+	                create_modal,
+	                youtubes
 	            );
 	        }
 	    }]);
@@ -37187,10 +38260,29 @@
 	    return YoutubeBox;
 	}(_react2.default.Component);
 
-	exports.default = YoutubeBox;
+	var mapStateToProps = function mapStateToProps(state) {
+	    return {
+	        youtube: state.youtubes
+	    };
+	};
+
+	var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+	    return {
+	        getYoutubes: function getYoutubes(page, order) {
+	            return dispatch((0, _youtubes.getYoutubes)(page, order));
+	        }
+	    };
+	};
+
+	YoutubeBox.propTypes = {
+	    youtube: _react2.default.PropTypes.object,
+	    getYoutubes: _react2.default.PropTypes.func
+	};
+
+	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(YoutubeBox);
 
 /***/ },
-/* 564 */
+/* 568 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -37233,13 +38325,13 @@
 													var youtube = this.props.youtube;
 													return _react2.default.createElement(
 																	'div',
-																	{ className: 'col s12 m3' },
+																	{ className: 'col s12 m4 l3 youtube-card' },
 																	_react2.default.createElement(
 																					_reactRouter.Link,
 																					{ to: "/youtube/show/" + youtube.youtube_id },
 																					_react2.default.createElement(
 																									'div',
-																									{ className: 'card z-depth-2' },
+																									{ className: 'card' },
 																									_react2.default.createElement(
 																													'div',
 																													{ className: 'card-image' },
@@ -37247,31 +38339,30 @@
 																									),
 																									_react2.default.createElement(
 																													'div',
-																													{ className: 'card-content' },
-																													youtube.title
+																													{ className: 'content' },
+																													youtube.title.length > 35 ? youtube.title.substring(0, 35) + ".." : youtube.title
 																									),
 																									_react2.default.createElement(
 																													'div',
-																													{ className: 'card-action valign-wrapper' },
+																													{ className: 'bottom-div' },
 																													_react2.default.createElement(
-																																	'i',
-																																	{ className: 'material-icons' },
-																																	'thumb_up'
+																																	'div',
+																																	{ className: 'youtube-icon-div' },
+																																	_react2.default.createElement('img', { src: '/asset/images/like-icon.png' }),
+																																	youtube.like_count
 																													),
-																													youtube.like_count,
 																													_react2.default.createElement(
-																																	'i',
-																																	{ className: 'material-icons' },
-																																	'comment'
+																																	'div',
+																																	{ className: 'youtube-icon-div' },
+																																	_react2.default.createElement('img', { src: '/asset/images/comment-icon.png' }),
+																																	youtube.comment_count
 																													),
-																													youtube.comment_count,
 																													_react2.default.createElement(
-																																	'i',
-																																	{ className: 'material-icons' },
-																																	'perm_identity'
-																													),
-																													youtube.hit_count,
-																													youtube.name ? youtube.name : "익명"
+																																	'div',
+																																	{ className: 'youtube-icon-div' },
+																																	_react2.default.createElement('img', { src: '/asset/images/hit-icon.png' }),
+																																	youtube.hit_count
+																													)
 																									)
 																					)
 																	)
@@ -37289,1127 +38380,7 @@
 	exports.default = YoutubeCard;
 
 /***/ },
-/* 565 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	var _react = __webpack_require__(299);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _axios = __webpack_require__(536);
-
-	var _axios2 = _interopRequireDefault(_axios);
-
-	var _Title = __webpack_require__(566);
-
-	var _Title2 = _interopRequireDefault(_Title);
-
-	var _YoutubeCommentBox = __webpack_require__(567);
-
-	var _YoutubeCommentBox2 = _interopRequireDefault(_YoutubeCommentBox);
-
-	var _LikeBox = __webpack_require__(573);
-
-	var _LikeBox2 = _interopRequireDefault(_LikeBox);
-
-	var _reactRouter = __webpack_require__(469);
-
-	var _reactAddonsUpdate = __webpack_require__(571);
-
-	var _reactAddonsUpdate2 = _interopRequireDefault(_reactAddonsUpdate);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	var YoutubeShowBox = function (_React$Component) {
-	    _inherits(YoutubeShowBox, _React$Component);
-
-	    function YoutubeShowBox(props) {
-	        _classCallCheck(this, YoutubeShowBox);
-
-	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(YoutubeShowBox).call(this, props));
-
-	        _this.displayName = 'YoutubeShowBox';
-	        _this.state = {
-	            youtube: {},
-	            comments: []
-	        };
-	        _this._onDeleteYoutube = _this._onDeleteYoutube.bind(_this);
-	        _this._onDisLike = _this._onDisLike.bind(_this);
-	        _this._onLike = _this._onLike.bind(_this);
-	        return _this;
-	    }
-
-	    _createClass(YoutubeShowBox, [{
-	        key: '_onLike',
-	        value: function _onLike() {
-	            var _this2 = this;
-
-	            _axios2.default.get('http://bad.watch/api/youtube-like/' + this.props.params.id).then(function (response) {
-	                var data = response.data;
-	                if (data.responseCode == 50) {
-	                    //좋아요 성공
-	                    _this2.setState({
-	                        youtube: (0, _reactAddonsUpdate2.default)(_this2.state.youtube, {
-	                            like_count: { $set: data.like_count },
-	                            like_status: { $set: true }
-	                        })
-	                    });
-	                } else if (data.responseCode == 49) {
-	                    sweetAlert('', '이미 좋아요를 하셨습니다.', 'error');
-	                    return;
-	                } else {
-	                    sweetAlert('', '실패했습니다.', 'error');
-	                    return;
-	                }
-	            });
-	        }
-	    }, {
-	        key: '_onDisLike',
-	        value: function _onDisLike() {
-	            var _this3 = this;
-
-	            _axios2.default.get('http://bad.watch/api/youtube-dislike/' + this.props.params.id).then(function (response) {
-	                var data = response.data;
-	                if (data.responseCode == 52) {
-	                    //좋아요 취소 성공
-	                    _this3.setState({
-	                        youtube: (0, _reactAddonsUpdate2.default)(_this3.state.youtube, {
-	                            like_count: { $set: data.like_count },
-	                            like_status: { $set: false }
-	                        })
-	                    });
-	                } else {
-	                    sweetAlert('', '오류가 발생했습니다.', 'error');
-	                    return;
-	                }
-	            });
-	        }
-	    }, {
-	        key: '_onDeleteYoutube',
-	        value: function _onDeleteYoutube() {
-	            _axios2.default.delete('http://bad.watch/api/youtube/' + this.props.params.id).then(function (response) {
-	                var data = response.data;
-	                if (data.responseCode == 47) {
-	                    sweetAlert('', '글이 삭제되었습니다.', 'success');
-	                    _reactRouter.browserHistory.push('/youtube');
-	                    return;
-	                } else {
-	                    sweetAlert('', '권한이 없습니다.', 'error');
-	                    return;
-	                }
-	            });
-	        }
-	    }, {
-	        key: 'componentDidMount',
-	        value: function componentDidMount() {
-	            var _this4 = this;
-
-	            _axios2.default.get('http://bad.watch/api/youtube/' + this.props.params.id).then(function (response) {
-	                var data = response.data;
-	                if (data.responseCode == 6) {
-	                    _this4.setState({
-	                        youtube: data.youtubeData
-	                    });
-	                } else {
-	                    sweetAlert('데이터를 불러오는데 오류가 발생했습니다.', '잠시후 다시시도해주세요.', 'error');
-	                    return;
-	                }
-	            });
-	        }
-	    }, {
-	        key: 'render',
-	        value: function render() {
-	            var auth_box = _react2.default.createElement(
-	                'div',
-	                null,
-	                _react2.default.createElement(
-	                    _reactRouter.Link,
-	                    { to: "/youtube/edit/" + this.props.params.id, className: 'btn' },
-	                    '수정'
-	                ),
-	                _react2.default.createElement(
-	                    'a',
-	                    { onClick: this._onDeleteYoutube, className: 'btn' },
-	                    '삭제'
-	                )
-	            );
-	            return _react2.default.createElement(
-	                'div',
-	                null,
-	                _react2.default.createElement(_Title2.default, { title: this.state.youtube.title,
-	                    comment_count: this.state.youtube.comment_count,
-	                    hit_count: this.state.youtube.hit_count,
-	                    like_count: this.state.youtube.like_count,
-	                    written_time: this.state.youtube.written_time,
-	                    name: this.state.youtube.name }),
-	                _react2.default.createElement(
-	                    'div',
-	                    { className: 'video-container' },
-	                    _react2.default.createElement('iframe', { width: '853', height: '480', src: "//www.youtube.com/embed/" + this.state.youtube.youtube_key, frameBorder: '0', allowFullScreen: true })
-	                ),
-	                _react2.default.createElement(_LikeBox2.default, { like_count: this.state.youtube.like_count,
-	                    handleLike: this._onLike,
-	                    handleDisLike: this._onDisLike,
-	                    like_status: this.state.youtube.like_status }),
-	                this.state.youtube.authentication ? auth_box : undefined,
-	                _react2.default.createElement(_YoutubeCommentBox2.default, { id: this.props.params.id })
-	            );
-	        }
-	    }]);
-
-	    return YoutubeShowBox;
-	}(_react2.default.Component);
-
-	exports.default = YoutubeShowBox;
-
-/***/ },
-/* 566 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	var _react = __webpack_require__(299);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	var Title = function (_React$Component) {
-	    _inherits(Title, _React$Component);
-
-	    function Title(props) {
-	        _classCallCheck(this, Title);
-
-	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Title).call(this, props));
-
-	        _this.displayName = 'Title';
-	        return _this;
-	    }
-
-	    _createClass(Title, [{
-	        key: 'render',
-	        value: function render() {
-	            return _react2.default.createElement(
-	                'div',
-	                { className: 'card-panel red lighten-4' },
-	                '제목 : ',
-	                this.props.title,
-	                ' ',
-	                _react2.default.createElement('br', null),
-	                '댓글수 : ',
-	                this.props.comment_count,
-	                '개 ',
-	                _react2.default.createElement('br', null),
-	                '좋아요 : ',
-	                this.props.like_count,
-	                '개 ',
-	                _react2.default.createElement('br', null),
-	                '조회수 : ',
-	                this.props.hit_count,
-	                ' ',
-	                _react2.default.createElement('br', null),
-	                '작성시간 : ',
-	                this.props.written_time,
-	                ' ',
-	                _react2.default.createElement('br', null),
-	                '작성자 : ',
-	                this.props.name ? this.props.name : "익명"
-	            );
-	        }
-	    }]);
-
-	    return Title;
-	}(_react2.default.Component);
-
-	Title.propTypes = {
-	    title: _react2.default.PropTypes.string,
-	    comment_count: _react2.default.PropTypes.number,
-	    hit_count: _react2.default.PropTypes.number,
-	    like_count: _react2.default.PropTypes.number,
-	    written_time: _react2.default.PropTypes.string
-	};
-
-	exports.default = Title;
-
-/***/ },
-/* 567 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	var _react = __webpack_require__(299);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _axios = __webpack_require__(536);
-
-	var _axios2 = _interopRequireDefault(_axios);
-
-	var _Comment = __webpack_require__(568);
-
-	var _Comment2 = _interopRequireDefault(_Comment);
-
-	var _CommentInput = __webpack_require__(570);
-
-	var _CommentInput2 = _interopRequireDefault(_CommentInput);
-
-	var _reactAddonsUpdate = __webpack_require__(571);
-
-	var _reactAddonsUpdate2 = _interopRequireDefault(_reactAddonsUpdate);
-
-	__webpack_require__(1);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	var YoutubeCommentBox = function (_React$Component) {
-	    _inherits(YoutubeCommentBox, _React$Component);
-
-	    function YoutubeCommentBox(props) {
-	        _classCallCheck(this, YoutubeCommentBox);
-
-	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(YoutubeCommentBox).call(this, props));
-
-	        _this.displayName = 'YoutubeCommentBox';
-	        _this.state = {
-	            comments: []
-	        };
-	        _this._onCreateComment = _this._onCreateComment.bind(_this);
-	        _this._handleReplyCount = _this._handleReplyCount.bind(_this);
-	        return _this;
-	    }
-
-	    _createClass(YoutubeCommentBox, [{
-	        key: '_onCreateComment',
-	        value: function _onCreateComment(content) {
-	            var _this2 = this;
-
-	            return (0, _axios2.default)({
-	                method: "POST",
-	                url: 'http://bad.watch/api/youtube-comment',
-	                data: {
-	                    content: content,
-	                    youtube_id: parseInt(this.props.id)
-	                }
-	            }).then(function (response) {
-	                var data = response.data;
-	                if (data.responseCode == 12) {
-	                    _this2.setState({
-	                        comments: (0, _reactAddonsUpdate2.default)(_this2.state.comments, {
-	                            $push: [data.commentData]
-	                        })
-	                    });
-	                    return true;
-	                } else {
-	                    sweetAlert('댓글 등록에 실패했습니다.', 'error');
-	                    return false;
-	                }
-	            });
-	        }
-	    }, {
-	        key: '_handleReplyCount',
-	        value: function _handleReplyCount(id) {
-	            var index = this.state.comments.findIndex(function (comment) {
-	                return comment.comment_id == id;
-	            });
-	            this.setState({
-	                comments: (0, _reactAddonsUpdate2.default)(this.state.comments, _defineProperty({}, index, {
-	                    reply_count: { $set: this.state.comments[index].reply_count + 1 }
-	                }))
-	            });
-	        }
-	    }, {
-	        key: 'componentDidMount',
-	        value: function componentDidMount() {
-	            var _this3 = this;
-
-	            _axios2.default.get('http://bad.watch/api/youtube-comment?id=' + this.props.id).then(function (response) {
-	                var data = response.data;
-	                if (data.responseCode == 10) {
-	                    _this3.setState({
-	                        comments: data.commentData
-	                    });
-	                } else {
-	                    sweetAlert('댓글을 불러오는데 오류가 발생했습니다.', 'error');
-	                    return;
-	                }
-	            });
-	        }
-	    }, {
-	        key: 'render',
-	        value: function render() {
-	            var _this4 = this;
-
-	            return _react2.default.createElement(
-	                'div',
-	                null,
-	                _react2.default.createElement(
-	                    'div',
-	                    null,
-	                    '댓글 ',
-	                    this.state.comments.length,
-	                    ' 개'
-	                ),
-	                this.state.comments.map(function (comment) {
-	                    return _react2.default.createElement(_Comment2.default, { key: comment.comment_id,
-	                        comment: comment,
-	                        handleReplyCount: _this4._handleReplyCount });
-	                }),
-	                _react2.default.createElement(_CommentInput2.default, { onCreateComment: this._onCreateComment })
-	            );
-	        }
-	    }]);
-
-	    return YoutubeCommentBox;
-	}(_react2.default.Component);
-
-	YoutubeCommentBox.propTypes = {
-	    id: _react2.default.PropTypes.string
-	};
-
-	exports.default = YoutubeCommentBox;
-
-/***/ },
-/* 568 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	var _react = __webpack_require__(299);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _axios = __webpack_require__(536);
-
-	var _axios2 = _interopRequireDefault(_axios);
-
-	var _Reply = __webpack_require__(569);
-
-	var _Reply2 = _interopRequireDefault(_Reply);
-
-	var _CommentInput = __webpack_require__(570);
-
-	var _CommentInput2 = _interopRequireDefault(_CommentInput);
-
-	var _reactAddonsUpdate = __webpack_require__(571);
-
-	var _reactAddonsUpdate2 = _interopRequireDefault(_reactAddonsUpdate);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	var Comment = function (_React$Component) {
-	    _inherits(Comment, _React$Component);
-
-	    function Comment(props) {
-	        _classCallCheck(this, Comment);
-
-	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Comment).call(this, props));
-
-	        _this.displayName = 'Comment';
-	        _this.state = {
-	            "isOpen": false,
-	            "replies": []
-	        };
-	        _this._handleReplyOpen = _this._handleReplyOpen.bind(_this);
-	        _this._onCreateComment = _this._onCreateComment.bind(_this);
-	        return _this;
-	    }
-
-	    _createClass(Comment, [{
-	        key: '_onCreateComment',
-	        value: function _onCreateComment(content) {
-	            var _this2 = this;
-
-	            return (0, _axios2.default)({
-	                method: "POST",
-	                url: "http://bad.watch/api/youtube-reply",
-	                data: {
-	                    content: content,
-	                    comment_id: this.props.comment.comment_id
-	                }
-	            }).then(function (response) {
-	                var data = response.data;
-	                if (data.responseCode == 16) {
-	                    _this2.setState({
-	                        replies: (0, _reactAddonsUpdate2.default)(_this2.state.replies, {
-	                            $push: [data.replyData]
-	                        })
-	                    });
-	                    _this2.props.handleReplyCount(_this2.props.comment.comment_id);
-	                    return true;
-	                } else {
-	                    sweetAlert('답글 등록에 실패했습니다.', 'error');
-	                    return false;
-	                }
-	            });
-	        }
-	    }, {
-	        key: '_handleReplyOpen',
-	        value: function _handleReplyOpen() {
-	            var _this3 = this;
-
-	            if (this.state.isOpen) {
-	                this.setState({
-	                    isOpen: false
-	                });
-	                return;
-	            } else {
-	                if (this.state.replies.length) {
-	                    this.setState({
-	                        isOpen: true
-	                    });
-	                    return;
-	                }
-	            }
-	            _axios2.default.get('http://bad.watch/api/youtube-reply?id=' + this.props.comment.comment_id).then(function (response) {
-	                var data = response.data;
-	                if (data.responseCode == 14) {
-	                    _this3.setState({
-	                        replies: data.replyData,
-	                        isOpen: !_this3.state.isOpen
-	                    });
-	                } else {
-	                    sweetAlert('댓글을 불러오는데 오류가 발생했습니다.', 'error');
-	                    return false;
-	                }
-	            });
-	        }
-	    }, {
-	        key: 'render',
-	        value: function render() {
-	            var comment = this.props.comment;
-	            var replyStatus = _react2.default.createElement(
-	                'div',
-	                null,
-	                comment.reply_count == 0 ? "답글달기" : "답글 " + comment.reply_count + "개"
-	            );
-	            var replyInfo = _react2.default.createElement(
-	                'div',
-	                null,
-	                this.state.replies.map(function (reply) {
-	                    return _react2.default.createElement(_Reply2.default, { key: reply.reply_id,
-	                        reply: reply });
-	                }),
-	                _react2.default.createElement(
-	                    'div',
-	                    { onClick: this._handleReplyOpen },
-	                    this.state.isOpen ? "답글접기" : undefined
-	                ),
-	                _react2.default.createElement(_CommentInput2.default, { onCreateComment: this._onCreateComment })
-	            );
-
-	            return _react2.default.createElement(
-	                'div',
-	                { className: 'blue-grey' },
-	                _react2.default.createElement(
-	                    'div',
-	                    { className: 'white-text' },
-	                    comment.content,
-	                    comment.written_time,
-	                    _react2.default.createElement(
-	                        'span',
-	                        { className: 'red-text' },
-	                        '[',
-	                        comment.ip,
-	                        ']'
-	                    ),
-	                    comment.name ? comment.name : "익명",
-	                    _react2.default.createElement(
-	                        'div',
-	                        { onClick: this._handleReplyOpen },
-	                        this.state.isOpen ? undefined : replyStatus
-	                    ),
-	                    this.state.isOpen ? replyInfo : undefined
-	                )
-	            );
-	        }
-	    }]);
-
-	    return Comment;
-	}(_react2.default.Component);
-
-	Comment.propTypes = {
-	    comment: _react2.default.PropTypes.object,
-	    handleReplyCount: _react2.default.PropTypes.func
-	};
-
-	exports.default = Comment;
-
-/***/ },
 /* 569 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	var _react = __webpack_require__(299);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	var Reply = function (_React$Component) {
-	    _inherits(Reply, _React$Component);
-
-	    function Reply(props) {
-	        _classCallCheck(this, Reply);
-
-	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Reply).call(this, props));
-
-	        _this.displayName = 'Reply';
-	        return _this;
-	    }
-
-	    _createClass(Reply, [{
-	        key: 'render',
-	        value: function render() {
-	            var reply = this.props.reply;
-	            return _react2.default.createElement(
-	                'div',
-	                null,
-	                reply.content,
-	                _react2.default.createElement(
-	                    'span',
-	                    { className: 'red-text' },
-	                    '[',
-	                    reply.ip,
-	                    ']'
-	                ),
-	                reply.name ? reply.name : "익명"
-	            );
-	        }
-	    }]);
-
-	    return Reply;
-	}(_react2.default.Component);
-
-	Reply.propTypes = {
-	    reply: _react2.default.PropTypes.object
-	};
-
-	exports.default = Reply;
-
-/***/ },
-/* 570 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	var _react = __webpack_require__(299);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	var CommentInput = function (_React$Component) {
-	    _inherits(CommentInput, _React$Component);
-
-	    function CommentInput(props) {
-	        _classCallCheck(this, CommentInput);
-
-	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(CommentInput).call(this, props));
-
-	        _this.displayName = 'CommentInput';
-	        _this.state = {
-	            "content": ''
-	        };
-	        _this._handleChange = _this._handleChange.bind(_this);
-	        _this._handleCreate = _this._handleCreate.bind(_this);
-	        return _this;
-	    }
-
-	    _createClass(CommentInput, [{
-	        key: '_handleChange',
-	        value: function _handleChange(e) {
-	            this.setState({
-	                content: e.target.value
-	            });
-	        }
-	    }, {
-	        key: '_handleCreate',
-	        value: function _handleCreate() {
-	            var _this2 = this;
-
-	            this.props.onCreateComment(this.state.content).then(function (success) {
-	                if (success) {
-	                    _this2.setState({
-	                        "content": ''
-	                    });
-	                }
-	            });
-	        }
-	    }, {
-	        key: 'render',
-	        value: function render() {
-	            return _react2.default.createElement(
-	                'div',
-	                null,
-	                _react2.default.createElement('input', { type: 'text',
-	                    name: 'comment_input',
-	                    value: this.state.content,
-	                    onChange: this._handleChange }),
-	                _react2.default.createElement(
-	                    'a',
-	                    { className: 'waves-effect waves-light btn',
-	                        onClick: this._handleCreate },
-	                    '등록'
-	                )
-	            );
-	        }
-	    }]);
-
-	    return CommentInput;
-	}(_react2.default.Component);
-
-	CommentInput.propTypes = {
-	    onCreateComment: _react2.default.PropTypes.func
-	};
-
-	exports.default = CommentInput;
-
-/***/ },
-/* 571 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = __webpack_require__(572);
-
-/***/ },
-/* 572 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/* WEBPACK VAR INJECTION */(function(process) {/**
-	 * Copyright 2013-present, Facebook, Inc.
-	 * All rights reserved.
-	 *
-	 * This source code is licensed under the BSD-style license found in the
-	 * LICENSE file in the root directory of this source tree. An additional grant
-	 * of patent rights can be found in the PATENTS file in the same directory.
-	 *
-	 * @providesModule update
-	 */
-
-	/* global hasOwnProperty:true */
-
-	'use strict';
-
-	var _prodInvariant = __webpack_require__(304),
-	    _assign = __webpack_require__(301);
-
-	var keyOf = __webpack_require__(321);
-	var invariant = __webpack_require__(305);
-	var hasOwnProperty = {}.hasOwnProperty;
-
-	function shallowCopy(x) {
-	  if (Array.isArray(x)) {
-	    return x.concat();
-	  } else if (x && typeof x === 'object') {
-	    return _assign(new x.constructor(), x);
-	  } else {
-	    return x;
-	  }
-	}
-
-	var COMMAND_PUSH = keyOf({ $push: null });
-	var COMMAND_UNSHIFT = keyOf({ $unshift: null });
-	var COMMAND_SPLICE = keyOf({ $splice: null });
-	var COMMAND_SET = keyOf({ $set: null });
-	var COMMAND_MERGE = keyOf({ $merge: null });
-	var COMMAND_APPLY = keyOf({ $apply: null });
-
-	var ALL_COMMANDS_LIST = [COMMAND_PUSH, COMMAND_UNSHIFT, COMMAND_SPLICE, COMMAND_SET, COMMAND_MERGE, COMMAND_APPLY];
-
-	var ALL_COMMANDS_SET = {};
-
-	ALL_COMMANDS_LIST.forEach(function (command) {
-	  ALL_COMMANDS_SET[command] = true;
-	});
-
-	function invariantArrayCase(value, spec, command) {
-	  !Array.isArray(value) ? process.env.NODE_ENV !== 'production' ? invariant(false, 'update(): expected target of %s to be an array; got %s.', command, value) : _prodInvariant('1', command, value) : void 0;
-	  var specValue = spec[command];
-	  !Array.isArray(specValue) ? process.env.NODE_ENV !== 'production' ? invariant(false, 'update(): expected spec of %s to be an array; got %s. Did you forget to wrap your parameter in an array?', command, specValue) : _prodInvariant('2', command, specValue) : void 0;
-	}
-
-	/**
-	 * Returns a updated shallow copy of an object without mutating the original.
-	 * See https://facebook.github.io/react/docs/update.html for details.
-	 */
-	function update(value, spec) {
-	  !(typeof spec === 'object') ? process.env.NODE_ENV !== 'production' ? invariant(false, 'update(): You provided a key path to update() that did not contain one of %s. Did you forget to include {%s: ...}?', ALL_COMMANDS_LIST.join(', '), COMMAND_SET) : _prodInvariant('3', ALL_COMMANDS_LIST.join(', '), COMMAND_SET) : void 0;
-
-	  if (hasOwnProperty.call(spec, COMMAND_SET)) {
-	    !(Object.keys(spec).length === 1) ? process.env.NODE_ENV !== 'production' ? invariant(false, 'Cannot have more than one key in an object with %s', COMMAND_SET) : _prodInvariant('4', COMMAND_SET) : void 0;
-
-	    return spec[COMMAND_SET];
-	  }
-
-	  var nextValue = shallowCopy(value);
-
-	  if (hasOwnProperty.call(spec, COMMAND_MERGE)) {
-	    var mergeObj = spec[COMMAND_MERGE];
-	    !(mergeObj && typeof mergeObj === 'object') ? process.env.NODE_ENV !== 'production' ? invariant(false, 'update(): %s expects a spec of type \'object\'; got %s', COMMAND_MERGE, mergeObj) : _prodInvariant('5', COMMAND_MERGE, mergeObj) : void 0;
-	    !(nextValue && typeof nextValue === 'object') ? process.env.NODE_ENV !== 'production' ? invariant(false, 'update(): %s expects a target of type \'object\'; got %s', COMMAND_MERGE, nextValue) : _prodInvariant('6', COMMAND_MERGE, nextValue) : void 0;
-	    _assign(nextValue, spec[COMMAND_MERGE]);
-	  }
-
-	  if (hasOwnProperty.call(spec, COMMAND_PUSH)) {
-	    invariantArrayCase(value, spec, COMMAND_PUSH);
-	    spec[COMMAND_PUSH].forEach(function (item) {
-	      nextValue.push(item);
-	    });
-	  }
-
-	  if (hasOwnProperty.call(spec, COMMAND_UNSHIFT)) {
-	    invariantArrayCase(value, spec, COMMAND_UNSHIFT);
-	    spec[COMMAND_UNSHIFT].forEach(function (item) {
-	      nextValue.unshift(item);
-	    });
-	  }
-
-	  if (hasOwnProperty.call(spec, COMMAND_SPLICE)) {
-	    !Array.isArray(value) ? process.env.NODE_ENV !== 'production' ? invariant(false, 'Expected %s target to be an array; got %s', COMMAND_SPLICE, value) : _prodInvariant('7', COMMAND_SPLICE, value) : void 0;
-	    !Array.isArray(spec[COMMAND_SPLICE]) ? process.env.NODE_ENV !== 'production' ? invariant(false, 'update(): expected spec of %s to be an array of arrays; got %s. Did you forget to wrap your parameters in an array?', COMMAND_SPLICE, spec[COMMAND_SPLICE]) : _prodInvariant('8', COMMAND_SPLICE, spec[COMMAND_SPLICE]) : void 0;
-	    spec[COMMAND_SPLICE].forEach(function (args) {
-	      !Array.isArray(args) ? process.env.NODE_ENV !== 'production' ? invariant(false, 'update(): expected spec of %s to be an array of arrays; got %s. Did you forget to wrap your parameters in an array?', COMMAND_SPLICE, spec[COMMAND_SPLICE]) : _prodInvariant('8', COMMAND_SPLICE, spec[COMMAND_SPLICE]) : void 0;
-	      nextValue.splice.apply(nextValue, args);
-	    });
-	  }
-
-	  if (hasOwnProperty.call(spec, COMMAND_APPLY)) {
-	    !(typeof spec[COMMAND_APPLY] === 'function') ? process.env.NODE_ENV !== 'production' ? invariant(false, 'update(): expected spec of %s to be a function; got %s.', COMMAND_APPLY, spec[COMMAND_APPLY]) : _prodInvariant('9', COMMAND_APPLY, spec[COMMAND_APPLY]) : void 0;
-	    nextValue = spec[COMMAND_APPLY](nextValue);
-	  }
-
-	  for (var k in spec) {
-	    if (!(ALL_COMMANDS_SET.hasOwnProperty(k) && ALL_COMMANDS_SET[k])) {
-	      nextValue[k] = update(value[k], spec[k]);
-	    }
-	  }
-
-	  return nextValue;
-	}
-
-	module.exports = update;
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(294)))
-
-/***/ },
-/* 573 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	var _react = __webpack_require__(299);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	var LikeBox = function (_React$Component) {
-	    _inherits(LikeBox, _React$Component);
-
-	    function LikeBox(props) {
-	        _classCallCheck(this, LikeBox);
-
-	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(LikeBox).call(this, props));
-
-	        _this.displayName = 'LikeBox';
-	        return _this;
-	    }
-
-	    _createClass(LikeBox, [{
-	        key: 'render',
-	        value: function render() {
-	            var like_true = _react2.default.createElement(
-	                'div',
-	                null,
-	                _react2.default.createElement(
-	                    'a',
-	                    { onClick: this.props.handleDisLike, className: 'waves-effect waves-light btn' },
-	                    _react2.default.createElement(
-	                        'i',
-	                        { className: 'material-icons left' },
-	                        'thumb_up'
-	                    ),
-	                    '좋아요 취소'
-	                )
-	            );
-	            var like_false = _react2.default.createElement(
-	                'div',
-	                null,
-	                _react2.default.createElement(
-	                    'a',
-	                    { onClick: this.props.handleLike, className: 'waves-effect waves-light btn' },
-	                    _react2.default.createElement(
-	                        'i',
-	                        { className: 'material-icons left' },
-	                        'thumb_up'
-	                    ),
-	                    '좋아요 ',
-	                    this.props.like_count,
-	                    '개'
-	                )
-	            );
-	            return _react2.default.createElement(
-	                'div',
-	                null,
-	                this.props.like_status ? like_true : like_false
-	            );
-	        }
-	    }]);
-
-	    return LikeBox;
-	}(_react2.default.Component);
-
-	LikeBox.propTypes = {
-	    handleLike: _react2.default.PropTypes.func,
-	    hadleDisLike: _react2.default.PropTypes.func,
-	    like_count: _react2.default.PropTypes.number,
-	    like_status: _react2.default.PropTypes.number
-	};
-
-	exports.default = LikeBox;
-
-/***/ },
-/* 574 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	var _react = __webpack_require__(299);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _axios = __webpack_require__(536);
-
-	var _axios2 = _interopRequireDefault(_axios);
-
-	var _reactRouter = __webpack_require__(469);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	var YoutubeEditBox = function (_React$Component) {
-	    _inherits(YoutubeEditBox, _React$Component);
-
-	    function YoutubeEditBox(props) {
-	        _classCallCheck(this, YoutubeEditBox);
-
-	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(YoutubeEditBox).call(this, props));
-
-	        _this.displayName = 'YoutubeEditBox';
-	        _this.state = {
-	            title: '',
-	            url: ''
-	        };
-	        _this._handleChange = _this._handleChange.bind(_this);
-	        _this._onEditYoutube = _this._onEditYoutube.bind(_this);
-	        return _this;
-	    }
-
-	    _createClass(YoutubeEditBox, [{
-	        key: '_handleChange',
-	        value: function _handleChange(e) {
-	            var nextState = {};
-	            nextState[e.target.name] = e.target.value;
-	            this.setState(nextState);
-	        }
-	    }, {
-	        key: '_onEditYoutube',
-	        value: function _onEditYoutube() {
-	            var _this2 = this;
-
-	            _axios2.default.put('http://bad.watch/api/youtube/' + this.props.params.id, {
-	                title: this.state.title,
-	                url: this.state.url
-	            }).then(function (response) {
-	                var data = response.data;
-	                if (data.responseCode == 45) {
-	                    _reactRouter.browserHistory.push('/youtube/show/' + _this2.props.params.id);
-	                    return;
-	                } else {
-	                    sweetAlert('글을 수정하는데 실패했습니다.', 'error');
-	                    return;
-	                }
-	            });
-	        }
-	    }, {
-	        key: 'componentDidMount',
-	        value: function componentDidMount() {
-	            var _this3 = this;
-
-	            _axios2.default.get('http://bad.watch/api/youtube/' + this.props.params.id).then(function (response) {
-	                var data = response.data;
-	                if (data.responseCode == 6) {
-	                    _this3.setState({
-	                        title: data.youtubeData.title,
-	                        url: "https://www.youtube.com/watch?v=" + data.youtubeData.youtube_key
-	                    });
-	                } else {
-	                    sweetAlert('데이터를 불러오는데 오류가 발생했습니다.', '잠시후 다시시도해주세요.', 'error');
-	                    return;
-	                }
-	            });
-	        }
-	    }, {
-	        key: 'render',
-	        value: function render() {
-	            return _react2.default.createElement(
-	                'div',
-	                null,
-	                _react2.default.createElement(
-	                    'div',
-	                    { className: 'input-field col s10' },
-	                    _react2.default.createElement('input', { type: 'text',
-	                        name: 'title',
-	                        value: this.state.title,
-	                        onChange: this._handleChange }),
-	                    _react2.default.createElement(
-	                        'label',
-	                        null,
-	                        '제목'
-	                    )
-	                ),
-	                _react2.default.createElement(
-	                    'h5',
-	                    null,
-	                    '유튜브 동영상 링크'
-	                ),
-	                _react2.default.createElement(
-	                    'p',
-	                    null,
-	                    'ex) https://www.youtube.com/watch?v=nxoAEKVPVF8'
-	                ),
-	                _react2.default.createElement(
-	                    'p',
-	                    null,
-	                    'ex) https://youtu.be/nxoAEKVPVF8'
-	                ),
-	                _react2.default.createElement(
-	                    'div',
-	                    { className: 'input-field col s10' },
-	                    _react2.default.createElement('input', { type: 'text',
-	                        name: 'url',
-	                        value: this.state.url,
-	                        onChange: this._handleChange }),
-	                    _react2.default.createElement(
-	                        'label',
-	                        null,
-	                        '링크'
-	                    )
-	                ),
-	                _react2.default.createElement(
-	                    'button',
-	                    { onClick: this._onEditYoutube },
-	                    '수정'
-	                )
-	            );
-	        }
-	    }]);
-
-	    return YoutubeEditBox;
-	}(_react2.default.Component);
-
-	exports.default = YoutubeEditBox;
-
-/***/ },
-/* 575 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -38417,11 +38388,11 @@
 	exports.__esModule = true;
 	exports.connect = exports.Provider = undefined;
 
-	var _Provider = __webpack_require__(576);
+	var _Provider = __webpack_require__(570);
 
 	var _Provider2 = _interopRequireDefault(_Provider);
 
-	var _connect = __webpack_require__(579);
+	var _connect = __webpack_require__(573);
 
 	var _connect2 = _interopRequireDefault(_connect);
 
@@ -38431,7 +38402,7 @@
 	exports.connect = _connect2["default"];
 
 /***/ },
-/* 576 */
+/* 570 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -38441,11 +38412,11 @@
 
 	var _react = __webpack_require__(299);
 
-	var _storeShape = __webpack_require__(577);
+	var _storeShape = __webpack_require__(571);
 
 	var _storeShape2 = _interopRequireDefault(_storeShape);
 
-	var _warning = __webpack_require__(578);
+	var _warning = __webpack_require__(572);
 
 	var _warning2 = _interopRequireDefault(_warning);
 
@@ -38515,7 +38486,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(294)))
 
 /***/ },
-/* 577 */
+/* 571 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -38531,7 +38502,7 @@
 	});
 
 /***/ },
-/* 578 */
+/* 572 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -38560,7 +38531,7 @@
 	}
 
 /***/ },
-/* 579 */
+/* 573 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -38572,31 +38543,31 @@
 
 	var _react = __webpack_require__(299);
 
-	var _storeShape = __webpack_require__(577);
+	var _storeShape = __webpack_require__(571);
 
 	var _storeShape2 = _interopRequireDefault(_storeShape);
 
-	var _shallowEqual = __webpack_require__(580);
+	var _shallowEqual = __webpack_require__(574);
 
 	var _shallowEqual2 = _interopRequireDefault(_shallowEqual);
 
-	var _wrapActionCreators = __webpack_require__(581);
+	var _wrapActionCreators = __webpack_require__(575);
 
 	var _wrapActionCreators2 = _interopRequireDefault(_wrapActionCreators);
 
-	var _warning = __webpack_require__(578);
+	var _warning = __webpack_require__(572);
 
 	var _warning2 = _interopRequireDefault(_warning);
 
-	var _isPlainObject = __webpack_require__(596);
+	var _isPlainObject = __webpack_require__(590);
 
 	var _isPlainObject2 = _interopRequireDefault(_isPlainObject);
 
-	var _hoistNonReactStatics = __webpack_require__(601);
+	var _hoistNonReactStatics = __webpack_require__(595);
 
 	var _hoistNonReactStatics2 = _interopRequireDefault(_hoistNonReactStatics);
 
-	var _invariant = __webpack_require__(602);
+	var _invariant = __webpack_require__(596);
 
 	var _invariant2 = _interopRequireDefault(_invariant);
 
@@ -38959,7 +38930,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(294)))
 
 /***/ },
-/* 580 */
+/* 574 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -38990,7 +38961,7 @@
 	}
 
 /***/ },
-/* 581 */
+/* 575 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -38998,7 +38969,7 @@
 	exports.__esModule = true;
 	exports["default"] = wrapActionCreators;
 
-	var _redux = __webpack_require__(582);
+	var _redux = __webpack_require__(576);
 
 	function wrapActionCreators(actionCreators) {
 	  return function (dispatch) {
@@ -39007,7 +38978,7 @@
 	}
 
 /***/ },
-/* 582 */
+/* 576 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -39015,27 +38986,27 @@
 	exports.__esModule = true;
 	exports.compose = exports.applyMiddleware = exports.bindActionCreators = exports.combineReducers = exports.createStore = undefined;
 
-	var _createStore = __webpack_require__(583);
+	var _createStore = __webpack_require__(577);
 
 	var _createStore2 = _interopRequireDefault(_createStore);
 
-	var _combineReducers = __webpack_require__(591);
+	var _combineReducers = __webpack_require__(585);
 
 	var _combineReducers2 = _interopRequireDefault(_combineReducers);
 
-	var _bindActionCreators = __webpack_require__(593);
+	var _bindActionCreators = __webpack_require__(587);
 
 	var _bindActionCreators2 = _interopRequireDefault(_bindActionCreators);
 
-	var _applyMiddleware = __webpack_require__(594);
+	var _applyMiddleware = __webpack_require__(588);
 
 	var _applyMiddleware2 = _interopRequireDefault(_applyMiddleware);
 
-	var _compose = __webpack_require__(595);
+	var _compose = __webpack_require__(589);
 
 	var _compose2 = _interopRequireDefault(_compose);
 
-	var _warning = __webpack_require__(592);
+	var _warning = __webpack_require__(586);
 
 	var _warning2 = _interopRequireDefault(_warning);
 
@@ -39059,7 +39030,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(294)))
 
 /***/ },
-/* 583 */
+/* 577 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -39068,11 +39039,11 @@
 	exports.ActionTypes = undefined;
 	exports["default"] = createStore;
 
-	var _isPlainObject = __webpack_require__(584);
+	var _isPlainObject = __webpack_require__(578);
 
 	var _isPlainObject2 = _interopRequireDefault(_isPlainObject);
 
-	var _symbolObservable = __webpack_require__(589);
+	var _symbolObservable = __webpack_require__(583);
 
 	var _symbolObservable2 = _interopRequireDefault(_symbolObservable);
 
@@ -39326,12 +39297,12 @@
 	}
 
 /***/ },
-/* 584 */
+/* 578 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var getPrototype = __webpack_require__(585),
-	    isHostObject = __webpack_require__(587),
-	    isObjectLike = __webpack_require__(588);
+	var getPrototype = __webpack_require__(579),
+	    isHostObject = __webpack_require__(581),
+	    isObjectLike = __webpack_require__(582);
 
 	/** `Object#toString` result references. */
 	var objectTag = '[object Object]';
@@ -39402,10 +39373,10 @@
 
 
 /***/ },
-/* 585 */
+/* 579 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var overArg = __webpack_require__(586);
+	var overArg = __webpack_require__(580);
 
 	/* Built-in method references for those with the same name as other `lodash` methods. */
 	var nativeGetPrototype = Object.getPrototypeOf;
@@ -39423,7 +39394,7 @@
 
 
 /***/ },
-/* 586 */
+/* 580 */
 /***/ function(module, exports) {
 
 	/**
@@ -39444,7 +39415,7 @@
 
 
 /***/ },
-/* 587 */
+/* 581 */
 /***/ function(module, exports) {
 
 	/**
@@ -39470,7 +39441,7 @@
 
 
 /***/ },
-/* 588 */
+/* 582 */
 /***/ function(module, exports) {
 
 	/**
@@ -39505,18 +39476,18 @@
 
 
 /***/ },
-/* 589 */
+/* 583 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {/* global window */
 	'use strict';
 
-	module.exports = __webpack_require__(590)(global || window || this);
+	module.exports = __webpack_require__(584)(global || window || this);
 
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 590 */
+/* 584 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -39541,7 +39512,7 @@
 
 
 /***/ },
-/* 591 */
+/* 585 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -39549,13 +39520,13 @@
 	exports.__esModule = true;
 	exports["default"] = combineReducers;
 
-	var _createStore = __webpack_require__(583);
+	var _createStore = __webpack_require__(577);
 
-	var _isPlainObject = __webpack_require__(584);
+	var _isPlainObject = __webpack_require__(578);
 
 	var _isPlainObject2 = _interopRequireDefault(_isPlainObject);
 
-	var _warning = __webpack_require__(592);
+	var _warning = __webpack_require__(586);
 
 	var _warning2 = _interopRequireDefault(_warning);
 
@@ -39674,7 +39645,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(294)))
 
 /***/ },
-/* 592 */
+/* 586 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -39704,7 +39675,7 @@
 	}
 
 /***/ },
-/* 593 */
+/* 587 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -39760,7 +39731,7 @@
 	}
 
 /***/ },
-/* 594 */
+/* 588 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -39771,7 +39742,7 @@
 
 	exports["default"] = applyMiddleware;
 
-	var _compose = __webpack_require__(595);
+	var _compose = __webpack_require__(589);
 
 	var _compose2 = _interopRequireDefault(_compose);
 
@@ -39823,7 +39794,7 @@
 	}
 
 /***/ },
-/* 595 */
+/* 589 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -39868,12 +39839,12 @@
 	}
 
 /***/ },
-/* 596 */
+/* 590 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var getPrototype = __webpack_require__(597),
-	    isHostObject = __webpack_require__(599),
-	    isObjectLike = __webpack_require__(600);
+	var getPrototype = __webpack_require__(591),
+	    isHostObject = __webpack_require__(593),
+	    isObjectLike = __webpack_require__(594);
 
 	/** `Object#toString` result references. */
 	var objectTag = '[object Object]';
@@ -39944,10 +39915,10 @@
 
 
 /***/ },
-/* 597 */
+/* 591 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var overArg = __webpack_require__(598);
+	var overArg = __webpack_require__(592);
 
 	/* Built-in method references for those with the same name as other `lodash` methods. */
 	var nativeGetPrototype = Object.getPrototypeOf;
@@ -39965,7 +39936,7 @@
 
 
 /***/ },
-/* 598 */
+/* 592 */
 /***/ function(module, exports) {
 
 	/**
@@ -39986,7 +39957,7 @@
 
 
 /***/ },
-/* 599 */
+/* 593 */
 /***/ function(module, exports) {
 
 	/**
@@ -40012,7 +39983,7 @@
 
 
 /***/ },
-/* 600 */
+/* 594 */
 /***/ function(module, exports) {
 
 	/**
@@ -40047,7 +40018,7 @@
 
 
 /***/ },
-/* 601 */
+/* 595 */
 /***/ function(module, exports) {
 
 	/**
@@ -40103,7 +40074,7 @@
 
 
 /***/ },
-/* 602 */
+/* 596 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/**
@@ -40161,7 +40132,1362 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(294)))
 
 /***/ },
+/* 597 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	exports.getYoutubes = getYoutubes;
+	exports.startGetYoutubes = startGetYoutubes;
+	exports.getYoutubesSuccess = getYoutubesSuccess;
+	exports.getYoutubesFail = getYoutubesFail;
+
+	var _ActionTypes = __webpack_require__(598);
+
+	var _axios = __webpack_require__(536);
+
+	var _axios2 = _interopRequireDefault(_axios);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function getYoutubes(page, order) {
+		return function (dispatch) {
+			dispatch(startGetYoutubes());
+
+			return _axios2.default.get('http://bad.watch/api/youtube-list?page=' + page + "&order=" + order).then(function (response) {
+				var data = response.data;
+				if (data.responseCode == 6) {
+					dispatch(getYoutubesSuccess(order, data.youtubeData));
+				} else {
+					console.log("fail");
+					dispatch(getYoutubesFail());
+				}
+			}).catch(function (err) {
+				console.log(err);
+				dispatch(getYoutubesFail());
+			});
+		};
+	}
+
+	function startGetYoutubes() {
+		return {
+			type: _ActionTypes.GET_YOUTUBES
+		};
+	}
+
+	function getYoutubesSuccess(order, youtubes) {
+		return {
+			type: _ActionTypes.GET_YOUTUBES_SUCCESS,
+			youtubes: youtubes,
+			order: order
+		};
+	}
+
+	function getYoutubesFail() {
+		return {
+			type: _ActionTypes.GET_YOUTUBES_FAIL
+		};
+	}
+
+/***/ },
+/* 598 */
+/***/ function(module, exports) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	/* Authentication */
+	var AUTH_LOGIN = exports.AUTH_LOGIN = "AUTH_LOGIN";
+	var AUTH_LOGIN_SUCCESS = exports.AUTH_LOGIN_SUCCESS = "AUTH_LOGIN_SUCCESS";
+	var AUTH_LOGIN_FAIL = exports.AUTH_LOGIN_FAIL = "AUTH_LOGIN_FAIL";
+	var AUTH_LOGOUT = exports.AUTH_LOGOUT = "AUTH_LOGOUT";
+	var AUTH_LOGOUT_SUCCESS = exports.AUTH_LOGOUT_SUCCESS = "AUTH_LOGOUT_SUCCESS";
+
+	var GET_YOUTUBES = exports.GET_YOUTUBES = "GET_YOUTUBES";
+	var GET_YOUTUBES_SUCCESS = exports.GET_YOUTUBES_SUCCESS = "GET_YOUTUBES_SUCCESS";
+	var GET_YOUTUBES_FAIL = exports.GET_YOUTUBES_FAIL = "GET_YOUTUBES_FAIL";
+
+	var GET_MESSAGE = exports.GET_MESSAGE = "GET_MESSAGE";
+
+/***/ },
+/* 599 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(299);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _axios = __webpack_require__(536);
+
+	var _axios2 = _interopRequireDefault(_axios);
+
+	var _Title = __webpack_require__(600);
+
+	var _Title2 = _interopRequireDefault(_Title);
+
+	var _YoutubeCommentBox = __webpack_require__(601);
+
+	var _YoutubeCommentBox2 = _interopRequireDefault(_YoutubeCommentBox);
+
+	var _LikeBox = __webpack_require__(607);
+
+	var _LikeBox2 = _interopRequireDefault(_LikeBox);
+
+	var _reactRouter = __webpack_require__(469);
+
+	var _reactAddonsUpdate = __webpack_require__(605);
+
+	var _reactAddonsUpdate2 = _interopRequireDefault(_reactAddonsUpdate);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var YoutubeShowBox = function (_React$Component) {
+	    _inherits(YoutubeShowBox, _React$Component);
+
+	    function YoutubeShowBox(props) {
+	        _classCallCheck(this, YoutubeShowBox);
+
+	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(YoutubeShowBox).call(this, props));
+
+	        _this.displayName = 'YoutubeShowBox';
+	        _this.state = {
+	            youtube: {},
+	            comments: []
+	        };
+	        _this._onDeleteYoutube = _this._onDeleteYoutube.bind(_this);
+	        _this._onDisLike = _this._onDisLike.bind(_this);
+	        _this._onLike = _this._onLike.bind(_this);
+	        return _this;
+	    }
+
+	    _createClass(YoutubeShowBox, [{
+	        key: '_onLike',
+	        value: function _onLike() {
+	            var _this2 = this;
+
+	            _axios2.default.get('http://bad.watch/api/youtube-like/' + this.props.params.id).then(function (response) {
+	                var data = response.data;
+	                if (data.responseCode == 50) {
+	                    //좋아요 성공
+	                    _this2.setState({
+	                        youtube: (0, _reactAddonsUpdate2.default)(_this2.state.youtube, {
+	                            like_count: { $set: data.like_count },
+	                            like_status: { $set: true }
+	                        })
+	                    });
+	                } else if (data.responseCode == 49) {
+	                    sweetAlert('', '이미 좋아요를 하셨습니다.', 'error');
+	                    return;
+	                } else {
+	                    sweetAlert('', '실패했습니다.', 'error');
+	                    return;
+	                }
+	            });
+	        }
+	    }, {
+	        key: '_onDisLike',
+	        value: function _onDisLike() {
+	            var _this3 = this;
+
+	            _axios2.default.get('http://bad.watch/api/youtube-dislike/' + this.props.params.id).then(function (response) {
+	                var data = response.data;
+	                if (data.responseCode == 52) {
+	                    //좋아요 취소 성공
+	                    _this3.setState({
+	                        youtube: (0, _reactAddonsUpdate2.default)(_this3.state.youtube, {
+	                            like_count: { $set: data.like_count },
+	                            like_status: { $set: false }
+	                        })
+	                    });
+	                } else {
+	                    sweetAlert('', '오류가 발생했습니다.', 'error');
+	                    return;
+	                }
+	            });
+	        }
+	    }, {
+	        key: '_onDeleteYoutube',
+	        value: function _onDeleteYoutube() {
+	            _axios2.default.delete('http://bad.watch/api/youtube/' + this.props.params.id).then(function (response) {
+	                var data = response.data;
+	                if (data.responseCode == 47) {
+	                    sweetAlert('', '글이 삭제되었습니다.', 'success');
+	                    _reactRouter.browserHistory.push('/youtube');
+	                    return;
+	                } else {
+	                    sweetAlert('', '권한이 없습니다.', 'error');
+	                    return;
+	                }
+	            });
+	        }
+	    }, {
+	        key: 'componentDidMount',
+	        value: function componentDidMount() {
+	            var _this4 = this;
+
+	            _axios2.default.get('http://bad.watch/api/youtube/' + this.props.params.id).then(function (response) {
+	                var data = response.data;
+	                if (data.responseCode == 6) {
+	                    _this4.setState({
+	                        youtube: data.youtubeData
+	                    });
+	                } else {
+	                    sweetAlert('데이터를 불러오는데 오류가 발생했습니다.', '잠시후 다시시도해주세요.', 'error');
+	                    return;
+	                }
+	            });
+	        }
+	    }, {
+	        key: 'render',
+	        value: function render() {
+	            var auth_box = _react2.default.createElement(
+	                'div',
+	                null,
+	                _react2.default.createElement(
+	                    _reactRouter.Link,
+	                    { to: "/youtube/edit/" + this.props.params.id, className: 'btn' },
+	                    '수정'
+	                ),
+	                _react2.default.createElement(
+	                    'a',
+	                    { onClick: this._onDeleteYoutube, className: 'btn' },
+	                    '삭제'
+	                )
+	            );
+	            return _react2.default.createElement(
+	                'div',
+	                null,
+	                _react2.default.createElement(_Title2.default, { title: this.state.youtube.title,
+	                    comment_count: this.state.youtube.comment_count,
+	                    hit_count: this.state.youtube.hit_count,
+	                    like_count: this.state.youtube.like_count,
+	                    written_time: this.state.youtube.written_time,
+	                    name: this.state.youtube.name }),
+	                _react2.default.createElement(
+	                    'div',
+	                    { className: 'video-container' },
+	                    _react2.default.createElement('iframe', { width: '853', height: '480', src: "//www.youtube.com/embed/" + this.state.youtube.youtube_key, frameBorder: '0', allowFullScreen: true })
+	                ),
+	                _react2.default.createElement(_LikeBox2.default, { like_count: this.state.youtube.like_count,
+	                    handleLike: this._onLike,
+	                    handleDisLike: this._onDisLike,
+	                    like_status: this.state.youtube.like_status }),
+	                this.state.youtube.authentication ? auth_box : undefined,
+	                _react2.default.createElement(_YoutubeCommentBox2.default, { id: this.props.params.id })
+	            );
+	        }
+	    }]);
+
+	    return YoutubeShowBox;
+	}(_react2.default.Component);
+
+	exports.default = YoutubeShowBox;
+
+/***/ },
+/* 600 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(299);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var Title = function (_React$Component) {
+	    _inherits(Title, _React$Component);
+
+	    function Title(props) {
+	        _classCallCheck(this, Title);
+
+	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Title).call(this, props));
+
+	        _this.displayName = 'Title';
+	        return _this;
+	    }
+
+	    _createClass(Title, [{
+	        key: 'render',
+	        value: function render() {
+	            return _react2.default.createElement(
+	                'div',
+	                { className: 'card-panel red lighten-4' },
+	                '제목 : ',
+	                this.props.title,
+	                ' ',
+	                _react2.default.createElement('br', null),
+	                '댓글수 : ',
+	                this.props.comment_count,
+	                '개 ',
+	                _react2.default.createElement('br', null),
+	                '좋아요 : ',
+	                this.props.like_count,
+	                '개 ',
+	                _react2.default.createElement('br', null),
+	                '조회수 : ',
+	                this.props.hit_count,
+	                ' ',
+	                _react2.default.createElement('br', null),
+	                '작성시간 : ',
+	                this.props.written_time,
+	                ' ',
+	                _react2.default.createElement('br', null),
+	                '작성자 : ',
+	                this.props.name ? this.props.name : "익명"
+	            );
+	        }
+	    }]);
+
+	    return Title;
+	}(_react2.default.Component);
+
+	Title.propTypes = {
+	    title: _react2.default.PropTypes.string,
+	    comment_count: _react2.default.PropTypes.number,
+	    hit_count: _react2.default.PropTypes.number,
+	    like_count: _react2.default.PropTypes.number,
+	    written_time: _react2.default.PropTypes.string
+	};
+
+	exports.default = Title;
+
+/***/ },
+/* 601 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(299);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _axios = __webpack_require__(536);
+
+	var _axios2 = _interopRequireDefault(_axios);
+
+	var _Comment = __webpack_require__(602);
+
+	var _Comment2 = _interopRequireDefault(_Comment);
+
+	var _CommentInput = __webpack_require__(604);
+
+	var _CommentInput2 = _interopRequireDefault(_CommentInput);
+
+	var _reactAddonsUpdate = __webpack_require__(605);
+
+	var _reactAddonsUpdate2 = _interopRequireDefault(_reactAddonsUpdate);
+
+	__webpack_require__(1);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var YoutubeCommentBox = function (_React$Component) {
+	    _inherits(YoutubeCommentBox, _React$Component);
+
+	    function YoutubeCommentBox(props) {
+	        _classCallCheck(this, YoutubeCommentBox);
+
+	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(YoutubeCommentBox).call(this, props));
+
+	        _this.displayName = 'YoutubeCommentBox';
+	        _this.state = {
+	            comments: []
+	        };
+	        _this._onCreateComment = _this._onCreateComment.bind(_this);
+	        _this._handleReplyCount = _this._handleReplyCount.bind(_this);
+	        return _this;
+	    }
+
+	    _createClass(YoutubeCommentBox, [{
+	        key: '_onCreateComment',
+	        value: function _onCreateComment(content) {
+	            var _this2 = this;
+
+	            return (0, _axios2.default)({
+	                method: "POST",
+	                url: 'http://bad.watch/api/youtube-comment',
+	                data: {
+	                    content: content,
+	                    youtube_id: parseInt(this.props.id)
+	                }
+	            }).then(function (response) {
+	                var data = response.data;
+	                if (data.responseCode == 12) {
+	                    _this2.setState({
+	                        comments: (0, _reactAddonsUpdate2.default)(_this2.state.comments, {
+	                            $push: [data.commentData]
+	                        })
+	                    });
+	                    return true;
+	                } else {
+	                    sweetAlert('댓글 등록에 실패했습니다.', 'error');
+	                    return false;
+	                }
+	            });
+	        }
+	    }, {
+	        key: '_handleReplyCount',
+	        value: function _handleReplyCount(id) {
+	            var index = this.state.comments.findIndex(function (comment) {
+	                return comment.comment_id == id;
+	            });
+	            this.setState({
+	                comments: (0, _reactAddonsUpdate2.default)(this.state.comments, _defineProperty({}, index, {
+	                    reply_count: { $set: this.state.comments[index].reply_count + 1 }
+	                }))
+	            });
+	        }
+	    }, {
+	        key: 'componentDidMount',
+	        value: function componentDidMount() {
+	            var _this3 = this;
+
+	            _axios2.default.get('http://bad.watch/api/youtube-comment?id=' + this.props.id).then(function (response) {
+	                var data = response.data;
+	                if (data.responseCode == 10) {
+	                    _this3.setState({
+	                        comments: data.commentData
+	                    });
+	                } else {
+	                    sweetAlert('댓글을 불러오는데 오류가 발생했습니다.', 'error');
+	                    return;
+	                }
+	            });
+	        }
+	    }, {
+	        key: 'render',
+	        value: function render() {
+	            var _this4 = this;
+
+	            return _react2.default.createElement(
+	                'div',
+	                null,
+	                _react2.default.createElement(
+	                    'div',
+	                    null,
+	                    '댓글 ',
+	                    this.state.comments.length,
+	                    ' 개'
+	                ),
+	                this.state.comments.map(function (comment) {
+	                    return _react2.default.createElement(_Comment2.default, { key: comment.comment_id,
+	                        comment: comment,
+	                        handleReplyCount: _this4._handleReplyCount });
+	                }),
+	                _react2.default.createElement(_CommentInput2.default, { onCreateComment: this._onCreateComment })
+	            );
+	        }
+	    }]);
+
+	    return YoutubeCommentBox;
+	}(_react2.default.Component);
+
+	YoutubeCommentBox.propTypes = {
+	    id: _react2.default.PropTypes.string
+	};
+
+	exports.default = YoutubeCommentBox;
+
+/***/ },
+/* 602 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(299);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _axios = __webpack_require__(536);
+
+	var _axios2 = _interopRequireDefault(_axios);
+
+	var _Reply = __webpack_require__(603);
+
+	var _Reply2 = _interopRequireDefault(_Reply);
+
+	var _CommentInput = __webpack_require__(604);
+
+	var _CommentInput2 = _interopRequireDefault(_CommentInput);
+
+	var _reactAddonsUpdate = __webpack_require__(605);
+
+	var _reactAddonsUpdate2 = _interopRequireDefault(_reactAddonsUpdate);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var Comment = function (_React$Component) {
+	    _inherits(Comment, _React$Component);
+
+	    function Comment(props) {
+	        _classCallCheck(this, Comment);
+
+	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Comment).call(this, props));
+
+	        _this.displayName = 'Comment';
+	        _this.state = {
+	            "isOpen": false,
+	            "replies": []
+	        };
+	        _this._handleReplyOpen = _this._handleReplyOpen.bind(_this);
+	        _this._onCreateComment = _this._onCreateComment.bind(_this);
+	        return _this;
+	    }
+
+	    _createClass(Comment, [{
+	        key: '_onCreateComment',
+	        value: function _onCreateComment(content) {
+	            var _this2 = this;
+
+	            return (0, _axios2.default)({
+	                method: "POST",
+	                url: "http://bad.watch/api/youtube-reply",
+	                data: {
+	                    content: content,
+	                    comment_id: this.props.comment.comment_id
+	                }
+	            }).then(function (response) {
+	                var data = response.data;
+	                if (data.responseCode == 16) {
+	                    _this2.setState({
+	                        replies: (0, _reactAddonsUpdate2.default)(_this2.state.replies, {
+	                            $push: [data.replyData]
+	                        })
+	                    });
+	                    _this2.props.handleReplyCount(_this2.props.comment.comment_id);
+	                    return true;
+	                } else {
+	                    sweetAlert('답글 등록에 실패했습니다.', 'error');
+	                    return false;
+	                }
+	            });
+	        }
+	    }, {
+	        key: '_handleReplyOpen',
+	        value: function _handleReplyOpen() {
+	            var _this3 = this;
+
+	            if (this.state.isOpen) {
+	                this.setState({
+	                    isOpen: false
+	                });
+	                return;
+	            } else {
+	                if (this.state.replies.length) {
+	                    this.setState({
+	                        isOpen: true
+	                    });
+	                    return;
+	                }
+	            }
+	            _axios2.default.get('http://bad.watch/api/youtube-reply?id=' + this.props.comment.comment_id).then(function (response) {
+	                var data = response.data;
+	                if (data.responseCode == 14) {
+	                    _this3.setState({
+	                        replies: data.replyData,
+	                        isOpen: !_this3.state.isOpen
+	                    });
+	                } else {
+	                    sweetAlert('댓글을 불러오는데 오류가 발생했습니다.', 'error');
+	                    return false;
+	                }
+	            });
+	        }
+	    }, {
+	        key: 'render',
+	        value: function render() {
+	            var comment = this.props.comment;
+	            var replyStatus = _react2.default.createElement(
+	                'div',
+	                null,
+	                comment.reply_count == 0 ? "답글달기" : "답글 " + comment.reply_count + "개"
+	            );
+	            var replyInfo = _react2.default.createElement(
+	                'div',
+	                null,
+	                this.state.replies.map(function (reply) {
+	                    return _react2.default.createElement(_Reply2.default, { key: reply.reply_id,
+	                        reply: reply });
+	                }),
+	                _react2.default.createElement(
+	                    'div',
+	                    { onClick: this._handleReplyOpen },
+	                    this.state.isOpen ? "답글접기" : undefined
+	                ),
+	                _react2.default.createElement(_CommentInput2.default, { onCreateComment: this._onCreateComment })
+	            );
+
+	            return _react2.default.createElement(
+	                'div',
+	                { className: 'blue-grey' },
+	                _react2.default.createElement(
+	                    'div',
+	                    { className: 'white-text' },
+	                    comment.content,
+	                    comment.written_time,
+	                    _react2.default.createElement(
+	                        'span',
+	                        { className: 'red-text' },
+	                        '[',
+	                        comment.ip,
+	                        ']'
+	                    ),
+	                    comment.name ? comment.name : "익명",
+	                    _react2.default.createElement(
+	                        'div',
+	                        { onClick: this._handleReplyOpen },
+	                        this.state.isOpen ? undefined : replyStatus
+	                    ),
+	                    this.state.isOpen ? replyInfo : undefined
+	                )
+	            );
+	        }
+	    }]);
+
+	    return Comment;
+	}(_react2.default.Component);
+
+	Comment.propTypes = {
+	    comment: _react2.default.PropTypes.object,
+	    handleReplyCount: _react2.default.PropTypes.func
+	};
+
+	exports.default = Comment;
+
+/***/ },
 /* 603 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(299);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var Reply = function (_React$Component) {
+	    _inherits(Reply, _React$Component);
+
+	    function Reply(props) {
+	        _classCallCheck(this, Reply);
+
+	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Reply).call(this, props));
+
+	        _this.displayName = 'Reply';
+	        return _this;
+	    }
+
+	    _createClass(Reply, [{
+	        key: 'render',
+	        value: function render() {
+	            var reply = this.props.reply;
+	            return _react2.default.createElement(
+	                'div',
+	                null,
+	                reply.content,
+	                _react2.default.createElement(
+	                    'span',
+	                    { className: 'red-text' },
+	                    '[',
+	                    reply.ip,
+	                    ']'
+	                ),
+	                reply.name ? reply.name : "익명"
+	            );
+	        }
+	    }]);
+
+	    return Reply;
+	}(_react2.default.Component);
+
+	Reply.propTypes = {
+	    reply: _react2.default.PropTypes.object
+	};
+
+	exports.default = Reply;
+
+/***/ },
+/* 604 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(299);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var CommentInput = function (_React$Component) {
+	    _inherits(CommentInput, _React$Component);
+
+	    function CommentInput(props) {
+	        _classCallCheck(this, CommentInput);
+
+	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(CommentInput).call(this, props));
+
+	        _this.displayName = 'CommentInput';
+	        _this.state = {
+	            "content": ''
+	        };
+	        _this._handleChange = _this._handleChange.bind(_this);
+	        _this._handleCreate = _this._handleCreate.bind(_this);
+	        return _this;
+	    }
+
+	    _createClass(CommentInput, [{
+	        key: '_handleChange',
+	        value: function _handleChange(e) {
+	            this.setState({
+	                content: e.target.value
+	            });
+	        }
+	    }, {
+	        key: '_handleCreate',
+	        value: function _handleCreate() {
+	            var _this2 = this;
+
+	            this.props.onCreateComment(this.state.content).then(function (success) {
+	                if (success) {
+	                    _this2.setState({
+	                        "content": ''
+	                    });
+	                }
+	            });
+	        }
+	    }, {
+	        key: 'render',
+	        value: function render() {
+	            return _react2.default.createElement(
+	                'div',
+	                null,
+	                _react2.default.createElement('input', { type: 'text',
+	                    name: 'comment_input',
+	                    value: this.state.content,
+	                    onChange: this._handleChange }),
+	                _react2.default.createElement(
+	                    'a',
+	                    { className: 'waves-effect waves-light btn',
+	                        onClick: this._handleCreate },
+	                    '등록'
+	                )
+	            );
+	        }
+	    }]);
+
+	    return CommentInput;
+	}(_react2.default.Component);
+
+	CommentInput.propTypes = {
+	    onCreateComment: _react2.default.PropTypes.func
+	};
+
+	exports.default = CommentInput;
+
+/***/ },
+/* 605 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = __webpack_require__(606);
+
+/***/ },
+/* 606 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(process) {/**
+	 * Copyright 2013-present, Facebook, Inc.
+	 * All rights reserved.
+	 *
+	 * This source code is licensed under the BSD-style license found in the
+	 * LICENSE file in the root directory of this source tree. An additional grant
+	 * of patent rights can be found in the PATENTS file in the same directory.
+	 *
+	 * @providesModule update
+	 */
+
+	/* global hasOwnProperty:true */
+
+	'use strict';
+
+	var _prodInvariant = __webpack_require__(304),
+	    _assign = __webpack_require__(301);
+
+	var keyOf = __webpack_require__(321);
+	var invariant = __webpack_require__(305);
+	var hasOwnProperty = {}.hasOwnProperty;
+
+	function shallowCopy(x) {
+	  if (Array.isArray(x)) {
+	    return x.concat();
+	  } else if (x && typeof x === 'object') {
+	    return _assign(new x.constructor(), x);
+	  } else {
+	    return x;
+	  }
+	}
+
+	var COMMAND_PUSH = keyOf({ $push: null });
+	var COMMAND_UNSHIFT = keyOf({ $unshift: null });
+	var COMMAND_SPLICE = keyOf({ $splice: null });
+	var COMMAND_SET = keyOf({ $set: null });
+	var COMMAND_MERGE = keyOf({ $merge: null });
+	var COMMAND_APPLY = keyOf({ $apply: null });
+
+	var ALL_COMMANDS_LIST = [COMMAND_PUSH, COMMAND_UNSHIFT, COMMAND_SPLICE, COMMAND_SET, COMMAND_MERGE, COMMAND_APPLY];
+
+	var ALL_COMMANDS_SET = {};
+
+	ALL_COMMANDS_LIST.forEach(function (command) {
+	  ALL_COMMANDS_SET[command] = true;
+	});
+
+	function invariantArrayCase(value, spec, command) {
+	  !Array.isArray(value) ? process.env.NODE_ENV !== 'production' ? invariant(false, 'update(): expected target of %s to be an array; got %s.', command, value) : _prodInvariant('1', command, value) : void 0;
+	  var specValue = spec[command];
+	  !Array.isArray(specValue) ? process.env.NODE_ENV !== 'production' ? invariant(false, 'update(): expected spec of %s to be an array; got %s. Did you forget to wrap your parameter in an array?', command, specValue) : _prodInvariant('2', command, specValue) : void 0;
+	}
+
+	/**
+	 * Returns a updated shallow copy of an object without mutating the original.
+	 * See https://facebook.github.io/react/docs/update.html for details.
+	 */
+	function update(value, spec) {
+	  !(typeof spec === 'object') ? process.env.NODE_ENV !== 'production' ? invariant(false, 'update(): You provided a key path to update() that did not contain one of %s. Did you forget to include {%s: ...}?', ALL_COMMANDS_LIST.join(', '), COMMAND_SET) : _prodInvariant('3', ALL_COMMANDS_LIST.join(', '), COMMAND_SET) : void 0;
+
+	  if (hasOwnProperty.call(spec, COMMAND_SET)) {
+	    !(Object.keys(spec).length === 1) ? process.env.NODE_ENV !== 'production' ? invariant(false, 'Cannot have more than one key in an object with %s', COMMAND_SET) : _prodInvariant('4', COMMAND_SET) : void 0;
+
+	    return spec[COMMAND_SET];
+	  }
+
+	  var nextValue = shallowCopy(value);
+
+	  if (hasOwnProperty.call(spec, COMMAND_MERGE)) {
+	    var mergeObj = spec[COMMAND_MERGE];
+	    !(mergeObj && typeof mergeObj === 'object') ? process.env.NODE_ENV !== 'production' ? invariant(false, 'update(): %s expects a spec of type \'object\'; got %s', COMMAND_MERGE, mergeObj) : _prodInvariant('5', COMMAND_MERGE, mergeObj) : void 0;
+	    !(nextValue && typeof nextValue === 'object') ? process.env.NODE_ENV !== 'production' ? invariant(false, 'update(): %s expects a target of type \'object\'; got %s', COMMAND_MERGE, nextValue) : _prodInvariant('6', COMMAND_MERGE, nextValue) : void 0;
+	    _assign(nextValue, spec[COMMAND_MERGE]);
+	  }
+
+	  if (hasOwnProperty.call(spec, COMMAND_PUSH)) {
+	    invariantArrayCase(value, spec, COMMAND_PUSH);
+	    spec[COMMAND_PUSH].forEach(function (item) {
+	      nextValue.push(item);
+	    });
+	  }
+
+	  if (hasOwnProperty.call(spec, COMMAND_UNSHIFT)) {
+	    invariantArrayCase(value, spec, COMMAND_UNSHIFT);
+	    spec[COMMAND_UNSHIFT].forEach(function (item) {
+	      nextValue.unshift(item);
+	    });
+	  }
+
+	  if (hasOwnProperty.call(spec, COMMAND_SPLICE)) {
+	    !Array.isArray(value) ? process.env.NODE_ENV !== 'production' ? invariant(false, 'Expected %s target to be an array; got %s', COMMAND_SPLICE, value) : _prodInvariant('7', COMMAND_SPLICE, value) : void 0;
+	    !Array.isArray(spec[COMMAND_SPLICE]) ? process.env.NODE_ENV !== 'production' ? invariant(false, 'update(): expected spec of %s to be an array of arrays; got %s. Did you forget to wrap your parameters in an array?', COMMAND_SPLICE, spec[COMMAND_SPLICE]) : _prodInvariant('8', COMMAND_SPLICE, spec[COMMAND_SPLICE]) : void 0;
+	    spec[COMMAND_SPLICE].forEach(function (args) {
+	      !Array.isArray(args) ? process.env.NODE_ENV !== 'production' ? invariant(false, 'update(): expected spec of %s to be an array of arrays; got %s. Did you forget to wrap your parameters in an array?', COMMAND_SPLICE, spec[COMMAND_SPLICE]) : _prodInvariant('8', COMMAND_SPLICE, spec[COMMAND_SPLICE]) : void 0;
+	      nextValue.splice.apply(nextValue, args);
+	    });
+	  }
+
+	  if (hasOwnProperty.call(spec, COMMAND_APPLY)) {
+	    !(typeof spec[COMMAND_APPLY] === 'function') ? process.env.NODE_ENV !== 'production' ? invariant(false, 'update(): expected spec of %s to be a function; got %s.', COMMAND_APPLY, spec[COMMAND_APPLY]) : _prodInvariant('9', COMMAND_APPLY, spec[COMMAND_APPLY]) : void 0;
+	    nextValue = spec[COMMAND_APPLY](nextValue);
+	  }
+
+	  for (var k in spec) {
+	    if (!(ALL_COMMANDS_SET.hasOwnProperty(k) && ALL_COMMANDS_SET[k])) {
+	      nextValue[k] = update(value[k], spec[k]);
+	    }
+	  }
+
+	  return nextValue;
+	}
+
+	module.exports = update;
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(294)))
+
+/***/ },
+/* 607 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(299);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var LikeBox = function (_React$Component) {
+	    _inherits(LikeBox, _React$Component);
+
+	    function LikeBox(props) {
+	        _classCallCheck(this, LikeBox);
+
+	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(LikeBox).call(this, props));
+
+	        _this.displayName = 'LikeBox';
+	        return _this;
+	    }
+
+	    _createClass(LikeBox, [{
+	        key: 'render',
+	        value: function render() {
+	            var like_true = _react2.default.createElement(
+	                'div',
+	                null,
+	                _react2.default.createElement(
+	                    'a',
+	                    { onClick: this.props.handleDisLike, className: 'waves-effect waves-light btn' },
+	                    _react2.default.createElement(
+	                        'i',
+	                        { className: 'material-icons left' },
+	                        'thumb_up'
+	                    ),
+	                    '좋아요 취소'
+	                )
+	            );
+	            var like_false = _react2.default.createElement(
+	                'div',
+	                null,
+	                _react2.default.createElement(
+	                    'a',
+	                    { onClick: this.props.handleLike, className: 'waves-effect waves-light btn' },
+	                    _react2.default.createElement(
+	                        'i',
+	                        { className: 'material-icons left' },
+	                        'thumb_up'
+	                    ),
+	                    '좋아요 ',
+	                    this.props.like_count,
+	                    '개'
+	                )
+	            );
+	            return _react2.default.createElement(
+	                'div',
+	                null,
+	                this.props.like_status ? like_true : like_false
+	            );
+	        }
+	    }]);
+
+	    return LikeBox;
+	}(_react2.default.Component);
+
+	LikeBox.propTypes = {
+	    handleLike: _react2.default.PropTypes.func,
+	    hadleDisLike: _react2.default.PropTypes.func,
+	    like_count: _react2.default.PropTypes.number,
+	    like_status: _react2.default.PropTypes.bool
+	};
+
+	exports.default = LikeBox;
+
+/***/ },
+/* 608 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(299);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _axios = __webpack_require__(536);
+
+	var _axios2 = _interopRequireDefault(_axios);
+
+	var _reactRouter = __webpack_require__(469);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var YoutubeEditBox = function (_React$Component) {
+	    _inherits(YoutubeEditBox, _React$Component);
+
+	    function YoutubeEditBox(props) {
+	        _classCallCheck(this, YoutubeEditBox);
+
+	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(YoutubeEditBox).call(this, props));
+
+	        _this.displayName = 'YoutubeEditBox';
+	        _this.state = {
+	            title: '',
+	            url: ''
+	        };
+	        _this._handleChange = _this._handleChange.bind(_this);
+	        _this._onEditYoutube = _this._onEditYoutube.bind(_this);
+	        return _this;
+	    }
+
+	    _createClass(YoutubeEditBox, [{
+	        key: '_handleChange',
+	        value: function _handleChange(e) {
+	            var nextState = {};
+	            nextState[e.target.name] = e.target.value;
+	            this.setState(nextState);
+	        }
+	    }, {
+	        key: '_onEditYoutube',
+	        value: function _onEditYoutube() {
+	            var _this2 = this;
+
+	            _axios2.default.put('http://bad.watch/api/youtube/' + this.props.params.id, {
+	                title: this.state.title,
+	                url: this.state.url
+	            }).then(function (response) {
+	                var data = response.data;
+	                if (data.responseCode == 45) {
+	                    _reactRouter.browserHistory.push('/youtube/show/' + _this2.props.params.id);
+	                    return;
+	                } else {
+	                    sweetAlert('글을 수정하는데 실패했습니다.', 'error');
+	                    return;
+	                }
+	            });
+	        }
+	    }, {
+	        key: 'componentDidMount',
+	        value: function componentDidMount() {
+	            var _this3 = this;
+
+	            _axios2.default.get('http://bad.watch/api/youtube/' + this.props.params.id).then(function (response) {
+	                var data = response.data;
+	                if (data.responseCode == 6) {
+	                    _this3.setState({
+	                        title: data.youtubeData.title,
+	                        url: "https://www.youtube.com/watch?v=" + data.youtubeData.youtube_key
+	                    });
+	                } else {
+	                    sweetAlert('데이터를 불러오는데 오류가 발생했습니다.', '잠시후 다시시도해주세요.', 'error');
+	                    return;
+	                }
+	            });
+	        }
+	    }, {
+	        key: 'render',
+	        value: function render() {
+	            return _react2.default.createElement(
+	                'div',
+	                null,
+	                _react2.default.createElement(
+	                    'div',
+	                    { className: 'input-field col s10' },
+	                    _react2.default.createElement('input', { type: 'text',
+	                        name: 'title',
+	                        value: this.state.title,
+	                        onChange: this._handleChange }),
+	                    _react2.default.createElement(
+	                        'label',
+	                        null,
+	                        '제목'
+	                    )
+	                ),
+	                _react2.default.createElement(
+	                    'h5',
+	                    null,
+	                    '유튜브 동영상 링크'
+	                ),
+	                _react2.default.createElement(
+	                    'p',
+	                    null,
+	                    'ex) https://www.youtube.com/watch?v=nxoAEKVPVF8'
+	                ),
+	                _react2.default.createElement(
+	                    'p',
+	                    null,
+	                    'ex) https://youtu.be/nxoAEKVPVF8'
+	                ),
+	                _react2.default.createElement(
+	                    'div',
+	                    { className: 'input-field col s10' },
+	                    _react2.default.createElement('input', { type: 'text',
+	                        name: 'url',
+	                        value: this.state.url,
+	                        onChange: this._handleChange }),
+	                    _react2.default.createElement(
+	                        'label',
+	                        null,
+	                        '링크'
+	                    )
+	                ),
+	                _react2.default.createElement(
+	                    'button',
+	                    { onClick: this._onEditYoutube },
+	                    '수정'
+	                )
+	            );
+	        }
+	    }]);
+
+	    return YoutubeEditBox;
+	}(_react2.default.Component);
+
+	exports.default = YoutubeEditBox;
+
+/***/ },
+/* 609 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(299);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _axios = __webpack_require__(536);
+
+	var _axios2 = _interopRequireDefault(_axios);
+
+	var _reactRedux = __webpack_require__(569);
+
+	var _authentication = __webpack_require__(610);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var LoginButton = function (_React$Component) {
+	    _inherits(LoginButton, _React$Component);
+
+	    function LoginButton(props) {
+	        _classCallCheck(this, LoginButton);
+
+	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(LoginButton).call(this, props));
+
+	        _this.displayName = 'LoginButton';
+	        _this._onLogin = _this._onLogin.bind(_this);
+	        _this._onLogout = _this._onLogout.bind(_this);
+	        _this._popLogin = _this._popLogin.bind(_this);
+	        return _this;
+	    }
+
+	    _createClass(LoginButton, [{
+	        key: '_onLogin',
+	        value: function _onLogin() {
+	            this.props.loginRequest();
+	        }
+	    }, {
+	        key: '_onLogout',
+	        value: function _onLogout() {
+	            this.props.logoutRequest();
+	        }
+	    }, {
+	        key: '_popLogin',
+	        value: function _popLogin() {
+	            var pop = window.open('http://bad.watch/api/auth/bnet', 'OAUTH_BATTLENET', 'width=450px, height=750px');
+	            pop.focus();
+	            var onClose = function onClose() {
+	                if (pop.closed !== false) {
+	                    window.clearInterval(pollTimer);
+	                    this._onLogin();
+	                }
+	            };
+	            var pollTimer = window.setInterval(onClose.bind(this), 200);
+	        }
+	    }, {
+	        key: 'render',
+	        value: function render() {
+	            var loginButton = _react2.default.createElement(
+	                'div',
+	                { onClick: this._popLogin },
+	                'Log - In'
+	            );
+	            var waitingButton = _react2.default.createElement(
+	                'div',
+	                { className: 'preloader-wrapper mini active' },
+	                _react2.default.createElement(
+	                    'div',
+	                    { className: 'spinner-layer spinner-blue-only' },
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'circle-clipper left' },
+	                        _react2.default.createElement('div', { className: 'circle' })
+	                    ),
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'gap-patch' },
+	                        _react2.default.createElement('div', { className: 'circle' })
+	                    ),
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'circle-clipper right' },
+	                        _react2.default.createElement('div', { className: 'circle' })
+	                    )
+	                )
+	            );
+	            var logoutButton = _react2.default.createElement(
+	                'div',
+	                { onClick: this._onLogout },
+	                'Log - Out'
+	            );
+	            var loginStatus = undefined;
+	            if (this.props.authentication.login.status == 'INIT') {
+	                loginStatus = loginButton;
+	            } else if (this.props.authentication.login.status == 'WAITING') {
+	                loginStatus = waitingButton;
+	            } else if (this.props.authentication.login.status == 'SUCCESS') {
+	                loginStatus = logoutButton;
+	            } else {
+	                loginStatus = loginButton;
+	            }
+	            return _react2.default.createElement(
+	                'span',
+	                { className: 'login-button' },
+	                loginStatus
+	            );
+	        }
+	    }]);
+
+	    return LoginButton;
+	}(_react2.default.Component);
+
+	var mapStateToProps = function mapStateToProps(state) {
+	    return {
+	        authentication: state.authentication
+	    };
+	};
+
+	var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+	    return {
+	        loginRequest: function loginRequest() {
+	            return dispatch((0, _authentication.loginRequest)());
+	        },
+	        logoutRequest: function logoutRequest() {
+	            return dispatch((0, _authentication.logoutRequest)());
+	        }
+	    };
+	};
+
+	LoginButton.propTypes = {
+	    authentication: _react2.default.PropTypes.object,
+	    loginRequest: _react2.default.PropTypes.func,
+	    logoutRequest: _react2.default.PropTypes.func
+	};
+
+	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(LoginButton);
+
+/***/ },
+/* 610 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -40177,7 +41503,7 @@
 	exports.logout = logout;
 	exports.logoutSuccess = logoutSuccess;
 
-	var _ActionTypes = __webpack_require__(604);
+	var _ActionTypes = __webpack_require__(598);
 
 	var _axios = __webpack_require__(536);
 
@@ -40208,7 +41534,7 @@
 
 			return _axios2.default.post('http://bad.watch/api/logout').then(function (response) {
 				var data = response.data;
-				if (data.responseCode == 43) {
+				if (data.responseCode == 44) {
 					dispatch(logoutSuccess());
 				}
 			}).catch(function (err) {
@@ -40249,23 +41575,72 @@
 	}
 
 /***/ },
-/* 604 */
-/***/ function(module, exports) {
+/* 611 */
+/***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
-	  value: true
+	    value: true
 	});
-	/* Authentication */
-	var AUTH_LOGIN = exports.AUTH_LOGIN = "AUTH_LOGIN";
-	var AUTH_LOGIN_SUCCESS = exports.AUTH_LOGIN_SUCCESS = "AUTH_LOGIN_SUCCESS";
-	var AUTH_LOGIN_FAIL = exports.AUTH_LOGIN_FAIL = "AUTH_LOGIN_FAIL";
-	var AUTH_LOGOUT = exports.AUTH_LOGOUT = "AUTH_LOGOUT";
-	var AUTH_LOGOUT_SUCCESS = exports.AUTH_LOGOUT_SUCCESS = "AUTH_LOGOUT_SUCCESS";
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(299);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var Footer = function (_React$Component) {
+	    _inherits(Footer, _React$Component);
+
+	    function Footer(props) {
+	        _classCallCheck(this, Footer);
+
+	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Footer).call(this, props));
+
+	        _this.displayName = 'Footer';
+	        return _this;
+	    }
+
+	    _createClass(Footer, [{
+	        key: 'render',
+	        value: function render() {
+	            return _react2.default.createElement(
+	                'footer',
+	                null,
+	                _react2.default.createElement(
+	                    'div',
+	                    { className: 'footer-copyright' },
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'container' },
+	                        'Copyright Badwatch All rights reserved',
+	                        _react2.default.createElement(
+	                            'a',
+	                            { className: 'right' },
+	                            'Nexters'
+	                        )
+	                    )
+	                )
+	            );
+	        }
+	    }]);
+
+	    return Footer;
+	}(_react2.default.Component);
+
+	exports.default = Footer;
 
 /***/ },
-/* 605 */
+/* 612 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -40281,6 +41656,522 @@
 	var _react2 = _interopRequireDefault(_react);
 
 	var _reactRouter = __webpack_require__(469);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var UserList = function (_React$Component) {
+	    _inherits(UserList, _React$Component);
+
+	    function UserList(props) {
+	        _classCallCheck(this, UserList);
+
+	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(UserList).call(this, props));
+
+	        _this.displayName = 'UserList';
+	        _this._goToUser = _this._goToUser.bind(_this);
+	        return _this;
+	    }
+
+	    _createClass(UserList, [{
+	        key: '_goToUser',
+	        value: function _goToUser() {
+	            var battletag = this.props.user.name + "-" + this.props.user.battletag;
+	            _reactRouter.browserHistory.push('/user/' + battletag);
+	        }
+	    }, {
+	        key: 'render',
+	        value: function render() {
+	            var user = this.props.user;
+	            var win_rate = 0;
+	            if (user.rank_game_count == 0) {
+	                win_rate = (user.quick_win * 100 / user.quick_game_count).toFixed(1);
+	            } else {
+	                win_rate = (user.rank_win * 100 / user.rank_game_count).toFixed(1);
+	            }
+	            return _react2.default.createElement(
+	                'div',
+	                { className: 'user-list', onClick: this._goToUser },
+	                _react2.default.createElement('img', { src: user.avatar, className: 'avatar' }),
+	                _react2.default.createElement(
+	                    'div',
+	                    null,
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'width-50 list-battletag' },
+	                        user.name,
+	                        '#',
+	                        user.battletag
+	                    ),
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'width-50 mobile-hide' },
+	                        '승률 ',
+	                        win_rate,
+	                        '%'
+	                    ),
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'width-50 list-point' },
+	                        '경쟁전 : ',
+	                        user.point,
+	                        '점'
+	                    ),
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'width-50 mobile-hide' },
+	                        '총 플레이 시간 ',
+	                        user.quick_playtime + user.rank_playtime,
+	                        '시간'
+	                    )
+	                )
+	            );
+	        }
+	    }]);
+
+	    return UserList;
+	}(_react2.default.Component);
+
+	UserList.propTypes = {
+	    user: _react2.default.PropTypes.object
+	};
+
+	exports.default = UserList;
+
+/***/ },
+/* 613 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(299);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactRouter = __webpack_require__(469);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var Menu = function (_React$Component) {
+	    _inherits(Menu, _React$Component);
+
+	    function Menu(props) {
+	        _classCallCheck(this, Menu);
+
+	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Menu).call(this, props));
+
+	        _this.displayName = 'Menu';
+	        return _this;
+	    }
+
+	    _createClass(Menu, [{
+	        key: 'render',
+	        value: function render() {
+	            var user_active = false;
+	            if (this.props.location.pathname.includes("user")) user_active = true;
+	            return _react2.default.createElement(
+	                'div',
+	                { className: 'header-menu' },
+	                _react2.default.createElement(
+	                    _reactRouter.Link,
+	                    { to: '/', className: user_active ? 'active' : '' },
+	                    _react2.default.createElement('img', { src: '/asset/images/search.png' }),
+	                    _react2.default.createElement(
+	                        'div',
+	                        null,
+	                        '전적 검색'
+	                    ),
+	                    _react2.default.createElement('div', { className: 'tab' })
+	                ),
+	                _react2.default.createElement(
+	                    _reactRouter.Link,
+	                    { to: '/chat', activeClassName: 'active' },
+	                    _react2.default.createElement('img', { src: '/asset/images/group.png' }),
+	                    _react2.default.createElement(
+	                        'div',
+	                        null,
+	                        '파티 매칭'
+	                    ),
+	                    _react2.default.createElement('div', { className: 'tab' })
+	                ),
+	                _react2.default.createElement(
+	                    _reactRouter.Link,
+	                    { to: '/youtube', activeClassName: 'active' },
+	                    _react2.default.createElement('img', { src: '/asset/images/youtube.png' }),
+	                    _react2.default.createElement(
+	                        'div',
+	                        null,
+	                        '동영상'
+	                    ),
+	                    _react2.default.createElement('div', { className: 'tab' })
+	                ),
+	                _react2.default.createElement(
+	                    _reactRouter.Link,
+	                    { to: '/board', activeClassName: 'active' },
+	                    _react2.default.createElement('img', { src: '/asset/images/board.png' }),
+	                    _react2.default.createElement(
+	                        'div',
+	                        null,
+	                        '커뮤니티'
+	                    ),
+	                    _react2.default.createElement('div', { className: 'tab' })
+	                )
+	            );
+	        }
+	    }]);
+
+	    return Menu;
+	}(_react2.default.Component);
+
+	Menu.propTypes = {
+	    location: _react2.default.PropTypes.any
+	};
+
+	exports.default = Menu;
+
+/***/ },
+/* 614 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(299);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactRouter = __webpack_require__(469);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var SearchUserInput = function (_React$Component) {
+	    _inherits(SearchUserInput, _React$Component);
+
+	    function SearchUserInput(props) {
+	        _classCallCheck(this, SearchUserInput);
+
+	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(SearchUserInput).call(this, props));
+
+	        _this.displayName = 'SearchUserInput';
+	        _this.state = {
+	            userName: ''
+	        };
+	        _this._handleChange = _this._handleChange.bind(_this);
+	        _this._handleKeyPress = _this._handleKeyPress.bind(_this);
+	        _this._onSearchUser = _this._onSearchUser.bind(_this);
+	        return _this;
+	    }
+
+	    _createClass(SearchUserInput, [{
+	        key: '_handleChange',
+	        value: function _handleChange(e) {
+	            this.setState({
+	                userName: e.target.value
+	            });
+	        }
+	    }, {
+	        key: '_handleKeyPress',
+	        value: function _handleKeyPress(e) {
+	            if (e.key == 'Enter') {
+	                this._onSearchUser();
+	            }
+	        }
+	    }, {
+	        key: '_onSearchUser',
+	        value: function _onSearchUser() {
+	            if (!this.state.userName) {
+	                sweetAlert('', '올바른 형식이 아닙니다.', 'error');
+	                return;
+	            }
+
+	            /* //////// # 포함시 배틀태그 포함 -로 변환후 url 요청 \\\\\\\\\  */
+	            if (this.state.userName.includes("#")) {
+	                var userName = this.state.userName.replace("#", "-");
+	                if (userName.includes("#")) {
+	                    sweetAlert('', '올바른 형식이 아닙니다.', 'error');
+	                    return;
+	                }
+
+	                _reactRouter.browserHistory.push('/user/' + userName);
+	            } else {
+	                _reactRouter.browserHistory.push('/userByName/' + this.state.userName);
+	            }
+	        }
+	    }, {
+	        key: 'render',
+	        value: function render() {
+	            return _react2.default.createElement(
+	                'div',
+	                { className: 'top-input-div' },
+	                _react2.default.createElement('input', { className: 'topSearchInput',
+	                    onChange: this._handleChange,
+	                    onKeyPress: this._handleKeyPress }),
+	                _react2.default.createElement('img', { src: '/asset/images/search-icon.png',
+	                    className: 'search-icon',
+	                    onClick: this._onSearchUser })
+	            );
+	        }
+	    }]);
+
+	    return SearchUserInput;
+	}(_react2.default.Component);
+
+	exports.default = SearchUserInput;
+
+/***/ },
+/* 615 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+					value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(299);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactRouter = __webpack_require__(469);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var Navbar = function (_React$Component) {
+					_inherits(Navbar, _React$Component);
+
+					function Navbar(props) {
+									_classCallCheck(this, Navbar);
+
+									var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Navbar).call(this, props));
+
+									_this.displayName = 'Navbar';
+									return _this;
+					}
+
+					_createClass(Navbar, [{
+									key: 'render',
+									value: function render() {
+													return _react2.default.createElement(
+																	'nav',
+																	{ className: 'computer-hide' },
+																	_react2.default.createElement(
+																					'div',
+																					{ className: 'nav-wrapper' },
+																					_react2.default.createElement(
+																									'a',
+																									{ 'data-activates': 'slide-out', className: 'brand-logo left', id: 'mobile-top-open' },
+																									_react2.default.createElement(
+																													'i',
+																													{ className: 'medium material-icons' },
+																													'reorder'
+																									)
+																					),
+																					_react2.default.createElement(
+																									'div',
+																									{ className: 'center-align' },
+																									_react2.default.createElement(
+																													_reactRouter.Link,
+																													{ to: '/' },
+																													_react2.default.createElement('img', { src: '/asset/images/badwatch.svg', className: 'badwatch' })
+																									)
+																					)
+																	)
+													);
+									}
+					}]);
+
+					return Navbar;
+	}(_react2.default.Component);
+
+	exports.default = Navbar;
+
+/***/ },
+/* 616 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+					value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(299);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactRouter = __webpack_require__(469);
+
+	var _ = __webpack_require__(534);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var SideNavbar = function (_React$Component) {
+					_inherits(SideNavbar, _React$Component);
+
+					function SideNavbar(props) {
+									_classCallCheck(this, SideNavbar);
+
+									var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(SideNavbar).call(this, props));
+
+									_this.displayName = 'SideNavbar';
+									return _this;
+					}
+
+					_createClass(SideNavbar, [{
+									key: 'render',
+									value: function render() {
+													var user_active = false;
+													if (this.props.location.pathname == "/" || this.props.location.pathname.includes("user")) user_active = true;
+													return _react2.default.createElement(
+																	'div',
+																	null,
+																	_react2.default.createElement(
+																					'ul',
+																					{ id: 'slide-out', className: 'side-nav' },
+																					_react2.default.createElement(
+																									'li',
+																									null,
+																									_react2.default.createElement(
+																													'div',
+																													{ className: 'userView' },
+																													_react2.default.createElement(
+																																	_reactRouter.Link,
+																																	{ to: '/' },
+																																	_react2.default.createElement('img', { src: '/asset/images/logo.png' })
+																													)
+																									)
+																					),
+																					_react2.default.createElement(
+																									'center',
+																									null,
+																									_react2.default.createElement(_.LoginButton, null)
+																					),
+																					_react2.default.createElement(
+																									'li',
+																									null,
+																									_react2.default.createElement('div', { className: 'divider' })
+																					),
+																					_react2.default.createElement(
+																									'li',
+																									null,
+																									_react2.default.createElement(
+																													_reactRouter.Link,
+																													{ to: '/', className: 'waves-effect side-li ' + (user_active ? 'active' : '') },
+																													_react2.default.createElement('img', { src: '/asset/images/search.png' }),
+																													'전적검색',
+																													_react2.default.createElement('i', { className: 'fa fa-check-circle-o fa-lg side-active', 'aria-hidden': 'true' })
+																									)
+																					),
+																					_react2.default.createElement(
+																									'li',
+																									null,
+																									_react2.default.createElement(
+																													_reactRouter.Link,
+																													{ to: '/chat', activeClassName: 'active', className: 'waves-effect side-li' },
+																													_react2.default.createElement('img', { src: '/asset/images/group.png' }),
+																													'파티매칭',
+																													_react2.default.createElement('i', { className: 'fa fa-check-circle-o fa-lg side-active', 'aria-hidden': 'true' })
+																									)
+																					),
+																					_react2.default.createElement(
+																									'li',
+																									null,
+																									_react2.default.createElement(
+																													_reactRouter.Link,
+																													{ to: '/youtube', activeClassName: 'active', className: 'waves-effect side-li' },
+																													_react2.default.createElement('img', { src: '/asset/images/youtube.png' }),
+																													'동영상',
+																													_react2.default.createElement('i', { className: 'fa fa-check-circle-o fa-lg side-active', 'aria-hidden': 'true' })
+																									)
+																					),
+																					_react2.default.createElement(
+																									'li',
+																									null,
+																									_react2.default.createElement(
+																													_reactRouter.Link,
+																													{ to: '/board', activeClassName: 'active', className: 'waves-effect side-li' },
+																													_react2.default.createElement('img', { src: '/asset/images/board.png' }),
+																													'커뮤니티',
+																													_react2.default.createElement('i', { className: 'fa fa-check-circle-o fa-lg side-active', 'aria-hidden': 'true' })
+																									)
+																					)
+																	)
+													);
+									}
+					}]);
+
+					return SideNavbar;
+	}(_react2.default.Component);
+
+	SideNavbar.propTypes = {
+					location: _react2.default.PropTypes.object
+	};
+
+	exports.default = SideNavbar;
+
+/***/ },
+/* 617 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(299);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactRouter = __webpack_require__(469);
+
+	var _components = __webpack_require__(534);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -40339,7 +42230,9 @@
 	                }
 
 	                _reactRouter.browserHistory.push('/user/' + userName);
-	            } else {}
+	            } else {
+	                _reactRouter.browserHistory.push('/userByName/' + this.state.userName);
+	            }
 	        }
 	    }, {
 	        key: 'render',
@@ -40348,75 +42241,54 @@
 	                'div',
 	                null,
 	                _react2.default.createElement(
+	                    'div',
+	                    { className: 'right-align mobile-hide' },
+	                    _react2.default.createElement(_components.LoginButton, null)
+	                ),
+	                _react2.default.createElement(
 	                    'center',
-	                    null,
-	                    _react2.default.createElement(
-	                        'a',
-	                        { className: 'main-black-button' },
-	                        '전적 검색'
-	                    ),
-	                    _react2.default.createElement(
-	                        'span',
-	                        { className: 'menu-dot' },
-	                        '····'
-	                    ),
-	                    _react2.default.createElement(
-	                        'a',
-	                        { className: 'main-black-button' },
-	                        '파티 매칭'
-	                    ),
-	                    _react2.default.createElement(
-	                        'span',
-	                        { className: 'menu-dot' },
-	                        '····'
-	                    ),
+	                    { className: 'main-center' },
+	                    _react2.default.createElement('img', { src: '/asset/images/logo.png', className: 'logo' }),
+	                    _react2.default.createElement('span', { className: 'main-divider' }),
 	                    _react2.default.createElement(
 	                        'div',
-	                        { className: 'inline user-search-box' },
-	                        _react2.default.createElement(
-	                            'div',
-	                            { className: 'row' },
-	                            _react2.default.createElement(
-	                                'div',
-	                                { className: 'input-field col s8 offset-s2' },
-	                                _react2.default.createElement('input', { type: 'text',
-	                                    name: 'user',
-	                                    id: 'main-search',
-	                                    className: 'validate',
-	                                    onChange: this._handleChange,
-	                                    value: this.state.userName,
-	                                    onKeyPress: this._handleKeyPress }),
-	                                _react2.default.createElement(
-	                                    'label',
-	                                    { className: 'text-left' },
-	                                    '닉네임#배틀태그'
-	                                ),
-	                                _react2.default.createElement(
-	                                    'i',
-	                                    { className: 'small material-icons', onClick: this._onSearchUser },
-	                                    'search'
-	                                )
-	                            )
-	                        )
+	                        { className: 'input-wrapper' },
+	                        _react2.default.createElement('input', { type: 'text',
+	                            name: 'user',
+	                            className: 'search-input',
+	                            placeholder: '닉네임#배틀태그',
+	                            onChange: this._handleChange,
+	                            onKeyPress: this._handleKeyPress }),
+	                        _react2.default.createElement('img', { src: '/asset/images/search-icon.png',
+	                            className: 'search-icon',
+	                            onClick: this._onSearchUser })
 	                    ),
+	                    _react2.default.createElement('br', null),
 	                    _react2.default.createElement(
 	                        'span',
-	                        { className: 'menu-dot' },
-	                        '····'
+	                        { className: 'main-letter' },
+	                        '최초검색 1회후 닉네임으로만 검색할 수 있습니다.'
+	                    ),
+	                    _react2.default.createElement('br', null),
+	                    _react2.default.createElement(
+	                        _reactRouter.Link,
+	                        { to: 'youtube', className: 'main-link link-left' },
+	                        '전적검색'
 	                    ),
 	                    _react2.default.createElement(
 	                        _reactRouter.Link,
-	                        { to: 'youtube', className: 'main-black-button' },
+	                        { to: 'youtube', className: 'main-link link-right' },
+	                        '파티매칭'
+	                    ),
+	                    _react2.default.createElement('br', null),
+	                    _react2.default.createElement(
+	                        _reactRouter.Link,
+	                        { to: 'youtube', className: 'main-link link-left' },
 	                        '동영상'
 	                    ),
 	                    _react2.default.createElement(
-	                        'span',
-	                        { className: 'menu-dot' },
-	                        '····'
-	                    ),
-	                    _react2.default.createElement(
-	                        'a',
-	                        { className: 'main-black-button' },
+	                        _reactRouter.Link,
+	                        { to: 'youtube', className: 'main-link link-right' },
 	                        '커뮤니티'
 	                    )
 	                ),
@@ -40433,7 +42305,7 @@
 	exports.default = Home;
 
 /***/ },
-/* 606 */
+/* 618 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -40485,7 +42357,7 @@
 	exports.default = Login;
 
 /***/ },
-/* 607 */
+/* 619 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -40537,7 +42409,7 @@
 	exports.default = Register;
 
 /***/ },
-/* 608 */
+/* 620 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -40576,8 +42448,12 @@
 
 	        _this.displayName = 'User';
 	        _this.state = {
-	            quickUserData: {},
-	            rankUserData: {},
+	            quickUserData: {
+	                heros: []
+	            },
+	            rankUserData: {
+	                heros: []
+	            },
 	            quick_mode: true
 	        };
 	        _this._onQuick = _this._onQuick.bind(_this);
@@ -40601,7 +42477,7 @@
 
 	            if (!this.state.quick_mode) return;
 
-	            if (!Object.keys(this.state.rankUserData).length) {
+	            if (Object.keys(this.state.rankUserData).length <= 1) {
 	                this._getUserRankData().then(function (data) {
 	                    _this2.setState({
 	                        rankUserData: data
@@ -40668,10 +42544,15 @@
 	    }, {
 	        key: 'render',
 	        value: function render() {
-	            return _react2.default.createElement(_components.UserDataBox, { userData: this.state.quick_mode ? this.state.quickUserData : this.state.rankUserData,
-	                onQuick: this._onQuick,
-	                onRank: this._onRank,
-	                quick_mode: this.state.quick_mode });
+	            return _react2.default.createElement(
+	                'div',
+	                null,
+	                _react2.default.createElement(_components.SearchUserInput, null),
+	                _react2.default.createElement(_components.UserDataBox, { userData: this.state.quick_mode ? this.state.quickUserData : this.state.rankUserData,
+	                    onQuick: this._onQuick,
+	                    onRank: this._onRank,
+	                    quick_mode: this.state.quick_mode })
+	            );
 	        }
 	    }]);
 
@@ -40681,7 +42562,7 @@
 	exports.default = User;
 
 /***/ },
-/* 609 */
+/* 621 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -40738,7 +42619,7 @@
 	exports.default = Youtube;
 
 /***/ },
-/* 610 */
+/* 622 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -40753,11 +42634,11 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _socket = __webpack_require__(611);
+	var _socket = __webpack_require__(623);
 
 	var _socket2 = _interopRequireDefault(_socket);
 
-	var _reactAddonsUpdate = __webpack_require__(571);
+	var _reactAddonsUpdate = __webpack_require__(605);
 
 	var _reactAddonsUpdate2 = _interopRequireDefault(_reactAddonsUpdate);
 
@@ -40897,7 +42778,7 @@
 	exports.default = Chat;
 
 /***/ },
-/* 611 */
+/* 623 */
 /***/ function(module, exports, __webpack_require__) {
 
 	
@@ -40905,10 +42786,10 @@
 	 * Module dependencies.
 	 */
 
-	var url = __webpack_require__(612);
-	var parser = __webpack_require__(617);
-	var Manager = __webpack_require__(625);
-	var debug = __webpack_require__(614)('socket.io-client');
+	var url = __webpack_require__(624);
+	var parser = __webpack_require__(629);
+	var Manager = __webpack_require__(637);
+	var debug = __webpack_require__(626)('socket.io-client');
 
 	/**
 	 * Module exports.
@@ -40990,12 +42871,12 @@
 	 * @api public
 	 */
 
-	exports.Manager = __webpack_require__(625);
-	exports.Socket = __webpack_require__(653);
+	exports.Manager = __webpack_require__(637);
+	exports.Socket = __webpack_require__(665);
 
 
 /***/ },
-/* 612 */
+/* 624 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {
@@ -41003,8 +42884,8 @@
 	 * Module dependencies.
 	 */
 
-	var parseuri = __webpack_require__(613);
-	var debug = __webpack_require__(614)('socket.io-client:url');
+	var parseuri = __webpack_require__(625);
+	var debug = __webpack_require__(626)('socket.io-client:url');
 
 	/**
 	 * Module exports.
@@ -41078,7 +42959,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 613 */
+/* 625 */
 /***/ function(module, exports) {
 
 	/**
@@ -41123,7 +43004,7 @@
 
 
 /***/ },
-/* 614 */
+/* 626 */
 /***/ function(module, exports, __webpack_require__) {
 
 	
@@ -41133,7 +43014,7 @@
 	 * Expose `debug()` as the module.
 	 */
 
-	exports = module.exports = __webpack_require__(615);
+	exports = module.exports = __webpack_require__(627);
 	exports.log = log;
 	exports.formatArgs = formatArgs;
 	exports.save = save;
@@ -41297,7 +43178,7 @@
 
 
 /***/ },
-/* 615 */
+/* 627 */
 /***/ function(module, exports, __webpack_require__) {
 
 	
@@ -41313,7 +43194,7 @@
 	exports.disable = disable;
 	exports.enable = enable;
 	exports.enabled = enabled;
-	exports.humanize = __webpack_require__(616);
+	exports.humanize = __webpack_require__(628);
 
 	/**
 	 * The currently active debug mode names, and names to skip.
@@ -41500,7 +43381,7 @@
 
 
 /***/ },
-/* 616 */
+/* 628 */
 /***/ function(module, exports) {
 
 	/**
@@ -41631,7 +43512,7 @@
 
 
 /***/ },
-/* 617 */
+/* 629 */
 /***/ function(module, exports, __webpack_require__) {
 
 	
@@ -41639,12 +43520,12 @@
 	 * Module dependencies.
 	 */
 
-	var debug = __webpack_require__(614)('socket.io-parser');
-	var json = __webpack_require__(618);
-	var isArray = __webpack_require__(621);
-	var Emitter = __webpack_require__(622);
-	var binary = __webpack_require__(623);
-	var isBuf = __webpack_require__(624);
+	var debug = __webpack_require__(626)('socket.io-parser');
+	var json = __webpack_require__(630);
+	var isArray = __webpack_require__(633);
+	var Emitter = __webpack_require__(634);
+	var binary = __webpack_require__(635);
+	var isBuf = __webpack_require__(636);
 
 	/**
 	 * Protocol version.
@@ -42037,14 +43918,14 @@
 
 
 /***/ },
-/* 618 */
+/* 630 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_RESULT__;/* WEBPACK VAR INJECTION */(function(module, global) {/*! JSON v3.3.2 | http://bestiejs.github.io/json3 | Copyright 2012-2014, Kit Cambridge | http://kit.mit-license.org */
 	;(function () {
 	  // Detect the `define` function exposed by asynchronous module loaders. The
 	  // strict `define` check is necessary for compatibility with `r.js`.
-	  var isLoader = "function" === "function" && __webpack_require__(620);
+	  var isLoader = "function" === "function" && __webpack_require__(632);
 
 	  // A set of types used to distinguish objects from primitives.
 	  var objectTypes = {
@@ -42943,10 +44824,10 @@
 	  }
 	}).call(this);
 
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(619)(module), (function() { return this; }())))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(631)(module), (function() { return this; }())))
 
 /***/ },
-/* 619 */
+/* 631 */
 /***/ function(module, exports) {
 
 	module.exports = function(module) {
@@ -42962,7 +44843,7 @@
 
 
 /***/ },
-/* 620 */
+/* 632 */
 /***/ function(module, exports) {
 
 	/* WEBPACK VAR INJECTION */(function(__webpack_amd_options__) {module.exports = __webpack_amd_options__;
@@ -42970,7 +44851,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, {}))
 
 /***/ },
-/* 621 */
+/* 633 */
 /***/ function(module, exports) {
 
 	module.exports = Array.isArray || function (arr) {
@@ -42979,7 +44860,7 @@
 
 
 /***/ },
-/* 622 */
+/* 634 */
 /***/ function(module, exports) {
 
 	
@@ -43149,7 +45030,7 @@
 
 
 /***/ },
-/* 623 */
+/* 635 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {/*global Blob,File*/
@@ -43158,8 +45039,8 @@
 	 * Module requirements
 	 */
 
-	var isArray = __webpack_require__(621);
-	var isBuf = __webpack_require__(624);
+	var isArray = __webpack_require__(633);
+	var isBuf = __webpack_require__(636);
 
 	/**
 	 * Replaces every Buffer | ArrayBuffer in packet with a numbered placeholder.
@@ -43297,7 +45178,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 624 */
+/* 636 */
 /***/ function(module, exports) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {
@@ -43317,7 +45198,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 625 */
+/* 637 */
 /***/ function(module, exports, __webpack_require__) {
 
 	
@@ -43325,15 +45206,15 @@
 	 * Module dependencies.
 	 */
 
-	var eio = __webpack_require__(626);
-	var Socket = __webpack_require__(653);
-	var Emitter = __webpack_require__(654);
-	var parser = __webpack_require__(617);
-	var on = __webpack_require__(656);
-	var bind = __webpack_require__(657);
-	var debug = __webpack_require__(614)('socket.io-client:manager');
-	var indexOf = __webpack_require__(651);
-	var Backoff = __webpack_require__(660);
+	var eio = __webpack_require__(638);
+	var Socket = __webpack_require__(665);
+	var Emitter = __webpack_require__(666);
+	var parser = __webpack_require__(629);
+	var on = __webpack_require__(668);
+	var bind = __webpack_require__(669);
+	var debug = __webpack_require__(626)('socket.io-client:manager');
+	var indexOf = __webpack_require__(663);
+	var Backoff = __webpack_require__(672);
 
 	/**
 	 * IE6+ hasOwnProperty
@@ -43880,19 +45761,19 @@
 
 
 /***/ },
-/* 626 */
+/* 638 */
 /***/ function(module, exports, __webpack_require__) {
 
 	
-	module.exports =  __webpack_require__(627);
+	module.exports =  __webpack_require__(639);
 
 
 /***/ },
-/* 627 */
+/* 639 */
 /***/ function(module, exports, __webpack_require__) {
 
 	
-	module.exports = __webpack_require__(628);
+	module.exports = __webpack_require__(640);
 
 	/**
 	 * Exports parser
@@ -43900,25 +45781,25 @@
 	 * @api public
 	 *
 	 */
-	module.exports.parser = __webpack_require__(635);
+	module.exports.parser = __webpack_require__(647);
 
 
 /***/ },
-/* 628 */
+/* 640 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {/**
 	 * Module dependencies.
 	 */
 
-	var transports = __webpack_require__(629);
-	var Emitter = __webpack_require__(644);
-	var debug = __webpack_require__(614)('engine.io-client:socket');
-	var index = __webpack_require__(651);
-	var parser = __webpack_require__(635);
-	var parseuri = __webpack_require__(613);
-	var parsejson = __webpack_require__(652);
-	var parseqs = __webpack_require__(645);
+	var transports = __webpack_require__(641);
+	var Emitter = __webpack_require__(656);
+	var debug = __webpack_require__(626)('engine.io-client:socket');
+	var index = __webpack_require__(663);
+	var parser = __webpack_require__(647);
+	var parseuri = __webpack_require__(625);
+	var parsejson = __webpack_require__(664);
+	var parseqs = __webpack_require__(657);
 
 	/**
 	 * Module exports.
@@ -44042,9 +45923,9 @@
 	 */
 
 	Socket.Socket = Socket;
-	Socket.Transport = __webpack_require__(634);
-	Socket.transports = __webpack_require__(629);
-	Socket.parser = __webpack_require__(635);
+	Socket.Transport = __webpack_require__(646);
+	Socket.transports = __webpack_require__(641);
+	Socket.parser = __webpack_require__(647);
 
 	/**
 	 * Creates transport of the given type.
@@ -44639,17 +46520,17 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 629 */
+/* 641 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {/**
 	 * Module dependencies
 	 */
 
-	var XMLHttpRequest = __webpack_require__(630);
-	var XHR = __webpack_require__(632);
-	var JSONP = __webpack_require__(648);
-	var websocket = __webpack_require__(649);
+	var XMLHttpRequest = __webpack_require__(642);
+	var XHR = __webpack_require__(644);
+	var JSONP = __webpack_require__(660);
+	var websocket = __webpack_require__(661);
 
 	/**
 	 * Export transports.
@@ -44699,11 +46580,11 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 630 */
+/* 642 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// browser shim for xmlhttprequest module
-	var hasCORS = __webpack_require__(631);
+	var hasCORS = __webpack_require__(643);
 
 	module.exports = function(opts) {
 	  var xdomain = opts.xdomain;
@@ -44741,7 +46622,7 @@
 
 
 /***/ },
-/* 631 */
+/* 643 */
 /***/ function(module, exports) {
 
 	
@@ -44764,18 +46645,18 @@
 
 
 /***/ },
-/* 632 */
+/* 644 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {/**
 	 * Module requirements.
 	 */
 
-	var XMLHttpRequest = __webpack_require__(630);
-	var Polling = __webpack_require__(633);
-	var Emitter = __webpack_require__(644);
-	var inherit = __webpack_require__(646);
-	var debug = __webpack_require__(614)('engine.io-client:polling-xhr');
+	var XMLHttpRequest = __webpack_require__(642);
+	var Polling = __webpack_require__(645);
+	var Emitter = __webpack_require__(656);
+	var inherit = __webpack_require__(658);
+	var debug = __webpack_require__(626)('engine.io-client:polling-xhr');
 
 	/**
 	 * Module exports.
@@ -45183,19 +47064,19 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 633 */
+/* 645 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * Module dependencies.
 	 */
 
-	var Transport = __webpack_require__(634);
-	var parseqs = __webpack_require__(645);
-	var parser = __webpack_require__(635);
-	var inherit = __webpack_require__(646);
-	var yeast = __webpack_require__(647);
-	var debug = __webpack_require__(614)('engine.io-client:polling');
+	var Transport = __webpack_require__(646);
+	var parseqs = __webpack_require__(657);
+	var parser = __webpack_require__(647);
+	var inherit = __webpack_require__(658);
+	var yeast = __webpack_require__(659);
+	var debug = __webpack_require__(626)('engine.io-client:polling');
 
 	/**
 	 * Module exports.
@@ -45208,7 +47089,7 @@
 	 */
 
 	var hasXHR2 = (function() {
-	  var XMLHttpRequest = __webpack_require__(630);
+	  var XMLHttpRequest = __webpack_require__(642);
 	  var xhr = new XMLHttpRequest({ xdomain: false });
 	  return null != xhr.responseType;
 	})();
@@ -45436,15 +47317,15 @@
 
 
 /***/ },
-/* 634 */
+/* 646 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * Module dependencies.
 	 */
 
-	var parser = __webpack_require__(635);
-	var Emitter = __webpack_require__(644);
+	var parser = __webpack_require__(647);
+	var Emitter = __webpack_require__(656);
 
 	/**
 	 * Module exports.
@@ -45597,19 +47478,19 @@
 
 
 /***/ },
-/* 635 */
+/* 647 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {/**
 	 * Module dependencies.
 	 */
 
-	var keys = __webpack_require__(636);
-	var hasBinary = __webpack_require__(637);
-	var sliceBuffer = __webpack_require__(639);
-	var base64encoder = __webpack_require__(640);
-	var after = __webpack_require__(641);
-	var utf8 = __webpack_require__(642);
+	var keys = __webpack_require__(648);
+	var hasBinary = __webpack_require__(649);
+	var sliceBuffer = __webpack_require__(651);
+	var base64encoder = __webpack_require__(652);
+	var after = __webpack_require__(653);
+	var utf8 = __webpack_require__(654);
 
 	/**
 	 * Check if we are running an android browser. That requires us to use
@@ -45666,7 +47547,7 @@
 	 * Create a blob api even for blob builder when vendor prefixes exist
 	 */
 
-	var Blob = __webpack_require__(643);
+	var Blob = __webpack_require__(655);
 
 	/**
 	 * Encodes a packet.
@@ -46198,7 +48079,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 636 */
+/* 648 */
 /***/ function(module, exports) {
 
 	
@@ -46223,7 +48104,7 @@
 
 
 /***/ },
-/* 637 */
+/* 649 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {
@@ -46231,7 +48112,7 @@
 	 * Module requirements.
 	 */
 
-	var isArray = __webpack_require__(638);
+	var isArray = __webpack_require__(650);
 
 	/**
 	 * Module exports.
@@ -46288,7 +48169,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 638 */
+/* 650 */
 /***/ function(module, exports) {
 
 	module.exports = Array.isArray || function (arr) {
@@ -46297,7 +48178,7 @@
 
 
 /***/ },
-/* 639 */
+/* 651 */
 /***/ function(module, exports) {
 
 	/**
@@ -46332,7 +48213,7 @@
 
 
 /***/ },
-/* 640 */
+/* 652 */
 /***/ function(module, exports) {
 
 	/*
@@ -46397,7 +48278,7 @@
 
 
 /***/ },
-/* 641 */
+/* 653 */
 /***/ function(module, exports) {
 
 	module.exports = after
@@ -46431,7 +48312,7 @@
 
 
 /***/ },
-/* 642 */
+/* 654 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_RESULT__;/* WEBPACK VAR INJECTION */(function(module, global) {/*! https://mths.be/utf8js v2.0.0 by @mathias */
@@ -46677,10 +48558,10 @@
 
 	}(this));
 
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(619)(module), (function() { return this; }())))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(631)(module), (function() { return this; }())))
 
 /***/ },
-/* 643 */
+/* 655 */
 /***/ function(module, exports) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {/**
@@ -46783,7 +48664,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 644 */
+/* 656 */
 /***/ function(module, exports) {
 
 	
@@ -46953,7 +48834,7 @@
 
 
 /***/ },
-/* 645 */
+/* 657 */
 /***/ function(module, exports) {
 
 	/**
@@ -46996,7 +48877,7 @@
 
 
 /***/ },
-/* 646 */
+/* 658 */
 /***/ function(module, exports) {
 
 	
@@ -47008,7 +48889,7 @@
 	};
 
 /***/ },
-/* 647 */
+/* 659 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -47082,7 +48963,7 @@
 
 
 /***/ },
-/* 648 */
+/* 660 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {
@@ -47090,8 +48971,8 @@
 	 * Module requirements.
 	 */
 
-	var Polling = __webpack_require__(633);
-	var inherit = __webpack_require__(646);
+	var Polling = __webpack_require__(645);
+	var inherit = __webpack_require__(658);
 
 	/**
 	 * Module exports.
@@ -47327,19 +49208,19 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 649 */
+/* 661 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {/**
 	 * Module dependencies.
 	 */
 
-	var Transport = __webpack_require__(634);
-	var parser = __webpack_require__(635);
-	var parseqs = __webpack_require__(645);
-	var inherit = __webpack_require__(646);
-	var yeast = __webpack_require__(647);
-	var debug = __webpack_require__(614)('engine.io-client:websocket');
+	var Transport = __webpack_require__(646);
+	var parser = __webpack_require__(647);
+	var parseqs = __webpack_require__(657);
+	var inherit = __webpack_require__(658);
+	var yeast = __webpack_require__(659);
+	var debug = __webpack_require__(626)('engine.io-client:websocket');
 	var BrowserWebSocket = global.WebSocket || global.MozWebSocket;
 
 	/**
@@ -47351,7 +49232,7 @@
 	var WebSocket = BrowserWebSocket;
 	if (!WebSocket && typeof window === 'undefined') {
 	  try {
-	    WebSocket = __webpack_require__(650);
+	    WebSocket = __webpack_require__(662);
 	  } catch (e) { }
 	}
 
@@ -47622,13 +49503,13 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 650 */
+/* 662 */
 /***/ function(module, exports) {
 
 	/* (ignored) */
 
 /***/ },
-/* 651 */
+/* 663 */
 /***/ function(module, exports) {
 
 	
@@ -47643,7 +49524,7 @@
 	};
 
 /***/ },
-/* 652 */
+/* 664 */
 /***/ function(module, exports) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {/**
@@ -47681,7 +49562,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 653 */
+/* 665 */
 /***/ function(module, exports, __webpack_require__) {
 
 	
@@ -47689,13 +49570,13 @@
 	 * Module dependencies.
 	 */
 
-	var parser = __webpack_require__(617);
-	var Emitter = __webpack_require__(654);
-	var toArray = __webpack_require__(655);
-	var on = __webpack_require__(656);
-	var bind = __webpack_require__(657);
-	var debug = __webpack_require__(614)('socket.io-client:socket');
-	var hasBin = __webpack_require__(658);
+	var parser = __webpack_require__(629);
+	var Emitter = __webpack_require__(666);
+	var toArray = __webpack_require__(667);
+	var on = __webpack_require__(668);
+	var bind = __webpack_require__(669);
+	var debug = __webpack_require__(626)('socket.io-client:socket');
+	var hasBin = __webpack_require__(670);
 
 	/**
 	 * Module exports.
@@ -48099,7 +49980,7 @@
 
 
 /***/ },
-/* 654 */
+/* 666 */
 /***/ function(module, exports) {
 
 	
@@ -48266,7 +50147,7 @@
 
 
 /***/ },
-/* 655 */
+/* 667 */
 /***/ function(module, exports) {
 
 	module.exports = toArray
@@ -48285,7 +50166,7 @@
 
 
 /***/ },
-/* 656 */
+/* 668 */
 /***/ function(module, exports) {
 
 	
@@ -48315,7 +50196,7 @@
 
 
 /***/ },
-/* 657 */
+/* 669 */
 /***/ function(module, exports) {
 
 	/**
@@ -48344,7 +50225,7 @@
 
 
 /***/ },
-/* 658 */
+/* 670 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {
@@ -48352,7 +50233,7 @@
 	 * Module requirements.
 	 */
 
-	var isArray = __webpack_require__(659);
+	var isArray = __webpack_require__(671);
 
 	/**
 	 * Module exports.
@@ -48410,7 +50291,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 659 */
+/* 671 */
 /***/ function(module, exports) {
 
 	module.exports = Array.isArray || function (arr) {
@@ -48419,7 +50300,7 @@
 
 
 /***/ },
-/* 660 */
+/* 672 */
 /***/ function(module, exports) {
 
 	
@@ -48510,7 +50391,173 @@
 
 
 /***/ },
-/* 661 */
+/* 673 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(299);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _axios = __webpack_require__(536);
+
+	var _axios2 = _interopRequireDefault(_axios);
+
+	var _components = __webpack_require__(534);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var UserByName = function (_React$Component) {
+	    _inherits(UserByName, _React$Component);
+
+	    function UserByName(props) {
+	        _classCallCheck(this, UserByName);
+
+	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(UserByName).call(this, props));
+
+	        _this.displayName = 'UserByName';
+	        _this.state = {
+	            userData: [],
+	            userEnd: true
+	        };
+	        _this._getMoreUser = _this._getMoreUser.bind(_this);
+	        return _this;
+	    }
+
+	    _createClass(UserByName, [{
+	        key: '_getMoreUser',
+	        value: function _getMoreUser() {
+	            var _this2 = this;
+
+	            if (this.state.userEnd) {
+	                return;
+	            }
+
+	            var url = "http://bad.watch/api/user?name=" + this.props.params.userName + "&value=" + this.state.userData[this.state.userData.length - 1].overwatch_id;
+	            _axios2.default.get(url).then(function (response) {
+	                var data = response.data;
+	                if (data.responseCode == 2) {
+	                    _this2.setState({
+	                        userData: _this2.state.userData.concat(data.userData)
+	                    });
+	                    if (data.userData.length < 10) {
+	                        _this2.setState({
+	                            userEnd: true
+	                        });
+	                    }
+	                } else {
+	                    sweetAlert('', '데이터를 불러오는데 오류가 발생했습니다.', 'error');
+	                    return;
+	                }
+	            }).catch(function (err) {
+	                console.log(err);
+	                sweetAlert('데이터를 불러오는데 오류가 발생했습니다.', '잠시후 다시시도해주세요.', 'error');
+	                return;
+	            });
+	        }
+	    }, {
+	        key: 'componentDidMount',
+	        value: function componentDidMount() {
+	            var _this3 = this;
+
+	            var MAX_SAFE_INTEGER = 9007199254740991;
+	            var url = "http://bad.watch/api/user?name=" + this.props.params.userName + "&value=" + MAX_SAFE_INTEGER;
+	            _axios2.default.get(url).then(function (response) {
+	                var data = response.data;
+	                if (data.responseCode == 2) {
+	                    _this3.setState({
+	                        userData: data.userData
+	                    });
+
+	                    if (data.userData.length == 10) {
+	                        _this3.setState({
+	                            userEnd: false
+	                        });
+	                    }
+	                } else {
+	                    sweetAlert('', '데이터를 불러오는데 오류가 발생했습니다.', 'error');
+	                    return;
+	                }
+	            }).catch(function (err) {
+	                console.log(err);
+	                sweetAlert('데이터를 불러오는데 오류가 발생했습니다.', '잠시후 다시시도해주세요.', 'error');
+	                return;
+	            });
+	        }
+	    }, {
+	        key: 'componentWillReceiveProps',
+	        value: function componentWillReceiveProps(nextProps) {
+	            var _this4 = this;
+
+	            var MAX_SAFE_INTEGER = 9007199254740991;
+	            var url = "http://bad.watch/api/user?name=" + nextProps.params.userName + "&value=" + MAX_SAFE_INTEGER;
+	            _axios2.default.get(url).then(function (response) {
+	                var data = response.data;
+	                if (data.responseCode == 2) {
+	                    _this4.setState({
+	                        userData: data.userData
+	                    });
+
+	                    if (data.userData.length == 10) {
+	                        _this4.setState({
+	                            userEnd: false
+	                        });
+	                    }
+	                } else {
+	                    sweetAlert('', '데이터를 불러오는데 오류가 발생했습니다.', 'error');
+	                    return;
+	                }
+	            }).catch(function (err) {
+	                console.log(err);
+	                sweetAlert('데이터를 불러오는데 오류가 발생했습니다.', '잠시후 다시시도해주세요.', 'error');
+	                return;
+	            });
+	        }
+	    }, {
+	        key: 'render',
+	        value: function render() {
+	            var more_user = _react2.default.createElement(
+	                'div',
+	                { className: 'more-user', onClick: this._getMoreUser },
+	                '더보기'
+	            );
+	            return _react2.default.createElement(
+	                'div',
+	                null,
+	                _react2.default.createElement(_components.SearchUserInput, null),
+	                _react2.default.createElement(
+	                    'div',
+	                    { className: 'user-list-box' },
+	                    this.state.userData.map(function (user) {
+	                        return _react2.default.createElement(_components.UserList, { key: user.user_id,
+	                            user: user });
+	                    }),
+	                    this.state.userEnd ? undefined : more_user
+	                )
+	            );
+	        }
+	    }]);
+
+	    return UserByName;
+	}(_react2.default.Component);
+
+	exports.default = UserByName;
+
+/***/ },
+/* 674 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -48519,20 +50566,25 @@
 		value: true
 	});
 
-	var _authentication = __webpack_require__(662);
+	var _authentication = __webpack_require__(675);
 
 	var _authentication2 = _interopRequireDefault(_authentication);
 
-	var _redux = __webpack_require__(582);
+	var _youtubes = __webpack_require__(676);
+
+	var _youtubes2 = _interopRequireDefault(_youtubes);
+
+	var _redux = __webpack_require__(576);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	exports.default = (0, _redux.combineReducers)({
-		authentication: _authentication2.default
+		authentication: _authentication2.default,
+		youtubes: _youtubes2.default
 	});
 
 /***/ },
-/* 662 */
+/* 675 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -48542,11 +50594,11 @@
 	});
 	exports.default = authentication;
 
-	var _ActionTypes = __webpack_require__(604);
+	var _ActionTypes = __webpack_require__(598);
 
 	var types = _interopRequireWildcard(_ActionTypes);
 
-	var _reactAddonsUpdate = __webpack_require__(571);
+	var _reactAddonsUpdate = __webpack_require__(605);
 
 	var _reactAddonsUpdate2 = _interopRequireDefault(_reactAddonsUpdate);
 
@@ -48612,7 +50664,128 @@
 	}
 
 /***/ },
-/* 663 */
+/* 676 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	exports.default = youtubes;
+
+	var _ActionTypes = __webpack_require__(598);
+
+	var types = _interopRequireWildcard(_ActionTypes);
+
+	var _reactAddonsUpdate = __webpack_require__(605);
+
+	var _reactAddonsUpdate2 = _interopRequireDefault(_reactAddonsUpdate);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+	var youtubeInitialState = {
+		status: 'INIT',
+		new: {
+			current_page: 0,
+			isEnd: false,
+			data: []
+		},
+		like: {
+			current_page: 0,
+			isEnd: false,
+			data: []
+		},
+		hit: {
+			current_page: 0,
+			isEnd: false,
+			data: []
+		}
+	};
+
+	function youtubes(state, action) {
+		if (typeof state === "undefined") state = youtubeInitialState;
+
+		switch (action.type) {
+			case types.GET_YOUTUBES:
+				return (0, _reactAddonsUpdate2.default)(state, {
+					status: {
+						$set: 'WAITING'
+					}
+				});
+			case types.GET_YOUTUBES_SUCCESS:
+				var isEnd = false;
+				if (action.youtubes.length < 16) isEnd = true;
+
+				if (action.order == 'new') {
+					return (0, _reactAddonsUpdate2.default)(state, {
+						status: {
+							$set: 'SUCCESS'
+						},
+						new: {
+							isEnd: {
+								$set: isEnd
+							},
+							current_page: {
+								$set: state.new.current_page + 1
+							},
+							data: {
+								$set: state.new.data.concat(action.youtubes)
+							}
+						}
+					});
+				} else if (action.order == 'like') {
+					return (0, _reactAddonsUpdate2.default)(state, {
+						status: {
+							$set: 'SUCCESS'
+						},
+						like: {
+							isEnd: {
+								$set: isEnd
+							},
+							current_page: {
+								$set: state.like.current_page + 1
+							},
+							data: {
+								$set: state.like.data.concat(action.youtubes)
+							}
+						}
+					});
+				} else if (action.order == 'hit') {
+					return (0, _reactAddonsUpdate2.default)(state, {
+						status: {
+							$set: 'SUCCESS'
+						},
+						hit: {
+							isEnd: {
+								$set: isEnd
+							},
+							current_page: {
+								$set: state.hit.current_page + 1
+							},
+							data: {
+								$set: state.hit.data.concat(action.youtubes)
+							}
+						}
+					});
+				}
+
+			case types.GET_YOUTUBES_FAIL:
+				return (0, _reactAddonsUpdate2.default)(state, {
+					status: {
+						$set: 'FAIL'
+					}
+				});
+
+			default:
+				return state;
+		}
+	}
+
+/***/ },
+/* 677 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -48640,7 +50813,7 @@
 	exports['default'] = thunk;
 
 /***/ },
-/* 664 */
+/* 678 */
 /***/ function(module, exports) {
 
 	/* WEBPACK VAR INJECTION */(function(__dirname) {'use strict';

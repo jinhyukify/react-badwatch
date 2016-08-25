@@ -69,10 +69,14 @@ class LoginButton extends React.Component {
     	{
     		loginStatus = waitingButton;
     	}
-    	else 
+    	else if(this.props.authentication.login.status == 'SUCCESS')
     	{
     		loginStatus = logoutButton;
     	}
+        else
+        {
+            loginStatus = loginButton;
+        }
         return (
         		<span className="login-button">
         			{loginStatus}

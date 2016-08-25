@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import { UserDataBox } from '../components';
+import { UserDataBox, SearchUserInput } from '../components';
 class User extends React.Component {
     constructor(props) {
         super(props);
@@ -147,10 +147,13 @@ class User extends React.Component {
 
     render() {
         return (
-        		<UserDataBox userData={this.state.quick_mode? this.state.quickUserData: this.state.rankUserData} 
+        		<div>
+	        		<SearchUserInput />
+	        		<UserDataBox userData={this.state.quick_mode? this.state.quickUserData: this.state.rankUserData} 
         				     onQuick={this._onQuick} 
         				     onRank={this._onRank} 
         				     quick_mode={this.state.quick_mode} />
+        		</div>
         	);
     }
 }

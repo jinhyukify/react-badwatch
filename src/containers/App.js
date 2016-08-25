@@ -1,5 +1,5 @@
 import React from 'react';
-import { Header, Footer } from '../components';
+import { Header, Footer, Navbar, SideNavbar } from '../components';
 import { connect } from 'react-redux';
 import { loginRequest, logoutRequest } from '../actions/authentication';
 class App extends React.Component {
@@ -46,13 +46,23 @@ class App extends React.Component {
         );
     }
 
+    componentDidMount()
+    {
+        console.log("app.js mount");
+        this._handleLogin();
+        $('#mobile-top-open').sideNav({
+            closeOnClick: true
+        });
+    }
+
     render() {
         let isUser = false;
         if(this.props.location.pathname == '/')
             isUser = true;
         return (
         		<div>
-
+                    <Navbar/>
+                    <SideNavbar location={this.props.location}/>
 	        		<div className="container body-container">
                         { isUser? undefined: <Header location={this.props.location}/> }
 	        			{this.props.children}

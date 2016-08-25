@@ -1,13 +1,13 @@
 import React from 'react';
 import axios from 'axios';
-import { UserList } from '../components';
+import { UserList, SearchUserInput } from '../components';
 class UserByName extends React.Component {
     constructor(props) {
         super(props);
         this.displayName = 'UserByName';
         this.state = {
         	userData: [],
-        	userEnd: false
+        	userEnd: true
         };
         this._getMoreUser = this._getMoreUser.bind(this);
     }
@@ -58,7 +58,8 @@ class UserByName extends React.Component {
 
     componentDidMount()
     {
-    	let url = "http://bad.watch/api/user?name="+this.props.params.userName+"&value="+ Number.MAX_SAFE_INTEGER; 
+        const MAX_SAFE_INTEGER = 9007199254740991
+    	let url = "http://bad.watch/api/user?name="+this.props.params.userName+"&value="+ MAX_SAFE_INTEGER; 
     	axios.get(url)
     	.then((response) => {
     		let data = response.data;
@@ -67,7 +68,14 @@ class UserByName extends React.Component {
     			this.setState({
     				userData: data.userData
     			});
-    		}
+    		    
+                if(data.userData.length == 10)
+                {
+                    this.setState({
+                        userEnd: false
+                    });
+                }
+            }
     		else 
     		{
     			sweetAlert(
@@ -89,6 +97,47 @@ class UserByName extends React.Component {
  			  }) 
     }
 
+
+
+componentWillReceiveProps(nextProps){
+    const MAX_SAFE_INTEGER = 9007199254740991
+        let url = "http://bad.watch/api/user?name="+nextProps.params.userName+"&value="+ MAX_SAFE_INTEGER; 
+        axios.get(url)
+        .then((response) => {
+            let data = response.data;
+            if(data.responseCode == 2)
+            {
+                this.setState({
+                    userData: data.userData
+                });
+                
+                if(data.userData.length == 10)
+                {
+                    this.setState({
+                        userEnd: false
+                    });
+                }
+            }
+            else 
+            {
+                sweetAlert(
+                       '',
+                      '데이터를 불러오는데 오류가 발생했습니다.',
+                      'error'
+                    );
+                return;
+            }
+        })
+        .catch( err => { 
+                    console.log(err);
+                    sweetAlert(
+                      '데이터를 불러오는데 오류가 발생했습니다.',
+                      '잠시후 다시시도해주세요.',
+                      'error'
+                    );
+                    return;
+              }) 
+}
     render() {
     	const more_user = (
     			<div className="more-user" onClick={this._getMoreUser}>
@@ -96,15 +145,18 @@ class UserByName extends React.Component {
         		</div>
     		);
         return (
-        		<div className="user-list-box">
-        			{this.state.userData.map((user) => {
-        				return (
-        					<UserList key={user.user_id}
-        							  user={user}/>
-        					);
-        			})}
-        			{this.state.userEnd? undefined: more_user}
-        		</div>
+                <div>
+                    <SearchUserInput />
+            		<div className="user-list-box">
+            			{this.state.userData.map((user) => {
+            				return (
+            					<UserList key={user.user_id}
+            							  user={user}/>
+            					);
+            			})}
+            			{this.state.userEnd? undefined: more_user}
+            		</div>
+                </div>
         	);
     }
 }

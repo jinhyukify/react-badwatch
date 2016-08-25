@@ -65,7 +65,7 @@ class Home extends React.Component {
     render() {
         return (
         	<div>
-                <div className="right-align">
+                <div className="right-align mobile-hide">
                     <LoginButton />
                 </div>
         		<center className="main-center">

@@ -38,7 +38,7 @@ export function logoutRequest()
 		return axios.post('http://bad.watch/api/logout')
 			.then((response) => {
 				let data = response.data;
-				if(data.responseCode == 43)
+				if(data.responseCode == 44)
 				{
 					dispatch(logoutSuccess());
 				}

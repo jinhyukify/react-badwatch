@@ -26,7 +26,9 @@ class UserGameData extends React.Component {
         			<span onClick={this._handleRank}
         				  className={this.props.quick_mode? "mode": "mode active"}>경쟁전</span>
         			<UserDetailBox userData={this.props.userData} 
-        						    quick_mode={this.props.quick_mode}/>
+        						    quick_mode={this.props.quick_mode}
+                                    onQuick={this.props.onQuick}
+                                    onRank={this.props.onRank}/>
         		</div>
         	);
     }

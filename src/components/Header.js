@@ -12,10 +12,12 @@ class Header extends React.Component {
 
     render() {
         return (
-        		<div>
-                    <img src="/asset/images/logo.png" className="header-logo"/>   
+        		<div className="header mobile-hide">
+                    <Link to="/">
+                        <img src="/asset/images/logo.png" className="header-logo"/>   
+                    </Link>
                     <div className="header-title">
-                        <span className="red-text">bad.</span><span>WATCH</span>
+                        <img src="/asset/images/typo.svg" className="typo"/>
                         <LoginButton />
                     </div>
                     <Menu location={this.props.location}/>

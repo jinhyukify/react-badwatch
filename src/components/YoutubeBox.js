@@ -1,8 +1,9 @@
 import React from 'react';
 import YoutubeCard from './YoutubeCard';
 import axios from 'axios';
-import { Link } from 'react-router';
-import { browserHistory } from 'react-router';
+import { Link, browserHistory } from 'react-router';
+import { connect } from 'react-redux';
+import { getYoutubes } from '../actions/youtubes'; 
 
 class YoutubeBox extends React.Component {
     constructor(props) {
@@ -11,10 +12,29 @@ class YoutubeBox extends React.Component {
         this.state = {
             youtubes: [],
             title: '',
-            url: ''
+            url: '',
+            order: 'new',
+            loadingState: false,
+            searchOpen: false
         };
+        this._selectChange = this._selectChange.bind(this);
         this._handleChange = this._handleChange.bind(this);
         this._onSubmitYoutube = this._onSubmitYoutube.bind(this);
+        this._openSearch = this._openSearch.bind(this);
+    }
+
+    _selectChange(e)
+    {
+        let current_page = this.props.youtube[e.target.value].current_page;
+        let youtubes = this.props.youtube[e.target.value].data;
+        if(!youtubes.length)
+        {
+           this.props.getYoutubes(current_page+1, e.target.value);
+        }
+
+        this.setState({
+          order: e.target.value
+        });
     }
 
     _openModal()
@@ -31,7 +51,6 @@ class YoutubeBox extends React.Component {
 
     _onSubmitYoutube()
     {
-        console.log(1);
         axios.post('http://bad.watch/api/youtube', {
             title: this.state.title,
             url: this.state.url
@@ -56,27 +75,52 @@ class YoutubeBox extends React.Component {
         })
     }
 
+    _openSearch()
+    {
+       this.setState({
+         searchOpen: !this.state.searchOpen
+       });
+    }
+
     componentDidMount()
     {
-        axios.get('http://bad.watch/api/youtube-list?value='+ Number.MAX_SAFE_INTEGER)
-            .then((response) => {
-                let data = response.data;
-                if(data.responseCode == 6)
+      //const MAX_SAFE_INTEGER = 9007199254740991;
+      if(!this.props.youtube[this.state.order].data.length)
+      {
+        this.props.getYoutubes(1, this.state.order);
+      }
+      
+
+      $(window).scroll(() => {
+
+            if ($(document).height() - $(window).height() - $(window).scrollTop() < 250) {
+                if(!this.state.loadingState) 
                 {
-                    this.setState({
-                        youtubes: data.youtubeData
-                    });
+                  
+                  if(this.props.youtube[this.state.order].isEnd || this.props.youtube[this.state.order].current_page == 0)
+                     return;
+                     
+                  this.props.getYoutubes(this.props.youtube[this.state.order].current_page+1, this.state.order); 
+                  this.setState({
+                    loadingState: true
+                  });
                 }
-                else 
-                {
-                    sweetAlert(
-                      '데이터를 불러오는데 오류가 발생했습니다.',
-                      '잠시후 다시시도해주세요.',
-                      'error'
-                    )
-                    return;
-                }
-            })
+            }
+            else 
+            {
+              if(this.state.loadingState)
+              {
+                this.setState({
+                  loadingState: false
+                });
+              }
+            }
+        });
+    }
+
+    componentWillUnmount()
+    {
+        $(window).unbind();
     }
 
     render() {  
@@ -109,23 +153,110 @@ class YoutubeBox extends React.Component {
                         </div>
                     </div>
         );
-
-
-        return (
-                <div>
-                    <a className="modal-trigger waves-effect waves-light btn" onClick={this._openModal}>글쓰기</a>
-                    {create_modal}
-            		<div className="row">
-                    {this.state.youtubes.map((youtube) => {
+  
+        const new_order = (
+              <div className="row">
+                    {this.props.youtube.new.data.map((youtube) => {
                         return (
                                 <YoutubeCard key={youtube.youtube_id}
                                              youtube={youtube}/>
                             );
                     })}
-            		</div>
+                </div>
+          );  
+
+        const like_order = (
+              <div className="row">
+                    {this.props.youtube.like.data.map((youtube) => {
+                        return (
+                                <YoutubeCard key={youtube.youtube_id}
+                                             youtube={youtube}/>
+                            );
+                    })}
+                </div>
+          );  
+
+        const hit_order = (
+              <div className="row">
+                    {this.props.youtube.hit.data.map((youtube) => {
+                        return (
+                                <YoutubeCard key={youtube.youtube_id}
+                                             youtube={youtube}/>
+                            );
+                    })}
+                </div>
+          );            
+        
+        const youtube_search = (
+                <div className="youtube-search-box" id="youtube-search">
+                   <select className="browser-default">
+                      <option value="new" defaultValue>글제목</option>
+                      <option value="like">글작성자</option>
+                   </select> 
+                 <input type="text"
+                       className="youtube-search-input"/>
+                 <img src="/asset/images/youtube-search-icon.png" className="youtube-search-icon"/>       
+                </div>
+          );
+        let youtubes = undefined;
+
+        if(this.state.order == 'new')
+        {
+           youtubes = new_order;
+        }
+        else if(this.state.order == 'like')
+        {
+           youtubes = like_order;
+        }
+        else if(this.state.order == 'hit')
+        {
+           youtubes = hit_order;
+        }
+
+        return (
+                <div>
+                  <div className="input-field youtube-select">
+                    <select className="browser-default" 
+                            onChange={this._selectChange} 
+                            value={this.state.order} >
+                      <option value="new" defaultValue>최신순</option>
+                      <option value="like">인기순</option>
+                      <option value="hit">조회순</option>
+                    </select> 
+                  </div>
+                   <div className="youtube-fixed">
+                        <a className="modal-trigger youtube-write" onClick={this._openModal}>
+                          <img src="/asset/images/write-icon.png" className="write-icon"/>
+                        </a>
+                        <a className="youtube-search" onClick={this._openSearch}>
+                          <img src="/asset/images/youtube-search-icon.png" className="youtube-search-icon"/>
+                        </a>
+                        {this.state.searchOpen? youtube_search: undefined}
+                   </div> 
+                    {create_modal}
+            		{youtubes}
                 </div>
         	);
     }
 }
 
-export default YoutubeBox;
+const mapStateToProps = (state) => {
+    return {
+      youtube: state.youtubes
+    };
+};
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+      getYoutubes: (page, order) => {
+        return dispatch(getYoutubes(page, order));
+      }
+    };
+};
+
+YoutubeBox.propTypes = {
+    youtube: React.PropTypes.object,
+    getYoutubes: React.PropTypes.func
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(YoutubeBox);

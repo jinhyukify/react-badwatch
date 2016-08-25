@@ -22,7 +22,7 @@ class UserDataBox extends React.Component {
 
     render() {
         return (
-        		<div>
+        		<div className="user-data-box">
 	        		<UserProfile userData={this.props.userData}/>
 	        		<UserGameData onQuick={this._handleQuick} 
 	        			 		  onRank={this._handleRank}

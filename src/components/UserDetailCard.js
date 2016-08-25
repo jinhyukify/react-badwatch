@@ -7,11 +7,16 @@ class UserDetailCard extends React.Component {
     }
     render() {
         return (
-        		<div className="col s6 m2">
+        		<div className="col s6 h2 user-detail">
+                    <div className="data-title">
         			{this.props.children}
-        			<br/>
-        			{this.props.data}
-        			<div>
+                    </div>
+
+        		    <div className="real-data">
+                        {this.props.data}
+                    </div>
+
+        			<div className="box-average">
         				{this.props.average? "한게임 평균 " + this.props.average.toFixed(1): undefined}
         			</div>
         			<br/>
