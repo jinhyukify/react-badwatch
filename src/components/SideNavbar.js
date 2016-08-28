@@ -9,8 +9,12 @@ class SideNavbar extends React.Component {
 
     render() {
     	let user_active = false;
+    	let board_active = false;
     	if(this.props.location.pathname == "/" || this.props.location.pathname.includes("user"))
     		user_active = true;
+
+    	if(this.props.location.pathname.includes("board"))
+    		board_active = true;
         return (
         		<div>
         			 <ul id="slide-out" className="side-nav">
@@ -46,7 +50,7 @@ class SideNavbar extends React.Component {
 					    	</Link>
 					    </li>
 					    <li>
-					    	<Link to="/board" activeClassName="active" className="waves-effect side-li">
+					    	<Link to="/board/free/page/1" activeClassName="active" className={`waves-effect side-li ${board_active? 'active': ''}`}>
 					    	<img src="/asset/images/board.png" />커뮤니티	
 					    		<i className="fa fa-check-circle-o fa-lg side-active" aria-hidden="true"></i>
 					    	</Link>

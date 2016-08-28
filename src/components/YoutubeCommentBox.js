@@ -85,8 +85,8 @@ class YoutubeCommentBox extends React.Component {
 
     render() {
         return (
-        		<div>
-        			<div>댓글 {this.state.comments.length} 개</div>
+        		<div className="comment-container">
+        			<div className="comment-box"><img src="/asset/images/comment-icon.png"/>댓글 {this.state.comments.length} 개</div>
         			{this.state.comments.map( (comment) => {
         				return (
         						<Comment key={comment.comment_id}

@@ -21,10 +21,12 @@ class UserGameData extends React.Component {
     render() {
         return (
         		<div>
-        			<span onClick={this._handleQuick} 
-        			      className={this.props.quick_mode? "mode active": "mode"}>빠른대전</span>
-        			<span onClick={this._handleRank}
-        				  className={this.props.quick_mode? "mode": "mode active"}>경쟁전</span>
+                    <div className="relative-choose">
+            			<span onClick={this._handleQuick} 
+            			      className={this.props.quick_mode? "mode active": "mode"}>빠른대전</span>
+            			<span onClick={this._handleRank}
+        				  className={this.props.quick_mode? "mode mode-right": "mode active mode-right"}>경쟁전</span>
+                    </div>
         			<UserDetailBox userData={this.props.userData} 
         						    quick_mode={this.props.quick_mode}
                                     onQuick={this.props.onQuick}

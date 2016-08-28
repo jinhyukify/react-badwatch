@@ -20,6 +20,14 @@ class CommentInput extends React.Component {
 
     _handleCreate()
     {
+        if(!this.state.content) 
+        {
+             sweetAlert(
+              '댓글을 입력해주세요.',
+               'error'
+             )
+             return;
+        }
     	this.props.onCreateComment(this.state.content)
     		.then((success) => {
     			if(success)
@@ -33,12 +41,13 @@ class CommentInput extends React.Component {
 
     render() {
         return (
-        		<div>
+        		<div className="comment-input">
         			<input type="text" 
         				   name="comment_input" 
         				   value={this.state.content} 
-        				   onChange={this._handleChange}/>
-        			<a className="waves-effect waves-light btn"
+        				   onChange={this._handleChange}
+                           placeholder="답글입력"/>
+        			<a className="waves-effect btn"
         			   onClick={this._handleCreate}>등록</a>	   
         		</div>
         	);

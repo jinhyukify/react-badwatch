@@ -14,18 +14,6 @@ class UserDetailBox extends React.Component {
     	const heros = this.props.userData.heros.filter((hero) => {
     		return hero.playtime != 0;
     	})
-    	const quick_image = (
-    			<div>
-	    			<img src="/asset/images/quick_open.png" className="quick_open"/>
-	    			<img src="/asset/images/rank_close.png" className="rank_close" onClick={this.props.onRank}/>
-	    		</div>	
-    		);
-    	const rank_image = (
-    			<div>
-    				<img src="/asset/images/quick_close.png" className="quick_close" onClick={this.props.onQuick}/>
-     				<img src="/asset/images/rank_open.png"  className="rank_open" />
-    			</div>
-    		);
     	let winRate = function(win, count)
 	    {
 	    	if(count==0)
@@ -122,14 +110,16 @@ class UserDetailBox extends React.Component {
         return (
         	<div>
         		<div className="quick-choose">
-        			{this.props.quick_mode? quick_image: rank_image}
+        			<center>
         			<div className="row mobile-hide">
 
 		        		{userDetailBox}
 		        	</div>
+		        	</center>
 		        	<div className="mobile-gamedata computer-hide">
 		        		{userMobileDetailBox}
 		        	</div>
+
         		</div>
 	        	<h5 className="hero-list">영웅목록</h5>
 	        	{heros.map((hero, i)=> {

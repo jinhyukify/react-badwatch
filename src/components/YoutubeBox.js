@@ -136,8 +136,7 @@ class YoutubeBox extends React.Component {
                               <label>제목</label>
                             </div>
                            <h5>유튜브 동영상 링크</h5>
-                           <p>ex) https://www.youtube.com/watch?v=nxoAEKVPVF8</p>
-                           <p>ex) https://youtu.be/nxoAEKVPVF8</p>
+                           
                             <div className="input-field col s10">
                               <input type="text" 
                                      name="url"
@@ -148,7 +147,7 @@ class YoutubeBox extends React.Component {
                         </div>
                         <div className="modal-footer">
                           <a onClick={this._onSubmitYoutube} 
-                             className="waves-effect waves-light btn">글작성</a>
+                             className="waves-effect btn">글작성</a>
                           <a className="modal-action modal-close waves-effect waves-green btn-flat">닫기</a>
                         </div>
                     </div>
@@ -228,10 +227,6 @@ class YoutubeBox extends React.Component {
                         <a className="modal-trigger youtube-write" onClick={this._openModal}>
                           <img src="/asset/images/write-icon.png" className="write-icon"/>
                         </a>
-                        <a className="youtube-search" onClick={this._openSearch}>
-                          <img src="/asset/images/youtube-search-icon.png" className="youtube-search-icon"/>
-                        </a>
-                        {this.state.searchOpen? youtube_search: undefined}
                    </div> 
                     {create_modal}
             		{youtubes}

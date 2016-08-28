@@ -10,8 +10,12 @@ class Menu extends React.Component {
 
     render() {
         let user_active = false;
+        let board_active = false;
         if(this.props.location.pathname.includes("user"))
             user_active = true;
+
+        if(this.props.location.pathname.includes("board"))
+            board_active = true;
         return (
         		<div className="header-menu">
                             <Link to="/" className={user_active? 'active': ''}>
@@ -29,7 +33,7 @@ class Menu extends React.Component {
                                 <div>동영상</div>
                                 <div className="tab"></div>
                             </Link>
-                            <Link to="/board" activeClassName="active">
+                            <Link to="/board/free/page/1" className={board_active? 'active': ''}>
                                 <img src="/asset/images/board.png"/>
                                 <div>커뮤니티</div>
                                 <div className="tab"></div>

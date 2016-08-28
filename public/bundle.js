@@ -46,7 +46,7 @@
 
 	__webpack_require__(1);
 	__webpack_require__(298);
-	module.exports = __webpack_require__(678);
+	module.exports = __webpack_require__(693);
 
 
 /***/ },
@@ -8143,11 +8143,11 @@
 
 	var _redux = __webpack_require__(576);
 
-	var _reducers = __webpack_require__(674);
+	var _reducers = __webpack_require__(688);
 
 	var _reducers2 = _interopRequireDefault(_reducers);
 
-	var _reduxThunk = __webpack_require__(677);
+	var _reduxThunk = __webpack_require__(692);
 
 	var _reduxThunk2 = _interopRequireDefault(_reduxThunk);
 
@@ -8171,13 +8171,26 @@
 				_react2.default.createElement(_reactRouter.Route, { path: 'user/:userName', component: _containers.User }),
 				_react2.default.createElement(_reactRouter.Route, { path: 'userByName/:userName', component: _containers.UserByName }),
 				_react2.default.createElement(_reactRouter.Route, { path: 'login', component: _containers.Login }),
-				_react2.default.createElement(_reactRouter.Route, { path: 'chat', component: _containers.Chat }),
+				_react2.default.createElement(
+					_reactRouter.Route,
+					{ path: 'chat', component: _containers.Chat },
+					_react2.default.createElement(_reactRouter.IndexRoute, { component: _components.RoomList }),
+					_react2.default.createElement(_reactRouter.Route, { path: ':room', component: _components.ChatRoom })
+				),
 				_react2.default.createElement(
 					_reactRouter.Route,
 					{ path: 'youtube', component: _containers.Youtube },
 					_react2.default.createElement(_reactRouter.IndexRoute, { component: _components.YoutubeBox }),
 					_react2.default.createElement(_reactRouter.Route, { path: 'show/:id', component: _components.YoutubeShowBox }),
 					_react2.default.createElement(_reactRouter.Route, { path: 'edit/:id', component: _components.YoutubeEditBox })
+				),
+				_react2.default.createElement(
+					_reactRouter.Route,
+					{ path: 'board', component: _containers.Board },
+					_react2.default.createElement(_reactRouter.Route, { path: ':boardType/page/:pageId', component: _components.BoardBox }),
+					_react2.default.createElement(_reactRouter.Route, { path: ':boardType/page/:pageId/article/:articleId', component: _components.BoardShowBox }),
+					_react2.default.createElement(_reactRouter.Route, { path: 'write', component: _components.ArticleWrite }),
+					_react2.default.createElement(_reactRouter.Route, { path: 'modify/:boardType/:articleId', component: _components.ArticleModify })
 				)
 			)
 		)
@@ -34723,31 +34736,31 @@
 
 	var _App2 = _interopRequireDefault(_App);
 
-	var _Home = __webpack_require__(617);
+	var _Home = __webpack_require__(681);
 
 	var _Home2 = _interopRequireDefault(_Home);
 
-	var _Login = __webpack_require__(618);
+	var _Login = __webpack_require__(682);
 
 	var _Login2 = _interopRequireDefault(_Login);
 
-	var _Register = __webpack_require__(619);
+	var _Register = __webpack_require__(683);
 
 	var _Register2 = _interopRequireDefault(_Register);
 
-	var _User = __webpack_require__(620);
+	var _User = __webpack_require__(684);
 
 	var _User2 = _interopRequireDefault(_User);
 
-	var _Youtube = __webpack_require__(621);
+	var _Youtube = __webpack_require__(685);
 
 	var _Youtube2 = _interopRequireDefault(_Youtube);
 
-	var _Chat = __webpack_require__(622);
+	var _Chat = __webpack_require__(686);
 
 	var _Chat2 = _interopRequireDefault(_Chat);
 
-	var _UserByName = __webpack_require__(673);
+	var _UserByName = __webpack_require__(687);
 
 	var _UserByName2 = _interopRequireDefault(_UserByName);
 
@@ -34896,7 +34909,7 @@
 	Object.defineProperty(exports, "__esModule", {
 		value: true
 	});
-	exports.SideNavbar = exports.Navbar = exports.SearchUserInput = exports.Menu = exports.UserList = exports.Footer = exports.LoginButton = exports.YoutubeEditBox = exports.YoutubeShowBox = exports.YoutubeBox = exports.UserDetailCard = exports.UserDetailBox = exports.UserGameData = exports.UserProfile = exports.UserDataBox = exports.Header = undefined;
+	exports.BoardCommentReplyWriteBox = exports.BoardCommentInput = exports.BoardComment = exports.BoardShowBox = exports.BoardBox = exports.ArticleModify = exports.ArticleWrite = exports.ArticleBox = exports.RoomList = exports.ChatRoom = exports.SideNavbar = exports.Navbar = exports.SearchUserInput = exports.Menu = exports.UserList = exports.Footer = exports.LoginButton = exports.YoutubeEditBox = exports.YoutubeShowBox = exports.YoutubeBox = exports.UserDetailCard = exports.UserDetailBox = exports.UserGameData = exports.UserProfile = exports.UserDataBox = exports.Header = undefined;
 
 	var _Header = __webpack_require__(535);
 
@@ -34962,6 +34975,50 @@
 
 	var _SideNavbar2 = _interopRequireDefault(_SideNavbar);
 
+	var _ChatRoom = __webpack_require__(617);
+
+	var _ChatRoom2 = _interopRequireDefault(_ChatRoom);
+
+	var _RoomList = __webpack_require__(670);
+
+	var _RoomList2 = _interopRequireDefault(_RoomList);
+
+	var _ArticleBox = __webpack_require__(671);
+
+	var _ArticleBox2 = _interopRequireDefault(_ArticleBox);
+
+	var _ArticleWrite = __webpack_require__(672);
+
+	var _ArticleWrite2 = _interopRequireDefault(_ArticleWrite);
+
+	var _ArticleModify = __webpack_require__(674);
+
+	var _ArticleModify2 = _interopRequireDefault(_ArticleModify);
+
+	var _BoardBox = __webpack_require__(675);
+
+	var _BoardBox2 = _interopRequireDefault(_BoardBox);
+
+	var _BoardShowBox = __webpack_require__(676);
+
+	var _BoardShowBox2 = _interopRequireDefault(_BoardShowBox);
+
+	var _BoardComment = __webpack_require__(678);
+
+	var _BoardComment2 = _interopRequireDefault(_BoardComment);
+
+	var _BoardCommentInput = __webpack_require__(680);
+
+	var _BoardCommentInput2 = _interopRequireDefault(_BoardCommentInput);
+
+	var _BoardCommentBox = __webpack_require__(677);
+
+	var _BoardCommentBox2 = _interopRequireDefault(_BoardCommentBox);
+
+	var _BoardCommentReplyWriteBox = __webpack_require__(679);
+
+	var _BoardCommentReplyWriteBox2 = _interopRequireDefault(_BoardCommentReplyWriteBox);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	exports.Header = _Header2.default;
@@ -34980,6 +35037,17 @@
 	exports.SearchUserInput = _SearchUserInput2.default;
 	exports.Navbar = _Navbar2.default;
 	exports.SideNavbar = _SideNavbar2.default;
+	exports.ChatRoom = _ChatRoom2.default;
+	exports.RoomList = _RoomList2.default;
+	exports.ArticleBox = _ArticleBox2.default;
+	exports.ArticleWrite = _ArticleWrite2.default;
+	exports.ArticleModify = _ArticleModify2.default;
+	exports.BoardBox = _BoardBox2.default;
+	exports.BoardShowBox = _BoardShowBox2.default;
+	exports.BoardComment = _BoardComment2.default;
+	exports.BoardCommentInput = _BoardCommentInput2.default;
+	exports.BoardShowBox = _BoardShowBox2.default;
+	exports.BoardCommentReplyWriteBox = _BoardCommentReplyWriteBox2.default;
 
 /***/ },
 /* 535 */
@@ -36447,7 +36515,32 @@
 	    }, {
 	        key: 'render',
 	        value: function render() {
-	            return _react2.default.createElement(
+	            var before_load = _react2.default.createElement(
+	                'div',
+	                null,
+	                _react2.default.createElement('br', null),
+	                _react2.default.createElement('br', null),
+	                _react2.default.createElement('br', null),
+	                _react2.default.createElement('br', null),
+	                _react2.default.createElement('br', null),
+	                _react2.default.createElement('br', null),
+	                _react2.default.createElement('br', null),
+	                _react2.default.createElement(
+	                    'div',
+	                    { className: 'progress wait' },
+	                    _react2.default.createElement('div', { className: 'indeterminate' })
+	                ),
+	                _react2.default.createElement(
+	                    'center',
+	                    null,
+	                    _react2.default.createElement(
+	                        'h2',
+	                        null,
+	                        '불러오는 중입니다.'
+	                    )
+	                )
+	            );
+	            var after_load = _react2.default.createElement(
 	                'div',
 	                { className: 'user-data-box' },
 	                _react2.default.createElement(_index.UserProfile, { userData: this.props.userData }),
@@ -36455,6 +36548,11 @@
 	                    onRank: this._handleRank,
 	                    quick_mode: this.props.quick_mode,
 	                    userData: this.props.userData })
+	            );
+	            return _react2.default.createElement(
+	                'div',
+	                null,
+	                Object.keys(this.props.userData.heros).length == 0 ? before_load : after_load
 	            );
 	        }
 	    }]);
@@ -36736,16 +36834,20 @@
 	                'div',
 	                null,
 	                _react2.default.createElement(
-	                    'span',
-	                    { onClick: this._handleQuick,
-	                        className: this.props.quick_mode ? "mode active" : "mode" },
-	                    '빠른대전'
-	                ),
-	                _react2.default.createElement(
-	                    'span',
-	                    { onClick: this._handleRank,
-	                        className: this.props.quick_mode ? "mode" : "mode active" },
-	                    '경쟁전'
+	                    'div',
+	                    { className: 'relative-choose' },
+	                    _react2.default.createElement(
+	                        'span',
+	                        { onClick: this._handleQuick,
+	                            className: this.props.quick_mode ? "mode active" : "mode" },
+	                        '빠른대전'
+	                    ),
+	                    _react2.default.createElement(
+	                        'span',
+	                        { onClick: this._handleRank,
+	                            className: this.props.quick_mode ? "mode mode-right" : "mode active mode-right" },
+	                        '경쟁전'
+	                    )
 	                ),
 	                _react2.default.createElement(_UserDetailBox2.default, { userData: this.props.userData,
 	                    quick_mode: this.props.quick_mode,
@@ -36826,18 +36928,6 @@
 													var heros = this.props.userData.heros.filter(function (hero) {
 																	return hero.playtime != 0;
 													});
-													var quick_image = _react2.default.createElement(
-																	'div',
-																	null,
-																	_react2.default.createElement('img', { src: '/asset/images/quick_open.png', className: 'quick_open' }),
-																	_react2.default.createElement('img', { src: '/asset/images/rank_close.png', className: 'rank_close', onClick: this.props.onRank })
-													);
-													var rank_image = _react2.default.createElement(
-																	'div',
-																	null,
-																	_react2.default.createElement('img', { src: '/asset/images/quick_close.png', className: 'quick_close', onClick: this.props.onQuick }),
-																	_react2.default.createElement('img', { src: '/asset/images/rank_open.png', className: 'rank_open' })
-													);
 													var winRate = function winRate(win, count) {
 																	if (count == 0) return "0%";
 
@@ -37155,11 +37245,14 @@
 																	_react2.default.createElement(
 																					'div',
 																					{ className: 'quick-choose' },
-																					this.props.quick_mode ? quick_image : rank_image,
 																					_react2.default.createElement(
-																									'div',
-																									{ className: 'row mobile-hide' },
-																									userDetailBox
+																									'center',
+																									null,
+																									_react2.default.createElement(
+																													'div',
+																													{ className: 'row mobile-hide' },
+																													userDetailBox
+																									)
 																					),
 																					_react2.default.createElement(
 																									'div',
@@ -37546,6 +37639,7 @@
 			}
 		}
 	}
+
 	exports.mapHero = mapHero;
 	exports.get_job_right_title = get_job_right_title;
 	exports.get_job_right_value = get_job_right_value;
@@ -38045,7 +38139,6 @@
 	        value: function componentDidMount() {
 	            var _this2 = this;
 
-	            console.log("YoutubeBox mounted");
 	            //const MAX_SAFE_INTEGER = 9007199254740991;
 	            if (!this.props.youtube[this.state.order].data.length) {
 	                this.props.getYoutubes(1, this.state.order);
@@ -38110,16 +38203,6 @@
 	                        '유튜브 동영상 링크'
 	                    ),
 	                    _react2.default.createElement(
-	                        'p',
-	                        null,
-	                        'ex) https://www.youtube.com/watch?v=nxoAEKVPVF8'
-	                    ),
-	                    _react2.default.createElement(
-	                        'p',
-	                        null,
-	                        'ex) https://youtu.be/nxoAEKVPVF8'
-	                    ),
-	                    _react2.default.createElement(
 	                        'div',
 	                        { className: 'input-field col s10' },
 	                        _react2.default.createElement('input', { type: 'text',
@@ -38139,7 +38222,7 @@
 	                    _react2.default.createElement(
 	                        'a',
 	                        { onClick: this._onSubmitYoutube,
-	                            className: 'waves-effect waves-light btn' },
+	                            className: 'waves-effect btn' },
 	                        '글작성'
 	                    ),
 	                    _react2.default.createElement(
@@ -38243,13 +38326,7 @@
 	                        'a',
 	                        { className: 'modal-trigger youtube-write', onClick: this._openModal },
 	                        _react2.default.createElement('img', { src: '/asset/images/write-icon.png', className: 'write-icon' })
-	                    ),
-	                    _react2.default.createElement(
-	                        'a',
-	                        { className: 'youtube-search', onClick: this._openSearch },
-	                        _react2.default.createElement('img', { src: '/asset/images/youtube-search-icon.png', className: 'youtube-search-icon' })
-	                    ),
-	                    this.state.searchOpen ? youtube_search : undefined
+	                    )
 	                ),
 	                create_modal,
 	                youtubes
@@ -40213,6 +40290,12 @@
 	var GET_YOUTUBES_FAIL = exports.GET_YOUTUBES_FAIL = "GET_YOUTUBES_FAIL";
 
 	var GET_MESSAGE = exports.GET_MESSAGE = "GET_MESSAGE";
+	var GET_CONNECTION_COUNT = exports.GET_CONNECTION_COUNT = "GET_CONNECTION_COUNT";
+	var GET_ROOM_USERLIST = exports.GET_ROOM_USERLIST = "GET_ROOM_USERLIST";
+	var UPDATE_CURRENT_ROOM = exports.UPDATE_CURRENT_ROOM = "UPDATE_CURRENT_ROOM";
+	var CONNECTION_ADD = exports.CONNECTION_ADD = "CONNECTION_ADD";
+	var CONNECTION_DELETE = exports.CONNECTION_DELETE = "CONNECTION_DELETE";
+	var LEAVE_ROOM = exports.LEAVE_ROOM = "LEAVE_ROOM";
 
 /***/ },
 /* 599 */
@@ -40298,7 +40381,7 @@
 	                    sweetAlert('', '이미 좋아요를 하셨습니다.', 'error');
 	                    return;
 	                } else {
-	                    sweetAlert('', '실패했습니다.', 'error');
+	                    sweetAlert('', '로그인이 필요합니다.', 'error');
 	                    return;
 	                }
 	            });
@@ -40384,13 +40467,14 @@
 	                    name: this.state.youtube.name }),
 	                _react2.default.createElement(
 	                    'div',
-	                    { className: 'video-container' },
-	                    _react2.default.createElement('iframe', { width: '853', height: '480', src: "//www.youtube.com/embed/" + this.state.youtube.youtube_key, frameBorder: '0', allowFullScreen: true })
+	                    { className: 'youtube-container' },
+	                    _react2.default.createElement('iframe', { width: '546', height: '321', src: "//www.youtube.com/embed/" + this.state.youtube.youtube_key, frameBorder: '0', allowFullScreen: true })
 	                ),
 	                _react2.default.createElement(_LikeBox2.default, { like_count: this.state.youtube.like_count,
 	                    handleLike: this._onLike,
 	                    handleDisLike: this._onDisLike,
-	                    like_status: this.state.youtube.like_status }),
+	                    like_status: this.state.youtube.like_status,
+	                    hit_count: this.state.youtube.hit_count }),
 	                this.state.youtube.authentication ? auth_box : undefined,
 	                _react2.default.createElement(_YoutubeCommentBox2.default, { id: this.props.params.id })
 	            );
@@ -40439,33 +40523,54 @@
 	    }
 
 	    _createClass(Title, [{
+	        key: '_dateFormat',
+	        value: function _dateFormat(date) {
+	            var now = new Date(date);
+	            var year = "" + now.getFullYear();
+	            var month = "" + (now.getMonth() + 1);if (month.length == 1) {
+	                month = "0" + month;
+	            }
+	            var day = "" + now.getDate();if (day.length == 1) {
+	                day = "0" + day;
+	            }
+	            var hour = "" + now.getHours();if (hour.length == 1) {
+	                hour = "0" + hour;
+	            }
+	            var minute = "" + now.getMinutes();if (minute.length == 1) {
+	                minute = "0" + minute;
+	            }
+	            var second = "" + now.getSeconds();if (second.length == 1) {
+	                second = "0" + second;
+	            }
+	            return year + "-" + month + "-" + day + " " + hour + ":" + minute + ":" + second;
+	        }
+	    }, {
 	        key: 'render',
 	        value: function render() {
 	            return _react2.default.createElement(
 	                'div',
-	                { className: 'card-panel red lighten-4' },
-	                '제목 : ',
-	                this.props.title,
-	                ' ',
-	                _react2.default.createElement('br', null),
-	                '댓글수 : ',
-	                this.props.comment_count,
-	                '개 ',
-	                _react2.default.createElement('br', null),
-	                '좋아요 : ',
-	                this.props.like_count,
-	                '개 ',
-	                _react2.default.createElement('br', null),
-	                '조회수 : ',
-	                this.props.hit_count,
-	                ' ',
-	                _react2.default.createElement('br', null),
-	                '작성시간 : ',
-	                this.props.written_time,
-	                ' ',
-	                _react2.default.createElement('br', null),
-	                '작성자 : ',
-	                this.props.name ? this.props.name : "익명"
+	                null,
+	                _react2.default.createElement(
+	                    'div',
+	                    { className: 'youtube-title' },
+	                    this.props.title
+	                ),
+	                _react2.default.createElement(
+	                    'div',
+	                    { className: 'youtube-writer' },
+	                    _react2.default.createElement(
+	                        'span',
+	                        null,
+	                        '글쓴이 : '
+	                    ),
+	                    ' ',
+	                    this.props.name ? this.props.name : "익명",
+	                    _react2.default.createElement(
+	                        'span',
+	                        { className: 'youtube-date' },
+	                        this._dateFormat(this.props.written_time)
+	                    )
+	                )
 	            );
 	        }
 	    }]);
@@ -40607,10 +40712,11 @@
 
 	            return _react2.default.createElement(
 	                'div',
-	                null,
+	                { className: 'comment-container' },
 	                _react2.default.createElement(
 	                    'div',
-	                    null,
+	                    { className: 'comment-box' },
+	                    _react2.default.createElement('img', { src: '/asset/images/comment-icon.png' }),
 	                    '댓글 ',
 	                    this.state.comments.length,
 	                    ' 개'
@@ -40693,6 +40799,28 @@
 	    }
 
 	    _createClass(Comment, [{
+	        key: '_dateFormat',
+	        value: function _dateFormat(date) {
+	            var now = new Date(date);
+	            var year = "" + now.getFullYear();
+	            var month = "" + (now.getMonth() + 1);if (month.length == 1) {
+	                month = "0" + month;
+	            }
+	            var day = "" + now.getDate();if (day.length == 1) {
+	                day = "0" + day;
+	            }
+	            var hour = "" + now.getHours();if (hour.length == 1) {
+	                hour = "0" + hour;
+	            }
+	            var minute = "" + now.getMinutes();if (minute.length == 1) {
+	                minute = "0" + minute;
+	            }
+	            var second = "" + now.getSeconds();if (second.length == 1) {
+	                second = "0" + second;
+	            }
+	            return year + "-" + month + "-" + day + " " + hour + ":" + minute + ":" + second;
+	        }
+	    }, {
 	        key: '_onCreateComment',
 	        value: function _onCreateComment(content) {
 	            var _this2 = this;
@@ -40757,8 +40885,8 @@
 	            var comment = this.props.comment;
 	            var replyStatus = _react2.default.createElement(
 	                'div',
-	                null,
-	                comment.reply_count == 0 ? "답글달기" : "답글 " + comment.reply_count + "개"
+	                { className: 'comment-reply' },
+	                comment.reply_count == 0 ? "[답글]" : "[답글 " + comment.reply_count + "개]"
 	            );
 	            var replyInfo = _react2.default.createElement(
 	                'div',
@@ -40769,28 +40897,45 @@
 	                }),
 	                _react2.default.createElement(
 	                    'div',
-	                    { onClick: this._handleReplyOpen },
-	                    this.state.isOpen ? "답글접기" : undefined
+	                    { onClick: this._handleReplyOpen, className: 'comment-reply' },
+	                    this.state.isOpen ? "[답글접기]" : undefined
 	                ),
 	                _react2.default.createElement(_CommentInput2.default, { onCreateComment: this._onCreateComment })
 	            );
 
 	            return _react2.default.createElement(
 	                'div',
-	                { className: 'blue-grey' },
+	                { className: 'comment' },
 	                _react2.default.createElement(
 	                    'div',
-	                    { className: 'white-text' },
-	                    comment.content,
-	                    comment.written_time,
+	                    { className: '' },
+	                    _react2.default.createElement('img', { src: comment.avatar, className: 'comment-avatar' }),
 	                    _react2.default.createElement(
-	                        'span',
-	                        { className: 'red-text' },
-	                        '[',
-	                        comment.ip,
-	                        ']'
+	                        'div',
+	                        { className: 'right-comment-div' },
+	                        _react2.default.createElement(
+	                            'span',
+	                            { className: 'comment-name' },
+	                            comment.name ? comment.name : "익명"
+	                        ),
+	                        _react2.default.createElement(
+	                            'span',
+	                            { className: 'meta' },
+	                            this._dateFormat(comment.written_time)
+	                        ),
+	                        _react2.default.createElement(
+	                            'span',
+	                            { className: 'red-text ip' },
+	                            '[',
+	                            comment.ip,
+	                            ']'
+	                        ),
+	                        _react2.default.createElement(
+	                            'div',
+	                            null,
+	                            comment.content
+	                        )
 	                    ),
-	                    comment.name ? comment.name : "익명",
 	                    _react2.default.createElement(
 	                        'div',
 	                        { onClick: this._handleReplyOpen },
@@ -40849,21 +40994,65 @@
 	    }
 
 	    _createClass(Reply, [{
+	        key: '_dateFormat',
+	        value: function _dateFormat(date) {
+	            var now = new Date(date);
+	            var year = "" + now.getFullYear();
+	            var month = "" + (now.getMonth() + 1);if (month.length == 1) {
+	                month = "0" + month;
+	            }
+	            var day = "" + now.getDate();if (day.length == 1) {
+	                day = "0" + day;
+	            }
+	            var hour = "" + now.getHours();if (hour.length == 1) {
+	                hour = "0" + hour;
+	            }
+	            var minute = "" + now.getMinutes();if (minute.length == 1) {
+	                minute = "0" + minute;
+	            }
+	            var second = "" + now.getSeconds();if (second.length == 1) {
+	                second = "0" + second;
+	            }
+	            return year + "-" + month + "-" + day + " " + hour + ":" + minute + ":" + second;
+	        }
+	    }, {
 	        key: 'render',
 	        value: function render() {
 	            var reply = this.props.reply;
 	            return _react2.default.createElement(
 	                'div',
-	                null,
-	                reply.content,
+	                { className: 'reply' },
 	                _react2.default.createElement(
-	                    'span',
-	                    { className: 'red-text' },
-	                    '[',
-	                    reply.ip,
-	                    ']'
-	                ),
-	                reply.name ? reply.name : "익명"
+	                    'div',
+	                    null,
+	                    _react2.default.createElement('img', { src: reply.avatar, className: 'comment-avatar' }),
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'right-comment-div' },
+	                        _react2.default.createElement(
+	                            'span',
+	                            { className: 'comment-name' },
+	                            reply.name ? reply.name : "익명"
+	                        ),
+	                        _react2.default.createElement(
+	                            'span',
+	                            { className: 'meta' },
+	                            this._dateFormat(reply.written_time)
+	                        ),
+	                        _react2.default.createElement(
+	                            'span',
+	                            { className: 'red-text ip' },
+	                            '[',
+	                            reply.ip,
+	                            ']'
+	                        ),
+	                        _react2.default.createElement(
+	                            'div',
+	                            null,
+	                            reply.content
+	                        )
+	                    )
+	                )
 	            );
 	        }
 	    }]);
@@ -40930,6 +41119,10 @@
 	        value: function _handleCreate() {
 	            var _this2 = this;
 
+	            if (!this.state.content) {
+	                sweetAlert('댓글을 입력해주세요.', 'error');
+	                return;
+	            }
 	            this.props.onCreateComment(this.state.content).then(function (success) {
 	                if (success) {
 	                    _this2.setState({
@@ -40943,14 +41136,15 @@
 	        value: function render() {
 	            return _react2.default.createElement(
 	                'div',
-	                null,
+	                { className: 'comment-input' },
 	                _react2.default.createElement('input', { type: 'text',
 	                    name: 'comment_input',
 	                    value: this.state.content,
-	                    onChange: this._handleChange }),
+	                    onChange: this._handleChange,
+	                    placeholder: '답글입력' }),
 	                _react2.default.createElement(
 	                    'a',
-	                    { className: 'waves-effect waves-light btn',
+	                    { className: 'waves-effect btn',
 	                        onClick: this._handleCreate },
 	                    '등록'
 	                )
@@ -41133,38 +41327,50 @@
 	        value: function render() {
 	            var like_true = _react2.default.createElement(
 	                'div',
-	                null,
+	                { className: 'right' },
 	                _react2.default.createElement(
 	                    'a',
-	                    { onClick: this.props.handleDisLike, className: 'waves-effect waves-light btn' },
-	                    _react2.default.createElement(
-	                        'i',
-	                        { className: 'material-icons left' },
-	                        'thumb_up'
-	                    ),
-	                    '좋아요 취소'
+	                    { onClick: this.props.handleDisLike, className: 'pointer' },
+	                    _react2.default.createElement('img', { src: '/asset/images/like-on.png' })
 	                )
 	            );
 	            var like_false = _react2.default.createElement(
 	                'div',
-	                null,
+	                { className: 'right' },
 	                _react2.default.createElement(
 	                    'a',
-	                    { onClick: this.props.handleLike, className: 'waves-effect waves-light btn' },
-	                    _react2.default.createElement(
-	                        'i',
-	                        { className: 'material-icons left' },
-	                        'thumb_up'
-	                    ),
-	                    '좋아요 ',
-	                    this.props.like_count,
-	                    '개'
+	                    { onClick: this.props.handleLike, className: 'pointer' },
+	                    _react2.default.createElement('img', { src: '/asset/images/like-off.png' })
 	                )
 	            );
 	            return _react2.default.createElement(
 	                'div',
-	                null,
-	                this.props.like_status ? like_true : like_false
+	                { className: 'like-status' },
+	                this.props.like_status ? like_true : like_false,
+	                _react2.default.createElement(
+	                    'div',
+	                    { className: 'siba' },
+	                    _react2.default.createElement(
+	                        'span',
+	                        { className: 'like-count' },
+	                        _react2.default.createElement('img', { src: '/asset/images/like-icon.png' })
+	                    ),
+	                    _react2.default.createElement(
+	                        'span',
+	                        null,
+	                        this.props.like_count
+	                    ),
+	                    _react2.default.createElement(
+	                        'span',
+	                        { className: 'hit-count' },
+	                        _react2.default.createElement('img', { src: '/asset/images/hit-icon.png' })
+	                    ),
+	                    _react2.default.createElement(
+	                        'span',
+	                        null,
+	                        this.props.hit_count
+	                    )
+	                )
 	            );
 	        }
 	    }]);
@@ -41176,7 +41382,8 @@
 	    handleLike: _react2.default.PropTypes.func,
 	    hadleDisLike: _react2.default.PropTypes.func,
 	    like_count: _react2.default.PropTypes.number,
-	    like_status: _react2.default.PropTypes.bool
+	    like_status: _react2.default.PropTypes.bool,
+	    hit_count: _react2.default.PropTypes.number
 	};
 
 	exports.default = LikeBox;
@@ -41785,7 +41992,10 @@
 	        key: 'render',
 	        value: function render() {
 	            var user_active = false;
+	            var board_active = false;
 	            if (this.props.location.pathname.includes("user")) user_active = true;
+
+	            if (this.props.location.pathname.includes("board")) board_active = true;
 	            return _react2.default.createElement(
 	                'div',
 	                { className: 'header-menu' },
@@ -41824,7 +42034,7 @@
 	                ),
 	                _react2.default.createElement(
 	                    _reactRouter.Link,
-	                    { to: '/board', activeClassName: 'active' },
+	                    { to: '/board/free/page/1', className: board_active ? 'active' : '' },
 	                    _react2.default.createElement('img', { src: '/asset/images/board.png' }),
 	                    _react2.default.createElement(
 	                        'div',
@@ -42065,7 +42275,10 @@
 									key: 'render',
 									value: function render() {
 													var user_active = false;
+													var board_active = false;
 													if (this.props.location.pathname == "/" || this.props.location.pathname.includes("user")) user_active = true;
+
+													if (this.props.location.pathname.includes("board")) board_active = true;
 													return _react2.default.createElement(
 																	'div',
 																	null,
@@ -42133,7 +42346,7 @@
 																									null,
 																									_react2.default.createElement(
 																													_reactRouter.Link,
-																													{ to: '/board', activeClassName: 'active', className: 'waves-effect side-li' },
+																													{ to: '/board/free/page/1', activeClassName: 'active', className: 'waves-effect side-li ' + (board_active ? 'active' : '') },
 																													_react2.default.createElement('img', { src: '/asset/images/board.png' }),
 																													'커뮤니티',
 																													_react2.default.createElement('i', { className: 'fa fa-check-circle-o fa-lg side-active', 'aria-hidden': 'true' })
@@ -42169,478 +42382,23 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _reactRouter = __webpack_require__(469);
-
-	var _components = __webpack_require__(534);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	var Home = function (_React$Component) {
-	    _inherits(Home, _React$Component);
-
-	    function Home(props) {
-	        _classCallCheck(this, Home);
-
-	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Home).call(this, props));
-
-	        _this.displayName = 'Home';
-	        _this.state = {
-	            userName: ""
-	        };
-	        _this._handleChange = _this._handleChange.bind(_this);
-	        _this._handleKeyPress = _this._handleKeyPress.bind(_this);
-	        _this._onSearchUser = _this._onSearchUser.bind(_this);
-	        return _this;
-	    }
-
-	    _createClass(Home, [{
-	        key: '_handleChange',
-	        value: function _handleChange(e) {
-	            this.setState({
-	                userName: e.target.value
-	            });
-	        }
-	    }, {
-	        key: '_handleKeyPress',
-	        value: function _handleKeyPress(e) {
-	            if (e.key == 'Enter') {
-	                this._onSearchUser();
-	            }
-	        }
-	    }, {
-	        key: '_onSearchUser',
-	        value: function _onSearchUser() {
-	            if (!this.state.userName) {
-	                sweetAlert('', '올바른 형식이 아닙니다.', 'error');
-	                return;
-	            }
-
-	            /* //////// # 포함시 배틀태그 포함 -로 변환후 url 요청 \\\\\\\\\  */
-	            if (this.state.userName.includes("#")) {
-	                var userName = this.state.userName.replace("#", "-");
-	                if (userName.includes("#")) {
-	                    sweetAlert('', '올바른 형식이 아닙니다.', 'error');
-	                    return;
-	                }
-
-	                _reactRouter.browserHistory.push('/user/' + userName);
-	            } else {
-	                _reactRouter.browserHistory.push('/userByName/' + this.state.userName);
-	            }
-	        }
-	    }, {
-	        key: 'render',
-	        value: function render() {
-	            return _react2.default.createElement(
-	                'div',
-	                null,
-	                _react2.default.createElement(
-	                    'div',
-	                    { className: 'right-align mobile-hide' },
-	                    _react2.default.createElement(_components.LoginButton, null)
-	                ),
-	                _react2.default.createElement(
-	                    'center',
-	                    { className: 'main-center' },
-	                    _react2.default.createElement('img', { src: '/asset/images/logo.png', className: 'logo' }),
-	                    _react2.default.createElement('span', { className: 'main-divider' }),
-	                    _react2.default.createElement(
-	                        'div',
-	                        { className: 'input-wrapper' },
-	                        _react2.default.createElement('input', { type: 'text',
-	                            name: 'user',
-	                            className: 'search-input',
-	                            placeholder: '닉네임#배틀태그',
-	                            onChange: this._handleChange,
-	                            onKeyPress: this._handleKeyPress }),
-	                        _react2.default.createElement('img', { src: '/asset/images/search-icon.png',
-	                            className: 'search-icon',
-	                            onClick: this._onSearchUser })
-	                    ),
-	                    _react2.default.createElement('br', null),
-	                    _react2.default.createElement(
-	                        'span',
-	                        { className: 'main-letter' },
-	                        '최초검색 1회후 닉네임으로만 검색할 수 있습니다.'
-	                    ),
-	                    _react2.default.createElement('br', null),
-	                    _react2.default.createElement(
-	                        _reactRouter.Link,
-	                        { to: 'youtube', className: 'main-link link-left' },
-	                        '전적검색'
-	                    ),
-	                    _react2.default.createElement(
-	                        _reactRouter.Link,
-	                        { to: 'youtube', className: 'main-link link-right' },
-	                        '파티매칭'
-	                    ),
-	                    _react2.default.createElement('br', null),
-	                    _react2.default.createElement(
-	                        _reactRouter.Link,
-	                        { to: 'youtube', className: 'main-link link-left' },
-	                        '동영상'
-	                    ),
-	                    _react2.default.createElement(
-	                        _reactRouter.Link,
-	                        { to: 'youtube', className: 'main-link link-right' },
-	                        '커뮤니티'
-	                    )
-	                ),
-	                _react2.default.createElement('br', null),
-	                _react2.default.createElement('br', null),
-	                _react2.default.createElement('div', null)
-	            );
-	        }
-	    }]);
-
-	    return Home;
-	}(_react2.default.Component);
-
-	exports.default = Home;
-
-/***/ },
-/* 618 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	var _react = __webpack_require__(299);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	var Login = function (_React$Component) {
-	    _inherits(Login, _React$Component);
-
-	    function Login(props) {
-	        _classCallCheck(this, Login);
-
-	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Login).call(this, props));
-
-	        _this.displayName = 'Login';
-	        return _this;
-	    }
-
-	    _createClass(Login, [{
-	        key: 'render',
-	        value: function render() {
-	            return _react2.default.createElement(
-	                'div',
-	                null,
-	                'Login'
-	            );
-	        }
-	    }]);
-
-	    return Login;
-	}(_react2.default.Component);
-
-	exports.default = Login;
-
-/***/ },
-/* 619 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	var _react = __webpack_require__(299);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	var Register = function (_React$Component) {
-	    _inherits(Register, _React$Component);
-
-	    function Register(props) {
-	        _classCallCheck(this, Register);
-
-	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Register).call(this, props));
-
-	        _this.displayName = 'Register';
-	        return _this;
-	    }
-
-	    _createClass(Register, [{
-	        key: 'render',
-	        value: function render() {
-	            return _react2.default.createElement(
-	                'div',
-	                null,
-	                'Register'
-	            );
-	        }
-	    }]);
-
-	    return Register;
-	}(_react2.default.Component);
-
-	exports.default = Register;
-
-/***/ },
-/* 620 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	var _react = __webpack_require__(299);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _axios = __webpack_require__(536);
-
-	var _axios2 = _interopRequireDefault(_axios);
-
-	var _components = __webpack_require__(534);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	var User = function (_React$Component) {
-	    _inherits(User, _React$Component);
-
-	    function User(props) {
-	        _classCallCheck(this, User);
-
-	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(User).call(this, props));
-
-	        _this.displayName = 'User';
-	        _this.state = {
-	            quickUserData: {
-	                heros: []
-	            },
-	            rankUserData: {
-	                heros: []
-	            },
-	            quick_mode: true
-	        };
-	        _this._onQuick = _this._onQuick.bind(_this);
-	        _this._onRank = _this._onRank.bind(_this);
-	        return _this;
-	    }
-
-	    _createClass(User, [{
-	        key: '_onQuick',
-	        value: function _onQuick() {
-	            if (this.state.quick_mode) return;
-
-	            this.setState({
-	                quick_mode: true
-	            });
-	        }
-	    }, {
-	        key: '_onRank',
-	        value: function _onRank() {
-	            var _this2 = this;
-
-	            if (!this.state.quick_mode) return;
-
-	            if (Object.keys(this.state.rankUserData).length <= 1) {
-	                this._getUserRankData().then(function (data) {
-	                    _this2.setState({
-	                        rankUserData: data
-	                    });
-	                }).then(function () {
-	                    if (!_this2.state.rankUserData.rank_game_count) {
-	                        /* 경쟁전을 한 적이 없음 */
-	                        sweetAlert('', '경쟁전 기록이 없습니다.', 'error');
-	                        return;
-	                    } else {
-	                        _this2.setState({
-	                            quick_mode: false
-	                        });
-	                    }
-	                });
-	            } else {
-	                if (!this.state.rankUserData.rank_game_count) {
-	                    /* 경쟁전을 한 적이 없음 */
-	                    sweetAlert('', '경쟁전 기록이 없습니다.', 'error');
-	                    return;
-	                } else {
-	                    this.setState({
-	                        quick_mode: false
-	                    });
-	                }
-	            }
-	        }
-	    }, {
-	        key: 'componentDidMount',
-	        value: function componentDidMount() {
-	            var _this3 = this;
-
-	            _axios2.default.get('http://bad.watch/api/user/quick/' + this.props.params.userName).then(function (response) {
-	                var data = response.data;
-	                if (data.responseCode == 2) {
-	                    _this3.setState({
-	                        quickUserData: data.userData
-	                    });
-	                } else {
-	                    sweetAlert('데이터를 불러오는데 오류가 발생했습니다.', '잠시후 다시시도해주세요.', 'error');
-	                    return;
-	                }
-	            }).catch(function (err) {
-	                sweetAlert('데이터를 불러오는데 오류가 발생했습니다.', '잠시후 다시시도해주세요.', 'error');
-	                return;
-	            });
-	        }
-	    }, {
-	        key: '_getUserRankData',
-	        value: function _getUserRankData() {
-	            return _axios2.default.get('http://bad.watch/api/user/rank/' + this.props.params.userName).then(function (response) {
-	                var data = response.data;
-	                if (data.responseCode == 2) {
-	                    return data.userData;
-	                } else {
-	                    sweetAlert('데이터를 불러오는데 오류가 발생했습니다.', '잠시후 다시시도해주세요.', 'error');
-	                    return;
-	                }
-	            }).catch(function (err) {
-	                sweetAlert('데이터를 불러오는데 오류가 발생했습니다.', '잠시후 다시시도해주세요.', 'error');
-	                return;
-	            });
-	        }
-	    }, {
-	        key: 'render',
-	        value: function render() {
-	            return _react2.default.createElement(
-	                'div',
-	                null,
-	                _react2.default.createElement(_components.SearchUserInput, null),
-	                _react2.default.createElement(_components.UserDataBox, { userData: this.state.quick_mode ? this.state.quickUserData : this.state.rankUserData,
-	                    onQuick: this._onQuick,
-	                    onRank: this._onRank,
-	                    quick_mode: this.state.quick_mode })
-	            );
-	        }
-	    }]);
-
-	    return User;
-	}(_react2.default.Component);
-
-	exports.default = User;
-
-/***/ },
-/* 621 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	var _react = __webpack_require__(299);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _axios = __webpack_require__(536);
-
-	var _axios2 = _interopRequireDefault(_axios);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	var Youtube = function (_React$Component) {
-	    _inherits(Youtube, _React$Component);
-
-	    function Youtube(props) {
-	        _classCallCheck(this, Youtube);
-
-	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Youtube).call(this, props));
-
-	        _this.displayName = 'Youtube';
-	        return _this;
-	    }
-
-	    _createClass(Youtube, [{
-	        key: 'render',
-	        value: function render() {
-
-	            return _react2.default.createElement(
-	                'div',
-	                null,
-	                this.props.children
-	            );
-	        }
-	    }]);
-
-	    return Youtube;
-	}(_react2.default.Component);
-
-	exports.default = Youtube;
-
-/***/ },
-/* 622 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	var _react = __webpack_require__(299);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _socket = __webpack_require__(623);
+	var _socket = __webpack_require__(618);
 
 	var _socket2 = _interopRequireDefault(_socket);
 
 	var _reactAddonsUpdate = __webpack_require__(605);
 
 	var _reactAddonsUpdate2 = _interopRequireDefault(_reactAddonsUpdate);
+
+	var _reactRouter = __webpack_require__(469);
+
+	var _reactRedux = __webpack_require__(569);
+
+	var _ChatMessage = __webpack_require__(668);
+
+	var _ChatMessage2 = _interopRequireDefault(_ChatMessage);
+
+	var _chat = __webpack_require__(669);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -42656,31 +42414,84 @@
 	    "transports": ["websocket"],
 	    "path": '/api/chat'
 	};
-	var socket = _socket2.default.connect('http://bad.watch', connectOptions);
 
-	var Chat = function (_React$Component) {
-	    _inherits(Chat, _React$Component);
+	var ChatRoom = function (_React$Component) {
+	    _inherits(ChatRoom, _React$Component);
 
-	    function Chat(props) {
-	        _classCallCheck(this, Chat);
+	    function ChatRoom(props) {
+	        _classCallCheck(this, ChatRoom);
 
-	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Chat).call(this, props));
+	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(ChatRoom).call(this, props));
 
-	        _this.displayName = 'Chat';
+	        _this.displayName = 'ChatRoom';
 	        _this.state = {
 	            message: '',
-	            name: '',
-	            results: []
+	            showList: false,
+	            whisperMessage: '',
+	            whisperInputOpen: false,
+	            whisperTo: {}
 	        };
 	        _this._handleChange = _this._handleChange.bind(_this);
 	        _this._sendMessage = _this._sendMessage.bind(_this);
-	        _this._receive = _this._receive.bind(_this);
 	        _this._handleKeyPress = _this._handleKeyPress.bind(_this);
-	        socket.on('news', _this._receive);
+	        _this._showList = _this._showList.bind(_this);
+	        _this._onWhisperOpen = _this._onWhisperOpen.bind(_this);
+	        _this._handleWhisperKeyPress = _this._handleWhisperKeyPress.bind(_this);
+	        _this._sendWhisperMessage = _this._sendWhisperMessage.bind(_this);
+	        _this.socket = _socket2.default.connect('http://bad.watch', connectOptions);
 	        return _this;
 	    }
 
-	    _createClass(Chat, [{
+	    _createClass(ChatRoom, [{
+	        key: 'chat_dateFormat',
+	        value: function chat_dateFormat(date) {
+	            var now = new Date(date);
+	            var year = "" + now.getFullYear();
+	            var month = "" + (now.getMonth() + 1);if (month.length == 1) {
+	                month = "0" + month;
+	            }
+	            var day = "" + now.getDate();if (day.length == 1) {
+	                day = "0" + day;
+	            }
+	            var hour = "" + now.getHours();if (hour.length == 1) {
+	                hour = "0" + hour;
+	            }
+	            var minute = "" + now.getMinutes();if (minute.length == 1) {
+	                minute = "0" + minute;
+	            }
+	            var second = "" + now.getSeconds();if (second.length == 1) {
+	                second = "0" + second;
+	            }
+	            return year + "-" + month + "-" + day + " " + hour + ":" + minute + ":" + second;
+	        }
+	    }, {
+	        key: '_onWhisperOpen',
+	        value: function _onWhisperOpen(name, overwatch_id) {
+	            this.setState({
+	                whisperTo: {
+	                    name: name,
+	                    overwatch_id: overwatch_id
+	                },
+	                whisperInputOpen: true
+	            }, function () {
+	                $('#whisper').focus();
+	            });
+	        }
+	    }, {
+	        key: '_handleWhisperKeyPress',
+	        value: function _handleWhisperKeyPress(e) {
+	            if (e.key == 'Enter') {
+	                this._sendWhisperMessage();
+	            }
+	        }
+	    }, {
+	        key: '_showList',
+	        value: function _showList() {
+	            this.setState({
+	                showList: !this.state.showList
+	            });
+	        }
+	    }, {
 	        key: '_handleChange',
 	        value: function _handleChange(e) {
 	            var nextState = {};
@@ -42697,88 +42508,277 @@
 	    }, {
 	        key: '_sendMessage',
 	        value: function _sendMessage() {
-	            console.log("sending");
-	            socket.emit('send', { "name": this.state.name, "message": this.state.message });
+	            if (!this.state.message) return;
+	            this.socket.emit('send', { "message": this.state.message });
 	            this.setState({
 	                message: ''
 	            });
 	        }
 	    }, {
-	        key: '_receive',
-	        value: function _receive(data) {
-	            console.log(data);
+	        key: '_sendWhisperMessage',
+	        value: function _sendWhisperMessage() {
+	            if (!this.state.whisperMessage) return;
+	            if (!this.state.whisperTo.overwatch_id) {
+	                sweetAlert('', '대상이 선택되지 않았습니다.', 'error');
+	                return;
+	            }
+	            this.socket.emit('send_whisper', { "message": this.state.whisperMessage, "overwatch_id": this.state.whisperTo.overwatch_id, "to": this.state.whisperTo.name });
 	            this.setState({
-	                results: (0, _reactAddonsUpdate2.default)(this.state.results, {
-	                    $push: [data]
-	                })
+	                whisperMessage: ''
 	            });
+	        }
+	    }, {
+	        key: '_goRoomList',
+	        value: function _goRoomList() {
+	            _reactRouter.browserHistory.push('/chat');
+	        }
+	    }, {
+	        key: 'componentDidMount',
+	        value: function componentDidMount() {
+	            $('.chat-box').scrollTop($('.chat-box')[0].scrollHeight);
+	            var room_list = ["bronze", "silver", "gold", "platinum", "diamond"];
+	            if (!room_list.includes(this.props.params.room)) {
+	                sweetAlert('', '잘못된 접근입니다.', 'error');
+	                _reactRouter.browserHistory.push('/');
+	                return;
+	            }
+	            var current_room = {
+	                room: this.props.params.room,
+	                overwatch_id: this.props.authentication.status.current_user.id
+	            };
+
+	            //방입장
+	            this.socket.emit('room_join', current_room);
+	            this.props.updateCurrentRoom(current_room.room);
+
+	            this.socket.on('connection_count', function (data) {
+	                console.log("connection_count");
+	                this.props.getConnectionCount(data.count, data.user_list);
+	            }.bind(this));
+
+	            this.socket.on('connection_add', function (data) {
+	                console.log("add");
+	                console.log(data);
+	                this.props.addConnection(data.count, data.user_data);
+	            }.bind(this));
+
+	            this.socket.on('connection_delete', function (data) {
+	                console.log("delete");
+	                this.props.deleteConnection(data.count, data.user_data);
+	            }.bind(this));
+
+	            this.socket.on('receive', function (data) {
+	                console.log("receive");
+	                console.log(data.type);
+	                if (data.type == 1) {
+	                    sweetAlert('', '로그인후 작성하실 수 있습니다.', 'error');
+	                    return;
+	                } else if (data.type == 2) {
+	                    sweetAlert('', '이 점수대와 맞지않아 채팅을 작성할 수 없습니다.', 'error');
+	                    return;
+	                } else if (data.type == 3) {
+	                    sweetAlert('', '접속중인 방이 없습니다.', 'error');
+	                    return;
+	                } else {
+	                    this.props.getMessage(data);
+	                }
+
+	                $('.chat-box').scrollTop($('.chat-box')[0].scrollHeight);
+	            }.bind(this));
+
+	            this.socket.on('receive_whisper', function (data) {
+	                console.log(data.type);
+	                if (data.type == 1) {
+	                    sweetAlert('', '로그인후 작성하실 수 있습니다.', 'error');
+	                    return;
+	                } else if (data.type == 2) {
+	                    sweetAlert('', '이 점수대와 맞지않아 채팅을 작성할 수 없습니다.', 'error');
+	                    return;
+	                } else if (data.type == 6) {
+	                    sweetAlert('', '대상이 없습니다.', 'error');
+	                    return;
+	                } else {
+	                    this.props.getMessage(data);
+	                }
+
+	                $('.chat-box').scrollTop($('.chat-box')[0].scrollHeight);
+	            }.bind(this));
+	        }
+	    }, {
+	        key: 'componentWillUnmount',
+	        value: function componentWillUnmount() {
+	            this.socket.emit('room_leave');
 	        }
 	    }, {
 	        key: 'render',
 	        value: function render() {
+	            var _this2 = this;
+
+	            var mobile_close = _react2.default.createElement(
+	                'div',
+	                { className: 'mobile-chat-list', onClick: this._showList },
+	                '접속 인원 ',
+	                this.props.chat[this.props.chat.current_room].connection_count,
+	                '명 ▼'
+	            );
+	            var mobile_open = _react2.default.createElement(
+	                'div',
+	                null,
+	                _react2.default.createElement(
+	                    'div',
+	                    { className: 'mobile-connect' },
+	                    this.props.chat[this.props.chat.current_room].room_userlist.map(function (user, i) {
+	                        return _react2.default.createElement(
+	                            'div',
+	                            { key: i + user },
+	                            user
+	                        );
+	                    })
+	                ),
+	                _react2.default.createElement(
+	                    'div',
+	                    { className: 'mobile-chat-list-close', onClick: this._showList },
+	                    '닫기 ▲'
+	                )
+	            );
+	            var whisper_input = _react2.default.createElement(
+	                'div',
+	                { className: 'youtube-search-box' },
+	                _react2.default.createElement(
+	                    'div',
+	                    { className: 'whisper-to-box' },
+	                    'To: ',
+	                    this.state.whisperTo.name,
+	                    ' :'
+	                ),
+	                _react2.default.createElement('input', { id: 'whisper',
+	                    className: 'youtube-search-input',
+	                    type: 'text',
+	                    name: 'whisperMessage',
+	                    onChange: this._handleChange,
+	                    onKeyPress: this._handleWhisperKeyPress,
+	                    value: this.state.whisperMessage }),
+	                _react2.default.createElement(
+	                    'div',
+	                    { className: 'whisper-send', onClick: this._sendWhisperMessage },
+	                    _react2.default.createElement('i', { className: 'fa fa-arrow-right fa-2x pointer', 'aria-hidden': 'true' })
+	                )
+	            );
+
 	            return _react2.default.createElement(
 	                'div',
 	                null,
-	                this.state.results.map(function (result, i) {
-	                    return _react2.default.createElement(
-	                        'div',
-	                        { key: i },
-	                        _react2.default.createElement(
-	                            'p',
-	                            null,
-	                            result.name,
-	                            ' : ',
-	                            result.message
-	                        )
-	                    );
-	                }),
+	                this.state.showList ? mobile_open : mobile_close,
 	                _react2.default.createElement(
 	                    'div',
-	                    { className: 'row' },
+	                    { className: 'chat-box' },
+	                    this.props.chat[this.props.chat.current_room].messages.map(function (message, i) {
+	                        return _react2.default.createElement(_ChatMessage2.default, { key: i,
+	                            message: message,
+	                            handleWhisperOpen: _this2._onWhisperOpen });
+	                    })
+	                ),
+	                _react2.default.createElement(
+	                    'div',
+	                    { className: 'chat-name-list' },
 	                    _react2.default.createElement(
 	                        'div',
-	                        { className: 'row' },
-	                        _react2.default.createElement(
-	                            'div',
-	                            { className: 'input-field col s2' },
-	                            _react2.default.createElement('input', { type: 'text',
-	                                onChange: this._handleChange,
-	                                name: 'name',
-	                                value: this.state.name })
-	                        ),
-	                        _react2.default.createElement(
-	                            'div',
-	                            { className: 'input-field col s9' },
-	                            _react2.default.createElement(
-	                                'i',
-	                                { className: 'material-icons prefix' },
-	                                'message'
-	                            ),
-	                            _react2.default.createElement('input', { className: 'input-field col s9',
-	                                type: 'text',
-	                                name: 'message',
-	                                value: this.state.message,
-	                                onChange: this._handleChange,
-	                                onKeyPress: this._handleKeyPress })
-	                        ),
-	                        _react2.default.createElement(
-	                            'button',
-	                            { onClick: this._sendMessage },
-	                            '전송'
-	                        )
+	                        { className: 'connect-title' },
+	                        '접속 인원 ',
+	                        this.props.chat[this.props.chat.current_room].connection_count,
+	                        '명'
+	                    ),
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'connect' },
+	                        this.props.chat[this.props.chat.current_room].room_userlist.map(function (user, i) {
+	                            return _react2.default.createElement(
+	                                'div',
+	                                { key: i + user },
+	                                user.split('#')[0]
+	                            );
+	                        })
+	                    ),
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'get-out-chat', onClick: this._goRoomList },
+	                        '대화방 나가기'
 	                    )
-	                )
+	                ),
+	                _react2.default.createElement(
+	                    'div',
+	                    { className: 'chat-input-div' },
+	                    _react2.default.createElement('input', { id: 'chat',
+	                        type: 'text',
+	                        name: 'message',
+	                        className: 'input-field',
+	                        value: this.state.message,
+	                        onChange: this._handleChange,
+	                        onKeyPress: this._handleKeyPress }),
+	                    _react2.default.createElement(
+	                        'span',
+	                        { onClick: this._sendMessage },
+	                        '전송'
+	                    )
+	                ),
+	                this.state.whisperInputOpen ? whisper_input : undefined,
+	                _react2.default.createElement('br', null),
+	                _react2.default.createElement('br', null),
+	                _react2.default.createElement('br', null),
+	                _react2.default.createElement('br', null),
+	                _react2.default.createElement('br', null),
+	                _react2.default.createElement('br', null)
 	            );
 	        }
 	    }]);
 
-	    return Chat;
+	    return ChatRoom;
 	}(_react2.default.Component);
 
-	exports.default = Chat;
+	var mapStateToProps = function mapStateToProps(state) {
+	    return {
+	        chat: state.chat,
+	        authentication: state.authentication
+	    };
+	};
+
+	var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+	    return {
+	        getMessage: function getMessage(message) {
+	            return dispatch((0, _chat.getMessage)(message));
+	        },
+	        updateCurrentRoom: function updateCurrentRoom(room) {
+	            return dispatch((0, _chat.updateCurrentRoom)(room));
+	        },
+	        getConnectionCount: function getConnectionCount(count, userlist) {
+	            return dispatch((0, _chat.getConnectionCount)(count, userlist));
+	        },
+	        addConnection: function addConnection(count, user) {
+	            return dispatch((0, _chat.addConnection)(count, user));
+	        },
+	        deleteConnection: function deleteConnection(count, user) {
+	            return dispatch((0, _chat.deleteConnection)(count, user));
+	        },
+	        leaveRoom: function leaveRoom() {
+	            return dispatch((0, _chat.leaveRoom)());
+	        }
+	    };
+	};
+
+	ChatRoom.propTypes = {
+	    chat: _react2.default.PropTypes.object,
+	    getMessage: _react2.default.PropTypes.func,
+	    updateCurrentRoom: _react2.default.PropTypes.func,
+	    getConnectionCount: _react2.default.PropTypes.func,
+	    addConnection: _react2.default.PropTypes.func,
+	    deleteConnection: _react2.default.PropTypes.func,
+	    leaveRoom: _react2.default.PropTypes.func
+	};
+
+	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(ChatRoom);
 
 /***/ },
-/* 623 */
+/* 618 */
 /***/ function(module, exports, __webpack_require__) {
 
 	
@@ -42786,10 +42786,10 @@
 	 * Module dependencies.
 	 */
 
-	var url = __webpack_require__(624);
-	var parser = __webpack_require__(629);
-	var Manager = __webpack_require__(637);
-	var debug = __webpack_require__(626)('socket.io-client');
+	var url = __webpack_require__(619);
+	var parser = __webpack_require__(624);
+	var Manager = __webpack_require__(632);
+	var debug = __webpack_require__(621)('socket.io-client');
 
 	/**
 	 * Module exports.
@@ -42871,12 +42871,12 @@
 	 * @api public
 	 */
 
-	exports.Manager = __webpack_require__(637);
-	exports.Socket = __webpack_require__(665);
+	exports.Manager = __webpack_require__(632);
+	exports.Socket = __webpack_require__(660);
 
 
 /***/ },
-/* 624 */
+/* 619 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {
@@ -42884,8 +42884,8 @@
 	 * Module dependencies.
 	 */
 
-	var parseuri = __webpack_require__(625);
-	var debug = __webpack_require__(626)('socket.io-client:url');
+	var parseuri = __webpack_require__(620);
+	var debug = __webpack_require__(621)('socket.io-client:url');
 
 	/**
 	 * Module exports.
@@ -42959,7 +42959,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 625 */
+/* 620 */
 /***/ function(module, exports) {
 
 	/**
@@ -43004,7 +43004,7 @@
 
 
 /***/ },
-/* 626 */
+/* 621 */
 /***/ function(module, exports, __webpack_require__) {
 
 	
@@ -43014,7 +43014,7 @@
 	 * Expose `debug()` as the module.
 	 */
 
-	exports = module.exports = __webpack_require__(627);
+	exports = module.exports = __webpack_require__(622);
 	exports.log = log;
 	exports.formatArgs = formatArgs;
 	exports.save = save;
@@ -43178,7 +43178,7 @@
 
 
 /***/ },
-/* 627 */
+/* 622 */
 /***/ function(module, exports, __webpack_require__) {
 
 	
@@ -43194,7 +43194,7 @@
 	exports.disable = disable;
 	exports.enable = enable;
 	exports.enabled = enabled;
-	exports.humanize = __webpack_require__(628);
+	exports.humanize = __webpack_require__(623);
 
 	/**
 	 * The currently active debug mode names, and names to skip.
@@ -43381,7 +43381,7 @@
 
 
 /***/ },
-/* 628 */
+/* 623 */
 /***/ function(module, exports) {
 
 	/**
@@ -43512,7 +43512,7 @@
 
 
 /***/ },
-/* 629 */
+/* 624 */
 /***/ function(module, exports, __webpack_require__) {
 
 	
@@ -43520,12 +43520,12 @@
 	 * Module dependencies.
 	 */
 
-	var debug = __webpack_require__(626)('socket.io-parser');
-	var json = __webpack_require__(630);
-	var isArray = __webpack_require__(633);
-	var Emitter = __webpack_require__(634);
-	var binary = __webpack_require__(635);
-	var isBuf = __webpack_require__(636);
+	var debug = __webpack_require__(621)('socket.io-parser');
+	var json = __webpack_require__(625);
+	var isArray = __webpack_require__(628);
+	var Emitter = __webpack_require__(629);
+	var binary = __webpack_require__(630);
+	var isBuf = __webpack_require__(631);
 
 	/**
 	 * Protocol version.
@@ -43918,14 +43918,14 @@
 
 
 /***/ },
-/* 630 */
+/* 625 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_RESULT__;/* WEBPACK VAR INJECTION */(function(module, global) {/*! JSON v3.3.2 | http://bestiejs.github.io/json3 | Copyright 2012-2014, Kit Cambridge | http://kit.mit-license.org */
 	;(function () {
 	  // Detect the `define` function exposed by asynchronous module loaders. The
 	  // strict `define` check is necessary for compatibility with `r.js`.
-	  var isLoader = "function" === "function" && __webpack_require__(632);
+	  var isLoader = "function" === "function" && __webpack_require__(627);
 
 	  // A set of types used to distinguish objects from primitives.
 	  var objectTypes = {
@@ -44824,10 +44824,10 @@
 	  }
 	}).call(this);
 
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(631)(module), (function() { return this; }())))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(626)(module), (function() { return this; }())))
 
 /***/ },
-/* 631 */
+/* 626 */
 /***/ function(module, exports) {
 
 	module.exports = function(module) {
@@ -44843,7 +44843,7 @@
 
 
 /***/ },
-/* 632 */
+/* 627 */
 /***/ function(module, exports) {
 
 	/* WEBPACK VAR INJECTION */(function(__webpack_amd_options__) {module.exports = __webpack_amd_options__;
@@ -44851,7 +44851,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, {}))
 
 /***/ },
-/* 633 */
+/* 628 */
 /***/ function(module, exports) {
 
 	module.exports = Array.isArray || function (arr) {
@@ -44860,7 +44860,7 @@
 
 
 /***/ },
-/* 634 */
+/* 629 */
 /***/ function(module, exports) {
 
 	
@@ -45030,7 +45030,7 @@
 
 
 /***/ },
-/* 635 */
+/* 630 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {/*global Blob,File*/
@@ -45039,8 +45039,8 @@
 	 * Module requirements
 	 */
 
-	var isArray = __webpack_require__(633);
-	var isBuf = __webpack_require__(636);
+	var isArray = __webpack_require__(628);
+	var isBuf = __webpack_require__(631);
 
 	/**
 	 * Replaces every Buffer | ArrayBuffer in packet with a numbered placeholder.
@@ -45178,7 +45178,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 636 */
+/* 631 */
 /***/ function(module, exports) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {
@@ -45198,7 +45198,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 637 */
+/* 632 */
 /***/ function(module, exports, __webpack_require__) {
 
 	
@@ -45206,15 +45206,15 @@
 	 * Module dependencies.
 	 */
 
-	var eio = __webpack_require__(638);
-	var Socket = __webpack_require__(665);
-	var Emitter = __webpack_require__(666);
-	var parser = __webpack_require__(629);
-	var on = __webpack_require__(668);
-	var bind = __webpack_require__(669);
-	var debug = __webpack_require__(626)('socket.io-client:manager');
-	var indexOf = __webpack_require__(663);
-	var Backoff = __webpack_require__(672);
+	var eio = __webpack_require__(633);
+	var Socket = __webpack_require__(660);
+	var Emitter = __webpack_require__(661);
+	var parser = __webpack_require__(624);
+	var on = __webpack_require__(663);
+	var bind = __webpack_require__(664);
+	var debug = __webpack_require__(621)('socket.io-client:manager');
+	var indexOf = __webpack_require__(658);
+	var Backoff = __webpack_require__(667);
 
 	/**
 	 * IE6+ hasOwnProperty
@@ -45761,19 +45761,19 @@
 
 
 /***/ },
-/* 638 */
+/* 633 */
 /***/ function(module, exports, __webpack_require__) {
 
 	
-	module.exports =  __webpack_require__(639);
+	module.exports =  __webpack_require__(634);
 
 
 /***/ },
-/* 639 */
+/* 634 */
 /***/ function(module, exports, __webpack_require__) {
 
 	
-	module.exports = __webpack_require__(640);
+	module.exports = __webpack_require__(635);
 
 	/**
 	 * Exports parser
@@ -45781,25 +45781,25 @@
 	 * @api public
 	 *
 	 */
-	module.exports.parser = __webpack_require__(647);
+	module.exports.parser = __webpack_require__(642);
 
 
 /***/ },
-/* 640 */
+/* 635 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {/**
 	 * Module dependencies.
 	 */
 
-	var transports = __webpack_require__(641);
-	var Emitter = __webpack_require__(656);
-	var debug = __webpack_require__(626)('engine.io-client:socket');
-	var index = __webpack_require__(663);
-	var parser = __webpack_require__(647);
-	var parseuri = __webpack_require__(625);
-	var parsejson = __webpack_require__(664);
-	var parseqs = __webpack_require__(657);
+	var transports = __webpack_require__(636);
+	var Emitter = __webpack_require__(651);
+	var debug = __webpack_require__(621)('engine.io-client:socket');
+	var index = __webpack_require__(658);
+	var parser = __webpack_require__(642);
+	var parseuri = __webpack_require__(620);
+	var parsejson = __webpack_require__(659);
+	var parseqs = __webpack_require__(652);
 
 	/**
 	 * Module exports.
@@ -45923,9 +45923,9 @@
 	 */
 
 	Socket.Socket = Socket;
-	Socket.Transport = __webpack_require__(646);
-	Socket.transports = __webpack_require__(641);
-	Socket.parser = __webpack_require__(647);
+	Socket.Transport = __webpack_require__(641);
+	Socket.transports = __webpack_require__(636);
+	Socket.parser = __webpack_require__(642);
 
 	/**
 	 * Creates transport of the given type.
@@ -46520,17 +46520,17 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 641 */
+/* 636 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {/**
 	 * Module dependencies
 	 */
 
-	var XMLHttpRequest = __webpack_require__(642);
-	var XHR = __webpack_require__(644);
-	var JSONP = __webpack_require__(660);
-	var websocket = __webpack_require__(661);
+	var XMLHttpRequest = __webpack_require__(637);
+	var XHR = __webpack_require__(639);
+	var JSONP = __webpack_require__(655);
+	var websocket = __webpack_require__(656);
 
 	/**
 	 * Export transports.
@@ -46580,11 +46580,11 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 642 */
+/* 637 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// browser shim for xmlhttprequest module
-	var hasCORS = __webpack_require__(643);
+	var hasCORS = __webpack_require__(638);
 
 	module.exports = function(opts) {
 	  var xdomain = opts.xdomain;
@@ -46622,7 +46622,7 @@
 
 
 /***/ },
-/* 643 */
+/* 638 */
 /***/ function(module, exports) {
 
 	
@@ -46645,18 +46645,18 @@
 
 
 /***/ },
-/* 644 */
+/* 639 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {/**
 	 * Module requirements.
 	 */
 
-	var XMLHttpRequest = __webpack_require__(642);
-	var Polling = __webpack_require__(645);
-	var Emitter = __webpack_require__(656);
-	var inherit = __webpack_require__(658);
-	var debug = __webpack_require__(626)('engine.io-client:polling-xhr');
+	var XMLHttpRequest = __webpack_require__(637);
+	var Polling = __webpack_require__(640);
+	var Emitter = __webpack_require__(651);
+	var inherit = __webpack_require__(653);
+	var debug = __webpack_require__(621)('engine.io-client:polling-xhr');
 
 	/**
 	 * Module exports.
@@ -47064,19 +47064,19 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 645 */
+/* 640 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * Module dependencies.
 	 */
 
-	var Transport = __webpack_require__(646);
-	var parseqs = __webpack_require__(657);
-	var parser = __webpack_require__(647);
-	var inherit = __webpack_require__(658);
-	var yeast = __webpack_require__(659);
-	var debug = __webpack_require__(626)('engine.io-client:polling');
+	var Transport = __webpack_require__(641);
+	var parseqs = __webpack_require__(652);
+	var parser = __webpack_require__(642);
+	var inherit = __webpack_require__(653);
+	var yeast = __webpack_require__(654);
+	var debug = __webpack_require__(621)('engine.io-client:polling');
 
 	/**
 	 * Module exports.
@@ -47089,7 +47089,7 @@
 	 */
 
 	var hasXHR2 = (function() {
-	  var XMLHttpRequest = __webpack_require__(642);
+	  var XMLHttpRequest = __webpack_require__(637);
 	  var xhr = new XMLHttpRequest({ xdomain: false });
 	  return null != xhr.responseType;
 	})();
@@ -47317,15 +47317,15 @@
 
 
 /***/ },
-/* 646 */
+/* 641 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * Module dependencies.
 	 */
 
-	var parser = __webpack_require__(647);
-	var Emitter = __webpack_require__(656);
+	var parser = __webpack_require__(642);
+	var Emitter = __webpack_require__(651);
 
 	/**
 	 * Module exports.
@@ -47478,19 +47478,19 @@
 
 
 /***/ },
-/* 647 */
+/* 642 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {/**
 	 * Module dependencies.
 	 */
 
-	var keys = __webpack_require__(648);
-	var hasBinary = __webpack_require__(649);
-	var sliceBuffer = __webpack_require__(651);
-	var base64encoder = __webpack_require__(652);
-	var after = __webpack_require__(653);
-	var utf8 = __webpack_require__(654);
+	var keys = __webpack_require__(643);
+	var hasBinary = __webpack_require__(644);
+	var sliceBuffer = __webpack_require__(646);
+	var base64encoder = __webpack_require__(647);
+	var after = __webpack_require__(648);
+	var utf8 = __webpack_require__(649);
 
 	/**
 	 * Check if we are running an android browser. That requires us to use
@@ -47547,7 +47547,7 @@
 	 * Create a blob api even for blob builder when vendor prefixes exist
 	 */
 
-	var Blob = __webpack_require__(655);
+	var Blob = __webpack_require__(650);
 
 	/**
 	 * Encodes a packet.
@@ -48079,7 +48079,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 648 */
+/* 643 */
 /***/ function(module, exports) {
 
 	
@@ -48104,7 +48104,7 @@
 
 
 /***/ },
-/* 649 */
+/* 644 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {
@@ -48112,7 +48112,7 @@
 	 * Module requirements.
 	 */
 
-	var isArray = __webpack_require__(650);
+	var isArray = __webpack_require__(645);
 
 	/**
 	 * Module exports.
@@ -48169,7 +48169,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 650 */
+/* 645 */
 /***/ function(module, exports) {
 
 	module.exports = Array.isArray || function (arr) {
@@ -48178,7 +48178,7 @@
 
 
 /***/ },
-/* 651 */
+/* 646 */
 /***/ function(module, exports) {
 
 	/**
@@ -48213,7 +48213,7 @@
 
 
 /***/ },
-/* 652 */
+/* 647 */
 /***/ function(module, exports) {
 
 	/*
@@ -48278,7 +48278,7 @@
 
 
 /***/ },
-/* 653 */
+/* 648 */
 /***/ function(module, exports) {
 
 	module.exports = after
@@ -48312,7 +48312,7 @@
 
 
 /***/ },
-/* 654 */
+/* 649 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_RESULT__;/* WEBPACK VAR INJECTION */(function(module, global) {/*! https://mths.be/utf8js v2.0.0 by @mathias */
@@ -48558,10 +48558,10 @@
 
 	}(this));
 
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(631)(module), (function() { return this; }())))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(626)(module), (function() { return this; }())))
 
 /***/ },
-/* 655 */
+/* 650 */
 /***/ function(module, exports) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {/**
@@ -48664,7 +48664,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 656 */
+/* 651 */
 /***/ function(module, exports) {
 
 	
@@ -48834,7 +48834,7 @@
 
 
 /***/ },
-/* 657 */
+/* 652 */
 /***/ function(module, exports) {
 
 	/**
@@ -48877,7 +48877,7 @@
 
 
 /***/ },
-/* 658 */
+/* 653 */
 /***/ function(module, exports) {
 
 	
@@ -48889,7 +48889,7 @@
 	};
 
 /***/ },
-/* 659 */
+/* 654 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -48963,7 +48963,7 @@
 
 
 /***/ },
-/* 660 */
+/* 655 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {
@@ -48971,8 +48971,8 @@
 	 * Module requirements.
 	 */
 
-	var Polling = __webpack_require__(645);
-	var inherit = __webpack_require__(658);
+	var Polling = __webpack_require__(640);
+	var inherit = __webpack_require__(653);
 
 	/**
 	 * Module exports.
@@ -49208,19 +49208,19 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 661 */
+/* 656 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {/**
 	 * Module dependencies.
 	 */
 
-	var Transport = __webpack_require__(646);
-	var parser = __webpack_require__(647);
-	var parseqs = __webpack_require__(657);
-	var inherit = __webpack_require__(658);
-	var yeast = __webpack_require__(659);
-	var debug = __webpack_require__(626)('engine.io-client:websocket');
+	var Transport = __webpack_require__(641);
+	var parser = __webpack_require__(642);
+	var parseqs = __webpack_require__(652);
+	var inherit = __webpack_require__(653);
+	var yeast = __webpack_require__(654);
+	var debug = __webpack_require__(621)('engine.io-client:websocket');
 	var BrowserWebSocket = global.WebSocket || global.MozWebSocket;
 
 	/**
@@ -49232,7 +49232,7 @@
 	var WebSocket = BrowserWebSocket;
 	if (!WebSocket && typeof window === 'undefined') {
 	  try {
-	    WebSocket = __webpack_require__(662);
+	    WebSocket = __webpack_require__(657);
 	  } catch (e) { }
 	}
 
@@ -49503,13 +49503,13 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 662 */
+/* 657 */
 /***/ function(module, exports) {
 
 	/* (ignored) */
 
 /***/ },
-/* 663 */
+/* 658 */
 /***/ function(module, exports) {
 
 	
@@ -49524,7 +49524,7 @@
 	};
 
 /***/ },
-/* 664 */
+/* 659 */
 /***/ function(module, exports) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {/**
@@ -49562,7 +49562,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 665 */
+/* 660 */
 /***/ function(module, exports, __webpack_require__) {
 
 	
@@ -49570,13 +49570,13 @@
 	 * Module dependencies.
 	 */
 
-	var parser = __webpack_require__(629);
-	var Emitter = __webpack_require__(666);
-	var toArray = __webpack_require__(667);
-	var on = __webpack_require__(668);
-	var bind = __webpack_require__(669);
-	var debug = __webpack_require__(626)('socket.io-client:socket');
-	var hasBin = __webpack_require__(670);
+	var parser = __webpack_require__(624);
+	var Emitter = __webpack_require__(661);
+	var toArray = __webpack_require__(662);
+	var on = __webpack_require__(663);
+	var bind = __webpack_require__(664);
+	var debug = __webpack_require__(621)('socket.io-client:socket');
+	var hasBin = __webpack_require__(665);
 
 	/**
 	 * Module exports.
@@ -49980,7 +49980,7 @@
 
 
 /***/ },
-/* 666 */
+/* 661 */
 /***/ function(module, exports) {
 
 	
@@ -50147,7 +50147,7 @@
 
 
 /***/ },
-/* 667 */
+/* 662 */
 /***/ function(module, exports) {
 
 	module.exports = toArray
@@ -50166,7 +50166,7 @@
 
 
 /***/ },
-/* 668 */
+/* 663 */
 /***/ function(module, exports) {
 
 	
@@ -50196,7 +50196,7 @@
 
 
 /***/ },
-/* 669 */
+/* 664 */
 /***/ function(module, exports) {
 
 	/**
@@ -50225,7 +50225,7 @@
 
 
 /***/ },
-/* 670 */
+/* 665 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {
@@ -50233,7 +50233,7 @@
 	 * Module requirements.
 	 */
 
-	var isArray = __webpack_require__(671);
+	var isArray = __webpack_require__(666);
 
 	/**
 	 * Module exports.
@@ -50291,7 +50291,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 671 */
+/* 666 */
 /***/ function(module, exports) {
 
 	module.exports = Array.isArray || function (arr) {
@@ -50300,7 +50300,7 @@
 
 
 /***/ },
-/* 672 */
+/* 667 */
 /***/ function(module, exports) {
 
 	
@@ -50391,7 +50391,2936 @@
 
 
 /***/ },
+/* 668 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(299);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactRouter = __webpack_require__(469);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var ChatMessage = function (_React$Component) {
+	  _inherits(ChatMessage, _React$Component);
+
+	  function ChatMessage(props) {
+	    _classCallCheck(this, ChatMessage);
+
+	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(ChatMessage).call(this, props));
+
+	    _this.displayName = 'ChatMessage';
+	    _this._openWhisper = _this._openWhisper.bind(_this);
+	    _this._closeWhisper = _this._closeWhisper.bind(_this);
+	    _this._lookThisRecord = _this._lookThisRecord.bind(_this);
+	    _this._handleWhisper = _this._handleWhisper.bind(_this);
+	    _this.state = {
+	      whisperOpen: false
+	    };
+	    return _this;
+	  }
+
+	  _createClass(ChatMessage, [{
+	    key: 'chat_dateFormat',
+	    value: function chat_dateFormat(date) {
+	      var now = new Date(date);
+	      var year = "" + now.getFullYear();
+	      var month = "" + (now.getMonth() + 1);if (month.length == 1) {
+	        month = "0" + month;
+	      }
+	      var day = "" + now.getDate();if (day.length == 1) {
+	        day = "0" + day;
+	      }
+	      var hour = "" + now.getHours();if (hour.length == 1) {
+	        hour = "0" + hour;
+	      }
+	      var minute = "" + now.getMinutes();if (minute.length == 1) {
+	        minute = "0" + minute;
+	      }
+	      var second = "" + now.getSeconds();if (second.length == 1) {
+	        second = "0" + second;
+	      }
+	      return year + "-" + month + "-" + day + " " + hour + ":" + minute + ":" + second;
+	    }
+	  }, {
+	    key: '_handleWhisper',
+	    value: function _handleWhisper() {
+	      this.props.handleWhisperOpen(this.props.message.battletag.split('#')[0], this.props.message.overwatch_id);
+	      this.setState({
+	        whisperOpen: false
+	      });
+	    }
+	  }, {
+	    key: '_openWhisper',
+	    value: function _openWhisper() {
+	      this.setState({
+	        whisperOpen: !this.state.whisperOpen
+	      });
+	    }
+	  }, {
+	    key: '_closeWhisper',
+	    value: function _closeWhisper() {
+	      this.setState({
+	        whisperOpen: false
+	      });
+	    }
+	  }, {
+	    key: '_lookThisRecord',
+	    value: function _lookThisRecord() {
+	      var bt = this.props.message.battletag.replace("#", "-");
+	      _reactRouter.browserHistory.push('/user/' + bt);
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      var message = this.props.message;
+	      var whisper = _react2.default.createElement(
+	        'div',
+	        { className: 'whisper-div' },
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'whisper-1', onClick: this._handleWhisper },
+	          '귓말하기'
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'whisper-2', onClick: this._lookThisRecord },
+	          '전적보기'
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'whisper-3', onClick: this._closeWhisper },
+	          _react2.default.createElement('i', { className: 'fa fa-times', 'aria-hidden': 'true' }),
+	          _react2.default.createElement(
+	            'span',
+	            null,
+	            '닫기'
+	          )
+	        )
+	      );
+	      var message_battletag = _react2.default.createElement(
+	        'div',
+	        { className: 'chat-box-name pointer', onClick: this._openWhisper },
+	        message.battletag.split('#')[0],
+	        ' ',
+	        _react2.default.createElement(
+	          'span',
+	          { className: 'meta' },
+	          this.chat_dateFormat(message.written_time)
+	        )
+	      );
+	      return _react2.default.createElement(
+	        'div',
+	        { className: 'relative' },
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'whisper-from ' + (message.type == 5 ? 'active' : '') },
+	          'FROM : ',
+	          message.battletag.split('#')[0]
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'whisper-to ' + (message.type == 7 ? 'active' : '') },
+	          'TO : ',
+	          message.to
+	        ),
+	        _react2.default.createElement('img', { src: message.avatar, className: 'chat-avatar pointer', onClick: this._openWhisper }),
+	        message.type == 4 ? message_battletag : undefined,
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'chat-log' },
+	          message.point,
+	          '점 (',
+	          _react2.default.createElement(
+	            'span',
+	            { className: 'log-name' },
+	            message.most_hero
+	          ),
+	          ') : ',
+	          _react2.default.createElement('br', { className: 'computer-hide' }),
+	          message.message
+	        ),
+	        this.state.whisperOpen ? whisper : undefined
+	      );
+	    }
+	  }]);
+
+	  return ChatMessage;
+	}(_react2.default.Component);
+
+	ChatMessage.propTypes = {
+	  message: _react2.default.PropTypes.object,
+	  handleWhisperOpen: _react2.default.PropTypes.func
+	};
+
+	exports.default = ChatMessage;
+
+/***/ },
+/* 669 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	exports.getMessage = getMessage;
+	exports.getConnectionCount = getConnectionCount;
+	exports.updateCurrentRoom = updateCurrentRoom;
+	exports.addConnection = addConnection;
+	exports.deleteConnection = deleteConnection;
+	exports.leaveRoom = leaveRoom;
+
+	var _ActionTypes = __webpack_require__(598);
+
+	function getMessage(message) {
+		return {
+			type: _ActionTypes.GET_MESSAGE,
+			message: message
+		};
+	}
+
+	function getConnectionCount(count, userlist) {
+		return {
+			type: _ActionTypes.GET_CONNECTION_COUNT,
+			count: count,
+			userlist: userlist
+		};
+	}
+
+	function updateCurrentRoom(room) {
+		return {
+			type: _ActionTypes.UPDATE_CURRENT_ROOM,
+			room: room
+		};
+	}
+
+	function addConnection(count, user) {
+		return {
+			type: _ActionTypes.CONNECTION_ADD,
+			count: count,
+			user: user
+		};
+	}
+
+	function deleteConnection(count, user) {
+		return {
+			type: _ActionTypes.CONNECTION_DELETE,
+			count: count,
+			user: user
+		};
+	}
+
+	function leaveRoom() {
+		return {
+			type: _ActionTypes.LEAVE_ROOM
+		};
+	}
+
+/***/ },
+/* 670 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(299);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactRouter = __webpack_require__(469);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var RoomList = function (_React$Component) {
+		_inherits(RoomList, _React$Component);
+
+		function RoomList(props) {
+			_classCallCheck(this, RoomList);
+
+			var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(RoomList).call(this, props));
+
+			_this.displayName = 'RoomList';
+			return _this;
+		}
+
+		_createClass(RoomList, [{
+			key: 'render',
+			value: function render() {
+				return _react2.default.createElement(
+					'div',
+					{ className: 'roomList' },
+					_react2.default.createElement(
+						'div',
+						{ className: 'rooms' },
+						_react2.default.createElement(
+							_reactRouter.Link,
+							{ to: '/chat/bronze' },
+							_react2.default.createElement('img', { src: '/asset/images/room_1.png', className: 'roomImage' }),
+							_react2.default.createElement(
+								'div',
+								{ className: 'chat-name' },
+								'심해층'
+							),
+							_react2.default.createElement(
+								'div',
+								{ className: 'tier-div' },
+								_react2.default.createElement('img', { src: '/asset/images/bronze.png' })
+							)
+						)
+					),
+					_react2.default.createElement(
+						'div',
+						{ className: 'rooms' },
+						_react2.default.createElement(
+							_reactRouter.Link,
+							{ to: '/chat/silver' },
+							_react2.default.createElement('img', { src: '/asset/images/room_2.png', className: 'roomImage' }),
+							_react2.default.createElement(
+								'div',
+								{ className: 'chat-name' },
+								'해저층'
+							),
+							_react2.default.createElement(
+								'div',
+								{ className: 'tier-div' },
+								_react2.default.createElement('img', { src: '/asset/images/silver.png' })
+							)
+						)
+					),
+					_react2.default.createElement(
+						'div',
+						{ className: 'rooms' },
+						_react2.default.createElement(
+							_reactRouter.Link,
+							{ to: '/chat/gold' },
+							_react2.default.createElement('img', { src: '/asset/images/room_3.png', className: 'roomImage' }),
+							_react2.default.createElement(
+								'div',
+								{ className: 'chat-name' },
+								'지상계'
+							),
+							_react2.default.createElement(
+								'div',
+								{ className: 'tier-div' },
+								_react2.default.createElement('img', { src: '/asset/images/gold.png' })
+							)
+						)
+					),
+					_react2.default.createElement(
+						'div',
+						{ className: 'rooms' },
+						_react2.default.createElement(
+							_reactRouter.Link,
+							{ to: '/chat/platinum' },
+							_react2.default.createElement('img', { src: '/asset/images/room_4.png', className: 'roomImage' }),
+							_react2.default.createElement(
+								'div',
+								{ className: 'chat-name' },
+								'성층권'
+							),
+							_react2.default.createElement(
+								'div',
+								{ className: 'tier-div' },
+								_react2.default.createElement('img', { src: '/asset/images/platinum.png' })
+							)
+						)
+					),
+					_react2.default.createElement(
+						'div',
+						{ className: 'rooms' },
+						_react2.default.createElement(
+							_reactRouter.Link,
+							{ to: '/chat/diamond' },
+							_react2.default.createElement('img', { src: '/asset/images/room_5.png', className: 'roomImage' }),
+							_react2.default.createElement(
+								'div',
+								{ className: 'chat-name' },
+								'천상계'
+							),
+							_react2.default.createElement(
+								'div',
+								{ className: 'tier-div' },
+								_react2.default.createElement('img', { src: '/asset/images/diamond.png' })
+							)
+						)
+					),
+					_react2.default.createElement(
+						'div',
+						{ className: 'mobile-rooms' },
+						_react2.default.createElement(
+							_reactRouter.Link,
+							{ to: '/chat/bronze' },
+							_react2.default.createElement(
+								'div',
+								{ className: 'chat-name' },
+								'심해층'
+							),
+							_react2.default.createElement(
+								'div',
+								{ className: 'tier-div' },
+								_react2.default.createElement('img', { src: '/asset/images/bronze.png' })
+							)
+						)
+					),
+					_react2.default.createElement(
+						'div',
+						{ className: 'mobile-rooms' },
+						_react2.default.createElement(
+							_reactRouter.Link,
+							{ to: '/chat/silver' },
+							_react2.default.createElement(
+								'div',
+								{ className: 'chat-name' },
+								'해저층'
+							),
+							_react2.default.createElement(
+								'div',
+								{ className: 'tier-div' },
+								_react2.default.createElement('img', { src: '/asset/images/silver.png' })
+							)
+						)
+					),
+					_react2.default.createElement(
+						'div',
+						{ className: 'mobile-rooms' },
+						_react2.default.createElement(
+							_reactRouter.Link,
+							{ to: '/chat/gold' },
+							_react2.default.createElement(
+								'div',
+								{ className: 'chat-name' },
+								'지상계'
+							),
+							_react2.default.createElement(
+								'div',
+								{ className: 'tier-div' },
+								_react2.default.createElement('img', { src: '/asset/images/gold.png' })
+							)
+						)
+					),
+					_react2.default.createElement(
+						'div',
+						{ className: 'mobile-rooms' },
+						_react2.default.createElement(
+							_reactRouter.Link,
+							{ to: '/chat/platinum' },
+							_react2.default.createElement(
+								'div',
+								{ className: 'chat-name' },
+								'성층권'
+							),
+							_react2.default.createElement(
+								'div',
+								{ className: 'tier-div' },
+								_react2.default.createElement('img', { src: '/asset/images/platinum.png' })
+							)
+						)
+					),
+					_react2.default.createElement(
+						'div',
+						{ className: 'mobile-rooms' },
+						_react2.default.createElement(
+							_reactRouter.Link,
+							{ to: '/chat/diamond' },
+							_react2.default.createElement(
+								'div',
+								{ className: 'chat-name' },
+								'천상계'
+							),
+							_react2.default.createElement(
+								'div',
+								{ className: 'tier-div' },
+								_react2.default.createElement('img', { src: '/asset/images/diamond.png' })
+							)
+						)
+					)
+				);
+			}
+		}]);
+
+		return RoomList;
+	}(_react2.default.Component);
+
+	exports.default = RoomList;
+
+/***/ },
+/* 671 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(299);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactRouter = __webpack_require__(469);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var ArticleBox = function (_React$Component) {
+		_inherits(ArticleBox, _React$Component);
+
+		function ArticleBox(props) {
+			_classCallCheck(this, ArticleBox);
+
+			var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(ArticleBox).call(this, props));
+
+			_this.displayName = 'ArticleBox';
+			return _this;
+		}
+
+		_createClass(ArticleBox, [{
+			key: '_boardType',
+			value: function _boardType(type) {
+				switch (type) {
+					case "free":
+						return "자유";
+					case "strategy":
+						return "공략";
+				}
+			}
+		}, {
+			key: '_dateFormat',
+			value: function _dateFormat(date) {
+				var now = new Date(date);
+				var year = "" + now.getFullYear();
+				var month = "" + (now.getMonth() + 1);if (month.length == 1) {
+					month = "0" + month;
+				}
+				var day = "" + now.getDate();if (day.length == 1) {
+					day = "0" + day;
+				}
+				var hour = "" + now.getHours();if (hour.length == 1) {
+					hour = "0" + hour;
+				}
+				var minute = "" + now.getMinutes();if (minute.length == 1) {
+					minute = "0" + minute;
+				}
+				return month + "/" + day + " " + hour + ":" + minute;
+			}
+		}, {
+			key: 'render',
+			value: function render() {
+				var article = this.props.article;
+				return _react2.default.createElement(
+					'tr',
+					null,
+					_react2.default.createElement(
+						'td',
+						{ className: 'left-align article-type mobile-hide' },
+						this._boardType(this.props.boardType)
+					),
+					_react2.default.createElement(
+						'td',
+						{ className: 'left-align article-title' },
+						_react2.default.createElement(
+							_reactRouter.Link,
+							{ to: "/board/" + this.props.boardType + "/page/" + this.props.pageId + "/article/" + article.article_id },
+							article.title,
+							_react2.default.createElement(
+								'span',
+								{ className: 'article-comment-count' },
+								'+',
+								article.comment_count
+							)
+						)
+					),
+					_react2.default.createElement(
+						'td',
+						{ className: 'collapsing hit-pad' },
+						article.name ? article.name : "익명"
+					),
+					_react2.default.createElement(
+						'td',
+						{ className: 'collapsing hit-pad mobile-hide' },
+						article.hit_count
+					),
+					_react2.default.createElement(
+						'td',
+						{ className: 'collapsing hit-pad mobile-hide' },
+						article.like_count
+					),
+					_react2.default.createElement(
+						'td',
+						{ className: 'collapsing mobile-hide' },
+						this._dateFormat(article.written_time)
+					)
+				);
+			}
+		}]);
+
+		return ArticleBox;
+	}(_react2.default.Component);
+
+	exports.default = ArticleBox;
+
+/***/ },
+/* 672 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(299);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _axios = __webpack_require__(536);
+
+	var _axios2 = _interopRequireDefault(_axios);
+
+	var _ResponseCode = __webpack_require__(673);
+
+	var _reactRouter = __webpack_require__(469);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var ArticleWrite = function (_React$Component) {
+		_inherits(ArticleWrite, _React$Component);
+
+		function ArticleWrite(props) {
+			_classCallCheck(this, ArticleWrite);
+
+			var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(ArticleWrite).call(this, props));
+
+			_this.state = {
+				title: "",
+				content: "",
+				boardType: "free"
+			};
+			_this._changeBoardType = _this._changeBoardType.bind(_this);
+			_this._handleChangeTitle = _this._handleChangeTitle.bind(_this);
+			_this._handleChangeContent = _this._handleChangeContent.bind(_this);
+			_this._writeArticle = _this._writeArticle.bind(_this);
+			return _this;
+		}
+
+		_createClass(ArticleWrite, [{
+			key: '_handleChangeTitle',
+			value: function _handleChangeTitle(e) {
+				this.setState({
+					title: e.target.value
+				});
+			}
+		}, {
+			key: '_handleChangeContent',
+			value: function _handleChangeContent(e) {
+				this.setState({
+					content: e.target.value
+				});
+			}
+		}, {
+			key: '_changeBoardType',
+			value: function _changeBoardType(e) {
+				this.setState({
+					boardType: e.target.value
+				});
+			}
+		}, {
+			key: '_writeArticle',
+			value: function _writeArticle() {
+				var _this2 = this;
+
+				(0, _axios2.default)({
+					method: "POST",
+					url: "http://bad.watch/api/article/write",
+					data: {
+						title: this.state.title,
+						content: this.state.content,
+						boardtype: this.state.boardType
+					}
+				}).then(function (response) {
+					var data = response.data;
+
+					if (data.responseCode == _ResponseCode.CREATE_ARTICLE_SUCCESS) {
+						var query = '/board/';
+						query += _this2.state.boardType;
+						query += '/page/';
+						query += 1;
+						_reactRouter.browserHistory.push(query);
+					} else {}
+				});
+			}
+		}, {
+			key: 'render',
+			value: function render() {
+				return _react2.default.createElement(
+					'div',
+					null,
+					_react2.default.createElement(
+						'select',
+						{ className: 'browser-default', onChange: this._changeBoardType, value: this.state.boardType },
+						_react2.default.createElement(
+							'option',
+							{ value: 'free' },
+							'자유게시판'
+						),
+						_react2.default.createElement(
+							'option',
+							{ value: 'strategy' },
+							'전략게시판'
+						)
+					),
+					'제목 ',
+					_react2.default.createElement('input', { type: 'text', name: 'title', value: this.state.title, onChange: this._handleChangeTitle }),
+					'내용 ',
+					_react2.default.createElement('textarea', { name: 'content', className: 'article-textarea', value: this.state.content, onChange: this._handleChangeContent }),
+					_react2.default.createElement(
+						'div',
+						{ className: 'modal-footer' },
+						_react2.default.createElement(
+							'a',
+							{ onClick: this._writeArticle,
+								className: 'waves-effect btn' },
+							'작성'
+						)
+					)
+				);
+			}
+		}]);
+
+		return ArticleWrite;
+	}(_react2.default.Component);
+
+	exports.default = ArticleWrite;
+
+/***/ },
 /* 673 */
+/***/ function(module, exports) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	var NO_AUTHORIZATION = exports.NO_AUTHORIZATION = 0;
+	var REQUIRE_LOGIN = exports.REQUIRE_LOGIN = 1;
+	var GET_USERINFO_SUCCESS = exports.GET_USERINFO_SUCCESS = 2;
+	var GET_USERINFO_FAIL = exports.GET_USERINFO_FAIL = 3;
+	var GET_HERO_USERINFO_SUCCESS = exports.GET_HERO_USERINFO_SUCCESS = 4;
+	var GET_HERO_USERINFO_FAIL = exports.GET_HERO_USERINFO_FAIL = 5;
+	var GET_YOUTUBE_SUCCESS = exports.GET_YOUTUBE_SUCCESS = 6;
+	var GET_YOUTUBE_FAIL = exports.GET_YOUTUBE_FAIL = 7;
+	var CREATE_YOUTUBE_SUCCESS = exports.CREATE_YOUTUBE_SUCCESS = 8;
+	var CREATE_YOUTUBE_FAIL = exports.CREATE_YOUTUBE_FAIL = 9;
+	var GET_YOUTUBE_COMMENT_SUCCESS = exports.GET_YOUTUBE_COMMENT_SUCCESS = 10;
+	var GET_YOUTUBE_COMMENT_FAIL = exports.GET_YOUTUBE_COMMENT_FAIL = 11;
+	var CREATE_YOUTUBE_COMMENT_SUCCESS = exports.CREATE_YOUTUBE_COMMENT_SUCCESS = 12;
+	var CREATE_YOUTUBE_COMMENT_FAIL = exports.CREATE_YOUTUBE_COMMENT_FAIL = 13;
+	var GET_YOUTUBE_REPLY_SUCCESS = exports.GET_YOUTUBE_REPLY_SUCCESS = 14;
+	var GET_YOUTUBE_REPLY_FAIL = exports.GET_YOUTUBE_REPLY_FAIL = 15;
+	var CREATE_YOUTUBE_REPLY_SUCCESS = exports.CREATE_YOUTUBE_REPLY_SUCCESS = 16;
+	var CREATE_YOUTUBE_REPLY_FAIL = exports.CREATE_YOUTUBE_REPLY_FAIL = 17;
+	var GET_ARTICLE_SUCCESS = exports.GET_ARTICLE_SUCCESS = 18;
+	var GET_ARTICLE_FAIL = exports.GET_ARTICLE_FAIL = 19;
+	var CREATE_ARTICLE_SUCCESS = exports.CREATE_ARTICLE_SUCCESS = 20;
+	var CREATE_ARTICLE_FAIL = exports.CREATE_ARTICLE_FAIL = 21;
+	var MODIFY_ARTICLE_SUCCESS = exports.MODIFY_ARTICLE_SUCCESS = 22;
+	var MODIFY_ARTICLE_FAIL = exports.MODIFY_ARTICLE_FAIL = 23;
+	var DELETE_ARTICLE_SUCCESS = exports.DELETE_ARTICLE_SUCCESS = 24;
+	var DELETE_ARTICLE_FAIL = exports.DELETE_ARTICLE_FAIL = 25;
+	var GET_COMMENT_SUCCESS = exports.GET_COMMENT_SUCCESS = 26;
+	var GET_COMMENT_FAIL = exports.GET_COMMENT_FAIL = 27;
+	var CREATE_COMMENT_SUCCESS = exports.CREATE_COMMENT_SUCCESS = 28;
+	var CREATE_COMMENT_FAIL = exports.CREATE_COMMENT_FAIL = 29;
+	var MODIFY_COMMENT_SUCCESS = exports.MODIFY_COMMENT_SUCCESS = 30;
+	var MODIFY_COMMENT_FAIL = exports.MODIFY_COMMENT_FAIL = 31;
+	var DELETE_COMMENT_SUCCESS = exports.DELETE_COMMENT_SUCCESS = 32;
+	var DELETE_COMMENT_FAIL = exports.DELETE_COMMENT_FAIL = 33;
+	var GET_REPLY_SUCCESS = exports.GET_REPLY_SUCCESS = 34;
+	var GET_REPLY_FAIL = exports.GET_REPLY_FAIL = 35;
+	var CREATE_REPLY_SUCCESS = exports.CREATE_REPLY_SUCCESS = 36;
+	var CREATE_REPLY_FAIL = exports.CREATE_REPLY_FAIL = 37;
+	var MODIFY_REPLY_SUCCESS = exports.MODIFY_REPLY_SUCCESS = 38;
+	var MODIFY_REPLY_FAIL = exports.MODIFY_REPLY_FAIL = 39;
+	var DELETE_REPLY_SUCCESS = exports.DELETE_REPLY_SUCCESS = 40;
+	var DELETE_REPLY_FAIL = exports.DELETE_REPLY_FAIL = 41;
+	var LOGIN_SUCCESS = exports.LOGIN_SUCCESS = 42;
+	var LOGIN_FAIL = exports.LOGIN_FAIL = 43;
+	var LOGOUT_SUCCESS = exports.LOGOUT_SUCCESS = 44;
+	var EDIT_YOUTUBE_SUCCESS = exports.EDIT_YOUTUBE_SUCCESS = 45;
+	var EDIT_YOUTUBE_FAIL = exports.EDIT_YOUTUBE_FAIL = 46;
+	var DELETE_YOUTUBE_SUCCESS = exports.DELETE_YOUTUBE_SUCCESS = 47;
+	var DELETE_YOUTUBE_FAIL = exports.DELETE_YOUTUBE_FAIL = 48;
+	var ALREADY_LIKE = exports.ALREADY_LIKE = 49;
+	var LIKE_SUCCESS = exports.LIKE_SUCCESS = 50;
+	var LIKE_FAIL = exports.LIKE_FAIL = 51;
+	var DISLIKE_SUCCESS = exports.DISLIKE_SUCCESS = 52;
+	var DISLIKE_FAIL = exports.DISLIKE_FAIL = 53;
+	var RENEW_USER_SUCCESS = exports.RENEW_USER_SUCCESS = 54;
+	var RENEW_USER_FAIL = exports.RENEW_USER_FAIL = 55;
+
+/***/ },
+/* 674 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(299);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _axios = __webpack_require__(536);
+
+	var _axios2 = _interopRequireDefault(_axios);
+
+	var _reactRouter = __webpack_require__(469);
+
+	var _ResponseCode = __webpack_require__(673);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var ArticleModify = function (_React$Component) {
+		_inherits(ArticleModify, _React$Component);
+
+		function ArticleModify(props) {
+			_classCallCheck(this, ArticleModify);
+
+			var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(ArticleModify).call(this, props));
+
+			_this.displayName = 'ArticleModify';
+			_this.state = {
+				articleId: _this.props.params.articleId,
+				title: "",
+				content: "",
+				boardType: _this.props.params.boardType
+			};
+
+			_this._changeBoardType = _this._changeBoardType.bind(_this);
+			_this._handleChangeTitle = _this._handleChangeTitle.bind(_this);
+			_this._handleChangeContent = _this._handleChangeContent.bind(_this);
+			_this._writeArticle = _this._writeArticle.bind(_this);
+			_this._getData = _this._getData.bind(_this);
+			return _this;
+		}
+
+		_createClass(ArticleModify, [{
+			key: '_handleChangeTitle',
+			value: function _handleChangeTitle(e) {
+				this.setState({
+					title: e.target.value
+				});
+			}
+		}, {
+			key: '_handleChangeContent',
+			value: function _handleChangeContent(e) {
+				this.setState({
+					content: e.target.value
+				});
+			}
+		}, {
+			key: '_changeBoardType',
+			value: function _changeBoardType(e) {
+				this.setState({
+					boardType: e.target.value
+				});
+			}
+		}, {
+			key: 'componentDidMount',
+			value: function componentDidMount() {
+				this._getData();
+			}
+		}, {
+			key: '_getData',
+			value: function _getData() {
+				var _this2 = this;
+
+				var query = 'http://bad.watch/api/article/';
+				query += this.state.boardType;
+				query += '/';
+				query += this.state.articleId;
+
+				_axios2.default.get(query).then(function (response) {
+					var data = response.data;
+
+					if (data.responseCode == 18) {
+						var articleData = data.articleData;
+
+						_this2.setState({
+							title: articleData.title,
+							content: articleData.content
+						});
+					} else {
+						sweetAlert('데이터를 불러오는데 오류가 발생했습니다.', '잠시후 다시시도해주세요.', 'error');
+						return;
+					}
+				});
+			}
+		}, {
+			key: '_writeArticle',
+			value: function _writeArticle() {
+				var _this3 = this;
+
+				var url = "http://bad.watch/api/article/";
+				url += this.state.articleId;
+				url += "/modify";
+
+				(0, _axios2.default)({
+					method: "PUT",
+					url: url,
+					data: {
+						title: this.state.title,
+						content: this.state.content,
+						boardtype: this.state.boardType
+					}
+				}).then(function (response) {
+					var data = response.data;
+
+					if (data.responseCode == _ResponseCode.MODIFY_ARTICLE_SUCCESS) {
+						var query = '/board/';
+						query += _this3.state.boardType;
+						query += '/page/';
+						query += 1;
+
+						_reactRouter.browserHistory.push(query);
+					} else {
+						sweetAlert("글 수정 에러");
+					}
+				});
+			}
+		}, {
+			key: 'render',
+			value: function render() {
+				return _react2.default.createElement(
+					'div',
+					null,
+					_react2.default.createElement(
+						'select',
+						{ className: 'browser-default', onChange: this._changeBoardType, value: this.state.boardType },
+						_react2.default.createElement(
+							'option',
+							{ value: 'free' },
+							'자유게시판'
+						),
+						_react2.default.createElement(
+							'option',
+							{ value: 'strategy' },
+							'전략게시판'
+						)
+					),
+					'제목 ',
+					_react2.default.createElement('input', { type: 'text', name: 'title', value: this.state.title, onChange: this._handleChangeTitle }),
+					'내용 ',
+					_react2.default.createElement('textarea', { name: 'content', value: this.state.content, onChange: this._handleChangeContent }),
+					_react2.default.createElement(
+						'div',
+						{ className: 'modal-footer' },
+						_react2.default.createElement(
+							'a',
+							{ onClick: this._writeArticle,
+								className: 'waves-effect waves-light btn' },
+							'수정'
+						)
+					)
+				);
+			}
+		}]);
+
+		return ArticleModify;
+	}(_react2.default.Component);
+
+	exports.default = ArticleModify;
+
+/***/ },
+/* 675 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(299);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactRouter = __webpack_require__(469);
+
+	var _axios = __webpack_require__(536);
+
+	var _axios2 = _interopRequireDefault(_axios);
+
+	var _ArticleBox = __webpack_require__(671);
+
+	var _ArticleBox2 = _interopRequireDefault(_ArticleBox);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var BoardBox = function (_React$Component) {
+		_inherits(BoardBox, _React$Component);
+
+		function BoardBox(props) {
+			_classCallCheck(this, BoardBox);
+
+			var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(BoardBox).call(this, props));
+
+			_this.state = {
+				articles: [],
+				currentPageNumber: _this.props.params.pageId,
+				numberOfPages: 1,
+				startPageNumber: 1,
+				endPageNumber: 1,
+				pageNumbers: [],
+				numberOfPagesPerView: 10,
+				numberOfArticlesPerPage: 16,
+				boardType: _this.props.params.boardType
+			};
+			_this.displayName = 'BoardBox';
+
+			_this._getData = _this._getData.bind(_this);
+			_this._setPageNumbers = _this._setPageNumbers.bind(_this);
+			_this._before = _this._before.bind(_this);
+			_this._next = _this._next.bind(_this);
+			return _this;
+		}
+
+		_createClass(BoardBox, [{
+			key: '_changeBoardType',
+			value: function _changeBoardType(board) {
+				var _this2 = this;
+
+				if (this.state.boardType === board) ;else {
+					this.setState({
+						boardType: board
+					}, function () {
+						return _this2._changePage(1);
+					});
+				}
+			}
+		}, {
+			key: '_changePage',
+			value: function _changePage(pageNumber) {
+				var _this3 = this;
+
+				var query = '/board/';
+				query += this.state.boardType;
+				query += '/page/';
+				query += pageNumber;
+
+				_reactRouter.browserHistory.push(query);
+				this.setState({
+					currentPageNumber: pageNumber
+				}, function () {
+					return _this3._getData();
+				});
+			}
+		}, {
+			key: '_before',
+			value: function _before() {
+				if (this.state.startPageNumber < this.state.numberOfPagesPerView) ;else this._changePage(Number(this.state.startPageNumber) - Number(1));
+			}
+		}, {
+			key: '_next',
+			value: function _next() {
+				if (this.state.endPageNumber >= this.state.numberOfPages) ;else this._changePage(Number(this.state.endPageNumber) + Number(1));
+			}
+		}, {
+			key: '_setPageNumbers',
+			value: function _setPageNumbers() {
+
+				var tempPageNumbers = [];
+				tempPageNumbers.push(_react2.default.createElement(
+					'li',
+					{ onClick: this._before, key: -1 },
+					_react2.default.createElement(
+						'a',
+						null,
+						_react2.default.createElement(
+							'i',
+							{ className: 'material-icons' },
+							'chevron_left'
+						)
+					)
+				));
+				for (var i = this.state.startPageNumber; i <= this.state.endPageNumber; i++) {
+					tempPageNumbers.push(_react2.default.createElement(
+						'li',
+						{ className: 'waves-effect ' + (this.state.currentPageNumber == i ? 'active' : ''), onClick: this._changePage.bind(this, i), key: i },
+						_react2.default.createElement(
+							'a',
+							null,
+							i
+						)
+					));
+				}
+				tempPageNumbers.push(_react2.default.createElement(
+					'li',
+					{ onClick: this._next, key: -2 },
+					_react2.default.createElement(
+						'a',
+						null,
+						_react2.default.createElement(
+							'i',
+							{ className: 'material-icons' },
+							'chevron_right'
+						)
+					)
+				));
+
+				this.setState({
+					pageNumbers: tempPageNumbers
+				});
+			}
+		}, {
+			key: 'componentDidMount',
+			value: function componentDidMount() {
+				this._getData();
+			}
+		}, {
+			key: '_getData',
+			value: function _getData() {
+				var _this4 = this;
+
+				var query = 'http://bad.watch/api/article/';
+				query += this.state.boardType;
+				query += '?page=';
+				query += this.state.currentPageNumber;
+
+				_axios2.default.get(query).then(function (response) {
+					var data = response.data;
+					if (data.responseCode == 18) {
+						var endNumber = void 0,
+						    startNumber = void 0;
+						var numberOfPagesFromServer = parseInt((data.articleCount + Number(_this4.state.numberOfArticlesPerPage) - 1) / Number(_this4.state.numberOfArticlesPerPage));
+
+						for (startNumber = _this4.state.currentPageNumber;; startNumber--) {
+							if (startNumber <= 1) break;
+							if (startNumber <= _this4.state.currentPageNumber - _this4.state.numberOfPagesPerView + 1) break;
+							if (startNumber % _this4.state.numberOfPagesPerView == 1) break;
+						}
+
+						for (endNumber = _this4.state.currentPageNumber;; endNumber++) {
+							if (endNumber >= numberOfPagesFromServer) break;
+							if (endNumber >= _this4.state.currentPage + _this4.state.numberOfPagesPerView - 1) break;
+							if (endNumber % _this4.state.numberOfPagesPerView == 0) break;
+						}
+
+						_this4.setState({
+							articles: data.articleData,
+							numberOfPages: numberOfPagesFromServer,
+							startPageNumber: startNumber,
+							endPageNumber: endNumber
+						}, function () {
+							return _this4._setPageNumbers();
+						});
+					} else {
+						sweetAlert('데이터를 불러오는데 오류가 발생했습니다.', '잠시후 다시시도해주세요.', 'error');
+						return;
+					}
+				});
+			}
+		}, {
+			key: 'render',
+			value: function render() {
+				var _this5 = this;
+
+				return _react2.default.createElement(
+					'div',
+					{ className: 'board-top' },
+					_react2.default.createElement(
+						'a',
+						{ className: 'waves-effect btn', onClick: this._changeBoardType.bind(this, 'free') },
+						'자유게시판'
+					),
+					_react2.default.createElement(
+						'a',
+						{ className: 'waves-effect btn', onClick: this._changeBoardType.bind(this, 'strategy') },
+						'전략게시판'
+					),
+					_react2.default.createElement('p', null),
+					_react2.default.createElement(
+						'div',
+						null,
+						_react2.default.createElement(
+							'table',
+							{ className: 'article-table' },
+							_react2.default.createElement(
+								'thead',
+								null,
+								_react2.default.createElement(
+									'tr',
+									null,
+									_react2.default.createElement(
+										'td',
+										{ className: 'mobile-hide' },
+										'카테고리'
+									),
+									_react2.default.createElement(
+										'td',
+										null,
+										'제목'
+									),
+									_react2.default.createElement(
+										'td',
+										null,
+										'작성자'
+									),
+									_react2.default.createElement(
+										'td',
+										{ className: 'mobile-hide' },
+										'조회수'
+									),
+									_react2.default.createElement(
+										'td',
+										{ className: 'mobile-hide' },
+										'추천수'
+									),
+									_react2.default.createElement(
+										'td',
+										{ className: 'mobile-hide' },
+										'등록일'
+									)
+								)
+							),
+							_react2.default.createElement(
+								'tbody',
+								null,
+								this.state.articles.map(function (article) {
+									return _react2.default.createElement(_ArticleBox2.default, { key: article.article_id,
+										article: article,
+										pageId: _this5.props.params.pageId,
+										boardType: _this5.state.boardType
+									});
+								})
+							)
+						)
+					),
+					_react2.default.createElement('p', null),
+					_react2.default.createElement(
+						'center',
+						null,
+						_react2.default.createElement(
+							'ul',
+							{ className: 'pagination' },
+							this.state.pageNumbers
+						)
+					),
+					_react2.default.createElement('p', null),
+					_react2.default.createElement(
+						_reactRouter.Link,
+						{ to: '/board/write', className: 'modal-trigger waves-effect waves-light btn' },
+						'글쓰기'
+					)
+				);
+			}
+		}]);
+
+		return BoardBox;
+	}(_react2.default.Component);
+
+	exports.default = BoardBox;
+
+/***/ },
+/* 676 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(299);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _axios = __webpack_require__(536);
+
+	var _axios2 = _interopRequireDefault(_axios);
+
+	var _BoardCommentBox = __webpack_require__(677);
+
+	var _BoardCommentBox2 = _interopRequireDefault(_BoardCommentBox);
+
+	var _ResponseCode = __webpack_require__(673);
+
+	var _reactRouter = __webpack_require__(469);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var BoardShowBox = function (_React$Component) {
+		_inherits(BoardShowBox, _React$Component);
+
+		function BoardShowBox(props) {
+			_classCallCheck(this, BoardShowBox);
+
+			var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(BoardShowBox).call(this, props));
+
+			_this.displayName = 'BoardShowBox';
+			_this.state = {
+				boardType: _this.props.params.boardType,
+				articleId: _this.props.params.articleId,
+				authentication: false,
+				name: "",
+				title: "",
+				content: "",
+				comment_count: 0,
+				hit_count: 0,
+				like_count: 0,
+				like_status: false,
+				year: 2016,
+				month: 8,
+				day: 22,
+				hour: 0,
+				minute: 0,
+				second: 0,
+				authenticationActions: [],
+				written_time: ""
+			};
+			_this._getData = _this._getData.bind(_this);
+			_this._toMyDate = _this._toMyDate.bind(_this);
+			_this._toLeftPad = _this._toLeftPad.bind(_this);
+			_this._like = _this._like.bind(_this);
+			_this._dislike = _this._dislike.bind(_this);
+			_this._addComment = _this._addComment.bind(_this);
+			_this._modify = _this._modify.bind(_this);
+			_this._delete = _this._delete.bind(_this);
+			_this._setAuthenticationActions = _this._setAuthenticationActions.bind(_this);
+			return _this;
+		}
+
+		_createClass(BoardShowBox, [{
+			key: '_dateFormat',
+			value: function _dateFormat(date) {
+				var now = new Date(date);
+				var year = "" + now.getFullYear();
+				var month = "" + (now.getMonth() + 1);if (month.length == 1) {
+					month = "0" + month;
+				}
+				var day = "" + now.getDate();if (day.length == 1) {
+					day = "0" + day;
+				}
+				var hour = "" + now.getHours();if (hour.length == 1) {
+					hour = "0" + hour;
+				}
+				var minute = "" + now.getMinutes();if (minute.length == 1) {
+					minute = "0" + minute;
+				}
+				var second = "" + now.getSeconds();if (second.length == 1) {
+					second = "0" + second;
+				}
+				return year + "-" + month + "-" + day + " " + hour + ":" + minute + ":" + second;
+			}
+		}, {
+			key: '_toMyDate',
+			value: function _toMyDate(written_time) {
+				var date = new Date(written_time);
+
+				this.setState({
+					year: date.getUTCFullYear(),
+					month: this._toLeftPad(Number(date.getUTCMonth()) + Number(1)),
+					day: this._toLeftPad(date.getUTCDate()),
+					hour: this._toLeftPad(date.getUTCHours()),
+					minute: this._toLeftPad(date.getUTCMinutes()),
+					second: this._toLeftPad(date.getUTCSeconds())
+				});
+			}
+		}, {
+			key: '_toLeftPad',
+			value: function _toLeftPad(number) {
+				return number < 10 ? '0' + number : number;
+			}
+		}, {
+			key: '_setAuthenticationActions',
+			value: function _setAuthenticationActions() {
+				var actions = [];
+				actions.push(_react2.default.createElement(
+					'button',
+					{ onClick: this._modify },
+					'수정'
+				));
+				action.push(_react2.default.createElement(
+					'button',
+					{ onClick: this._delete },
+					'삭제'
+				));
+			}
+		}, {
+			key: '_modify',
+			value: function _modify() {
+				var url = "/board/modify/";
+				url += this.state.boardType;
+				url += "/";
+				url += this.state.articleId;
+
+				_reactRouter.browserHistory.push(url);
+				/*if(this.state.authentication === true){
+	   	
+	   	}
+	   else{
+	   	sweetAlert("글 수정에 실패했습니다");
+	   }*/
+			}
+		}, {
+			key: '_delete',
+			value: function _delete() {
+				var _this2 = this;
+
+				if (this.state.authentication === true) {
+					var query = "http://bad.watch/api/article/";
+					query += this.state.articleId;
+					query += "/delete";
+
+					_axios2.default.get(query).then(function (response) {
+						var data = response.data;
+
+						if (data.responseCode === _ResponseCode.DELETE_ARTICLE_SUCCESS) {
+							var url = '/board/';
+							url += _this2.state.boardType;
+							url += '/page/';
+							url += 1;
+							_reactRouter.browserHistory.push(url);
+						} else {
+							sweetAlert("글 삭제에 실패했습니다.");
+						}
+					});
+				} else {
+					sweetAlert("글 삭제에 실패했습니다.");
+				}
+			}
+		}, {
+			key: '_like',
+			value: function _like() {
+				var _this3 = this;
+
+				if (this.state.like_status === true) {
+					var query = "http://bad.watch/api/article-like/";
+					query += this.state.articleId;
+
+					_axios2.default.get(query).then(function (response) {
+						var data = response.data;
+						if (data.responseCode == _ResponseCode.LIKE_SUCCESS) {
+							_this3.setState({
+								like_count: _this3.like_count + 1
+							});
+						} else {
+							sweetAlert("이미 좋아요를 누르셨습니다");
+						}
+					});
+				} else {
+					sweetAlert("로그인 후 이용가능합니다.");
+				}
+			}
+		}, {
+			key: '_dislike',
+			value: function _dislike() {
+				var _this4 = this;
+
+				if (this.state.like_status === true) {
+					var query = "http://bad.watch/api/article-dislike/";
+					query += this.state.articleId;
+
+					_axios2.default.get(query).then(function (response) {
+						var data = response.data;
+
+						if (data.responseCode == _ResponseCode.DISLIKE_SUCCESS) {
+							_this4.setState({
+								like_count: _this4.like_count - 1
+							});
+						} else {
+							sweetAlert("이전에 좋아요를 누르시지 않았습니다");
+						}
+					});
+				} else {
+					sweetAlert("로그인 후 이용가능합니다.");
+				}
+			}
+		}, {
+			key: '_addComment',
+			value: function _addComment(content) {
+				var _this5 = this;
+
+				return (0, _axios2.default)({
+					method: "POST",
+					url: 'http://bad.watch/api/article-comment/write',
+					data: {
+						content: content,
+						article_id: parseInt(this.state.articleId)
+					}
+				}).then(function (response) {
+					var data = response.data;
+					if (data.responseCode == 28) {
+						_this5.setState({
+							comment_count: _this5.state.comment_count + 1
+						});
+						return true;
+					} else {
+						sweetAlert('댓글 등록에 실패했습니다.', 'error');
+						return false;
+					}
+				});
+			}
+		}, {
+			key: 'componentDidMount',
+			value: function componentDidMount() {
+				this._getData();
+			}
+		}, {
+			key: '_getData',
+			value: function _getData() {
+				var _this6 = this;
+
+				var query = 'http://bad.watch/api/article/';
+				query += this.state.boardType;
+				query += '/';
+				query += this.state.articleId;
+
+				_axios2.default.get(query).then(function (response) {
+					var data = response.data;
+
+					if (data.responseCode == 18) {
+						var writter;
+
+						(function () {
+							var articleData = data.articleData;
+
+							writter = articleData.name;
+
+							if (writter === null) {
+								writter = "익명";
+							}
+
+							if (articleData.authentication === true) _this6._setAuthenticationActions();
+
+							_this6.setState({
+								authentication: articleData.authentication,
+								name: writter,
+								title: articleData.title,
+								content: articleData.content,
+								comment_count: articleData.comment_count,
+								hit_count: articleData.hit_count,
+								like_count: articleData.like_count,
+								like_status: articleData.like_status,
+								written_time: articleData.written_time
+							}, function () {
+								return _this6._toMyDate(articleData.written_time);
+							});
+						})();
+					} else {
+						sweetAlert('데이터를 불러오는데 오류가 발생했습니다.', '잠시후 다시시도해주세요.', 'error');
+						return;
+					}
+				});
+			}
+		}, {
+			key: 'render',
+			value: function render() {
+				var like_true = _react2.default.createElement(
+					'div',
+					{ className: 'right' },
+					_react2.default.createElement(
+						'a',
+						{ onClick: this._like, className: 'pointer' },
+						_react2.default.createElement('img', { src: '/asset/images/like-on.png' })
+					)
+				);
+				var like_false = _react2.default.createElement(
+					'div',
+					{ className: 'right' },
+					_react2.default.createElement(
+						'a',
+						{ onClick: this._dislike, className: 'pointer' },
+						_react2.default.createElement('img', { src: '/asset/images/like-off.png' })
+					)
+				);
+				return _react2.default.createElement(
+					'div',
+					null,
+					_react2.default.createElement(
+						'div',
+						{ className: 'youtube-title' },
+						this.state.title
+					),
+					_react2.default.createElement(
+						'div',
+						{ className: 'youtube-writer' },
+						_react2.default.createElement(
+							'span',
+							null,
+							'글쓴이 : '
+						),
+						' ',
+						this.state.name ? this.state.name : "익명",
+						_react2.default.createElement(
+							'span',
+							{ className: 'youtube-date' },
+							this._dateFormat(this.state.written_time)
+						)
+					),
+					_react2.default.createElement(
+						'div',
+						{ className: 'youtube-container' },
+						this.state.content
+					),
+					_react2.default.createElement(
+						'div',
+						{ className: 'like-status' },
+						this.state.like_status ? like_true : like_false,
+						_react2.default.createElement(
+							'div',
+							{ className: 'siba' },
+							_react2.default.createElement(
+								'span',
+								{ className: 'like-count' },
+								_react2.default.createElement('img', { src: '/asset/images/like-icon.png' })
+							),
+							_react2.default.createElement(
+								'span',
+								null,
+								this.state.like_count
+							),
+							_react2.default.createElement(
+								'span',
+								{ className: 'hit-count' },
+								_react2.default.createElement('img', { src: '/asset/images/hit-icon.png' })
+							),
+							_react2.default.createElement(
+								'span',
+								null,
+								this.state.hit_count
+							)
+						)
+					),
+					_react2.default.createElement(_BoardCommentBox2.default, { articleId: this.state.articleId, addComment: this._addComment,
+						comment_count: this.state.comment_count })
+				);
+			}
+		}]);
+
+		return BoardShowBox;
+	}(_react2.default.Component);
+
+	exports.default = BoardShowBox;
+
+/***/ },
+/* 677 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(299);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _axios = __webpack_require__(536);
+
+	var _axios2 = _interopRequireDefault(_axios);
+
+	var _BoardComment = __webpack_require__(678);
+
+	var _BoardComment2 = _interopRequireDefault(_BoardComment);
+
+	var _BoardCommentInput = __webpack_require__(680);
+
+	var _BoardCommentInput2 = _interopRequireDefault(_BoardCommentInput);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var BoardCommentBox = function (_React$Component) {
+	    _inherits(BoardCommentBox, _React$Component);
+
+	    function BoardCommentBox(props) {
+	        _classCallCheck(this, BoardCommentBox);
+
+	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(BoardCommentBox).call(this, props));
+
+	        _this.displayName = 'CommentBox';
+	        _this.state = {
+	            comments: [],
+	            numberOfComments: 0,
+	            numberOfCommentsPerPage: 20,
+	            numberOfPagesPerView: 10,
+	            numberOfPages: 0,
+	            startPageNumber: 1,
+	            endPageNumber: 1,
+	            currentPageNumber: 1,
+	            pageNumbers: [],
+	            displayedComments: []
+	        };
+
+	        _this._before = _this._before.bind(_this);
+	        _this._next = _this._next.bind(_this);
+	        _this._getData = _this._getData.bind(_this);
+	        _this._setPageNumbers = _this._setPageNumbers.bind(_this);
+	        _this._addComment = _this._addComment.bind(_this);
+	        return _this;
+	    }
+
+	    _createClass(BoardCommentBox, [{
+	        key: '_changePage',
+	        value: function _changePage(pageNumber) {
+	            var _this2 = this;
+
+	            this.setState({
+	                currentPageNumber: pageNumber
+	            }, function () {
+	                return _this2._getData();
+	            });
+	        }
+	    }, {
+	        key: '_before',
+	        value: function _before() {
+	            if (this.state.startPageNumber < this.state.numberOfPagesPerView) ;else this._changePage(Number(this.state.startPageNumber) - Number(1));
+	        }
+	    }, {
+	        key: '_next',
+	        value: function _next() {
+	            if (this.state.endPageNumber >= this.state.numberOfPages) ;else this._changePage(Number(this.state.endPageNumber) + Number(1));
+	        }
+	    }, {
+	        key: '_setPageNumbers',
+	        value: function _setPageNumbers() {
+
+	            var tempPageNumbers = [];
+	            tempPageNumbers.push(_react2.default.createElement(
+	                'button',
+	                { onClick: this._before },
+	                '<'
+	            ));
+	            for (var i = this.state.startPageNumber; i <= this.state.endPageNumber; i++) {
+	                tempPageNumbers.push(_react2.default.createElement(
+	                    'button',
+	                    { onClick: this._changePage.bind(this, i), key: i },
+	                    ' ',
+	                    i,
+	                    ' '
+	                ));
+	            }
+	            tempPageNumbers.push(_react2.default.createElement(
+	                'button',
+	                { onClick: this._next },
+	                '>'
+	            ));
+
+	            this.setState({
+	                pageNumbers: tempPageNumbers
+	            });
+	        }
+	    }, {
+	        key: '_addComment',
+	        value: function _addComment(content) {
+	            var _this3 = this;
+
+	            return this.props.addComment(content).then(function (success) {
+	                if (success) {
+	                    _this3.setState({
+	                        currentPageNumber: 1
+	                    }, function () {
+	                        return _this3._getData();
+	                    });
+	                    return true;
+	                } else {
+	                    return false;
+	                }
+	            });
+	        }
+	    }, {
+	        key: 'componentDidMount',
+	        value: function componentDidMount() {
+	            this._getData();
+	        }
+	    }, {
+	        key: '_getData',
+	        value: function _getData() {
+	            var _this4 = this;
+
+	            var query = 'http://bad.watch/api/article-comment/';
+	            query += this.props.articleId;
+
+	            _axios2.default.get(query).then(function (response) {
+	                var data = response.data;
+	                if (data.responseCode == 26) {
+	                    var endNumber = void 0,
+	                        startNumber = void 0;
+	                    var numberOfComments = data.commentData.length;
+	                    var numberOfPages = parseInt((numberOfComments + Number(_this4.state.numberOfCommentsPerPage) - 1) / Number(_this4.state.numberOfCommentsPerPage));
+
+	                    for (startNumber = _this4.state.currentPageNumber;; startNumber--) {
+	                        if (startNumber <= 1) break;
+	                        if (startNumber <= _this4.state.currentPageNumber - _this4.state.numberOfPagesPerView + 1) break;
+	                        if (startNumber % _this4.state.numberOfPagesPerView == 1) break;
+	                    }
+
+	                    for (endNumber = _this4.state.currentPageNumber;; endNumber++) {
+	                        if (endNumber >= numberOfPages) break;
+	                        if (endNumber >= _this4.state.currentPage + _this4.state.numberOfPagesPerView - 1) break;
+	                        if (endNumber % _this4.state.numberOfPagesPerView == 0) break;
+	                    }
+
+	                    var newDisplayedComments = [];
+	                    var index;
+
+	                    for (index = numberOfComments - 1 - Number(_this4.state.currentPageNumber - Number(1)) * _this4.state.numberOfCommentsPerPage; index > numberOfComments - 1 - Number(_this4.state.currentPageNumber) * _this4.state.numberOfCommentsPerPage; index--) {
+	                        if (index < 0) break;
+	                        newDisplayedComments.push(data.commentData[index]);
+	                    }
+
+	                    _this4.setState({
+	                        comments: data.commentData,
+	                        numberOfComments: numberOfComments,
+	                        numberOfPages: numberOfPages,
+	                        startPageNumber: startNumber,
+	                        endPageNumber: endNumber,
+	                        displayedComments: newDisplayedComments
+	                    }, function () {
+	                        return _this4._setPageNumbers();
+	                    });
+	                } else {
+	                    sweetAlert('데이터를 불러오는데 오류가 발생했습니다.', '잠시후 다시시도해주세요.', 'error');
+	                    return;
+	                }
+	            });
+	        }
+	    }, {
+	        key: 'render',
+	        value: function render() {
+	            return _react2.default.createElement(
+	                'div',
+	                { className: 'comment-container' },
+	                _react2.default.createElement(
+	                    'div',
+	                    { className: 'comment-box' },
+	                    _react2.default.createElement('img', { src: '/asset/images/comment-icon.png' }),
+	                    '댓글 ',
+	                    this.props.comment_count,
+	                    ' 개'
+	                ),
+	                _react2.default.createElement(
+	                    'div',
+	                    null,
+	                    this.state.displayedComments.map(function (comment) {
+	                        return _react2.default.createElement(_BoardComment2.default, { key: comment.comment_id,
+	                            comment: comment
+	                        });
+	                    })
+	                ),
+	                _react2.default.createElement(_BoardCommentInput2.default, { addComment: this._addComment })
+	            );
+	        }
+	    }]);
+
+	    return BoardCommentBox;
+	}(_react2.default.Component);
+
+	exports.default = BoardCommentBox;
+
+/***/ },
+/* 678 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(299);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _axios = __webpack_require__(536);
+
+	var _axios2 = _interopRequireDefault(_axios);
+
+	var _BoardCommentReplyWriteBox = __webpack_require__(679);
+
+	var _BoardCommentReplyWriteBox2 = _interopRequireDefault(_BoardCommentReplyWriteBox);
+
+	var _ResponseCode = __webpack_require__(673);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var BoardComment = function (_React$Component) {
+	    _inherits(BoardComment, _React$Component);
+
+	    function BoardComment(props) {
+	        _classCallCheck(this, BoardComment);
+
+	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(BoardComment).call(this, props));
+
+	        _this.displayName = 'BoardComment';
+	        _this.state = {
+	            comment: _this.props.comment,
+	            written_time: _this._toMyDate(_this.props.comment.written_time),
+	            reply_count: 0,
+	            replys: [],
+	            replyWriteBox: [],
+	            isOpenReplyBox: false,
+	            isOpenReplyWriteBox: false
+	        };
+
+	        _this._toMyDate = _this._toMyDate.bind(_this);
+	        _this._changeIsOpenReplyBox = _this._changeIsOpenReplyBox.bind(_this);
+	        _this._setReplyBox = _this._setReplyBox.bind(_this);
+	        _this._changeIsOpenReplyWriteBox = _this._changeIsOpenReplyWriteBox.bind(_this);
+	        _this._setReplyWriteBox = _this._setReplyWriteBox.bind(_this);
+	        _this._addReply = _this._addReply.bind(_this);
+	        _this._getData = _this._getData.bind(_this);
+	        return _this;
+	    }
+
+	    _createClass(BoardComment, [{
+	        key: '_dateFormat',
+	        value: function _dateFormat(date) {
+	            var now = new Date(date);
+	            var year = "" + now.getFullYear();
+	            var month = "" + (now.getMonth() + 1);if (month.length == 1) {
+	                month = "0" + month;
+	            }
+	            var day = "" + now.getDate();if (day.length == 1) {
+	                day = "0" + day;
+	            }
+	            var hour = "" + now.getHours();if (hour.length == 1) {
+	                hour = "0" + hour;
+	            }
+	            var minute = "" + now.getMinutes();if (minute.length == 1) {
+	                minute = "0" + minute;
+	            }
+	            var second = "" + now.getSeconds();if (second.length == 1) {
+	                second = "0" + second;
+	            }
+	            return year + "-" + month + "-" + day + " " + hour + ":" + minute + ":" + second;
+	        }
+	    }, {
+	        key: '_changeIsOpenReplyBox',
+	        value: function _changeIsOpenReplyBox() {
+	            var _this2 = this;
+
+	            if (this.state.comment.reply_count === 0) {
+	                this.setState({
+	                    isOpenReplyBox: false,
+	                    replys: []
+	                });
+	            } else {
+	                if (this.state.isOpenReplyBox === true) {
+	                    this.setState({
+	                        isOpenReplyBox: false,
+	                        replys: []
+	                    });
+	                } else {
+	                    this.setState({
+	                        isOpenReplyBox: true
+	                    }, function () {
+	                        return _this2._setReplyBox();
+	                    });
+	                }
+	            }
+	        }
+	    }, {
+	        key: '_changeIsOpenReplyWriteBox',
+	        value: function _changeIsOpenReplyWriteBox() {
+	            var _this3 = this;
+
+	            if (this.state.isOpenReplyWriteBox === false) {
+	                this.setState({
+	                    isOpenReplyWriteBox: true
+	                }, function () {
+	                    return _this3._setReplyWriteBox();
+	                });
+	            } else {
+	                this.setState({
+	                    isOpenReplyWriteBox: false,
+	                    replyWriteBox: []
+	                });
+	            }
+	        }
+	    }, {
+	        key: '_setReplyWriteBox',
+	        value: function _setReplyWriteBox() {
+	            var newReplyWriteBox = [];
+	            newReplyWriteBox.push(_react2.default.createElement(_BoardCommentReplyWriteBox2.default, { createReply: this._addReply }));
+
+	            this.setState({
+	                replyWriteBox: newReplyWriteBox
+	            });
+	        }
+	    }, {
+	        key: '_addReply',
+	        value: function _addReply(content) {
+	            var _this4 = this;
+
+	            return (0, _axios2.default)({
+	                method: "POST",
+	                url: 'http://bad.watch/api/article-reply/write',
+	                data: {
+	                    content: content,
+	                    comment_id: parseInt(this.state.comment.comment_id)
+	                }
+	            }).then(function (response) {
+	                var data = response.data;
+
+	                if (data.responseCode == _ResponseCode.CREATE_REPLY_SUCCESS) {
+	                    _this4._setReplyBox();
+	                    return true;
+	                } else {
+	                    sweetAlert('답글 등록에 실패했습니다.', 'error');
+	                    return false;
+	                }
+	            });
+	        }
+	    }, {
+	        key: 'componentDidMount',
+	        value: function componentDidMount() {
+	            this._getData();
+	        }
+	    }, {
+	        key: '_getData',
+	        value: function _getData() {
+	            var _this5 = this;
+
+	            var query = 'http://bad.watch/api/article-reply/';
+	            query += this.state.comment.comment_id;
+
+	            _axios2.default.get(query).then(function (response) {
+	                var data = response.data;
+	                if (data.responseCode == 34) {
+	                    var replyData = data.commentData;
+
+	                    _this5.setState({
+	                        reply_count: replyData.length
+	                    });
+	                } else {}
+	            });
+	        }
+	    }, {
+	        key: '_setReplyBox',
+	        value: function _setReplyBox() {
+	            var _this6 = this;
+
+	            var query = 'http://bad.watch/api/article-reply/';
+	            query += this.state.comment.comment_id;
+
+	            _axios2.default.get(query).then(function (response) {
+	                var data = response.data;
+	                if (data.responseCode == 34) {
+	                    var replyData = data.commentData;
+
+	                    var newReplyData = [];
+	                    var index;
+	                    for (index = 0; index < replyData.length; index++) {
+	                        newReplyData.push(_react2.default.createElement(
+	                            'pre',
+	                            { key: i },
+	                            replyData[index].content,
+	                            '      ',
+	                            _this6._toMyDate(replyData[index].written_time)
+	                        ));
+	                    }
+
+	                    _this6.setState({
+	                        reply_count: replyData.length,
+	                        replys: newReplyData
+	                    });
+	                } else {}
+	            });
+	        }
+	    }, {
+	        key: '_toMyDate',
+	        value: function _toMyDate(written_time) {
+	            var date = new Date(written_time);
+	            var dateToString = "";
+
+	            dateToString += date.getUTCFullYear();
+	            dateToString += '/';
+	            dateToString += this._toLeftPad(Number(date.getUTCMonth()) + Number(1));
+	            dateToString += '/';
+	            dateToString += this._toLeftPad(date.getUTCDate());
+	            dateToString += '  ';
+	            dateToString += this._toLeftPad(date.getUTCHours());
+	            dateToString += ':';
+	            dateToString += this._toLeftPad(date.getUTCMinutes());
+	            dateToString += ':';
+	            dateToString += this._toLeftPad(date.getUTCSeconds());
+
+	            return dateToString;
+	        }
+	    }, {
+	        key: '_toLeftPad',
+	        value: function _toLeftPad(number) {
+	            return number < 10 ? '0' + number : number;
+	        }
+	    }, {
+	        key: 'render',
+	        value: function render() {
+	            var comment = this.props.comment;
+	            var replyStatus = _react2.default.createElement(
+	                'div',
+	                { className: 'comment-reply' },
+	                comment.reply_count == 0 ? "[답글]" : "[답글 " + comment.reply_count + "개]"
+	            );
+
+	            return _react2.default.createElement(
+	                'div',
+	                { className: 'comment' },
+	                _react2.default.createElement(
+	                    'div',
+	                    null,
+	                    _react2.default.createElement('img', { src: comment.avatar, className: 'comment-avatar' }),
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'right-comment-div' },
+	                        _react2.default.createElement(
+	                            'span',
+	                            { className: 'comment-name' },
+	                            comment.name ? comment.name : "익명"
+	                        ),
+	                        _react2.default.createElement(
+	                            'span',
+	                            { className: 'meta' },
+	                            this._dateFormat(comment.written_time)
+	                        ),
+	                        _react2.default.createElement(
+	                            'div',
+	                            null,
+	                            comment.content
+	                        )
+	                    ),
+	                    this.state.isOpenReplyBox ? replyInfo : undefined,
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'comment-reply', onClick: this._changeIsOpenReplyWriteBox },
+	                        '[답글',
+	                        this.state.reply_count,
+	                        '개]'
+	                    ),
+	                    this.state.replys,
+	                    this.state.replyWriteBox
+	                )
+	            );
+	        }
+	    }]);
+
+	    return BoardComment;
+	}(_react2.default.Component);
+
+	exports.default = BoardComment;
+
+/***/ },
+/* 679 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(299);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _axios = __webpack_require__(536);
+
+	var _axios2 = _interopRequireDefault(_axios);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var BoardCommentReplyWriteBox = function (_React$Component) {
+	    _inherits(BoardCommentReplyWriteBox, _React$Component);
+
+	    function BoardCommentReplyWriteBox(props) {
+	        _classCallCheck(this, BoardCommentReplyWriteBox);
+
+	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(BoardCommentReplyWriteBox).call(this, props));
+
+	        _this.displayName = 'BoardCommentReplyWriteBox';
+	        _this.state = {
+	            content: ""
+	        };
+	        _this._handleChange = _this._handleChange.bind(_this);
+	        _this._handleWrite = _this._handleWrite.bind(_this);
+	        return _this;
+	    }
+
+	    _createClass(BoardCommentReplyWriteBox, [{
+	        key: '_handleChange',
+	        value: function _handleChange(e) {
+	            this.setState({
+	                content: e.target.value
+	            });
+	        }
+	    }, {
+	        key: '_handleWrite',
+	        value: function _handleWrite() {
+	            var _this2 = this;
+
+	            this.props.createReply(this.state.content).then(function (success) {
+
+	                if (success) {
+	                    _this2.setState({
+	                        content: ''
+	                    });
+	                }
+	            });
+	        }
+	    }, {
+	        key: 'render',
+	        value: function render() {
+	            return _react2.default.createElement(
+	                'div',
+	                { className: 'comment-input' },
+	                _react2.default.createElement('input', { type: 'text',
+	                    name: 'reply_input',
+	                    value: this.state.content,
+	                    onChange: this._handleChange,
+	                    placeholder: '답글입력' }),
+	                _react2.default.createElement(
+	                    'a',
+	                    { className: 'waves-effect btn',
+	                        onClick: this._handleWrite },
+	                    '등록'
+	                )
+	            );
+	        }
+	    }]);
+
+	    return BoardCommentReplyWriteBox;
+	}(_react2.default.Component);
+
+	exports.default = BoardCommentReplyWriteBox;
+
+/***/ },
+/* 680 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(299);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _axios = __webpack_require__(536);
+
+	var _axios2 = _interopRequireDefault(_axios);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var BoardCommentInput = function (_React$Component) {
+	    _inherits(BoardCommentInput, _React$Component);
+
+	    function BoardCommentInput(props) {
+	        _classCallCheck(this, BoardCommentInput);
+
+	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(BoardCommentInput).call(this, props));
+
+	        _this.displayName = 'BoardCommentInput';
+	        _this.state = {
+	            content: ""
+	        };
+
+	        _this._handleChange = _this._handleChange.bind(_this);
+	        _this._handleCreate = _this._handleCreate.bind(_this);
+	        return _this;
+	    }
+
+	    _createClass(BoardCommentInput, [{
+	        key: '_handleChange',
+	        value: function _handleChange(e) {
+	            this.setState({
+	                content: e.target.value
+	            });
+	        }
+	    }, {
+	        key: '_handleCreate',
+	        value: function _handleCreate() {
+	            var _this2 = this;
+
+	            this.props.addComment(this.state.content).then(function (success) {
+	                if (success) {
+	                    _this2.setState({
+	                        content: ''
+	                    });
+	                }
+	            });
+	        }
+	    }, {
+	        key: 'render',
+	        value: function render() {
+	            return _react2.default.createElement(
+	                'div',
+	                { className: 'comment-input' },
+	                _react2.default.createElement('input', { type: 'text',
+	                    name: 'comment_input',
+	                    value: this.state.content,
+	                    onChange: this._handleChange,
+	                    placeholder: '답글입력' }),
+	                _react2.default.createElement(
+	                    'a',
+	                    { className: 'waves-effect btn',
+	                        onClick: this._handleCreate },
+	                    '등록'
+	                )
+	            );
+	        }
+	    }]);
+
+	    return BoardCommentInput;
+	}(_react2.default.Component);
+
+	exports.default = BoardCommentInput;
+
+/***/ },
+/* 681 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(299);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactRouter = __webpack_require__(469);
+
+	var _components = __webpack_require__(534);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var Home = function (_React$Component) {
+	    _inherits(Home, _React$Component);
+
+	    function Home(props) {
+	        _classCallCheck(this, Home);
+
+	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Home).call(this, props));
+
+	        _this.displayName = 'Home';
+	        _this.state = {
+	            userName: ""
+	        };
+	        _this._handleChange = _this._handleChange.bind(_this);
+	        _this._handleKeyPress = _this._handleKeyPress.bind(_this);
+	        _this._onSearchUser = _this._onSearchUser.bind(_this);
+	        return _this;
+	    }
+
+	    _createClass(Home, [{
+	        key: '_handleChange',
+	        value: function _handleChange(e) {
+	            this.setState({
+	                userName: e.target.value
+	            });
+	        }
+	    }, {
+	        key: '_handleKeyPress',
+	        value: function _handleKeyPress(e) {
+	            if (e.key == 'Enter') {
+	                this._onSearchUser();
+	            }
+	        }
+	    }, {
+	        key: '_onSearchUser',
+	        value: function _onSearchUser() {
+	            if (!this.state.userName) {
+	                sweetAlert('', '올바른 형식이 아닙니다.', 'error');
+	                return;
+	            }
+
+	            /* //////// # 포함시 배틀태그 포함 -로 변환후 url 요청 \\\\\\\\\  */
+	            if (this.state.userName.includes("#")) {
+	                var userName = this.state.userName.replace("#", "-");
+	                if (userName.includes("#")) {
+	                    sweetAlert('', '올바른 형식이 아닙니다.', 'error');
+	                    return;
+	                }
+
+	                _reactRouter.browserHistory.push('/user/' + userName);
+	            } else {
+	                _reactRouter.browserHistory.push('/userByName/' + this.state.userName);
+	            }
+	        }
+	    }, {
+	        key: 'render',
+	        value: function render() {
+	            return _react2.default.createElement(
+	                'div',
+	                null,
+	                _react2.default.createElement(
+	                    'div',
+	                    { className: 'right-align mobile-hide' },
+	                    _react2.default.createElement(_components.LoginButton, null)
+	                ),
+	                _react2.default.createElement(
+	                    'center',
+	                    { className: 'main-center' },
+	                    _react2.default.createElement(
+	                        'p',
+	                        null,
+	                        '안녕하세요. 배드워치입니다. 저희는 사실 아직 개발이 완료되지 않아 계속 개발이 진행되고 있는 상황입니다.',
+	                        _react2.default.createElement('br', null),
+	                        '본의아니게 개발과정과 내용들을 외부에 발표하게 되면서 몇몇분에게 도메인이 알려지면서, 유저분들이 방문해주시고 있는 상황입니다.',
+	                        _react2.default.createElement('br', null),
+	                        '원래 계획으로는, 안드로이드 버전 앱과, 아이폰버전 앱을 동시에 오픈하려고 하였습니다. 아직 디자인이나 개발적인 내용이 완벽히 다듬어지지 않아, 오류가 적지 않습니다.'
+	                    ),
+	                    _react2.default.createElement(
+	                        'p',
+	                        null,
+	                        '평가시스템은 곧 대규모 업데이트가 있을 예정이며, 베타버전으로 아직까지 부족한게 사실입니다. 여러개의 평가기준과 알고리즘을 이용하여 재밌는 요소들을 더욱넣어 재밌는 사이트가 되도록 노력하겠습니다.',
+	                        _react2.default.createElement('br', null),
+	                        '베타버전이지만 이용해주셔셔 감사합니다.'
+	                    ),
+	                    _react2.default.createElement(
+	                        'p',
+	                        { className: 'right-align' },
+	                        '-개발자 일동 올림'
+	                    ),
+	                    _react2.default.createElement('img', { src: '/asset/images/logo.png', className: 'logo' }),
+	                    _react2.default.createElement('span', { className: 'main-divider' }),
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'input-wrapper' },
+	                        _react2.default.createElement('input', { type: 'text',
+	                            name: 'user',
+	                            className: 'search-input',
+	                            placeholder: '닉네임#배틀태그',
+	                            onChange: this._handleChange,
+	                            onKeyPress: this._handleKeyPress }),
+	                        _react2.default.createElement('img', { src: '/asset/images/search-icon.png',
+	                            className: 'search-icon',
+	                            onClick: this._onSearchUser })
+	                    ),
+	                    _react2.default.createElement('br', null),
+	                    _react2.default.createElement(
+	                        'span',
+	                        { className: 'main-letter' },
+	                        '최초검색 1회후 닉네임으로만 검색할 수 있습니다.'
+	                    ),
+	                    _react2.default.createElement('br', null),
+	                    _react2.default.createElement(
+	                        _reactRouter.Link,
+	                        { to: '/', className: 'main-link link-left' },
+	                        '전적검색'
+	                    ),
+	                    _react2.default.createElement(
+	                        _reactRouter.Link,
+	                        { to: 'chat', className: 'main-link link-right' },
+	                        '파티매칭'
+	                    ),
+	                    _react2.default.createElement('br', null),
+	                    _react2.default.createElement(
+	                        _reactRouter.Link,
+	                        { to: 'youtube', className: 'main-link link-left' },
+	                        '동영상'
+	                    ),
+	                    _react2.default.createElement(
+	                        _reactRouter.Link,
+	                        { to: 'board/free/page/1', className: 'main-link link-right' },
+	                        '커뮤니티'
+	                    )
+	                ),
+	                _react2.default.createElement('br', null),
+	                _react2.default.createElement('br', null),
+	                _react2.default.createElement('div', null)
+	            );
+	        }
+	    }]);
+
+	    return Home;
+	}(_react2.default.Component);
+
+	exports.default = Home;
+
+/***/ },
+/* 682 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(299);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var Login = function (_React$Component) {
+	    _inherits(Login, _React$Component);
+
+	    function Login(props) {
+	        _classCallCheck(this, Login);
+
+	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Login).call(this, props));
+
+	        _this.displayName = 'Login';
+	        return _this;
+	    }
+
+	    _createClass(Login, [{
+	        key: 'render',
+	        value: function render() {
+	            return _react2.default.createElement(
+	                'div',
+	                null,
+	                'Login'
+	            );
+	        }
+	    }]);
+
+	    return Login;
+	}(_react2.default.Component);
+
+	exports.default = Login;
+
+/***/ },
+/* 683 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(299);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var Register = function (_React$Component) {
+	    _inherits(Register, _React$Component);
+
+	    function Register(props) {
+	        _classCallCheck(this, Register);
+
+	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Register).call(this, props));
+
+	        _this.displayName = 'Register';
+	        return _this;
+	    }
+
+	    _createClass(Register, [{
+	        key: 'render',
+	        value: function render() {
+	            return _react2.default.createElement(
+	                'div',
+	                null,
+	                'Register'
+	            );
+	        }
+	    }]);
+
+	    return Register;
+	}(_react2.default.Component);
+
+	exports.default = Register;
+
+/***/ },
+/* 684 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(299);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _axios = __webpack_require__(536);
+
+	var _axios2 = _interopRequireDefault(_axios);
+
+	var _reactRouter = __webpack_require__(469);
+
+	var _components = __webpack_require__(534);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var User = function (_React$Component) {
+	    _inherits(User, _React$Component);
+
+	    function User(props) {
+	        _classCallCheck(this, User);
+
+	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(User).call(this, props));
+
+	        _this.displayName = 'User';
+	        _this.state = {
+	            quickUserData: {
+	                heros: []
+	            },
+	            rankUserData: {
+	                heros: []
+	            },
+	            quick_mode: true
+	        };
+	        _this._onQuick = _this._onQuick.bind(_this);
+	        _this._onRank = _this._onRank.bind(_this);
+	        return _this;
+	    }
+
+	    _createClass(User, [{
+	        key: '_onQuick',
+	        value: function _onQuick() {
+	            if (this.state.quick_mode) return;
+
+	            this.setState({
+	                quick_mode: true
+	            });
+	        }
+	    }, {
+	        key: '_onRank',
+	        value: function _onRank() {
+	            var _this2 = this;
+
+	            if (!this.state.quick_mode) return;
+
+	            if (Object.keys(this.state.rankUserData).length <= 1) {
+	                this._getUserRankData().then(function (data) {
+	                    _this2.setState({
+	                        rankUserData: data
+	                    });
+	                }).then(function () {
+	                    if (!_this2.state.rankUserData.rank_game_count) {
+	                        /* 경쟁전을 한 적이 없음 */
+	                        sweetAlert('', '경쟁전 기록이 없습니다.', 'error');
+	                        return;
+	                    } else {
+	                        _this2.setState({
+	                            quick_mode: false
+	                        });
+	                    }
+	                });
+	            } else {
+	                if (!this.state.rankUserData.rank_game_count) {
+	                    /* 경쟁전을 한 적이 없음 */
+	                    sweetAlert('', '경쟁전 기록이 없습니다.', 'error');
+	                    return;
+	                } else {
+	                    this.setState({
+	                        quick_mode: false
+	                    });
+	                }
+	            }
+	        }
+	    }, {
+	        key: 'componentDidMount',
+	        value: function componentDidMount() {
+	            var _this3 = this;
+
+	            _axios2.default.get('http://bad.watch/api/user/quick/' + this.props.params.userName).then(function (response) {
+	                var data = response.data;
+	                if (data.responseCode == 2) {
+	                    _this3.setState({
+	                        quickUserData: data.userData
+	                    });
+	                } else {
+	                    sweetAlert('', '유저 정보가 존재하지 않습니다..', 'error');
+	                    _reactRouter.browserHistory.push('/');
+	                    return;
+	                }
+	            }).catch(function (err) {
+	                sweetAlert('데이터를 불러오는데 오류가 발생했습니다.', '잠시후 다시시도해주세요.', 'error');
+	                return;
+	            });
+	        }
+	    }, {
+	        key: '_getUserRankData',
+	        value: function _getUserRankData() {
+	            return _axios2.default.get('http://bad.watch/api/user/rank/' + this.props.params.userName).then(function (response) {
+	                var data = response.data;
+	                if (data.responseCode == 2) {
+	                    return data.userData;
+	                } else {
+	                    sweetAlert('데이터를 불러오는데 오류가 발생했습니다.', '잠시후 다시시도해주세요.', 'error');
+	                    return;
+	                }
+	            }).catch(function (err) {
+	                sweetAlert('데이터를 불러오는데 오류가 발생했습니다.', '잠시후 다시시도해주세요.', 'error');
+	                return;
+	            });
+	        }
+	    }, {
+	        key: 'render',
+	        value: function render() {
+	            return _react2.default.createElement(
+	                'div',
+	                null,
+	                _react2.default.createElement(_components.SearchUserInput, null),
+	                _react2.default.createElement(_components.UserDataBox, { userData: this.state.quick_mode ? this.state.quickUserData : this.state.rankUserData,
+	                    onQuick: this._onQuick,
+	                    onRank: this._onRank,
+	                    quick_mode: this.state.quick_mode })
+	            );
+	        }
+	    }]);
+
+	    return User;
+	}(_react2.default.Component);
+
+	exports.default = User;
+
+/***/ },
+/* 685 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(299);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _axios = __webpack_require__(536);
+
+	var _axios2 = _interopRequireDefault(_axios);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var Youtube = function (_React$Component) {
+	    _inherits(Youtube, _React$Component);
+
+	    function Youtube(props) {
+	        _classCallCheck(this, Youtube);
+
+	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Youtube).call(this, props));
+
+	        _this.displayName = 'Youtube';
+	        return _this;
+	    }
+
+	    _createClass(Youtube, [{
+	        key: 'render',
+	        value: function render() {
+
+	            return _react2.default.createElement(
+	                'div',
+	                null,
+	                this.props.children
+	            );
+	        }
+	    }]);
+
+	    return Youtube;
+	}(_react2.default.Component);
+
+	exports.default = Youtube;
+
+/***/ },
+/* 686 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(299);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var Chat = function (_React$Component) {
+	    _inherits(Chat, _React$Component);
+
+	    function Chat(props) {
+	        _classCallCheck(this, Chat);
+
+	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Chat).call(this, props));
+
+	        _this.displayName = 'Chat';
+	        return _this;
+	    }
+
+	    _createClass(Chat, [{
+	        key: 'render',
+	        value: function render() {
+	            return _react2.default.createElement(
+	                'div',
+	                null,
+	                this.props.children
+	            );
+	        }
+	    }]);
+
+	    return Chat;
+	}(_react2.default.Component);
+
+	exports.default = Chat;
+
+/***/ },
+/* 687 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -50474,7 +53403,7 @@
 	            var _this3 = this;
 
 	            var MAX_SAFE_INTEGER = 9007199254740991;
-	            var url = "http://bad.watch/api/user?name=" + this.props.params.userName + "&value=" + MAX_SAFE_INTEGER;
+	            var url = "http://bad.watch/api/user?name=" + encodeURIComponent(this.props.params.userName) + "&value=" + MAX_SAFE_INTEGER;
 	            _axios2.default.get(url).then(function (response) {
 	                var data = response.data;
 	                if (data.responseCode == 2) {
@@ -50534,6 +53463,11 @@
 	                { className: 'more-user', onClick: this._getMoreUser },
 	                '더보기'
 	            );
+	            var no_user = _react2.default.createElement(
+	                'div',
+	                { className: 'no-user' },
+	                '유저가 존재하지 않습니다. 최초 1회 배틀태그 검색후 닉네임으로 검색이 가능합니다.'
+	            );
 	            return _react2.default.createElement(
 	                'div',
 	                null,
@@ -50545,6 +53479,7 @@
 	                        return _react2.default.createElement(_components.UserList, { key: user.user_id,
 	                            user: user });
 	                    }),
+	                    this.state.userData.length == 0 ? no_user : undefined,
 	                    this.state.userEnd ? undefined : more_user
 	                )
 	            );
@@ -50557,7 +53492,7 @@
 	exports.default = UserByName;
 
 /***/ },
-/* 674 */
+/* 688 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -50566,13 +53501,17 @@
 		value: true
 	});
 
-	var _authentication = __webpack_require__(675);
+	var _authentication = __webpack_require__(689);
 
 	var _authentication2 = _interopRequireDefault(_authentication);
 
-	var _youtubes = __webpack_require__(676);
+	var _youtubes = __webpack_require__(690);
 
 	var _youtubes2 = _interopRequireDefault(_youtubes);
+
+	var _chat = __webpack_require__(691);
+
+	var _chat2 = _interopRequireDefault(_chat);
 
 	var _redux = __webpack_require__(576);
 
@@ -50580,11 +53519,12 @@
 
 	exports.default = (0, _redux.combineReducers)({
 		authentication: _authentication2.default,
-		youtubes: _youtubes2.default
+		youtubes: _youtubes2.default,
+		chat: _chat2.default
 	});
 
 /***/ },
-/* 675 */
+/* 689 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -50664,7 +53604,7 @@
 	}
 
 /***/ },
-/* 676 */
+/* 690 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -50785,7 +53725,140 @@
 	}
 
 /***/ },
-/* 677 */
+/* 691 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	exports.default = chat;
+
+	var _ActionTypes = __webpack_require__(598);
+
+	var types = _interopRequireWildcard(_ActionTypes);
+
+	var _reactAddonsUpdate = __webpack_require__(605);
+
+	var _reactAddonsUpdate2 = _interopRequireDefault(_reactAddonsUpdate);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+	var chatInitialState = {
+		current_room: 'bronze',
+		bronze: {
+			connection_count: 0,
+			messages: [],
+			room_userlist: []
+		},
+		silver: {
+			connection_count: 0,
+			messages: [],
+			room_userlist: []
+		},
+		gold: {
+			connection_count: 0,
+			messages: [],
+			room_userlist: []
+		},
+		platinum: {
+			connection_count: 0,
+			messages: [],
+			room_userlist: []
+		},
+		diamond: {
+			connection_count: 0,
+			messages: [],
+			room_userlist: []
+		}
+	};
+
+	function chat() {
+		var state = arguments.length <= 0 || arguments[0] === undefined ? chatInitialState : arguments[0];
+		var action = arguments[1];
+
+		switch (action.type) {
+			case types.GET_MESSAGE:
+				return (0, _reactAddonsUpdate2.default)(state, _defineProperty({}, state.current_room, {
+					messages: {
+						$push: [action.message]
+					}
+				}));
+			case types.GET_CONNECTION_COUNT:
+				return (0, _reactAddonsUpdate2.default)(state, _defineProperty({}, state.current_room, {
+					connection_count: {
+						$set: action.count
+					},
+					room_userlist: {
+						$set: action.userlist
+					}
+				}));
+			case types.UPDATE_CURRENT_ROOM:
+				return (0, _reactAddonsUpdate2.default)(state, {
+					current_room: {
+						$set: action.room
+					}
+				});
+			case types.CONNECTION_ADD:
+				if (action.user) {
+					return (0, _reactAddonsUpdate2.default)(state, _defineProperty({}, state.current_room, {
+						connection_count: {
+							$set: action.count
+						},
+						room_userlist: {
+							$push: [action.user]
+						}
+					}));
+				} else {
+					return (0, _reactAddonsUpdate2.default)(state, _defineProperty({}, state.current_room, {
+						connection_count: {
+							$set: action.count
+						}
+					}));
+				}
+
+			case types.CONNECTION_DELETE:
+				if (action.user) {
+					return (0, _reactAddonsUpdate2.default)(state, _defineProperty({}, state.current_room, {
+						connection_count: {
+							$set: action.count
+						},
+						room_userlist: {
+							$splice: [[state[state.current_room].room_userlist.indexOf(action.user), 1]]
+						}
+					}));
+				} else {
+					return (0, _reactAddonsUpdate2.default)(state, _defineProperty({}, state.current_room, {
+						connection_count: {
+							$set: action.count
+						}
+					}));
+				}
+
+			case types.LEAVE_ROOM:
+				return (0, _reactAddonsUpdate2.default)(state, _defineProperty({}, state.current_room, {
+					connection_count: {
+						$set: 0
+					},
+					messages: {
+						$set: 0
+					},
+					room_userlist: {
+						$set: []
+					}
+				}));
+			default:
+				return state;
+		}
+	}
+
+/***/ },
+/* 692 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -50813,7 +53886,7 @@
 	exports['default'] = thunk;
 
 /***/ },
-/* 678 */
+/* 693 */
 /***/ function(module, exports) {
 
 	/* WEBPACK VAR INJECTION */(function(__dirname) {'use strict';

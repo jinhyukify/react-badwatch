@@ -33,6 +33,7 @@ var list_right_title = [
     "임무기여시간 최고기록"
  ];
 
+
 function hour_modify(hour)
 {
 	if(hour >= 1)
@@ -671,4 +672,6 @@ function get_job_right_value(quick_mode, hero, heroData)
 	}
 	
 }
+
+
 export { mapHero, get_job_right_title, get_job_right_value, hour_modify, second_modify };

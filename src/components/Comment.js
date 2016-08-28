@@ -16,6 +16,18 @@ class Comment extends React.Component {
     	this._onCreateComment = this._onCreateComment.bind(this);
     }
 
+    _dateFormat(date) 
+    {
+      let now = new Date(date);
+      let year = "" + now.getFullYear();
+      let month = "" + (now.getMonth() + 1); if (month.length == 1) { month = "0" + month; }
+      let day = "" + now.getDate(); if (day.length == 1) { day = "0" + day; }
+      let hour = "" + now.getHours(); if (hour.length == 1) { hour = "0" + hour; }
+      let minute = "" + now.getMinutes(); if (minute.length == 1) { minute = "0" + minute; }
+      let second = "" + now.getSeconds(); if (second.length == 1) { second = "0" + second; }
+      return year + "-" + month + "-" + day + " " + hour + ":" + minute + ":" + second;
+    }
+
     _onCreateComment(content)
     {
     	return axios({
@@ -94,8 +106,8 @@ class Comment extends React.Component {
     render() {
     	const comment = this.props.comment;
     	const replyStatus = (
-    			<div>
-    				{comment.reply_count == 0? "답글달기": "답글 "+comment.reply_count + "개"}
+    			<div className="comment-reply">
+    				{comment.reply_count == 0? "[답글]": "[답글 "+comment.reply_count + "개]"}
     			</div>
     		);
     	const replyInfo = (
@@ -106,8 +118,8 @@ class Comment extends React.Component {
         							   reply={reply}/>
         					);
         			})}
-        			<div onClick={this._handleReplyOpen}>
-        				{this.state.isOpen? "답글접기": undefined}
+        			<div onClick={this._handleReplyOpen} className="comment-reply">
+        				{this.state.isOpen? "[답글접기]": undefined}
         			</div>
         			<CommentInput onCreateComment={this._onCreateComment}/>
     			</div>
@@ -115,10 +127,15 @@ class Comment extends React.Component {
 
 
         return (
-        	<div className="blue-grey">
-        		<div className="white-text">
-        			{comment.content}{comment.written_time}<span className="red-text">[{comment.ip}]</span>
-                    {comment.name? comment.name: "익명"}
+        	<div className="comment">
+        		<div className="">
+                <img src={comment.avatar} className="comment-avatar"/>
+                <div className="right-comment-div">
+                     <span className="comment-name">{comment.name? comment.name: "익명"}</span>
+                     <span className="meta">{this._dateFormat(comment.written_time)}</span>
+                     <span className="red-text ip">[{comment.ip}]</span>
+                     <div>{comment.content}</div>
+                </div>
         			<div onClick={this._handleReplyOpen}>
         				{this.state.isOpen? undefined: replyStatus}
         			</div>

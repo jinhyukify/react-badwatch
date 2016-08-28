@@ -20,15 +20,34 @@ class UserDataBox extends React.Component {
     }
 
 
+
     render() {
+        const before_load = (
+                <div>
+                    <br/><br/><br/><br/><br/><br/><br/>
+                    <div className="progress wait">
+                         <div className="indeterminate"></div>
+                    </div>
+                    <center>
+                        <h2>
+                            불러오는 중입니다.
+                        </h2>
+                    </center>
+                </div>
+            );
+        const after_load = (
+                <div className="user-data-box">
+                        <UserProfile userData={this.props.userData}/>
+                        <UserGameData onQuick={this._handleQuick} 
+                                  onRank={this._handleRank}
+                                  quick_mode={this.props.quick_mode} 
+                                  userData={this.props.userData}/>
+                    </div>
+            );
         return (
-        		<div className="user-data-box">
-	        		<UserProfile userData={this.props.userData}/>
-	        		<UserGameData onQuick={this._handleQuick} 
-	        			 		  onRank={this._handleRank}
-	        			 		  quick_mode={this.props.quick_mode} 
-	        			 		  userData={this.props.userData}/>
-        		</div>
+            <div>
+            {Object.keys(this.props.userData.heros).length==0? before_load: after_load}   		
+            </div>
         	);
     }
 

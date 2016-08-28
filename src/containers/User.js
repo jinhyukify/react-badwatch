@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import { browserHistory } from 'react-router';
 import { UserDataBox, SearchUserInput } from '../components';
 class User extends React.Component {
     constructor(props) {
@@ -98,10 +99,11 @@ class User extends React.Component {
  			 	 else
  			 	 {
  			 	 	sweetAlert(
-					  '데이터를 불러오는데 오류가 발생했습니다.',
-					  '잠시후 다시시도해주세요.',
+					  '',
+					  '유저 정보가 존재하지 않습니다..',
 					  'error'
 					)
+					browserHistory.push('/');
 					return;
  			 	 }
  			 })

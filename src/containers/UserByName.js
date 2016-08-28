@@ -58,8 +58,8 @@ class UserByName extends React.Component {
 
     componentDidMount()
     {
-        const MAX_SAFE_INTEGER = 9007199254740991
-    	let url = "http://bad.watch/api/user?name="+this.props.params.userName+"&value="+ MAX_SAFE_INTEGER; 
+        const MAX_SAFE_INTEGER = 9007199254740991;
+    	let url = "http://bad.watch/api/user?name="+encodeURIComponent(this.props.params.userName)+"&value="+ MAX_SAFE_INTEGER; 
     	axios.get(url)
     	.then((response) => {
     		let data = response.data;
@@ -144,6 +144,11 @@ componentWillReceiveProps(nextProps){
         			더보기
         		</div>
     		);
+        const no_user = (
+                <div className="no-user">
+                    유저가 존재하지 않습니다. 최초 1회 배틀태그 검색후 닉네임으로 검색이 가능합니다.
+                </div>
+            );
         return (
                 <div>
                     <SearchUserInput />
@@ -154,6 +159,7 @@ componentWillReceiveProps(nextProps){
             							  user={user}/>
             					);
             			})}
+                        {this.state.userData.length==0? no_user: undefined}
             			{this.state.userEnd? undefined: more_user}
             		</div>
                 </div>
