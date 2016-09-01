@@ -27,6 +27,9 @@ class ArticleBox extends React.Component{
       return month + "/" + day + " " + hour + ":" + minute;
     }
 
+    shouldComponentUpdate(nextProps, nextState){
+	    return nextProps.article.article_id !== this.props.article.article_id;
+	}
     
 
 	render(){
@@ -34,7 +37,11 @@ class ArticleBox extends React.Component{
 		return(
 			<tr>
 				<td className="left-align article-type mobile-hide">{this._boardType(this.props.boardType)}</td>
-				<td className="left-align article-title"><Link to={"/board/" + this.props.boardType + "/page/" + this.props.pageId +"/article/" + article.article_id}>{article.title}<span className="article-comment-count">+{article.comment_count}</span></Link></td>
+				<td className="left-align article-title">
+					<Link to={"/board/" + this.props.boardType + "/page/" + this.props.pageId +"/article/" + article.article_id}>
+						{article.title}
+					</Link><span className="article-comment-count">+{article.comment_count}</span>
+				</td>
 				<td className="collapsing hit-pad">{article.name? article.name: "익명"}</td>
 				<td className="collapsing hit-pad mobile-hide">{article.hit_count}</td>
 				<td className="collapsing hit-pad mobile-hide">{article.like_count}</td>
@@ -44,5 +51,9 @@ class ArticleBox extends React.Component{
 		);
 	}
 }
+
+ArticleBox.propTypes = {
+	article: React.PropTypes.object
+};
 
 export default ArticleBox;

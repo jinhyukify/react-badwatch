@@ -1,4 +1,8 @@
+@import url(https://cdn.rawgit.com/openhiun/hangul/14c0f6faa2941116bb53001d6a7dcd5e82300c3f/nanumbarungothic.css);
 
+* {
+  font-family: 'Nanum Barun Gothic', sans-serif;
+}
 .logo {
 	 width: 283px;
 	 margin-top: 96px;
@@ -56,7 +60,6 @@
 	display: inline-block;
 	padding: 0px 15px 9px 15px;
 	border-bottom: solid 1px rgba(150, 150, 150, 0.33);
-	text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
 	font-size: 18px;
   	font-weight: 400;
   	color: #020202;
@@ -132,6 +135,7 @@ span.mode {
   border-top-left-radius: 9px;
   border-top-right-radius: 9px;
   border: solid 2px #c6c4c4;
+  border-bottom: 0px;
 	display: inline-block;
   text-align: center;
   width: 134px;
@@ -215,9 +219,7 @@ span.mode.active {
 	font-size: 18px;
     font-weight: 400;
     text-align: center;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
     background-color: #5b6abf;
-    box-shadow: 1px 1px 2px 0 rgba(0, 0, 0, 0.5);
     border: solid 1px #979797;
     width: 130px;
     border-radius: 4px;
@@ -574,7 +576,7 @@ a.active .tab {
 }
 
 .hero-div {
-	background-image: linear-gradient(to bottom, #ffffff, #e9e9e9);
+	  /*background-image: linear-gradient(to bottom, #ffffff, #e9e9e9);*/
     border: solid 2px #5b6abf;
     border-radius: 4px;
     padding: 11px 12px;
@@ -677,7 +679,7 @@ a.active .tab {
 }
 
 .evil {
-  width: 50px;
+  width: 33px;
   vertical-align: middle;
   margin: 0 60px 0 40px;
 }
@@ -696,14 +698,12 @@ a.active .tab {
 .reputation-div { 
     padding: 20px;
     background-color: rgba(91,106,191,0.1);
-    box-shadow: inset 0 1px 3px 0 rgba(0, 0, 0, 0.5);
 }
 
 .hero-data-div {
     border-bottom-left-radius: 8px;
     border-bottom-right-radius: 8px;
     background-color: #f5f5f5;
-    box-shadow: inset 0 1px 3px 0 rgba(0, 0, 0, 0.5);
     padding: 40px 0px;
 }
 
@@ -752,6 +752,8 @@ a.active .tab {
 .medal img {
   width: 28.6px;
   margin-bottom: 3px;
+  margin-right: 10px;
+  vertical-align: middle;
 }
 
 .hero-data-list {
@@ -1632,3 +1634,8 @@ opacity: 1 !important;
    opacity: 1 !important;
 }
 
+
+input:focus::-webkit-input-placeholder 
+{
+color: transparent;
+}
