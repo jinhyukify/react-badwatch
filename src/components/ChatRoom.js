@@ -20,7 +20,8 @@ class ChatRoom extends React.Component {
             showList: false,
             whisperMessage: '',
             whisperInputOpen: false,
-            whisperTo: {}
+            whisperTo: {},
+            socket: null
         };
         this._handleChange = this._handleChange.bind(this);
         this._sendMessage = this._sendMessage.bind(this);
@@ -29,7 +30,6 @@ class ChatRoom extends React.Component {
         this._onWhisperOpen = this._onWhisperOpen.bind(this);
         this._handleWhisperKeyPress = this._handleWhisperKeyPress.bind(this);
         this._sendWhisperMessage = this._sendWhisperMessage.bind(this);
-        this.socket = io.connect('http://bad.watch', connectOptions)
     }
 
     chat_dateFormat(date) 
@@ -92,7 +92,7 @@ class ChatRoom extends React.Component {
     {
         if(!this.state.message) 
             return;
-        this.socket.emit('send', { "message": this.state.message });
+        this.state.socket.emit('send', { "message": this.state.message });
         this.setState({
             message: ''
         });
@@ -111,7 +111,7 @@ class ChatRoom extends React.Component {
             )
             return;
         }
-        this.socket.emit('send_whisper', { "message": this.state.whisperMessage, "overwatch_id": this.state.whisperTo.overwatch_id, "to": this.state.whisperTo.name })
+        this.state.socket.emit('send_whisper', { "message": this.state.whisperMessage, "overwatch_id": this.state.whisperTo.overwatch_id, "to": this.state.whisperTo.name })
         this.setState({
             whisperMessage: ''
         });
@@ -141,108 +141,113 @@ class ChatRoom extends React.Component {
             overwatch_id: this.props.authentication.status.current_user.id
         };
     	
+        this.setState({
+            socket: io.connect('http://bad.watch', connectOptions)
+        }, function(){
+            //방입장
+            this.state.socket.emit('room_join', current_room);
+            this.props.updateCurrentRoom(current_room.room);
+
+
+            this.state.socket.on('connection_count', function(data){
+                console.log("connection_count");
+                this.props.getConnectionCount(data.count, data.user_list);
+            }.bind(this));
+
+            this.state.socket.on('connection_add', function(data){
+                console.log("add");
+                console.log(data);
+                this.props.addConnection(data.count, data.user_data);
+            }.bind(this));
+
+            this.state.socket.on('connection_delete', function(data){
+                console.log("delete");
+                this.props.deleteConnection(data.count, data.user_data);
+            }.bind(this));  
+
+            this.state.socket.on('receive', function(data){
+                console.log("receive");
+                console.log(data.type);
+                if(data.type == 1)
+                {
+                    sweetAlert(
+                        '',
+                        '로그인후 작성하실 수 있습니다.',
+                        'error'
+                    )
+                    return;
+                }
+                else if(data.type == 2)
+                {
+                    sweetAlert(
+                        '',
+                        '이 점수대와 맞지않아 채팅을 작성할 수 없습니다.',
+                        'error'
+                    )
+                    return;
+                }
+                else if(data.type == 3)
+                {
+                    sweetAlert(
+                        '',
+                        '접속중인 방이 없습니다.',
+                        'error'
+                    )
+                    return;
+                }
+                else
+                {
+                    this.props.getMessage(data);
+                }
+
+                $('.chat-box').scrollTop($('.chat-box')[0].scrollHeight);
+            }.bind(this));
+
+            this.state.socket.on('receive_whisper', function(data){
+                console.log(data.type);
+                if(data.type == 1)
+                {
+                    sweetAlert(
+                        '',
+                        '로그인후 작성하실 수 있습니다.',
+                        'error'
+                    )
+                    return;
+                }
+                else if(data.type == 2)
+                {
+                    sweetAlert(
+                        '',
+                        '이 점수대와 맞지않아 채팅을 작성할 수 없습니다.',
+                        'error'
+                    )
+                    return;
+                }
+                else if(data.type == 6)
+                {
+                    sweetAlert(
+                        '',
+                        '대상이 없습니다.',
+                        'error'
+                    )
+                    return;
+                }
+                else
+                {
+                    this.props.getMessage(data);
+                }
+
+                $('.chat-box').scrollTop($('.chat-box')[0].scrollHeight);
+            }.bind(this))
+        }.bind(this));
+
         
-        //방입장
-        this.socket.emit('room_join', current_room);
-        this.props.updateCurrentRoom(current_room.room);
-
-
-        this.socket.on('connection_count', function(data){
-            console.log("connection_count");
-            this.props.getConnectionCount(data.count, data.user_list);
-        }.bind(this));
-
-        this.socket.on('connection_add', function(data){
-            console.log("add");
-            console.log(data);
-            this.props.addConnection(data.count, data.user_data);
-        }.bind(this));
-
-        this.socket.on('connection_delete', function(data){
-            console.log("delete");
-            this.props.deleteConnection(data.count, data.user_data);
-        }.bind(this));  
-
-        this.socket.on('receive', function(data){
-            console.log("receive");
-            console.log(data.type);
-            if(data.type == 1)
-            {
-                sweetAlert(
-                    '',
-                    '로그인후 작성하실 수 있습니다.',
-                    'error'
-                )
-                return;
-            }
-            else if(data.type == 2)
-            {
-                sweetAlert(
-                    '',
-                    '이 점수대와 맞지않아 채팅을 작성할 수 없습니다.',
-                    'error'
-                )
-                return;
-            }
-            else if(data.type == 3)
-            {
-                sweetAlert(
-                    '',
-                    '접속중인 방이 없습니다.',
-                    'error'
-                )
-                return;
-            }
-            else
-            {
-                this.props.getMessage(data);
-            }
-
-            $('.chat-box').scrollTop($('.chat-box')[0].scrollHeight);
-        }.bind(this));
-
-        this.socket.on('receive_whisper', function(data){
-            console.log(data.type);
-            if(data.type == 1)
-            {
-                sweetAlert(
-                    '',
-                    '로그인후 작성하실 수 있습니다.',
-                    'error'
-                )
-                return;
-            }
-            else if(data.type == 2)
-            {
-                sweetAlert(
-                    '',
-                    '이 점수대와 맞지않아 채팅을 작성할 수 없습니다.',
-                    'error'
-                )
-                return;
-            }
-            else if(data.type == 6)
-            {
-                sweetAlert(
-                    '',
-                    '대상이 없습니다.',
-                    'error'
-                )
-                return;
-            }
-            else
-            {
-                this.props.getMessage(data);
-            }
-
-            $('.chat-box').scrollTop($('.chat-box')[0].scrollHeight);
-        }.bind(this))
             
     }
 
     componentWillUnmount()
     {
-        this.socket.emit('room_leave');
+        this.state.socket.emit('room_leave');
     }
 
 

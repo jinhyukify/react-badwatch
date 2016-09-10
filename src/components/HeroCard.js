@@ -12,6 +12,7 @@ class HeroCard extends React.Component {
         };
         this._onDetail = this._onDetail.bind(this);
         this._onClose = this._onClose.bind(this);
+        this._onToggle = this._onToggle.bind(this);
     }
 
     _onDetail()
@@ -59,6 +60,14 @@ class HeroCard extends React.Component {
     	});
     }
 
+    _onToggle()
+    {
+    	if(this.state.detailOpen)
+    		this._onClose();
+    	else
+    		this._onDetail();
+    }
+
     render() {
     	const hero = this.props.hero;
     	const heroDetail = (
@@ -82,18 +91,36 @@ class HeroCard extends React.Component {
 	    }
         return (
         	<div>
-        		<div className="hero-div">
+        		<div className="hero-div pointer" onClick={this._onToggle}>
 				    <img src={"/asset/images/heros/"+mapHero[hero.hero]+".png"} 
 				         className="hero-avatar"/>
-				    <div className="heroname">{hero.hero}</div><br/>
-				    <div className="hero-data">승률  <span className="right">{winRate(hero.win, hero.game_count)}</span></div><br/>
-				    <div className="hero-data">K / D  <span className="right">{kda(hero.kill, hero.death)}</span></div><br/>
-				    <div className="hero-data">플레이 시간 <span className="right">{hour_modify(hero.playtime)}</span></div>
-			
+				    <div className="heroname mobile-hide">{hero.hero}</div>
+				    <div className="hero-wrapper mobile-hide">
+					    <div className="hero-data hero-playtime">{hour_modify(hero.playtime)}</div>
+					    <div className="hero-data hero-kda middle-big-hide">{kda(hero.kill, hero.death)}</div>
+					    <div className="hero-data hero-win middle-big-hide">{this.props.quick_mode? hero.win+"승": winRate(hero.win, hero.game_count)}</div>
+				    </div>
+
+					<table className="mobile-hero-wrapper computer-hide">
+						<tbody>
+							<tr>
+								<td>플레이</td>
+								<td className="h-playtime">{hour_modify(hero.playtime)}</td>	
+							</tr>
+							<tr>
+								<td>K/D</td>
+								<td className="h-kda">{kda(hero.kill, hero.death)}</td>	
+							</tr>
+							<tr>	
+								<td>{this.props.quick_mode? "승리": "승률(%)"}</td>
+								<td className="h-win">{this.props.quick_mode? hero.win+"승": winRate(hero.win, hero.game_count)}</td>	
+							</tr>
+						</tbody>
+				    </table>
 					
-					<div className="hero-more valign-wrapper mobile-hide">
+					<div className="hero-more valign-wrapper">
 						<div className="right-align">
-							<span className="check-repu">평가를 확인해보세요!</span>
+							<span className="check-repu mobile-hide">평가를 확인해보세요!</span>
 							{this.state.detailOpen? 
 								<img src="/asset/images/arrow-up.png" 
 								 className="arrow"
@@ -105,17 +132,8 @@ class HeroCard extends React.Component {
 							
 						</div>						
 					</div>
-					<div className="computer-hide mobile-hero-more">
-						<span className="check-repu">평가를 확인해보세요!</span>
-						{this.state.detailOpen? 
-								<img src="/asset/images/arrow-up.png" 
-								 className="arrow"
-								 onClick={this._onClose}/>: 
-								 <img src="/asset/images/arrow-down.png" 
-								 className="arrow"
-								 onClick={this._onDetail}/>
-							}
-					</div>
+					<br className="computer-hide"/><br className="computer-hide"/>
+					<div className="heroname computer-hide">{hero.hero}</div>
 				</div>
 				{this.state.detailOpen? heroDetail: undefined}
 			</div>

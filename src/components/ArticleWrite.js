@@ -48,14 +48,19 @@ class ArticleWrite extends React.Component{
 			let data = response.data;
 
 			if(data.responseCode == CREATE_ARTICLE_SUCCESS){
-				var query = '/board/';
+				var query = '/article/';
 					query += this.state.boardType;
-					query += '/page/';
+					query += '?page=';
 					query += 1;
 				browserHistory.push(query);
 			}
 			else{
-
+				sweetAlert(
+						'',
+				       '글 등록에 실패했습니다.',
+				        'error'
+				)
+				return false;
 			}
 		})
 	}
@@ -64,8 +69,8 @@ class ArticleWrite extends React.Component{
 
 	render(){
 		return(
-			<div>
-				<select className = "browser-default" onChange={this._changeBoardType} value={this.state.boardType}>
+			<div> 
+				<select className = "browser-default article-write-select" onChange={this._changeBoardType} value={this.state.boardType}>
     				<option value="free">자유게시판</option>
     				<option value="strategy">전략게시판</option>
   				</select>

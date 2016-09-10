@@ -16,15 +16,11 @@ import Navbar from './Navbar';
 import SideNavbar from './SideNavbar';
 import ChatRoom from './ChatRoom';
 import RoomList from './RoomList';
+import ArticleList from './ArticleList';
+import ArticleShowBox from './ArticleShowBox';
 import ArticleBox from './ArticleBox';
 import ArticleWrite from './ArticleWrite';
 import ArticleModify from './ArticleModify';
-import BoardBox from './BoardBox';
-import BoardShowBox from './BoardShowBox';
-import BoardComment from './BoardComment';
-import BoardCommentInput from './BoardCommentInput';
-import BoardCommentBox from './BoardCommentBox';
-import BoardCommentReplyWriteBox from './BoardCommentReplyWriteBox';
 export { Header, 
 	UserDataBox, 
 	UserProfile, 
@@ -46,10 +42,6 @@ export { Header,
 	ArticleBox,
 	ArticleWrite,
 	ArticleModify,
-	BoardBox,
-	BoardShowBox,
-	BoardComment,
-	BoardCommentInput,
-	BoardShowBox,
-	BoardCommentReplyWriteBox
+	ArticleList,
+	ArticleShowBox
 	};

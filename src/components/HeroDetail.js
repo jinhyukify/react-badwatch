@@ -10,26 +10,25 @@ class HeroDetail extends React.Component {
     	let list_left_value = [];
     	let list_right_title = [];
     	let list_right_value = [];
-    	let list_left_title = [
-    		"게임당 평균 K/D",
-    		"승률",
-    		"솔로킬",
-    		"게임당 임무 기여 처치",
-    		"명중률",
-    		"게임당 평균 킬딸",
-    		"게임당 평균 치유",
-    		"게임당 평균 치명타",
-    		"전체 킬",
-    		"전체 데스",
-    		"승리",
-    		"패배"
-    	];
+    	let list_left_title = [];
 
     	if(this.props.quick_mode)
     	{
+            list_left_title = [
+                "게임당 평균 K/D",
+                "승리",
+                "솔로킬",
+                "게임당 임무 기여 처치",
+                "명중률",
+                "게임당 평균 킬딸",
+                "게임당 평균 치유",
+                "게임당 평균 치명타",
+                "전체 킬",
+                "전체 데스"
+            ];
     		list_left_value = [
 	    		hero.quick_death == 0? "perfect": (hero.quick_kill/hero.quick_death).toFixed(2),
-	    		hero.quick_game_count == 0? "0%": (hero.quick_win*100/hero.quick_game_count).toFixed(1) + "%",
+	    		hero.quick_win + "승",
 	    		hero.quick_solo_kill+"킬",
 	    		hero.quick_game_count == 0? 0: (hero.quick_mission_kill/hero.quick_game_count).toFixed(1)+"킬",
 	    		hero.quick_accuracy+"%",
@@ -37,13 +36,25 @@ class HeroDetail extends React.Component {
 	    		hero.quick_game_count == 0? 0: (hero.quick_heal/hero.quick_game_count).toFixed(1),
 	    		hero.quick_game_count == 0? 0: (hero.quick_critical/hero.quick_game_count).toFixed(1),
 	    		hero.quick_kill+"킬",
-	    		hero.quick_death+"데스",
-	    		hero.quick_win+"승",
-	    		(hero.quick_game_count - hero.quick_win)+"패"
+	    		hero.quick_death+"데스"
     		];
     	}
     	else 
     	{
+            list_left_title = [
+                "게임당 평균 K/D",
+                "승률",
+                "솔로킬",
+                "게임당 임무 기여 처치",
+                "명중률",
+                "게임당 평균 킬딸",
+                "게임당 평균 치유",
+                "게임당 평균 치명타",
+                "전체 킬",
+                "전체 데스",
+                "승리",
+                "패배"
+            ];
     		list_left_value = [
 	    		(hero.rank_kill/hero.rank_death).toFixed(2),
 	    		hero.rank_game_count == 0? "0%": (hero.rank_win*100/hero.rank_game_count).toFixed(1) + "%",
@@ -73,21 +84,21 @@ class HeroDetail extends React.Component {
         			<div className="hero-data-div">
         				<div className="hero-detail-1">
 	        				<div>
-	        					<div>
+	        					<div className="inline">
 	        						<span className="list-circle"></span>
 	        						<span className="list-title">메달</span>
 	        					</div>
 	        					<div className="medal">
 	        						<span className="left inline">
-	        							<img src="/asset/images/gold-medal.png" className="gold-medal" /><br/>
+	        							<img src="/asset/images/gold-icon.png" className="gold-medal" />
 	        							{this.props.quick_mode? hero.quick_gold_medal: hero.rank_gold_medal}
 	        						</span>
 	        						<span className="inline">	
-	        							<img src="/asset/images/silver-medal.png" className="silver-medal" /><br/>
+	        							<img src="/asset/images/silver-icon.png" className="silver-medal" />
 	        							{this.props.quick_mode? hero.quick_silver_medal: hero.rank_silver_medal}
 	        						</span>
 	        						<span className="right inline">
-	        							<img src="/asset/images/bronze-medal.png" className="bronze-medal" /><br/>
+	        							<img src="/asset/images/bronze-icon.png" className="bronze-medal" />
 	        							{this.props.quick_mode? hero.quick_bronze_medal: hero.rank_bronze_medal}
 	        						</span>
 	        					</div>

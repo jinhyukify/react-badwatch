@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import { UserList, SearchUserInput } from '../components';
+import { UserList } from '../components';
 class UserByName extends React.Component {
     constructor(props) {
         super(props);
@@ -101,7 +101,7 @@ class UserByName extends React.Component {
 
 componentWillReceiveProps(nextProps){
     const MAX_SAFE_INTEGER = 9007199254740991
-        let url = "http://bad.watch/api/user?name="+nextProps.params.userName+"&value="+ MAX_SAFE_INTEGER; 
+        let url = "http://bad.watch/api/user?name="+encodeURIComponent(nextProps.params.userName)+"&value="+ MAX_SAFE_INTEGER; 
         axios.get(url)
         .then((response) => {
             let data = response.data;
@@ -151,7 +151,6 @@ componentWillReceiveProps(nextProps){
             );
         return (
                 <div>
-                    <SearchUserInput />
             		<div className="user-list-box">
             			{this.state.userData.map((user) => {
             				return (

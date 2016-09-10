@@ -1,4 +1,4 @@
-    import React from 'react';
+import React from 'react';
 import { Link } from 'react-router';
 import { LoginButton, Menu } from './';
 import axios from 'axios';
@@ -17,7 +17,9 @@ class Header extends React.Component {
                         <img src="/asset/images/logo.png" className="header-logo"/>   
                     </Link>
                     <div className="header-title">
-                        <img src="/asset/images/typo.svg" className="typo"/>
+                         <Link to="/">
+                            <img src="/asset/images/typo.svg" className="typo"/>
+                         </Link>
                         <LoginButton />
                     </div>
                     <Menu location={this.props.location}/>

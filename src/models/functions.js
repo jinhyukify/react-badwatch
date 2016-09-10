@@ -296,7 +296,7 @@ function get_job_right_value(quick_mode, hero, heroData)
 						per_game(heroData.quick_pulse_bomb_kill)+"킬",
 						per_game(heroData.quick_pulse_bomb_attached)+"개",
 						heroData.quick_best_pulse_bomb_kill_in_game+"킬",
-						heroData.quick_best_puls_bomb_attached_in_game+"개"
+						heroData.quick_best_pulse_bomb_attached_in_game+"개"
 					]);
 			case "메르시":
 				return list_right_value.concat([
@@ -499,7 +499,7 @@ function get_job_right_value(quick_mode, hero, heroData)
 						per_game(heroData.rank_pulse_bomb_kill)+"킬",
 						per_game(heroData.rank_pulse_bomb_attached)+"개",
 						heroData.rank_best_pulse_bomb_kill_in_game+"킬",
-						heroData.rank_best_puls_bomb_attached_in_game+"개"
+						heroData.rank_best_pulse_bomb_attached_in_game+"개"
 					]);
 			case "메르시":
 				return list_right_value.concat([

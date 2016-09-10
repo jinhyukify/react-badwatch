@@ -6,16 +6,42 @@ class Reply extends React.Component {
         this.displayName = 'Reply';
     }
 
-    _dateFormat(date) 
+    _dateFormat(date)
     {
-      let now = new Date(date);
-      let year = "" + now.getFullYear();
-      let month = "" + (now.getMonth() + 1); if (month.length == 1) { month = "0" + month; }
-      let day = "" + now.getDate(); if (day.length == 1) { day = "0" + day; }
-      let hour = "" + now.getHours(); if (hour.length == 1) { hour = "0" + hour; }
-      let minute = "" + now.getMinutes(); if (minute.length == 1) { minute = "0" + minute; }
-      let second = "" + now.getSeconds(); if (second.length == 1) { second = "0" + second; }
-      return year + "-" + month + "-" + day + " " + hour + ":" + minute + ":" + second;
+      var today = new Date();   
+
+      var dateObj = new Date(date);
+      var month = Math.floor((today.getTime() - dateObj.getTime()) / 1000 / 60 / 60/ 24 /30);
+      var day = Math.floor((today.getTime() - dateObj.getTime()) / 1000 / 60 / 60/ 24);
+      var hour = Math.floor((today.getTime() - dateObj.getTime()) / 1000 / 60 / 60);
+      var minute = Math.floor((today.getTime() - dateObj.getTime()) / 1000 / 60);
+
+      if( month == 0 )
+      {
+         if( day != 0 )
+         {
+            if( day == 1 )
+               return "어제";
+            else
+               return day+"일 전";
+         }
+         else
+         {
+            if( hour !=0 )
+               return hour+"시간 전";
+            else
+               return minute+"분 전";
+         }
+
+      }
+      else if( minute <= 0 )
+      {
+         return "방금";
+      }
+      else
+      {
+         return month+"달 전"
+      }
     }
 
     render() {

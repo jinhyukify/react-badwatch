@@ -48,23 +48,43 @@ class App extends React.Component {
 
     componentDidMount()
     {
-        console.log("app.js mount");
         this._handleLogin();
         $('#mobile-top-open').sideNav({
             closeOnClick: true
         });
+        if(this.props.location.pathname == "/")
+        {
+            $('body').removeClass('other');
+            $('body').addClass("home");
+        }
+        else
+        {
+            $('body').removeClass('home');
+            $('body').addClass("other");
+        }
+    }
+
+    componentDidUpdate()
+    {
+        if(this.props.location.pathname == "/")
+        {
+            $('body').removeClass('other');
+            $('body').addClass("home");
+        }
+        else
+        {
+            $('body').removeClass('home');
+            $('body').addClass("other");
+        }
     }
 
     render() {
-        let isUser = false;
-        if(this.props.location.pathname == '/')
-            isUser = true;
+        
         return (
         		<div>
-                    <Navbar/>
+                    <Navbar location={this.props.location}/>
                     <SideNavbar location={this.props.location}/>
 	        		<div className="container body-container">
-                        { isUser? undefined: <Header location={this.props.location}/> }
 	        			{this.props.children}
 	        		</div>  
         		</div>

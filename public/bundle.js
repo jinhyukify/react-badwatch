@@ -46,7 +46,7 @@
 
 	__webpack_require__(1);
 	__webpack_require__(298);
-	module.exports = __webpack_require__(693);
+	module.exports = __webpack_require__(694);
 
 
 /***/ },
@@ -8143,11 +8143,11 @@
 
 	var _redux = __webpack_require__(576);
 
-	var _reducers = __webpack_require__(688);
+	var _reducers = __webpack_require__(689);
 
 	var _reducers2 = _interopRequireDefault(_reducers);
 
-	var _reduxThunk = __webpack_require__(692);
+	var _reduxThunk = __webpack_require__(693);
 
 	var _reduxThunk2 = _interopRequireDefault(_reduxThunk);
 
@@ -8168,7 +8168,7 @@
 				{ path: '/', component: _containers.App },
 				_react2.default.createElement(_reactRouter.IndexRoute, { component: _containers.Home }),
 				_react2.default.createElement(_reactRouter.Route, { path: 'home', component: _containers.Home }),
-				_react2.default.createElement(_reactRouter.Route, { path: 'user/:userName', component: _containers.User }),
+				_react2.default.createElement(_reactRouter.Route, { path: 'user/:id', component: _containers.User }),
 				_react2.default.createElement(_reactRouter.Route, { path: 'userByName/:userName', component: _containers.UserByName }),
 				_react2.default.createElement(_reactRouter.Route, { path: 'login', component: _containers.Login }),
 				_react2.default.createElement(
@@ -8186,11 +8186,10 @@
 				),
 				_react2.default.createElement(
 					_reactRouter.Route,
-					{ path: 'board', component: _containers.Board },
-					_react2.default.createElement(_reactRouter.Route, { path: ':boardType/page/:pageId', component: _components.BoardBox }),
-					_react2.default.createElement(_reactRouter.Route, { path: ':boardType/page/:pageId/article/:articleId', component: _components.BoardShowBox }),
-					_react2.default.createElement(_reactRouter.Route, { path: 'write', component: _components.ArticleWrite }),
-					_react2.default.createElement(_reactRouter.Route, { path: 'modify/:boardType/:articleId', component: _components.ArticleModify })
+					{ path: 'article', component: _containers.Article },
+					_react2.default.createElement(_reactRouter.Route, { path: ':boardType', component: _components.ArticleList }),
+					_react2.default.createElement(_reactRouter.Route, { path: ':boardType/show/:id', component: _components.ArticleShowBox }),
+					_react2.default.createElement(_reactRouter.Route, { path: ':boardType/write', component: _components.ArticleWrite })
 				)
 			)
 		)
@@ -34730,7 +34729,7 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.UserByName = exports.Chat = exports.Youtube = exports.User = exports.Register = exports.Login = exports.Home = exports.App = undefined;
+	exports.Article = exports.UserByName = exports.Chat = exports.Youtube = exports.User = exports.Register = exports.Login = exports.Home = exports.App = undefined;
 
 	var _App = __webpack_require__(533);
 
@@ -34764,6 +34763,10 @@
 
 	var _UserByName2 = _interopRequireDefault(_UserByName);
 
+	var _Article = __webpack_require__(688);
+
+	var _Article2 = _interopRequireDefault(_Article);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	exports.App = _App2.default;
@@ -34774,6 +34777,7 @@
 	exports.Youtube = _Youtube2.default;
 	exports.Chat = _Chat2.default;
 	exports.UserByName = _UserByName2.default;
+	exports.Article = _Article2.default;
 
 /***/ },
 /* 533 */
@@ -34852,26 +34856,41 @@
 	    }, {
 	        key: 'componentDidMount',
 	        value: function componentDidMount() {
-	            console.log("app.js mount");
 	            this._handleLogin();
 	            $('#mobile-top-open').sideNav({
 	                closeOnClick: true
 	            });
+	            if (this.props.location.pathname == "/") {
+	                $('body').removeClass('other');
+	                $('body').addClass("home");
+	            } else {
+	                $('body').removeClass('home');
+	                $('body').addClass("other");
+	            }
+	        }
+	    }, {
+	        key: 'componentDidUpdate',
+	        value: function componentDidUpdate() {
+	            if (this.props.location.pathname == "/") {
+	                $('body').removeClass('other');
+	                $('body').addClass("home");
+	            } else {
+	                $('body').removeClass('home');
+	                $('body').addClass("other");
+	            }
 	        }
 	    }, {
 	        key: 'render',
 	        value: function render() {
-	            var isUser = false;
-	            if (this.props.location.pathname == '/') isUser = true;
+
 	            return _react2.default.createElement(
 	                'div',
 	                null,
-	                _react2.default.createElement(_components.Navbar, null),
+	                _react2.default.createElement(_components.Navbar, { location: this.props.location }),
 	                _react2.default.createElement(_components.SideNavbar, { location: this.props.location }),
 	                _react2.default.createElement(
 	                    'div',
 	                    { className: 'container body-container' },
-	                    isUser ? undefined : _react2.default.createElement(_components.Header, { location: this.props.location }),
 	                    this.props.children
 	                )
 	            );
@@ -34909,7 +34928,7 @@
 	Object.defineProperty(exports, "__esModule", {
 		value: true
 	});
-	exports.BoardCommentReplyWriteBox = exports.BoardCommentInput = exports.BoardComment = exports.BoardShowBox = exports.BoardBox = exports.ArticleModify = exports.ArticleWrite = exports.ArticleBox = exports.RoomList = exports.ChatRoom = exports.SideNavbar = exports.Navbar = exports.SearchUserInput = exports.Menu = exports.UserList = exports.Footer = exports.LoginButton = exports.YoutubeEditBox = exports.YoutubeShowBox = exports.YoutubeBox = exports.UserDetailCard = exports.UserDetailBox = exports.UserGameData = exports.UserProfile = exports.UserDataBox = exports.Header = undefined;
+	exports.ArticleShowBox = exports.ArticleList = exports.ArticleModify = exports.ArticleWrite = exports.ArticleBox = exports.RoomList = exports.ChatRoom = exports.SideNavbar = exports.Navbar = exports.SearchUserInput = exports.Menu = exports.UserList = exports.Footer = exports.LoginButton = exports.YoutubeEditBox = exports.YoutubeShowBox = exports.YoutubeBox = exports.UserDetailCard = exports.UserDetailBox = exports.UserGameData = exports.UserProfile = exports.UserDataBox = exports.Header = undefined;
 
 	var _Header = __webpack_require__(535);
 
@@ -34983,41 +35002,25 @@
 
 	var _RoomList2 = _interopRequireDefault(_RoomList);
 
-	var _ArticleBox = __webpack_require__(671);
+	var _ArticleList = __webpack_require__(671);
+
+	var _ArticleList2 = _interopRequireDefault(_ArticleList);
+
+	var _ArticleShowBox = __webpack_require__(673);
+
+	var _ArticleShowBox2 = _interopRequireDefault(_ArticleShowBox);
+
+	var _ArticleBox = __webpack_require__(677);
 
 	var _ArticleBox2 = _interopRequireDefault(_ArticleBox);
 
-	var _ArticleWrite = __webpack_require__(672);
+	var _ArticleWrite = __webpack_require__(678);
 
 	var _ArticleWrite2 = _interopRequireDefault(_ArticleWrite);
 
-	var _ArticleModify = __webpack_require__(674);
+	var _ArticleModify = __webpack_require__(680);
 
 	var _ArticleModify2 = _interopRequireDefault(_ArticleModify);
-
-	var _BoardBox = __webpack_require__(675);
-
-	var _BoardBox2 = _interopRequireDefault(_BoardBox);
-
-	var _BoardShowBox = __webpack_require__(676);
-
-	var _BoardShowBox2 = _interopRequireDefault(_BoardShowBox);
-
-	var _BoardComment = __webpack_require__(678);
-
-	var _BoardComment2 = _interopRequireDefault(_BoardComment);
-
-	var _BoardCommentInput = __webpack_require__(680);
-
-	var _BoardCommentInput2 = _interopRequireDefault(_BoardCommentInput);
-
-	var _BoardCommentBox = __webpack_require__(677);
-
-	var _BoardCommentBox2 = _interopRequireDefault(_BoardCommentBox);
-
-	var _BoardCommentReplyWriteBox = __webpack_require__(679);
-
-	var _BoardCommentReplyWriteBox2 = _interopRequireDefault(_BoardCommentReplyWriteBox);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -35042,12 +35045,8 @@
 	exports.ArticleBox = _ArticleBox2.default;
 	exports.ArticleWrite = _ArticleWrite2.default;
 	exports.ArticleModify = _ArticleModify2.default;
-	exports.BoardBox = _BoardBox2.default;
-	exports.BoardShowBox = _BoardShowBox2.default;
-	exports.BoardComment = _BoardComment2.default;
-	exports.BoardCommentInput = _BoardCommentInput2.default;
-	exports.BoardShowBox = _BoardShowBox2.default;
-	exports.BoardCommentReplyWriteBox = _BoardCommentReplyWriteBox2.default;
+	exports.ArticleList = _ArticleList2.default;
+	exports.ArticleShowBox = _ArticleShowBox2.default;
 
 /***/ },
 /* 535 */
@@ -35108,7 +35107,11 @@
 	                _react2.default.createElement(
 	                    'div',
 	                    { className: 'header-title' },
-	                    _react2.default.createElement('img', { src: '/asset/images/typo.svg', className: 'typo' }),
+	                    _react2.default.createElement(
+	                        _reactRouter.Link,
+	                        { to: '/' },
+	                        _react2.default.createElement('img', { src: '/asset/images/typo.svg', className: 'typo' })
+	                    ),
 	                    _react2.default.createElement(_.LoginButton, null)
 	                ),
 	                _react2.default.createElement(_.Menu, { location: this.props.location })
@@ -36542,12 +36545,32 @@
 	            );
 	            var after_load = _react2.default.createElement(
 	                'div',
-	                { className: 'user-data-box' },
-	                _react2.default.createElement(_index.UserProfile, { userData: this.props.userData }),
-	                _react2.default.createElement(_index.UserGameData, { onQuick: this._handleQuick,
-	                    onRank: this._handleRank,
-	                    quick_mode: this.props.quick_mode,
-	                    userData: this.props.userData })
+	                { className: 'row' },
+	                _react2.default.createElement(
+	                    'div',
+	                    { className: 'col l1 tablet-hide mobile-hide' },
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'vertical-choose-1 ' + (this.props.quick_mode ? "active" : ""),
+	                            onClick: this._handleQuick },
+	                        '빠른대전'
+	                    ),
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'vertical-choose-2 ' + (this.props.quick_mode ? '' : "active"),
+	                            onClick: this._handleRank },
+	                        '경쟁전'
+	                    )
+	                ),
+	                _react2.default.createElement(
+	                    'div',
+	                    { className: 'col l11' },
+	                    _react2.default.createElement(_index.UserProfile, { userData: this.props.userData }),
+	                    _react2.default.createElement(_index.UserGameData, { onQuick: this._handleQuick,
+	                        onRank: this._handleRank,
+	                        quick_mode: this.props.quick_mode,
+	                        userData: this.props.userData })
+	                )
 	            );
 	            return _react2.default.createElement(
 	                'div',
@@ -36576,7 +36599,7 @@
 	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
-	    value: true
+	   value: true
 	});
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -36598,179 +36621,172 @@
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 	var UserProfile = function (_React$Component) {
-	    _inherits(UserProfile, _React$Component);
+	   _inherits(UserProfile, _React$Component);
 
-	    function UserProfile(props) {
-	        _classCallCheck(this, UserProfile);
+	   function UserProfile(props) {
+	      _classCallCheck(this, UserProfile);
 
-	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(UserProfile).call(this, props));
+	      var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(UserProfile).call(this, props));
 
-	        _this.displayName = 'UserProfile';
-	        _this._onRenew = _this._onRenew.bind(_this);
-	        _this.state = {
-	            renewStart: false
-	        };
-	        return _this;
-	    }
+	      _this.displayName = 'UserProfile';
+	      _this._onRenew = _this._onRenew.bind(_this);
+	      _this.state = {
+	         renewStart: false
+	      };
+	      return _this;
+	   }
 
-	    _createClass(UserProfile, [{
-	        key: '_dateFormat',
-	        value: function _dateFormat(date) {
-	            var today = new Date();
+	   _createClass(UserProfile, [{
+	      key: '_dateFormat',
+	      value: function _dateFormat(date) {
+	         var today = new Date();
 
-	            var dateObj = new Date(date);
-	            var month = Math.floor((today.getTime() - dateObj.getTime()) / 1000 / 60 / 60 / 24 / 30);
-	            var day = Math.floor((today.getTime() - dateObj.getTime()) / 1000 / 60 / 60 / 24);
-	            var hour = Math.floor((today.getTime() - dateObj.getTime()) / 1000 / 60 / 60);
-	            var minute = Math.floor((today.getTime() - dateObj.getTime()) / 1000 / 60);
+	         var dateObj = new Date(date);
+	         var month = Math.floor((today.getTime() - dateObj.getTime()) / 1000 / 60 / 60 / 24 / 30);
+	         var day = Math.floor((today.getTime() - dateObj.getTime()) / 1000 / 60 / 60 / 24);
+	         var hour = Math.floor((today.getTime() - dateObj.getTime()) / 1000 / 60 / 60);
+	         var minute = Math.floor((today.getTime() - dateObj.getTime()) / 1000 / 60);
 
-	            if (month == 0) {
-	                if (day != 0) {
-	                    if (day == 1) return "어제";else return day + "일 전";
-	                } else {
-	                    if (hour != 0) return hour + "시간 전";else return minute + "분 전";
-	                }
-	            } else if (minute <= 0) {
-	                return "방금";
+	         if (month == 0) {
+	            if (day != 0) {
+	               if (day == 1) return "어제";else return day + "일 전";
 	            } else {
-	                return month + "달 전";
+	               if (hour != 0) return hour + "시간 전";else return minute + "분 전";
 	            }
-	        }
-	    }, {
-	        key: '_onRenew',
-	        value: function _onRenew() {
-	            var _this2 = this;
+	         } else if (minute <= 0) {
+	            return "방금";
+	         } else {
+	            return month + "달 전";
+	         }
+	      }
+	   }, {
+	      key: '_renewAble',
+	      value: function _renewAble(date) {
+	         var today = new Date();
+	         var dateObj = new Date(date);
+	         var minute = Math.floor((today.getTime() - dateObj.getTime()) / 1000 / 60);
+	         if (minute < 11) return false;else return true;
+	      }
+	   }, {
+	      key: '_onRenew',
+	      value: function _onRenew() {
+	         var _this2 = this;
 
-	            this.setState({
-	                renewStart: true
-	            });
+	         this.setState({
+	            renewStart: true
+	         });
 
-	            $('.renew-box').addClass('active');
-	            var url = "http://bad.watch/api/renew-user/" + this.props.userData.overwatch_id;
-	            _axios2.default.get(url).then(function (response) {
-	                var data = response.data;
-	                if (data.responseCode == 54) {
-	                    //갱신 성공
-	                    location.reload();
-	                } else if (data.responseCode == 55) {
-	                    //갱신실패
-	                    var last_renew_time = _this2._dateFormat(data.last_renew);
-	                    _this2.setState({
-	                        renewStart: false
-	                    });
-	                    $('.renew-box').removeClass('active');
-	                    sweetAlert('이미 ' + last_renew_time + '에 갱신하였습니다.', '10분마다 갱신하실 수 있습니다.', 'error');
-	                    return;
-	                }
-	            });
-	        }
-	    }, {
-	        key: 'render',
-	        value: function render() {
-	            var renewState = undefined;
-	            if (this.state.renewStart) {
-	                renewState = _react2.default.createElement(
-	                    'div',
-	                    { className: 'preloader-wrapper renew-loader active' },
-	                    _react2.default.createElement(
-	                        'div',
-	                        { className: 'spinner-layer spinner-white-only' },
-	                        _react2.default.createElement(
-	                            'div',
-	                            { className: 'circle-clipper left' },
-	                            _react2.default.createElement('div', { className: 'circle' })
-	                        ),
-	                        _react2.default.createElement(
-	                            'div',
-	                            { className: 'gap-patch' },
-	                            _react2.default.createElement('div', { className: 'circle' })
-	                        ),
-	                        _react2.default.createElement(
-	                            'div',
-	                            { className: 'circle-clipper right' },
-	                            _react2.default.createElement('div', { className: 'circle' })
-	                        )
-	                    )
-	                );
-	            } else {
-	                renewState = _react2.default.createElement('img', { src: '/asset/images/renew.png', className: 'renew-icon' });
+	         $('.renew-box').addClass('active');
+	         var url = "http://bad.watch/api/renew-user/" + this.props.userData.overwatch_id;
+	         _axios2.default.get(url).then(function (response) {
+	            var data = response.data;
+	            if (data.responseCode == 54) {
+	               //갱신 성공
+	               location.reload();
+	            } else if (data.responseCode == 55) {
+	               //갱신실패
+	               var last_renew_time = _this2._dateFormat(data.last_renew);
+	               _this2.setState({
+	                  renewStart: false
+	               });
+	               $('.renew-box').removeClass('active');
+	               sweetAlert('이미 ' + last_renew_time + '에 갱신하였습니다.', '10분마다 갱신하실 수 있습니다.', 'error');
+	               return;
 	            }
-	            return _react2.default.createElement(
-	                'div',
-	                null,
-	                _react2.default.createElement(
-	                    'div',
-	                    null,
-	                    _react2.default.createElement('img', { className: 'user-profile-img',
-	                        src: this.props.userData.avatar }),
-	                    _react2.default.createElement(
-	                        'div',
-	                        { className: 'profile-battletag' },
-	                        this.props.userData.name,
-	                        ' # ',
-	                        this.props.userData.battletag,
-	                        _react2.default.createElement('br', { className: 'computer-hide' }),
-	                        _react2.default.createElement(
-	                            'span',
-	                            { className: 'meta' },
-	                            '최근 갱신시간 : ',
-	                            this._dateFormat(this.props.userData.last_renew)
-	                        )
-	                    ),
-	                    _react2.default.createElement(
-	                        'div',
-	                        { className: 'profile-info' },
-	                        _react2.default.createElement(
-	                            'span',
-	                            null,
-	                            '레벨 ',
-	                            this.props.userData.level
-	                        ),
-	                        _react2.default.createElement('br', null),
-	                        _react2.default.createElement(
-	                            'span',
-	                            null,
-	                            '경쟁전 점수 ',
-	                            this.props.userData.point
-	                        ),
-	                        _react2.default.createElement('br', { className: 'computer-hide' }),
-	                        _react2.default.createElement('br', { className: 'computer-hide' }),
-	                        _react2.default.createElement(
-	                            'span',
-	                            { className: 'renew-box', onClick: this._onRenew },
-	                            renewState
-	                        ),
-	                        _react2.default.createElement('br', { className: 'computer-hide' }),
-	                        _react2.default.createElement(
-	                            'span',
-	                            { className: 'renew-ment' },
-	                            '! 게임종료 후 갱신해야 최신 기록이 업데이트됩니다.'
-	                        )
-	                    )
-	                ),
-	                _react2.default.createElement(
-	                    'div',
-	                    { className: 'clear' },
-	                    _react2.default.createElement(
-	                        'div',
-	                        { className: 'reputation-title' },
-	                        '배드워치 평가'
-	                    ),
-	                    _react2.default.createElement(
-	                        'div',
-	                        { className: 'reputation' },
-	                        this.props.userData.reputation
-	                    )
-	                )
+	         });
+	      }
+	   }, {
+	      key: 'render',
+	      value: function render() {
+	         var renewState = undefined;
+	         if (this._renewAble(this.props.userData.last_renew)) {
+	            renewState = _react2.default.createElement(
+	               'div',
+	               { className: 'renew-box', onClick: this._onRenew },
+	               _react2.default.createElement('img', { src: '/asset/images/renew-available.png', className: 'renew-available' }),
+	               '갱신하기'
 	            );
-	        }
-	    }]);
+	         } else {
+	            renewState = _react2.default.createElement(
+	               'div',
+	               { className: 'renew-box-disabled' },
+	               _react2.default.createElement('img', { src: '/asset/images/renew-disable.png', className: 'renew-available' }),
+	               '갱신됨'
+	            );
+	         }
+	         return _react2.default.createElement(
+	            'div',
+	            null,
+	            _react2.default.createElement(
+	               'div',
+	               { className: 'user-profile' },
+	               _react2.default.createElement('img', { className: 'user-profile-img',
+	                  src: this.props.userData.avatar }),
+	               _react2.default.createElement(
+	                  'div',
+	                  { className: 'profile-battletag' },
+	                  _react2.default.createElement(
+	                     'span',
+	                     { className: 'profile-user-name' },
+	                     this.props.userData.name
+	                  ),
+	                  _react2.default.createElement(
+	                     'span',
+	                     { className: 'profile-user-level' },
+	                     '경쟁전 점수 ',
+	                     _react2.default.createElement(
+	                        'span',
+	                        { className: 'red-text' },
+	                        this.props.userData.point
+	                     )
+	                  ),
+	                  _react2.default.createElement(
+	                     'span',
+	                     { className: 'profile-user-level' },
+	                     '레벨 ',
+	                     _react2.default.createElement(
+	                        'span',
+	                        { className: 'red-text' },
+	                        this.props.userData.level
+	                     )
+	                  ),
+	                  _react2.default.createElement(
+	                     'div',
+	                     { className: 'profile-absolute' },
+	                     _react2.default.createElement(
+	                        'span',
+	                        { className: 'meta' },
+	                        '최근 갱신시간 : ',
+	                        this._dateFormat(this.props.userData.last_renew)
+	                     ),
+	                     renewState
+	                  )
+	               )
+	            ),
+	            _react2.default.createElement(
+	               'div',
+	               { className: 'clear' },
+	               _react2.default.createElement(
+	                  'div',
+	                  { className: 'reputation' },
+	                  _react2.default.createElement('img', { src: '/asset/images/quot-left.png', className: 'quot-left' }),
+	                  _react2.default.createElement(
+	                     'div',
+	                     { className: 'reputation-text-top' },
+	                     this.props.userData.reputation
+	                  ),
+	                  _react2.default.createElement('img', { src: '/asset/images/quot-right.png', className: 'quot-right' })
+	               )
+	            )
+	         );
+	      }
+	   }]);
 
-	    return UserProfile;
+	   return UserProfile;
 	}(_react2.default.Component);
 
 	UserProfile.propTypes = {
-	    userData: _react2.default.PropTypes.object
+	   userData: _react2.default.PropTypes.object
 	};
 
 	exports.default = UserProfile;
@@ -36835,19 +36851,15 @@
 	                null,
 	                _react2.default.createElement(
 	                    'div',
-	                    { className: 'relative-choose' },
-	                    _react2.default.createElement(
-	                        'span',
-	                        { onClick: this._handleQuick,
-	                            className: this.props.quick_mode ? "mode active" : "mode" },
-	                        '빠른대전'
-	                    ),
-	                    _react2.default.createElement(
-	                        'span',
-	                        { onClick: this._handleRank,
-	                            className: this.props.quick_mode ? "mode mode-right" : "mode active mode-right" },
-	                        '경쟁전'
-	                    )
+	                    { className: 'mode-choose-1 ' + (this.props.quick_mode ? "active" : ''),
+	                        onClick: this._handleQuick },
+	                    '빠른대전'
+	                ),
+	                _react2.default.createElement(
+	                    'div',
+	                    { className: 'mode-choose-2 ' + (this.props.quick_mode ? '' : "active"),
+	                        onClick: this._handleRank },
+	                    '경쟁전'
 	                ),
 	                _react2.default.createElement(_UserDetailBox2.default, { userData: this.props.userData,
 	                    quick_mode: this.props.quick_mode,
@@ -36944,72 +36956,72 @@
 																					null,
 																					_react2.default.createElement(
 																									_UserDetailCard2.default,
-																									{ data: winRate(userData.quick_win, userData.quick_game_count) },
-																									'승률'
+																									{ data: userData.quick_win + "승", img: "win-rate-icon" },
+																									'승'
 																					),
 																					_react2.default.createElement(
 																									_UserDetailCard2.default,
-																									{ data: kda(userData.quick_kill, userData.quick_death) },
+																									{ data: kda(userData.quick_kill, userData.quick_death), img: "kda-icon" },
 																									'킬뎃'
 																					),
 																					_react2.default.createElement(
 																									_UserDetailCard2.default,
-																									{ data: userData.quick_gold_medal, average: userData.quick_gold_medal / userData.quick_game_count },
+																									{ data: userData.quick_gold_medal, average: userData.quick_gold_medal / userData.quick_game_count, img: "gold-icon" },
 																									'금메달'
 																					),
 																					_react2.default.createElement(
 																									_UserDetailCard2.default,
-																									{ data: userData.quick_silver_medal, average: userData.quick_silver_medal / userData.quick_game_count },
+																									{ data: userData.quick_silver_medal, average: userData.quick_silver_medal / userData.quick_game_count, img: "silver-icon" },
 																									'은메달'
 																					),
 																					_react2.default.createElement(
 																									_UserDetailCard2.default,
-																									{ data: userData.quick_bronze_medal, average: userData.quick_bronze_medal / userData.quick_game_count },
+																									{ data: userData.quick_bronze_medal, average: userData.quick_bronze_medal / userData.quick_game_count, img: "bronze-icon" },
 																									'동메달'
 																					),
 																					_react2.default.createElement(
 																									_UserDetailCard2.default,
-																									{ data: userData.quick_solo_kill, average: userData.quick_solo_kill / userData.quick_game_count },
+																									{ data: userData.quick_solo_kill, average: userData.quick_solo_kill / userData.quick_game_count, img: "solokill-icon" },
 																									'솔킬'
 																					),
 																					_react2.default.createElement(
 																									_UserDetailCard2.default,
-																									{ data: userData.quick_most_kill },
+																									{ data: userData.quick_most_kill, img: "most-kill-icon" },
 																									'처치 최고기록'
 																					),
 																					_react2.default.createElement(
 																									_UserDetailCard2.default,
-																									{ data: userData.quick_most_mission_kill },
+																									{ data: userData.quick_most_mission_kill, img: "most-mission-kill-icon" },
 																									'임무처치 최고기록'
 																					),
 																					_react2.default.createElement(
 																									_UserDetailCard2.default,
-																									{ data: (0, _functions.second_modify)(userData.quick_most_mission_time) },
+																									{ data: (0, _functions.second_modify)(userData.quick_most_mission_time), img: "most-mission-time-icon" },
 																									'임무기여 시간 최고기록'
 																					),
 																					_react2.default.createElement(
 																									_UserDetailCard2.default,
-																									{ data: userData.quick_most_onecombo },
+																									{ data: userData.quick_most_onecombo, img: "one-combo-icon" },
 																									'원콤보 최고기록'
 																					),
 																					_react2.default.createElement(
 																									_UserDetailCard2.default,
-																									{ data: userData.quick_most_lastshot },
+																									{ data: userData.quick_most_lastshot, img: "lastshot-icon" },
 																									'킬딸 최고기록'
 																					),
 																					_react2.default.createElement(
 																									_UserDetailCard2.default,
-																									{ data: userData.quick_most_deal },
+																									{ data: userData.quick_most_deal, img: "most-deal-icon" },
 																									'딜 최고기록'
 																					),
 																					_react2.default.createElement(
 																									_UserDetailCard2.default,
-																									{ data: (0, _functions.hour_modify)(userData.quick_playtime) },
+																									{ data: (0, _functions.hour_modify)(userData.quick_playtime), img: "playtime-icon" },
 																									'플레이 시간'
 																					),
 																					_react2.default.createElement(
 																									_UserDetailCard2.default,
-																									{ data: userData.quick_most_heal },
+																									{ data: userData.quick_most_heal, img: "heal-icon" },
 																									'힐 최고기록'
 																					)
 																	);
@@ -37018,72 +37030,72 @@
 																					null,
 																					_react2.default.createElement(
 																									_UserMobileDetailCard2.default,
-																									{ data: winRate(userData.quick_win, userData.quick_game_count) },
-																									'승률'
+																									{ data: userData.quick_win + "승", img: "win-rate-icon" },
+																									'승'
 																					),
 																					_react2.default.createElement(
 																									_UserMobileDetailCard2.default,
-																									{ data: kda(userData.quick_kill, userData.quick_death) },
+																									{ data: kda(userData.quick_kill, userData.quick_death), img: "kda-icon" },
 																									'킬뎃'
 																					),
 																					_react2.default.createElement(
 																									_UserMobileDetailCard2.default,
-																									{ data: userData.quick_gold_medal, average: userData.quick_gold_medal / userData.quick_game_count },
+																									{ data: userData.quick_gold_medal, average: userData.quick_gold_medal / userData.quick_game_count, img: "gold-icon" },
 																									'금메달'
 																					),
 																					_react2.default.createElement(
 																									_UserMobileDetailCard2.default,
-																									{ data: userData.quick_silver_medal, average: userData.quick_silver_medal / userData.quick_game_count },
+																									{ data: userData.quick_silver_medal, average: userData.quick_silver_medal / userData.quick_game_count, img: "silver-icon" },
 																									'은메달'
 																					),
 																					_react2.default.createElement(
 																									_UserMobileDetailCard2.default,
-																									{ data: userData.quick_bronze_medal, average: userData.quick_bronze_medal / userData.quick_game_count },
+																									{ data: userData.quick_bronze_medal, average: userData.quick_bronze_medal / userData.quick_game_count, img: "bronze-icon" },
 																									'동메달'
 																					),
 																					_react2.default.createElement(
 																									_UserMobileDetailCard2.default,
-																									{ data: userData.quick_solo_kill, average: userData.quick_solo_kill / userData.quick_game_count },
+																									{ data: userData.quick_solo_kill, average: userData.quick_solo_kill / userData.quick_game_count, img: "solokill-icon" },
 																									'솔킬'
 																					),
 																					_react2.default.createElement(
 																									_UserMobileDetailCard2.default,
-																									{ data: userData.quick_most_kill },
+																									{ data: userData.quick_most_kill, img: "most-kill-icon" },
 																									'처치 최고기록'
 																					),
 																					_react2.default.createElement(
 																									_UserMobileDetailCard2.default,
-																									{ data: userData.quick_most_mission_kill },
+																									{ data: userData.quick_most_mission_kill, img: "most-mission-kill-icon" },
 																									'임무처치 최고기록'
 																					),
 																					_react2.default.createElement(
 																									_UserMobileDetailCard2.default,
-																									{ data: (0, _functions.second_modify)(userData.quick_most_mission_time) },
+																									{ data: (0, _functions.second_modify)(userData.quick_most_mission_time), img: "most-mission-time-icon" },
 																									'임무기여 시간 최고기록'
 																					),
 																					_react2.default.createElement(
 																									_UserMobileDetailCard2.default,
-																									{ data: userData.quick_most_onecombo },
+																									{ data: userData.quick_most_onecombo, img: "one-combo-icon" },
 																									'원콤보 최고기록'
 																					),
 																					_react2.default.createElement(
 																									_UserMobileDetailCard2.default,
-																									{ data: userData.quick_most_lastshot },
+																									{ data: userData.quick_most_lastshot, img: "lastshot-icon" },
 																									'킬딸 최고기록'
 																					),
 																					_react2.default.createElement(
 																									_UserMobileDetailCard2.default,
-																									{ data: userData.quick_most_deal },
+																									{ data: userData.quick_most_deal, img: "most-deal-icon" },
 																									'딜 최고기록'
 																					),
 																					_react2.default.createElement(
 																									_UserMobileDetailCard2.default,
-																									{ data: (0, _functions.hour_modify)(userData.quick_playtime) },
+																									{ data: (0, _functions.hour_modify)(userData.quick_playtime), img: "playtime-icon" },
 																									'플레이 시간'
 																					),
 																					_react2.default.createElement(
 																									_UserMobileDetailCard2.default,
-																									{ data: userData.quick_most_heal },
+																									{ data: userData.quick_most_heal, img: "heal-icon" },
 																									'힐 최고기록'
 																					)
 																	);
@@ -37093,72 +37105,72 @@
 																					null,
 																					_react2.default.createElement(
 																									_UserDetailCard2.default,
-																									{ data: winRate(userData.rank_win, userData.rank_game_count) },
+																									{ data: winRate(userData.rank_win, userData.rank_game_count), img: "win-rate-icon" },
 																									'승률'
 																					),
 																					_react2.default.createElement(
 																									_UserDetailCard2.default,
-																									{ data: kda(userData.rank_kill, userData.rank_death) },
+																									{ data: kda(userData.rank_kill, userData.rank_death), img: "kda-icon" },
 																									'킬뎃'
 																					),
 																					_react2.default.createElement(
 																									_UserDetailCard2.default,
-																									{ data: userData.rank_gold_medal, average: userData.rank_gold_medal / userData.rank_game_count },
+																									{ data: userData.rank_gold_medal, average: userData.rank_gold_medal / userData.rank_game_count, img: "gold-icon" },
 																									'금메달'
 																					),
 																					_react2.default.createElement(
 																									_UserDetailCard2.default,
-																									{ data: userData.rank_silver_medal, average: userData.rank_silver_medal / userData.rank_game_count },
+																									{ data: userData.rank_silver_medal, average: userData.rank_silver_medal / userData.rank_game_count, img: "silver-icon" },
 																									'은메달'
 																					),
 																					_react2.default.createElement(
 																									_UserDetailCard2.default,
-																									{ data: userData.rank_bronze_medal, average: userData.rank_bronze_medal / userData.rank_game_count },
+																									{ data: userData.rank_bronze_medal, average: userData.rank_bronze_medal / userData.rank_game_count, img: "bronze-icon" },
 																									'동메달'
 																					),
 																					_react2.default.createElement(
 																									_UserDetailCard2.default,
-																									{ data: userData.rank_solo_kill, average: userData.rank_solo_kill / userData.rank_game_count },
+																									{ data: userData.rank_solo_kill, average: userData.rank_solo_kill / userData.rank_game_count, img: "solokill-icon" },
 																									'솔킬'
 																					),
 																					_react2.default.createElement(
 																									_UserDetailCard2.default,
-																									{ data: userData.rank_most_kill },
+																									{ data: userData.rank_most_kill, img: "most-kill-icon" },
 																									'처치 최고기록'
 																					),
 																					_react2.default.createElement(
 																									_UserDetailCard2.default,
-																									{ data: userData.rank_most_mission_kill },
+																									{ data: userData.rank_most_mission_kill, img: "most-mission-kill-icon" },
 																									'임무처치 최고기록'
 																					),
 																					_react2.default.createElement(
 																									_UserDetailCard2.default,
-																									{ data: (0, _functions.second_modify)(userData.rank_most_mission_time) },
+																									{ data: (0, _functions.second_modify)(userData.rank_most_mission_time), img: "most-mission-time-icon" },
 																									'임무기여 시간 최고기록'
 																					),
 																					_react2.default.createElement(
 																									_UserDetailCard2.default,
-																									{ data: userData.rank_most_onecombo },
+																									{ data: userData.rank_most_onecombo, img: "one-combo-icon" },
 																									'원콤보 최고기록'
 																					),
 																					_react2.default.createElement(
 																									_UserDetailCard2.default,
-																									{ data: userData.rank_most_lastshot },
+																									{ data: userData.rank_most_lastshot, img: "lastshot-icon" },
 																									'킬딸 최고기록'
 																					),
 																					_react2.default.createElement(
 																									_UserDetailCard2.default,
-																									{ data: userData.rank_most_deal },
+																									{ data: userData.rank_most_deal, img: "most-deal-icon" },
 																									'딜 최고기록'
 																					),
 																					_react2.default.createElement(
 																									_UserDetailCard2.default,
-																									{ data: (0, _functions.hour_modify)(userData.rank_playtime) },
+																									{ data: (0, _functions.hour_modify)(userData.rank_playtime), img: "playtime-icon" },
 																									'플레이 시간'
 																					),
 																					_react2.default.createElement(
 																									_UserDetailCard2.default,
-																									{ data: userData.rank_most_heal },
+																									{ data: userData.rank_most_heal, img: "heal-icon" },
 																									'힐 최고기록'
 																					)
 																	);
@@ -37168,72 +37180,72 @@
 																					null,
 																					_react2.default.createElement(
 																									_UserMobileDetailCard2.default,
-																									{ data: winRate(userData.rank_win, userData.rank_game_count) },
+																									{ data: winRate(userData.rank_win, userData.rank_game_count), img: "win-rate-icon" },
 																									'승률'
 																					),
 																					_react2.default.createElement(
 																									_UserMobileDetailCard2.default,
-																									{ data: kda(userData.rank_kill, userData.rank_death) },
+																									{ data: kda(userData.rank_kill, userData.rank_death), img: "kda-icon" },
 																									'킬뎃'
 																					),
 																					_react2.default.createElement(
 																									_UserMobileDetailCard2.default,
-																									{ data: userData.rank_gold_medal, average: userData.rank_gold_medal / userData.rank_game_count },
+																									{ data: userData.rank_gold_medal, average: userData.rank_gold_medal / userData.rank_game_count, img: "gold-icon" },
 																									'금메달'
 																					),
 																					_react2.default.createElement(
 																									_UserMobileDetailCard2.default,
-																									{ data: userData.rank_silver_medal, average: userData.rank_silver_medal / userData.rank_game_count },
+																									{ data: userData.rank_silver_medal, average: userData.rank_silver_medal / userData.rank_game_count, img: "silver-icon" },
 																									'은메달'
 																					),
 																					_react2.default.createElement(
 																									_UserMobileDetailCard2.default,
-																									{ data: userData.rank_bronze_medal, average: userData.rank_bronze_medal / userData.rank_game_count },
+																									{ data: userData.rank_bronze_medal, average: userData.rank_bronze_medal / userData.rank_game_count, img: "bronze-icon" },
 																									'동메달'
 																					),
 																					_react2.default.createElement(
 																									_UserMobileDetailCard2.default,
-																									{ data: userData.rank_solo_kill, average: userData.rank_solo_kill / userData.rank_game_count },
+																									{ data: userData.rank_solo_kill, average: userData.rank_solo_kill / userData.rank_game_count, img: "solokill-icon" },
 																									'솔킬'
 																					),
 																					_react2.default.createElement(
 																									_UserMobileDetailCard2.default,
-																									{ data: userData.rank_most_kill },
+																									{ data: userData.rank_most_kill, img: "most-kill-icon" },
 																									'처치 최고기록'
 																					),
 																					_react2.default.createElement(
 																									_UserMobileDetailCard2.default,
-																									{ data: userData.rank_most_mission_kill },
+																									{ data: userData.rank_most_mission_kill, img: "most-mission-kill-icon" },
 																									'임무처치 최고기록'
 																					),
 																					_react2.default.createElement(
 																									_UserMobileDetailCard2.default,
-																									{ data: (0, _functions.second_modify)(userData.rank_most_mission_time) },
+																									{ data: (0, _functions.second_modify)(userData.rank_most_mission_time), img: "most-mission-time-icon" },
 																									'임무기여 시간 최고기록'
 																					),
 																					_react2.default.createElement(
 																									_UserMobileDetailCard2.default,
-																									{ data: userData.rank_most_onecombo },
+																									{ data: userData.rank_most_onecombo, img: "one-combo-icon" },
 																									'원콤보 최고기록'
 																					),
 																					_react2.default.createElement(
 																									_UserMobileDetailCard2.default,
-																									{ data: userData.rank_most_lastshot },
+																									{ data: userData.rank_most_lastshot, img: "lastshot-icon" },
 																									'킬딸 최고기록'
 																					),
 																					_react2.default.createElement(
 																									_UserMobileDetailCard2.default,
-																									{ data: userData.rank_most_deal },
+																									{ data: userData.rank_most_deal, img: "most-deal-icon" },
 																									'딜 최고기록'
 																					),
 																					_react2.default.createElement(
 																									_UserMobileDetailCard2.default,
-																									{ data: (0, _functions.hour_modify)(userData.rank_playtime) },
+																									{ data: (0, _functions.hour_modify)(userData.rank_playtime), img: "playtime-icon" },
 																									'플레이 시간'
 																					),
 																					_react2.default.createElement(
 																									_UserMobileDetailCard2.default,
-																									{ data: userData.rank_most_heal },
+																									{ data: userData.rank_most_heal, img: "heal-icon" },
 																									'힐 최고기록'
 																					)
 																	);
@@ -37244,33 +37256,63 @@
 																	null,
 																	_react2.default.createElement(
 																					'div',
-																					{ className: 'quick-choose' },
+																					null,
 																					_react2.default.createElement(
-																									'center',
-																									null,
+																									'div',
+																									{ className: 'col s12 l4' },
 																									_react2.default.createElement(
 																													'div',
-																													{ className: 'row mobile-hide' },
+																													{ className: 'summary' },
+																													'요약'
+																									),
+																									_react2.default.createElement(
+																													'div',
+																													{ className: 'summary-data' },
 																													userDetailBox
 																									)
 																					),
+																					_react2.default.createElement('br', { className: 'computer-hide' }),
 																					_react2.default.createElement(
 																									'div',
-																									{ className: 'mobile-gamedata computer-hide' },
-																									userMobileDetailBox
-																					)
-																	),
-																	_react2.default.createElement(
-																					'h5',
-																					{ className: 'hero-list' },
-																					'영웅목록'
-																	),
-																	heros.map(function (hero, i) {
-																					return _react2.default.createElement(_HeroCard2.default, { key: _this2.props.quick_mode + hero.hero,
-																									hero: hero,
-																									quick_mode: _this2.props.quick_mode,
-																									overwatch_id: userData.overwatch_id });
-																	})
+																									{ className: 'col s12 l8' },
+																									_react2.default.createElement(
+																													'div',
+																													{ className: 'hero-info mobile-hide' },
+																													_react2.default.createElement(
+																																	'span',
+																																	{ className: 'hero-head-hero' },
+																																	'영웅별 전적'
+																													),
+																													_react2.default.createElement(
+																																	'span',
+																																	{ className: 'hero-head-playtime' },
+																																	'플레이 시간'
+																													),
+																													_react2.default.createElement(
+																																	'span',
+																																	{ className: 'hero-head-kda middle-big-hide' },
+																																	'K/D'
+																													),
+																													_react2.default.createElement(
+																																	'span',
+																																	{ className: 'hero-head-win middle-big-hide' },
+																																	this.props.quick_mode ? "승리" : "승률(%)"
+																													)
+																									),
+																									_react2.default.createElement(
+																													'div',
+																													{ className: 'computer-hide mobile-hero-info' },
+																													'영웅별 전적'
+																									),
+																									heros.map(function (hero, i) {
+																													return _react2.default.createElement(_HeroCard2.default, { key: _this2.props.quick_mode + hero.hero,
+																																	hero: hero,
+																																	quick_mode: _this2.props.quick_mode,
+																																	overwatch_id: userData.overwatch_id });
+																									})
+																					),
+																					_react2.default.createElement('br', null)
+																	)
 													);
 									}
 					}]);
@@ -37328,7 +37370,9 @@
 	        value: function render() {
 	            return _react2.default.createElement(
 	                'div',
-	                { className: 'col s6 h2 user-detail' },
+	                { className: 'user-detail-card' },
+	                _react2.default.createElement('img', { src: "/asset/images/" + this.props.img + ".png",
+	                    className: 'summary-icon' }),
 	                _react2.default.createElement(
 	                    'div',
 	                    { className: 'data-title' },
@@ -37354,7 +37398,8 @@
 
 	UserDetailCard.propTypes = {
 	    data: _react2.default.PropTypes.any,
-	    average: _react2.default.PropTypes.any
+	    average: _react2.default.PropTypes.any,
+	    img: _react2.default.PropTypes.string
 	};
 
 	exports.default = UserDetailCard;
@@ -37542,7 +37587,7 @@
 				case "리퍼":
 					return list_right_value.concat([per_game(heroData.quick_death_blossom_kill) + "킬", per_game(heroData.quick_soul_consumed) + "영혼", heroData.quick_most_death_blossom_kill + "킬", heroData.quick_most_soul_consumed + "영혼"]);
 				case "트레이서":
-					return list_right_value.concat([per_game(heroData.quick_pulse_bomb_kill) + "킬", per_game(heroData.quick_pulse_bomb_attached) + "개", heroData.quick_best_pulse_bomb_kill_in_game + "킬", heroData.quick_best_puls_bomb_attached_in_game + "개"]);
+					return list_right_value.concat([per_game(heroData.quick_pulse_bomb_kill) + "킬", per_game(heroData.quick_pulse_bomb_attached) + "개", heroData.quick_best_pulse_bomb_kill_in_game + "킬", heroData.quick_best_pulse_bomb_attached_in_game + "개"]);
 				case "메르시":
 					return list_right_value.concat([per_game(heroData.quick_resurrected) + "명", per_game(heroData.quick_blaster_kill) + "킬", heroData.quick_best_resurrected_in_game + "명", heroData.quick_best_blaster_kill_in_game + "킬", heroData.quick_best_heal_in_game]);
 				case "한조":
@@ -37595,7 +37640,7 @@
 				case "리퍼":
 					return list_right_value.concat([_per_game(heroData.rank_death_blossom_kill) + "킬", _per_game(heroData.rank_soul_consumed) + "영혼", heroData.rank_most_death_blossom_kill + "킬", heroData.rank_most_soul_consumed + "영혼"]);
 				case "트레이서":
-					return list_right_value.concat([_per_game(heroData.rank_pulse_bomb_kill) + "킬", _per_game(heroData.rank_pulse_bomb_attached) + "개", heroData.rank_best_pulse_bomb_kill_in_game + "킬", heroData.rank_best_puls_bomb_attached_in_game + "개"]);
+					return list_right_value.concat([_per_game(heroData.rank_pulse_bomb_kill) + "킬", _per_game(heroData.rank_pulse_bomb_attached) + "개", heroData.rank_best_pulse_bomb_kill_in_game + "킬", heroData.rank_best_pulse_bomb_attached_in_game + "개"]);
 				case "메르시":
 					return list_right_value.concat([_per_game(heroData.rank_resurrected) + "명", _per_game(heroData.rank_blaster_kill) + "킬", heroData.rank_best_resurrected_in_game + "명", heroData.rank_best_blaster_kill_in_game + "킬", heroData.rank_best_heal_in_game]);
 				case "한조":
@@ -37695,6 +37740,7 @@
 			};
 			_this._onDetail = _this._onDetail.bind(_this);
 			_this._onClose = _this._onClose.bind(_this);
+			_this._onToggle = _this._onToggle.bind(_this);
 			return _this;
 		}
 
@@ -37734,6 +37780,11 @@
 				});
 			}
 		}, {
+			key: '_onToggle',
+			value: function _onToggle() {
+				if (this.state.detailOpen) this._onClose();else this._onDetail();
+			}
+		}, {
 			key: 'render',
 			value: function render() {
 				var hero = this.props.hero;
@@ -37755,56 +37806,92 @@
 					null,
 					_react2.default.createElement(
 						'div',
-						{ className: 'hero-div' },
+						{ className: 'hero-div pointer', onClick: this._onToggle },
 						_react2.default.createElement('img', { src: "/asset/images/heros/" + _functions.mapHero[hero.hero] + ".png",
 							className: 'hero-avatar' }),
 						_react2.default.createElement(
 							'div',
-							{ className: 'heroname' },
+							{ className: 'heroname mobile-hide' },
 							hero.hero
 						),
-						_react2.default.createElement('br', null),
 						_react2.default.createElement(
 							'div',
-							{ className: 'hero-data' },
-							'승률  ',
+							{ className: 'hero-wrapper mobile-hide' },
 							_react2.default.createElement(
-								'span',
-								{ className: 'right' },
-								winRate(hero.win, hero.game_count)
-							)
-						),
-						_react2.default.createElement('br', null),
-						_react2.default.createElement(
-							'div',
-							{ className: 'hero-data' },
-							'K / D  ',
-							_react2.default.createElement(
-								'span',
-								{ className: 'right' },
-								kda(hero.kill, hero.death)
-							)
-						),
-						_react2.default.createElement('br', null),
-						_react2.default.createElement(
-							'div',
-							{ className: 'hero-data' },
-							'플레이 시간 ',
-							_react2.default.createElement(
-								'span',
-								{ className: 'right' },
+								'div',
+								{ className: 'hero-data hero-playtime' },
 								(0, _functions.hour_modify)(hero.playtime)
+							),
+							_react2.default.createElement(
+								'div',
+								{ className: 'hero-data hero-kda middle-big-hide' },
+								kda(hero.kill, hero.death)
+							),
+							_react2.default.createElement(
+								'div',
+								{ className: 'hero-data hero-win middle-big-hide' },
+								this.props.quick_mode ? hero.win + "승" : winRate(hero.win, hero.game_count)
+							)
+						),
+						_react2.default.createElement(
+							'table',
+							{ className: 'mobile-hero-wrapper computer-hide' },
+							_react2.default.createElement(
+								'tbody',
+								null,
+								_react2.default.createElement(
+									'tr',
+									null,
+									_react2.default.createElement(
+										'td',
+										null,
+										'플레이'
+									),
+									_react2.default.createElement(
+										'td',
+										{ className: 'h-playtime' },
+										(0, _functions.hour_modify)(hero.playtime)
+									)
+								),
+								_react2.default.createElement(
+									'tr',
+									null,
+									_react2.default.createElement(
+										'td',
+										null,
+										'K/D'
+									),
+									_react2.default.createElement(
+										'td',
+										{ className: 'h-kda' },
+										kda(hero.kill, hero.death)
+									)
+								),
+								_react2.default.createElement(
+									'tr',
+									null,
+									_react2.default.createElement(
+										'td',
+										null,
+										this.props.quick_mode ? "승리" : "승률(%)"
+									),
+									_react2.default.createElement(
+										'td',
+										{ className: 'h-win' },
+										this.props.quick_mode ? hero.win + "승" : winRate(hero.win, hero.game_count)
+									)
+								)
 							)
 						),
 						_react2.default.createElement(
 							'div',
-							{ className: 'hero-more valign-wrapper mobile-hide' },
+							{ className: 'hero-more valign-wrapper' },
 							_react2.default.createElement(
 								'div',
 								{ className: 'right-align' },
 								_react2.default.createElement(
 									'span',
-									{ className: 'check-repu' },
+									{ className: 'check-repu mobile-hide' },
 									'평가를 확인해보세요!'
 								),
 								this.state.detailOpen ? _react2.default.createElement('img', { src: '/asset/images/arrow-up.png',
@@ -37814,19 +37901,12 @@
 									onClick: this._onDetail })
 							)
 						),
+						_react2.default.createElement('br', { className: 'computer-hide' }),
+						_react2.default.createElement('br', { className: 'computer-hide' }),
 						_react2.default.createElement(
 							'div',
-							{ className: 'computer-hide mobile-hero-more' },
-							_react2.default.createElement(
-								'span',
-								{ className: 'check-repu' },
-								'평가를 확인해보세요!'
-							),
-							this.state.detailOpen ? _react2.default.createElement('img', { src: '/asset/images/arrow-up.png',
-								className: 'arrow',
-								onClick: this._onClose }) : _react2.default.createElement('img', { src: '/asset/images/arrow-down.png',
-								className: 'arrow',
-								onClick: this._onDetail })
+							{ className: 'heroname computer-hide' },
+							hero.hero
 						)
 					),
 					this.state.detailOpen ? heroDetail : undefined
@@ -37890,11 +37970,13 @@
 	            var list_left_value = [];
 	            var list_right_title = [];
 	            var list_right_value = [];
-	            var list_left_title = ["게임당 평균 K/D", "승률", "솔로킬", "게임당 임무 기여 처치", "명중률", "게임당 평균 킬딸", "게임당 평균 치유", "게임당 평균 치명타", "전체 킬", "전체 데스", "승리", "패배"];
+	            var list_left_title = [];
 
 	            if (this.props.quick_mode) {
-	                list_left_value = [hero.quick_death == 0 ? "perfect" : (hero.quick_kill / hero.quick_death).toFixed(2), hero.quick_game_count == 0 ? "0%" : (hero.quick_win * 100 / hero.quick_game_count).toFixed(1) + "%", hero.quick_solo_kill + "킬", hero.quick_game_count == 0 ? 0 : (hero.quick_mission_kill / hero.quick_game_count).toFixed(1) + "킬", hero.quick_accuracy + "%", hero.quick_game_count == 0 ? 0 : (hero.quick_lastshot / hero.quick_game_count).toFixed(1) + "킬", hero.quick_game_count == 0 ? 0 : (hero.quick_heal / hero.quick_game_count).toFixed(1), hero.quick_game_count == 0 ? 0 : (hero.quick_critical / hero.quick_game_count).toFixed(1), hero.quick_kill + "킬", hero.quick_death + "데스", hero.quick_win + "승", hero.quick_game_count - hero.quick_win + "패"];
+	                list_left_title = ["게임당 평균 K/D", "승리", "솔로킬", "게임당 임무 기여 처치", "명중률", "게임당 평균 킬딸", "게임당 평균 치유", "게임당 평균 치명타", "전체 킬", "전체 데스"];
+	                list_left_value = [hero.quick_death == 0 ? "perfect" : (hero.quick_kill / hero.quick_death).toFixed(2), hero.quick_win + "승", hero.quick_solo_kill + "킬", hero.quick_game_count == 0 ? 0 : (hero.quick_mission_kill / hero.quick_game_count).toFixed(1) + "킬", hero.quick_accuracy + "%", hero.quick_game_count == 0 ? 0 : (hero.quick_lastshot / hero.quick_game_count).toFixed(1) + "킬", hero.quick_game_count == 0 ? 0 : (hero.quick_heal / hero.quick_game_count).toFixed(1), hero.quick_game_count == 0 ? 0 : (hero.quick_critical / hero.quick_game_count).toFixed(1), hero.quick_kill + "킬", hero.quick_death + "데스"];
 	            } else {
+	                list_left_title = ["게임당 평균 K/D", "승률", "솔로킬", "게임당 임무 기여 처치", "명중률", "게임당 평균 킬딸", "게임당 평균 치유", "게임당 평균 치명타", "전체 킬", "전체 데스", "승리", "패배"];
 	                list_left_value = [(hero.rank_kill / hero.rank_death).toFixed(2), hero.rank_game_count == 0 ? "0%" : (hero.rank_win * 100 / hero.rank_game_count).toFixed(1) + "%", hero.rank_solo_kill + "킬", hero.rank_game_count == 0 ? 0 : (hero.rank_mission_kill / hero.rank_game_count).toFixed(1) + "킬", hero.rank_accuracy + "%", hero.rank_game_count == 0 ? 0 : (hero.rank_lastshot / hero.rank_game_count).toFixed(1) + "킬", hero.rank_game_count == 0 ? 0 : (hero.rank_heal / hero.rank_game_count).toFixed(1), hero.rank_game_count == 0 ? 0 : (hero.rank_critical / hero.rank_game_count).toFixed(1), hero.rank_kill + "킬", hero.rank_death + "데스", hero.rank_win + "승", hero.rank_game_count - hero.rank_win + "패"];
 	            }
 
@@ -37924,7 +38006,7 @@
 	                            null,
 	                            _react2.default.createElement(
 	                                'div',
-	                                null,
+	                                { className: 'inline' },
 	                                _react2.default.createElement('span', { className: 'list-circle' }),
 	                                _react2.default.createElement(
 	                                    'span',
@@ -37938,22 +38020,19 @@
 	                                _react2.default.createElement(
 	                                    'span',
 	                                    { className: 'left inline' },
-	                                    _react2.default.createElement('img', { src: '/asset/images/gold-medal.png', className: 'gold-medal' }),
-	                                    _react2.default.createElement('br', null),
+	                                    _react2.default.createElement('img', { src: '/asset/images/gold-icon.png', className: 'gold-medal' }),
 	                                    this.props.quick_mode ? hero.quick_gold_medal : hero.rank_gold_medal
 	                                ),
 	                                _react2.default.createElement(
 	                                    'span',
 	                                    { className: 'inline' },
-	                                    _react2.default.createElement('img', { src: '/asset/images/silver-medal.png', className: 'silver-medal' }),
-	                                    _react2.default.createElement('br', null),
+	                                    _react2.default.createElement('img', { src: '/asset/images/silver-icon.png', className: 'silver-medal' }),
 	                                    this.props.quick_mode ? hero.quick_silver_medal : hero.rank_silver_medal
 	                                ),
 	                                _react2.default.createElement(
 	                                    'span',
 	                                    { className: 'right inline' },
-	                                    _react2.default.createElement('img', { src: '/asset/images/bronze-medal.png', className: 'bronze-medal' }),
-	                                    _react2.default.createElement('br', null),
+	                                    _react2.default.createElement('img', { src: '/asset/images/bronze-icon.png', className: 'bronze-medal' }),
 	                                    this.props.quick_mode ? hero.quick_bronze_medal : hero.rank_bronze_medal
 	                                )
 	                            )
@@ -40801,24 +40880,25 @@
 	    _createClass(Comment, [{
 	        key: '_dateFormat',
 	        value: function _dateFormat(date) {
-	            var now = new Date(date);
-	            var year = "" + now.getFullYear();
-	            var month = "" + (now.getMonth() + 1);if (month.length == 1) {
-	                month = "0" + month;
+	            var today = new Date();
+
+	            var dateObj = new Date(date);
+	            var month = Math.floor((today.getTime() - dateObj.getTime()) / 1000 / 60 / 60 / 24 / 30);
+	            var day = Math.floor((today.getTime() - dateObj.getTime()) / 1000 / 60 / 60 / 24);
+	            var hour = Math.floor((today.getTime() - dateObj.getTime()) / 1000 / 60 / 60);
+	            var minute = Math.floor((today.getTime() - dateObj.getTime()) / 1000 / 60);
+
+	            if (month == 0) {
+	                if (day != 0) {
+	                    if (day == 1) return "어제";else return day + "일 전";
+	                } else {
+	                    if (hour != 0) return hour + "시간 전";else return minute + "분 전";
+	                }
+	            } else if (minute <= 0) {
+	                return "방금";
+	            } else {
+	                return month + "달 전";
 	            }
-	            var day = "" + now.getDate();if (day.length == 1) {
-	                day = "0" + day;
-	            }
-	            var hour = "" + now.getHours();if (hour.length == 1) {
-	                hour = "0" + hour;
-	            }
-	            var minute = "" + now.getMinutes();if (minute.length == 1) {
-	                minute = "0" + minute;
-	            }
-	            var second = "" + now.getSeconds();if (second.length == 1) {
-	                second = "0" + second;
-	            }
-	            return year + "-" + month + "-" + day + " " + hour + ":" + minute + ":" + second;
 	        }
 	    }, {
 	        key: '_onCreateComment',
@@ -40996,24 +41076,25 @@
 	    _createClass(Reply, [{
 	        key: '_dateFormat',
 	        value: function _dateFormat(date) {
-	            var now = new Date(date);
-	            var year = "" + now.getFullYear();
-	            var month = "" + (now.getMonth() + 1);if (month.length == 1) {
-	                month = "0" + month;
+	            var today = new Date();
+
+	            var dateObj = new Date(date);
+	            var month = Math.floor((today.getTime() - dateObj.getTime()) / 1000 / 60 / 60 / 24 / 30);
+	            var day = Math.floor((today.getTime() - dateObj.getTime()) / 1000 / 60 / 60 / 24);
+	            var hour = Math.floor((today.getTime() - dateObj.getTime()) / 1000 / 60 / 60);
+	            var minute = Math.floor((today.getTime() - dateObj.getTime()) / 1000 / 60);
+
+	            if (month == 0) {
+	                if (day != 0) {
+	                    if (day == 1) return "어제";else return day + "일 전";
+	                } else {
+	                    if (hour != 0) return hour + "시간 전";else return minute + "분 전";
+	                }
+	            } else if (minute <= 0) {
+	                return "방금";
+	            } else {
+	                return month + "달 전";
 	            }
-	            var day = "" + now.getDate();if (day.length == 1) {
-	                day = "0" + day;
-	            }
-	            var hour = "" + now.getHours();if (hour.length == 1) {
-	                hour = "0" + hour;
-	            }
-	            var minute = "" + now.getMinutes();if (minute.length == 1) {
-	                minute = "0" + minute;
-	            }
-	            var second = "" + now.getSeconds();if (second.length == 1) {
-	                second = "0" + second;
-	            }
-	            return year + "-" + month + "-" + day + " " + hour + ":" + minute + ":" + second;
 	        }
 	    }, {
 	        key: 'render',
@@ -41561,6 +41642,8 @@
 
 	var _axios2 = _interopRequireDefault(_axios);
 
+	var _reactRouter = __webpack_require__(469);
+
 	var _reactRedux = __webpack_require__(569);
 
 	var _authentication = __webpack_require__(610);
@@ -41585,6 +41668,11 @@
 	        _this._onLogin = _this._onLogin.bind(_this);
 	        _this._onLogout = _this._onLogout.bind(_this);
 	        _this._popLogin = _this._popLogin.bind(_this);
+	        _this.state = {
+	            dropdownOpen: false
+	        };
+	        _this._handleDropdown = _this._handleDropdown.bind(_this);
+	        _this._onProfile = _this._onProfile.bind(_this);
 	        return _this;
 	    }
 
@@ -41612,40 +41700,103 @@
 	            var pollTimer = window.setInterval(onClose.bind(this), 200);
 	        }
 	    }, {
+	        key: '_handleDropdown',
+	        value: function _handleDropdown() {
+	            this.setState({
+	                dropdownOpen: !this.state.dropdownOpen
+	            });
+	        }
+	    }, {
+	        key: '_onProfile',
+	        value: function _onProfile() {
+	            if (!this.props.authentication.status.current_user.battletag) return;
+
+	            var url = "http://bad.watch/api/user/" + this.props.authentication.status.current_user.battletag.replace("#", "-");
+	            _axios2.default.get(url).then(function (response) {
+	                var data = response.data;
+	                if (data.responseCode == 2) {
+	                    _reactRouter.browserHistory.push('/user/' + data.user_id);
+	                } else {
+	                    sweetAlert('', '유저 정보가 존재하지 않습니다..', 'error');
+	                    return;
+	                }
+	            });
+	        }
+	    }, {
+	        key: 'componentDidMount',
+	        value: function componentDidMount() {
+	            //$('#dropdown1').dropdown('open');
+	        }
+	    }, {
 	        key: 'render',
 	        value: function render() {
 	            var loginButton = _react2.default.createElement(
-	                'div',
-	                { onClick: this._popLogin },
-	                'Log - In'
+	                'a',
+	                { onClick: this._popLogin,
+	                    className: 'right-logo right' },
+	                _react2.default.createElement('img', { src: '/asset/images/login-button.png', className: 'login-button-img' }),
+	                'Log In'
 	            );
 	            var waitingButton = _react2.default.createElement(
 	                'div',
-	                { className: 'preloader-wrapper mini active' },
+	                { className: 'waitingButton' },
 	                _react2.default.createElement(
 	                    'div',
-	                    { className: 'spinner-layer spinner-blue-only' },
+	                    { className: 'preloader-wrapper small active' },
 	                    _react2.default.createElement(
 	                        'div',
-	                        { className: 'circle-clipper left' },
-	                        _react2.default.createElement('div', { className: 'circle' })
-	                    ),
-	                    _react2.default.createElement(
-	                        'div',
-	                        { className: 'gap-patch' },
-	                        _react2.default.createElement('div', { className: 'circle' })
-	                    ),
-	                    _react2.default.createElement(
-	                        'div',
-	                        { className: 'circle-clipper right' },
-	                        _react2.default.createElement('div', { className: 'circle' })
+	                        { className: 'spinner-layer spinner-red-only' },
+	                        _react2.default.createElement(
+	                            'div',
+	                            { className: 'circle-clipper left' },
+	                            _react2.default.createElement('div', { className: 'circle' })
+	                        ),
+	                        _react2.default.createElement(
+	                            'div',
+	                            { className: 'gap-patch' },
+	                            _react2.default.createElement('div', { className: 'circle' })
+	                        ),
+	                        _react2.default.createElement(
+	                            'div',
+	                            { className: 'circle-clipper right' },
+	                            _react2.default.createElement('div', { className: 'circle' })
+	                        )
 	                    )
 	                )
 	            );
 	            var logoutButton = _react2.default.createElement(
 	                'div',
-	                { onClick: this._onLogout },
-	                'Log - Out'
+	                null,
+	                _react2.default.createElement(
+	                    'div',
+	                    { className: 'inline nav-user' },
+	                    this.props.authentication.status.current_user.battletag ? this.props.authentication.status.current_user.battletag.split("#")[0] : "오류"
+	                ),
+	                _react2.default.createElement(
+	                    'div',
+	                    { onClick: this._handleDropdown, className: 'login-dropdown ' + (this.state.dropdownOpen ? 'active' : undefined) },
+	                    !this.state.dropdownOpen ? _react2.default.createElement('img', { src: '/asset/images/dropdown-button.png' }) : _react2.default.createElement(
+	                        'div',
+	                        { className: 'mobile-login-dropdown' },
+	                        _react2.default.createElement('img', { src: '/asset/images/dropdown-up.png' }),
+	                        _react2.default.createElement(
+	                            'div',
+	                            { className: 'dropdown' },
+	                            _react2.default.createElement(
+	                                'div',
+	                                { className: 'item', onClick: this._onProfile },
+	                                _react2.default.createElement('img', { src: '/asset/images/my-user.png', className: 'my-user' }),
+	                                '내프로필'
+	                            ),
+	                            _react2.default.createElement(
+	                                'div',
+	                                { className: 'item', onClick: this._onLogout },
+	                                _react2.default.createElement('img', { src: '/asset/images/logout.png', className: 'my-user' }),
+	                                '로그아웃'
+	                            )
+	                        )
+	                    )
+	                )
 	            );
 	            var loginStatus = undefined;
 	            if (this.props.authentication.login.status == 'INIT') {
@@ -41658,8 +41809,8 @@
 	                loginStatus = loginButton;
 	            }
 	            return _react2.default.createElement(
-	                'span',
-	                { className: 'login-button' },
+	                'div',
+	                { className: 'inline' },
 	                loginStatus
 	            );
 	        }
@@ -41888,8 +42039,8 @@
 	    _createClass(UserList, [{
 	        key: '_goToUser',
 	        value: function _goToUser() {
-	            var battletag = this.props.user.name + "-" + this.props.user.battletag;
-	            _reactRouter.browserHistory.push('/user/' + battletag);
+	            var user_id = this.props.user.user_id;
+	            _reactRouter.browserHistory.push('/user/' + user_id);
 	        }
 	    }, {
 	        key: 'render',
@@ -41911,9 +42062,7 @@
 	                    _react2.default.createElement(
 	                        'div',
 	                        { className: 'width-50 list-battletag' },
-	                        user.name,
-	                        '#',
-	                        user.battletag
+	                        user.name
 	                    ),
 	                    _react2.default.createElement(
 	                        'div',
@@ -41995,7 +42144,7 @@
 	            var board_active = false;
 	            if (this.props.location.pathname.includes("user")) user_active = true;
 
-	            if (this.props.location.pathname.includes("board")) board_active = true;
+	            if (this.props.location.pathname.includes("article")) board_active = true;
 	            return _react2.default.createElement(
 	                'div',
 	                { className: 'header-menu' },
@@ -42034,7 +42183,7 @@
 	                ),
 	                _react2.default.createElement(
 	                    _reactRouter.Link,
-	                    { to: '/board/free/page/1', className: board_active ? 'active' : '' },
+	                    { to: '/article/free?page=1', className: board_active ? 'active' : '' },
 	                    _react2.default.createElement('img', { src: '/asset/images/board.png' }),
 	                    _react2.default.createElement(
 	                        'div',
@@ -42066,6 +42215,8 @@
 	    value: true
 	});
 
+	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 	var _react = __webpack_require__(299);
@@ -42073,6 +42224,10 @@
 	var _react2 = _interopRequireDefault(_react);
 
 	var _reactRouter = __webpack_require__(469);
+
+	var _axios = __webpack_require__(536);
+
+	var _axios2 = _interopRequireDefault(_axios);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -42092,7 +42247,8 @@
 
 	        _this.displayName = 'SearchUserInput';
 	        _this.state = {
-	            userName: ''
+	            userName: '',
+	            status: 'INIT'
 	        };
 	        _this._handleChange = _this._handleChange.bind(_this);
 	        _this._handleKeyPress = _this._handleKeyPress.bind(_this);
@@ -42117,6 +42273,8 @@
 	    }, {
 	        key: '_onSearchUser',
 	        value: function _onSearchUser() {
+	            var _this2 = this;
+
 	            if (!this.state.userName) {
 	                sweetAlert('', '올바른 형식이 아닙니다.', 'error');
 	                return;
@@ -42124,13 +42282,40 @@
 
 	            /* //////// # 포함시 배틀태그 포함 -로 변환후 url 요청 \\\\\\\\\  */
 	            if (this.state.userName.includes("#")) {
-	                var userName = this.state.userName.replace("#", "-");
-	                if (userName.includes("#")) {
-	                    sweetAlert('', '올바른 형식이 아닙니다.', 'error');
-	                    return;
-	                }
+	                var _ret = function () {
+	                    var userName = _this2.state.userName.replace("#", "-");
+	                    if (userName.includes("#")) {
+	                        sweetAlert('', '올바른 형식이 아닙니다.', 'error');
+	                        return {
+	                            v: void 0
+	                        };
+	                    }
+	                    _this2.setState({
+	                        status: 'WAITING'
+	                    }, function () {
+	                        var _this3 = this;
 
-	                _reactRouter.browserHistory.push('/user/' + userName);
+	                        var url = "http://bad.watch/api/user/" + userName;
+	                        _axios2.default.get(url).then(function (response) {
+	                            var data = response.data;
+	                            if (data.responseCode == 2) {
+	                                _this3.setState({
+	                                    status: 'INIT'
+	                                }, function () {
+	                                    _reactRouter.browserHistory.push('/user/' + data.user_id);
+	                                });
+	                            } else {
+	                                sweetAlert('', '유저가 존재하지 않습니다.', 'error');
+	                                _this3.setState({
+	                                    status: 'INIT'
+	                                });
+	                                return;
+	                            }
+	                        });
+	                    });
+	                }();
+
+	                if ((typeof _ret === 'undefined' ? 'undefined' : _typeof(_ret)) === "object") return _ret.v;
 	            } else {
 	                _reactRouter.browserHistory.push('/userByName/' + this.state.userName);
 	            }
@@ -42138,15 +42323,44 @@
 	    }, {
 	        key: 'render',
 	        value: function render() {
+	            var status_inactive = _react2.default.createElement('img', { src: '/asset/images/nav-search-icon.png',
+	                className: 'nav-search-icon',
+	                onClick: this._onSearchUser });
+	            var status_active = _react2.default.createElement(
+	                'div',
+	                { className: 'preloader-wrapper small active search-preloader' },
+	                _react2.default.createElement(
+	                    'div',
+	                    { className: 'spinner-layer spinner-blue-only' },
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'circle-clipper left' },
+	                        _react2.default.createElement('div', { className: 'circle' })
+	                    ),
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'gap-patch' },
+	                        _react2.default.createElement('div', { className: 'circle' })
+	                    ),
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'circle-clipper right' },
+	                        _react2.default.createElement('div', { className: 'circle' })
+	                    )
+	                )
+	            );
+	            var submit_button = null;
+	            if (this.state.status == 'INIT') submit_button = status_inactive;else submit_button = status_active;
 	            return _react2.default.createElement(
 	                'div',
-	                { className: 'top-input-div' },
-	                _react2.default.createElement('input', { className: 'topSearchInput',
+	                { className: 'input-wrapper' },
+	                _react2.default.createElement('input', { type: 'text',
+	                    className: 'nav-search-input',
+	                    placeholder: '닉네임#배틀태그를 입력하세요.',
+	                    value: this.state.userName,
 	                    onChange: this._handleChange,
 	                    onKeyPress: this._handleKeyPress }),
-	                _react2.default.createElement('img', { src: '/asset/images/search-icon.png',
-	                    className: 'search-icon',
-	                    onClick: this._onSearchUser })
+	                submit_button
 	            );
 	        }
 	    }]);
@@ -42174,6 +42388,14 @@
 
 	var _reactRouter = __webpack_require__(469);
 
+	var _LoginButton = __webpack_require__(609);
+
+	var _LoginButton2 = _interopRequireDefault(_LoginButton);
+
+	var _SearchUserInput = __webpack_require__(614);
+
+	var _SearchUserInput2 = _interopRequireDefault(_SearchUserInput);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -42195,30 +42417,93 @@
 					}
 
 					_createClass(Navbar, [{
+									key: '_onBlock',
+									value: function _onBlock() {
+													sweetAlert('', '보다 나은 서비스를 위해 채팅서버를 점검중입니다.', 'error');
+													return;
+									}
+					}, {
 									key: 'render',
 									value: function render() {
+													var user_active = false;
+													var board_active = false;
+													if (this.props.location.pathname.includes("user") || this.props.location.pathname == '/') user_active = true;
+
+													if (this.props.location.pathname.includes("article")) board_active = true;
+
+													var isUser = false;
+													if (this.props.location.pathname == '/') isUser = true;
+
 													return _react2.default.createElement(
-																	'nav',
-																	{ className: 'computer-hide' },
+																	'div',
+																	null,
 																	_react2.default.createElement(
-																					'div',
-																					{ className: 'nav-wrapper' },
-																					_react2.default.createElement(
-																									'a',
-																									{ 'data-activates': 'slide-out', className: 'brand-logo left', id: 'mobile-top-open' },
-																									_react2.default.createElement(
-																													'i',
-																													{ className: 'medium material-icons' },
-																													'reorder'
-																									)
-																					),
+																					'nav',
+																					{ className: 'mobile-nav' },
 																					_react2.default.createElement(
 																									'div',
-																									{ className: 'center-align' },
+																									{ className: 'nav-wrapper' },
+																									_react2.default.createElement(
+																													'a',
+																													{ 'data-activates': 'slide-out', className: 'brand-logo left', id: 'mobile-top-open' },
+																													_react2.default.createElement(
+																																	'i',
+																																	{ className: 'medium material-icons' },
+																																	'reorder'
+																													)
+																									),
+																									_react2.default.createElement(
+																													'div',
+																													{ className: 'center-align' },
+																													_react2.default.createElement(
+																																	_reactRouter.Link,
+																																	{ to: '/' },
+																																	_react2.default.createElement('img', { src: '/asset/images/badwatch.svg', className: 'badwatch' })
+																													)
+																									)
+																					)
+																	),
+																	_react2.default.createElement(
+																					'nav',
+																					{ className: 'computer-nav' },
+																					_react2.default.createElement(
+																									'div',
+																									{ className: 'nav-wrapper computer-nav' },
 																									_react2.default.createElement(
 																													_reactRouter.Link,
 																													{ to: '/' },
-																													_react2.default.createElement('img', { src: '/asset/images/badwatch.svg', className: 'badwatch' })
+																													_react2.default.createElement('img', { src: '/asset/images/badwatch-logo.png', className: 'badwatch-logo' }),
+																													_react2.default.createElement('img', { src: '/asset/images/nav-logo-text.png', className: 'nav-logo-text' })
+																									),
+																									_react2.default.createElement(
+																													_reactRouter.Link,
+																													{ to: '/', className: 'tablet-hide ' + (user_active ? 'active' : '') },
+																													'전적검색'
+																									),
+																									_react2.default.createElement(
+																													'a',
+																													{ className: 'tablet-hide', onClick: this._onBlock },
+																													'파티매칭'
+																									),
+																									_react2.default.createElement(
+																													_reactRouter.Link,
+																													{ to: '/youtube', activeClassName: 'active', className: 'tablet-hide' },
+																													'동영상'
+																									),
+																									_react2.default.createElement(
+																													_reactRouter.Link,
+																													{ to: '/article/free?page=1', className: 'tablet-hide ' + (board_active ? 'active' : '') },
+																													'게시판'
+																									),
+																									_react2.default.createElement(
+																													'div',
+																													{ className: 'right' },
+																													_react2.default.createElement(_LoginButton2.default, null)
+																									),
+																									_react2.default.createElement(
+																													'div',
+																													{ className: 'right' },
+																													isUser ? undefined : _react2.default.createElement(_SearchUserInput2.default, null)
 																									)
 																					)
 																	)
@@ -42228,6 +42513,10 @@
 
 					return Navbar;
 	}(_react2.default.Component);
+
+	Navbar.propTypes = {
+					location: _react2.default.PropTypes.object
+	};
 
 	exports.default = Navbar;
 
@@ -42272,6 +42561,12 @@
 					}
 
 					_createClass(SideNavbar, [{
+									key: '_onBlock',
+									value: function _onBlock() {
+													sweetAlert('', '보다 나은 서비스를 위해 채팅서버를 점검중입니다.', 'error');
+													return;
+									}
+					}, {
 									key: 'render',
 									value: function render() {
 													var user_active = false;
@@ -42323,8 +42618,8 @@
 																									'li',
 																									null,
 																									_react2.default.createElement(
-																													_reactRouter.Link,
-																													{ to: '/chat', activeClassName: 'active', className: 'waves-effect side-li' },
+																													'a',
+																													{ className: 'waves-effect side-li', onClick: this._onBlock },
 																													_react2.default.createElement('img', { src: '/asset/images/group.png' }),
 																													'파티매칭',
 																													_react2.default.createElement('i', { className: 'fa fa-check-circle-o fa-lg side-active', 'aria-hidden': 'true' })
@@ -42346,7 +42641,7 @@
 																									null,
 																									_react2.default.createElement(
 																													_reactRouter.Link,
-																													{ to: '/board/free/page/1', activeClassName: 'active', className: 'waves-effect side-li ' + (board_active ? 'active' : '') },
+																													{ to: '/article/free?page=1', activeClassName: 'active', className: 'waves-effect side-li ' + (board_active ? 'active' : '') },
 																													_react2.default.createElement('img', { src: '/asset/images/board.png' }),
 																													'커뮤니티',
 																													_react2.default.createElement('i', { className: 'fa fa-check-circle-o fa-lg side-active', 'aria-hidden': 'true' })
@@ -42429,7 +42724,8 @@
 	            showList: false,
 	            whisperMessage: '',
 	            whisperInputOpen: false,
-	            whisperTo: {}
+	            whisperTo: {},
+	            socket: null
 	        };
 	        _this._handleChange = _this._handleChange.bind(_this);
 	        _this._sendMessage = _this._sendMessage.bind(_this);
@@ -42438,7 +42734,6 @@
 	        _this._onWhisperOpen = _this._onWhisperOpen.bind(_this);
 	        _this._handleWhisperKeyPress = _this._handleWhisperKeyPress.bind(_this);
 	        _this._sendWhisperMessage = _this._sendWhisperMessage.bind(_this);
-	        _this.socket = _socket2.default.connect('http://bad.watch', connectOptions);
 	        return _this;
 	    }
 
@@ -42509,7 +42804,7 @@
 	        key: '_sendMessage',
 	        value: function _sendMessage() {
 	            if (!this.state.message) return;
-	            this.socket.emit('send', { "message": this.state.message });
+	            this.state.socket.emit('send', { "message": this.state.message });
 	            this.setState({
 	                message: ''
 	            });
@@ -42522,7 +42817,7 @@
 	                sweetAlert('', '대상이 선택되지 않았습니다.', 'error');
 	                return;
 	            }
-	            this.socket.emit('send_whisper', { "message": this.state.whisperMessage, "overwatch_id": this.state.whisperTo.overwatch_id, "to": this.state.whisperTo.name });
+	            this.state.socket.emit('send_whisper', { "message": this.state.whisperMessage, "overwatch_id": this.state.whisperTo.overwatch_id, "to": this.state.whisperTo.name });
 	            this.setState({
 	                whisperMessage: ''
 	            });
@@ -42547,67 +42842,71 @@
 	                overwatch_id: this.props.authentication.status.current_user.id
 	            };
 
-	            //방입장
-	            this.socket.emit('room_join', current_room);
-	            this.props.updateCurrentRoom(current_room.room);
+	            this.setState({
+	                socket: _socket2.default.connect('http://bad.watch', connectOptions)
+	            }, function () {
+	                //방입장
+	                this.state.socket.emit('room_join', current_room);
+	                this.props.updateCurrentRoom(current_room.room);
 
-	            this.socket.on('connection_count', function (data) {
-	                console.log("connection_count");
-	                this.props.getConnectionCount(data.count, data.user_list);
-	            }.bind(this));
+	                this.state.socket.on('connection_count', function (data) {
+	                    console.log("connection_count");
+	                    this.props.getConnectionCount(data.count, data.user_list);
+	                }.bind(this));
 
-	            this.socket.on('connection_add', function (data) {
-	                console.log("add");
-	                console.log(data);
-	                this.props.addConnection(data.count, data.user_data);
-	            }.bind(this));
+	                this.state.socket.on('connection_add', function (data) {
+	                    console.log("add");
+	                    console.log(data);
+	                    this.props.addConnection(data.count, data.user_data);
+	                }.bind(this));
 
-	            this.socket.on('connection_delete', function (data) {
-	                console.log("delete");
-	                this.props.deleteConnection(data.count, data.user_data);
-	            }.bind(this));
+	                this.state.socket.on('connection_delete', function (data) {
+	                    console.log("delete");
+	                    this.props.deleteConnection(data.count, data.user_data);
+	                }.bind(this));
 
-	            this.socket.on('receive', function (data) {
-	                console.log("receive");
-	                console.log(data.type);
-	                if (data.type == 1) {
-	                    sweetAlert('', '로그인후 작성하실 수 있습니다.', 'error');
-	                    return;
-	                } else if (data.type == 2) {
-	                    sweetAlert('', '이 점수대와 맞지않아 채팅을 작성할 수 없습니다.', 'error');
-	                    return;
-	                } else if (data.type == 3) {
-	                    sweetAlert('', '접속중인 방이 없습니다.', 'error');
-	                    return;
-	                } else {
-	                    this.props.getMessage(data);
-	                }
+	                this.state.socket.on('receive', function (data) {
+	                    console.log("receive");
+	                    console.log(data.type);
+	                    if (data.type == 1) {
+	                        sweetAlert('', '로그인후 작성하실 수 있습니다.', 'error');
+	                        return;
+	                    } else if (data.type == 2) {
+	                        sweetAlert('', '이 점수대와 맞지않아 채팅을 작성할 수 없습니다.', 'error');
+	                        return;
+	                    } else if (data.type == 3) {
+	                        sweetAlert('', '접속중인 방이 없습니다.', 'error');
+	                        return;
+	                    } else {
+	                        this.props.getMessage(data);
+	                    }
 
-	                $('.chat-box').scrollTop($('.chat-box')[0].scrollHeight);
-	            }.bind(this));
+	                    $('.chat-box').scrollTop($('.chat-box')[0].scrollHeight);
+	                }.bind(this));
 
-	            this.socket.on('receive_whisper', function (data) {
-	                console.log(data.type);
-	                if (data.type == 1) {
-	                    sweetAlert('', '로그인후 작성하실 수 있습니다.', 'error');
-	                    return;
-	                } else if (data.type == 2) {
-	                    sweetAlert('', '이 점수대와 맞지않아 채팅을 작성할 수 없습니다.', 'error');
-	                    return;
-	                } else if (data.type == 6) {
-	                    sweetAlert('', '대상이 없습니다.', 'error');
-	                    return;
-	                } else {
-	                    this.props.getMessage(data);
-	                }
+	                this.state.socket.on('receive_whisper', function (data) {
+	                    console.log(data.type);
+	                    if (data.type == 1) {
+	                        sweetAlert('', '로그인후 작성하실 수 있습니다.', 'error');
+	                        return;
+	                    } else if (data.type == 2) {
+	                        sweetAlert('', '이 점수대와 맞지않아 채팅을 작성할 수 없습니다.', 'error');
+	                        return;
+	                    } else if (data.type == 6) {
+	                        sweetAlert('', '대상이 없습니다.', 'error');
+	                        return;
+	                    } else {
+	                        this.props.getMessage(data);
+	                    }
 
-	                $('.chat-box').scrollTop($('.chat-box')[0].scrollHeight);
+	                    $('.chat-box').scrollTop($('.chat-box')[0].scrollHeight);
+	                }.bind(this));
 	            }.bind(this));
 	        }
 	    }, {
 	        key: 'componentWillUnmount',
 	        value: function componentWillUnmount() {
-	            this.socket.emit('room_leave');
+	            this.state.socket.emit('room_leave');
 	        }
 	    }, {
 	        key: 'render',
@@ -50877,6 +51176,1203 @@
 	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(299);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _axios = __webpack_require__(536);
+
+	var _axios2 = _interopRequireDefault(_axios);
+
+	var _reactRouter = __webpack_require__(469);
+
+	var _ArticleTr = __webpack_require__(672);
+
+	var _ArticleTr2 = _interopRequireDefault(_ArticleTr);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var ArticleList = function (_React$Component) {
+	    _inherits(ArticleList, _React$Component);
+
+	    function ArticleList(props) {
+	        _classCallCheck(this, ArticleList);
+
+	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(ArticleList).call(this, props));
+
+	        _this.displayName = 'ArticleList';
+	        _this.state = {
+	            articles: [],
+	            numberOfArticlesPerPage: 16,
+	            numberOfPagesPerView: 10,
+	            pageNumbers: [],
+	            current_page: 0,
+	            numberOfPages: 1,
+	            current_boardType: "free"
+	        };
+	        _this._changePage = _this._changePage.bind(_this);
+	        _this._getArticles = _this._getArticles.bind(_this);
+	        _this._before = _this._before.bind(_this);
+	        _this._next = _this._next.bind(_this);
+	        _this._selectChange = _this._selectChange.bind(_this);
+	        return _this;
+	    }
+
+	    _createClass(ArticleList, [{
+	        key: '_before',
+	        value: function _before() {
+	            if (this.state.pageNumbers[0] == 1) return;
+	            this._changePage(this.state.pageNumbers[0] - 1);
+	        }
+	    }, {
+	        key: '_next',
+	        value: function _next() {
+	            if (this.state.pageNumbers[this.state.pageNumbers.length - 1] >= this.state.numberOfPages) return;
+	            this._changePage(this.state.pageNumbers[this.state.pageNumbers.length - 1] + 1);
+	        }
+	    }, {
+	        key: '_changePage',
+	        value: function _changePage(pageNumber) {
+	            var url = "/article/" + this.props.params.boardType + "?page=" + pageNumber;
+	            _reactRouter.browserHistory.push(url);
+	        }
+	    }, {
+	        key: '_selectChange',
+	        value: function _selectChange(e) {
+	            if (e.target.value == this.props.params.boardType) return;
+
+	            var url = "/article/" + e.target.value + "?page=1";
+	            _reactRouter.browserHistory.push(url);
+	        }
+	    }, {
+	        key: 'componentDidMount',
+	        value: function componentDidMount() {
+	            this._getArticles();
+	        }
+	    }, {
+	        key: 'componentDidUpdate',
+	        value: function componentDidUpdate(prevProps, prevState) {
+	            var _this2 = this;
+
+	            if (prevProps.params.boardType != this.props.params.boardType || prevProps.location.query.page != this.props.location.query.page) {
+	                var board_list = ["free", "strategy"];
+	                if (!board_list.includes(this.props.params.boardType) || !this.props.location.query.page) {
+	                    sweetAlert('잘못된 접근입니다.', 'error');
+	                    return false;
+	                }
+	                this.setState({
+	                    current_page: this.props.location.query.page,
+	                    current_boardType: this.props.params.boardType
+	                });
+	                var url = "http://bad.watch/api/article/" + this.props.params.boardType + "?page=" + this.props.location.query.page;
+	                _axios2.default.get(url).then(function (response) {
+	                    var data = response.data;
+	                    if (data.responseCode == 18) {
+
+	                        var articleCount = data.articleCount;
+	                        var pageCount = Math.ceil(articleCount / _this2.state.numberOfArticlesPerPage);
+	                        var start = Math.floor((_this2.props.location.query.page - 1) / _this2.state.numberOfPagesPerView);
+	                        var page_array = [];
+	                        for (var i = start * 10 + 1; i <= (start + 1) * 10; i++) {
+	                            if (i <= pageCount) page_array.push(i);
+	                        }
+	                        _this2.setState({
+	                            articles: data.articleData,
+	                            pageNumbers: page_array,
+	                            numberOfPages: pageCount
+	                        });
+	                    } else {
+	                        sweetAlert('게시물을 불러오는데 문제가 생겼습니다.', 'error');
+	                        return;
+	                    }
+	                });
+	            }
+	        }
+	    }, {
+	        key: '_getArticles',
+	        value: function _getArticles() {
+	            var _this3 = this;
+
+	            var board_list = ["free", "strategy"];
+	            if (!board_list.includes(this.props.params.boardType) || !this.props.location.query.page) {
+	                sweetAlert('잘못된 접근입니다.', 'error');
+	                return false;
+	            }
+	            this.setState({
+	                current_page: this.props.location.query.page,
+	                current_boardType: this.props.params.boardType
+	            });
+	            var url = "http://bad.watch/api/article/" + this.props.params.boardType + "?page=" + this.props.location.query.page;
+	            _axios2.default.get(url).then(function (response) {
+	                var data = response.data;
+	                if (data.responseCode == 18) {
+	                    var articleCount = data.articleCount;
+	                    var pageCount = Math.ceil(articleCount / _this3.state.numberOfArticlesPerPage);
+	                    var start = Math.floor((_this3.props.location.query.page - 1) / _this3.state.numberOfPagesPerView);
+	                    var page_array = [];
+	                    for (var i = start * 10 + 1; i <= (start + 1) * 10; i++) {
+	                        if (i <= pageCount) page_array.push(i);
+	                    }
+	                    _this3.setState({
+	                        articles: data.articleData,
+	                        pageNumbers: page_array,
+	                        numberOfPages: pageCount
+	                    });
+	                } else {
+	                    sweetAlert('게시물을 불러오는데 문제가 생겼습니다.', 'error');
+	                    return;
+	                }
+	            });
+	        }
+	    }, {
+	        key: 'render',
+	        value: function render() {
+	            var _this4 = this;
+
+	            return _react2.default.createElement(
+	                'div',
+	                { className: 'board-top' },
+	                _react2.default.createElement(
+	                    _reactRouter.Link,
+	                    { to: "/article/" + this.props.params.boardType + "/write", className: 'waves-effect waves-light btn right' },
+	                    '글쓰기'
+	                ),
+	                _react2.default.createElement(
+	                    'select',
+	                    { className: 'browser-default',
+	                        onChange: this._selectChange,
+	                        value: this.state.current_boardType },
+	                    _react2.default.createElement(
+	                        'option',
+	                        { value: 'free' },
+	                        '자유게시판'
+	                    ),
+	                    _react2.default.createElement(
+	                        'option',
+	                        { value: 'strategy' },
+	                        '전략게시판'
+	                    )
+	                ),
+	                _react2.default.createElement('br', null),
+	                _react2.default.createElement(
+	                    'div',
+	                    null,
+	                    _react2.default.createElement(
+	                        'table',
+	                        { className: 'article-table' },
+	                        _react2.default.createElement(
+	                            'thead',
+	                            null,
+	                            _react2.default.createElement(
+	                                'tr',
+	                                null,
+	                                _react2.default.createElement(
+	                                    'td',
+	                                    { className: 'mobile-hide' },
+	                                    '카테고리'
+	                                ),
+	                                _react2.default.createElement(
+	                                    'td',
+	                                    null,
+	                                    '제목'
+	                                ),
+	                                _react2.default.createElement(
+	                                    'td',
+	                                    null,
+	                                    '작성자'
+	                                ),
+	                                _react2.default.createElement(
+	                                    'td',
+	                                    { className: 'mobile-hide' },
+	                                    '조회수'
+	                                ),
+	                                _react2.default.createElement(
+	                                    'td',
+	                                    { className: 'mobile-hide' },
+	                                    '추천수'
+	                                ),
+	                                _react2.default.createElement(
+	                                    'td',
+	                                    { className: 'mobile-hide' },
+	                                    '등록일'
+	                                )
+	                            )
+	                        ),
+	                        _react2.default.createElement(
+	                            'tbody',
+	                            null,
+	                            this.state.articles.map(function (article) {
+	                                return _react2.default.createElement(_ArticleTr2.default, { key: article.article_id,
+	                                    article: article,
+	                                    boardType: _this4.props.params.boardType });
+	                            })
+	                        )
+	                    )
+	                ),
+	                _react2.default.createElement('br', null),
+	                _react2.default.createElement(
+	                    'center',
+	                    null,
+	                    _react2.default.createElement(
+	                        'ul',
+	                        { className: 'pagination' },
+	                        _react2.default.createElement(
+	                            'li',
+	                            { onClick: this._before },
+	                            _react2.default.createElement(
+	                                'a',
+	                                null,
+	                                _react2.default.createElement(
+	                                    'i',
+	                                    { className: 'material-icons' },
+	                                    'chevron_left'
+	                                )
+	                            )
+	                        ),
+	                        this.state.pageNumbers.map(function (page) {
+	                            return _react2.default.createElement(
+	                                'li',
+	                                { className: 'waves-effect ' + (_this4.state.current_page == page ? 'active' : ''),
+	                                    onClick: _this4._changePage.bind(_this4, page),
+	                                    key: page },
+	                                _react2.default.createElement(
+	                                    'a',
+	                                    null,
+	                                    page
+	                                )
+	                            );
+	                        }),
+	                        _react2.default.createElement(
+	                            'li',
+	                            { onClick: this._next },
+	                            _react2.default.createElement(
+	                                'a',
+	                                null,
+	                                _react2.default.createElement(
+	                                    'i',
+	                                    { className: 'material-icons' },
+	                                    'chevron_right'
+	                                )
+	                            )
+	                        )
+	                    )
+	                )
+	            );
+	        }
+	    }]);
+
+	    return ArticleList;
+	}(_react2.default.Component);
+
+	exports.default = ArticleList;
+
+/***/ },
+/* 672 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(299);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactRouter = __webpack_require__(469);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var ArticleTr = function (_React$Component) {
+	    _inherits(ArticleTr, _React$Component);
+
+	    function ArticleTr(props) {
+	        _classCallCheck(this, ArticleTr);
+
+	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(ArticleTr).call(this, props));
+
+	        _this.displayName = 'ArticleTr';
+	        return _this;
+	    }
+
+	    _createClass(ArticleTr, [{
+	        key: '_boardType',
+	        value: function _boardType(type) {
+	            switch (type) {
+	                case "free":
+	                    return "자유";
+	                case "strategy":
+	                    return "공략";
+	            }
+	        }
+	    }, {
+	        key: '_dateFormat',
+	        value: function _dateFormat(date) {
+	            var now = new Date(date);
+	            var year = "" + now.getFullYear();
+	            var month = "" + (now.getMonth() + 1);if (month.length == 1) {
+	                month = "0" + month;
+	            }
+	            var day = "" + now.getDate();if (day.length == 1) {
+	                day = "0" + day;
+	            }
+	            var hour = "" + now.getHours();if (hour.length == 1) {
+	                hour = "0" + hour;
+	            }
+	            var minute = "" + now.getMinutes();if (minute.length == 1) {
+	                minute = "0" + minute;
+	            }
+	            return month + "/" + day + " " + hour + ":" + minute;
+	        }
+	    }, {
+	        key: 'shouldComponentUpdate',
+	        value: function shouldComponentUpdate(nextProps, nextState) {
+	            return nextProps.article !== this.props.article;
+	        }
+	    }, {
+	        key: 'render',
+	        value: function render() {
+	            var article = this.props.article;
+	            return _react2.default.createElement(
+	                'tr',
+	                null,
+	                _react2.default.createElement(
+	                    'td',
+	                    { className: 'center-align article-type mobile-hide' },
+	                    this._boardType(this.props.boardType)
+	                ),
+	                _react2.default.createElement(
+	                    'td',
+	                    { className: 'left-align article-title' },
+	                    _react2.default.createElement(
+	                        _reactRouter.Link,
+	                        { to: "/article/" + this.props.boardType + "/show/" + article.article_id },
+	                        article.title
+	                    ),
+	                    _react2.default.createElement(
+	                        'span',
+	                        { className: 'article-comment-count' },
+	                        '+',
+	                        article.comment_count
+	                    )
+	                ),
+	                _react2.default.createElement(
+	                    'td',
+	                    { className: 'collapsing hit-pad' },
+	                    article.name ? article.name : "익명"
+	                ),
+	                _react2.default.createElement(
+	                    'td',
+	                    { className: 'collapsing hit-pad mobile-hide' },
+	                    article.hit_count
+	                ),
+	                _react2.default.createElement(
+	                    'td',
+	                    { className: 'collapsing hit-pad mobile-hide' },
+	                    article.like_count
+	                ),
+	                _react2.default.createElement(
+	                    'td',
+	                    { className: 'collapsing mobile-hide' },
+	                    this._dateFormat(article.written_time)
+	                )
+	            );
+	        }
+	    }]);
+
+	    return ArticleTr;
+	}(_react2.default.Component);
+
+	exports.default = ArticleTr;
+
+/***/ },
+/* 673 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(299);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _axios = __webpack_require__(536);
+
+	var _axios2 = _interopRequireDefault(_axios);
+
+	var _reactRedux = __webpack_require__(569);
+
+	var _ArticleCommentBox = __webpack_require__(674);
+
+	var _ArticleCommentBox2 = _interopRequireDefault(_ArticleCommentBox);
+
+	var _reactAddonsUpdate = __webpack_require__(605);
+
+	var _reactAddonsUpdate2 = _interopRequireDefault(_reactAddonsUpdate);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var ArticleShowBox = function (_React$Component) {
+	    _inherits(ArticleShowBox, _React$Component);
+
+	    function ArticleShowBox(props) {
+	        _classCallCheck(this, ArticleShowBox);
+
+	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(ArticleShowBox).call(this, props));
+
+	        _this.displayName = 'ArticleShowBox';
+	        _this.state = {
+	            article: {}
+	        };
+	        _this._onLike = _this._onLike.bind(_this);
+	        _this._onDislike = _this._onDislike.bind(_this);
+	        return _this;
+	    }
+
+	    _createClass(ArticleShowBox, [{
+	        key: '_dateFormat',
+	        value: function _dateFormat(date) {
+	            var now = new Date(date);
+	            var year = "" + now.getFullYear();
+	            var month = "" + (now.getMonth() + 1);if (month.length == 1) {
+	                month = "0" + month;
+	            }
+	            var day = "" + now.getDate();if (day.length == 1) {
+	                day = "0" + day;
+	            }
+	            var hour = "" + now.getHours();if (hour.length == 1) {
+	                hour = "0" + hour;
+	            }
+	            var minute = "" + now.getMinutes();if (minute.length == 1) {
+	                minute = "0" + minute;
+	            }
+	            var second = "" + now.getSeconds();if (second.length == 1) {
+	                second = "0" + second;
+	            }
+	            return year + "-" + month + "-" + day + " " + hour + ":" + minute + ":" + second;
+	        }
+	    }, {
+	        key: '_onLike',
+	        value: function _onLike() {
+	            var _this2 = this;
+
+	            if (!this.props.authentication.status.isLoggedIn) {
+	                sweetAlert('', '로그인이 필요합니다.', 'error');
+	                return;
+	            }
+	            if (this.state.article.like_status == false) {
+	                var url = "http://bad.watch/api/article-like/" + this.state.article.article_id;
+	                _axios2.default.get(url).then(function (response) {
+	                    var data = response.data;
+	                    if (data.responseCode == 50) {
+	                        _this2.setState({
+	                            article: (0, _reactAddonsUpdate2.default)(_this2.state.article, {
+	                                like_count: {
+	                                    $set: _this2.state.article.like_count + 1
+	                                },
+	                                like_status: {
+	                                    $set: true
+	                                }
+	                            })
+	                        });
+	                    } else if (data.responseCode == 1) {
+	                        sweetAlert('', '로그인이 필요합니다.', 'error');
+	                        return;
+	                    } else {
+	                        sweetAlert('', '이미 좋아요를 누르셨습니다.', 'error');
+	                        return;
+	                    }
+	                });
+	            } else {
+	                sweetAlert('', '이미 좋아요를 누르셨습니다.', 'error');
+	                return;
+	            }
+	        }
+	    }, {
+	        key: '_onDislike',
+	        value: function _onDislike() {
+	            var _this3 = this;
+
+	            if (!this.props.authentication.status.isLoggedIn) {
+	                sweetAlert('', '로그인이 필요합니다.', 'error');
+	                return;
+	            }
+	            if (this.state.article.like_status == true) {
+	                var url = "http://bad.watch/api/article-dislike/" + this.state.article.article_id;
+	                _axios2.default.get(url).then(function (response) {
+	                    var data = response.data;
+	                    if (data.responseCode == 52) {
+	                        _this3.setState({
+	                            article: (0, _reactAddonsUpdate2.default)(_this3.state.article, {
+	                                like_count: {
+	                                    $set: _this3.state.article.like_count - 1
+	                                },
+	                                like_status: {
+	                                    $set: false
+	                                }
+	                            })
+	                        });
+	                    } else if (data.responseCode == 1) {
+	                        sweetAlert('', '로그인이 필요합니다.', 'error');
+	                        return;
+	                    } else {
+	                        sweetAlert('', '이미 좋아요를 취소했습니다.', 'error');
+	                        return;
+	                    }
+	                });
+	            } else {
+	                sweetAlert('', '이미 좋아요를 취소했습니다.', 'error');
+	                return;
+	            }
+	        }
+	    }, {
+	        key: 'componentDidMount',
+	        value: function componentDidMount() {
+	            var _this4 = this;
+
+	            var url = "http://bad.watch/api/article/" + this.props.params.boardType + "/" + this.props.params.id;
+	            _axios2.default.get(url).then(function (response) {
+	                var data = response.data;
+
+	                if (data.responseCode == 18) {
+	                    _this4.setState({
+	                        article: data.articleData
+	                    });
+	                } else {
+	                    sweetAlert('데이터를 불러오는데 오류가 발생했습니다.', '잠시후 다시시도해주세요.', 'error');
+	                    return;
+	                }
+	            });
+	        }
+	    }, {
+	        key: 'render',
+	        value: function render() {
+	            var like_true = _react2.default.createElement(
+	                'div',
+	                { className: 'right' },
+	                _react2.default.createElement(
+	                    'a',
+	                    { onClick: this._onDislike, className: 'pointer' },
+	                    _react2.default.createElement('img', { src: '/asset/images/like-on.png' })
+	                )
+	            );
+	            var like_false = _react2.default.createElement(
+	                'div',
+	                { className: 'right' },
+	                _react2.default.createElement(
+	                    'a',
+	                    { onClick: this._onLike, className: 'pointer' },
+	                    _react2.default.createElement('img', { src: '/asset/images/like-off.png' })
+	                )
+	            );
+	            return _react2.default.createElement(
+	                'div',
+	                null,
+	                _react2.default.createElement(
+	                    'div',
+	                    { className: 'youtube-title' },
+	                    this.state.article.title
+	                ),
+	                _react2.default.createElement(
+	                    'div',
+	                    { className: 'youtube-writer' },
+	                    _react2.default.createElement(
+	                        'span',
+	                        null,
+	                        '글쓴이 : '
+	                    ),
+	                    this.state.article.name ? this.state.article.name : "익명",
+	                    _react2.default.createElement(
+	                        'span',
+	                        { className: 'youtube-date' },
+	                        this._dateFormat(this.state.article.written_time)
+	                    )
+	                ),
+	                _react2.default.createElement(
+	                    'div',
+	                    { className: 'youtube-container' },
+	                    this.state.article.content
+	                ),
+	                _react2.default.createElement(
+	                    'div',
+	                    { className: 'like-status' },
+	                    this.state.article.like_status ? like_true : like_false,
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'siba' },
+	                        _react2.default.createElement(
+	                            'span',
+	                            { className: 'like-count' },
+	                            _react2.default.createElement('img', { src: '/asset/images/like-icon.png' })
+	                        ),
+	                        _react2.default.createElement(
+	                            'span',
+	                            null,
+	                            this.state.article.like_count
+	                        ),
+	                        _react2.default.createElement(
+	                            'span',
+	                            { className: 'hit-count' },
+	                            _react2.default.createElement('img', { src: '/asset/images/hit-icon.png' })
+	                        ),
+	                        _react2.default.createElement(
+	                            'span',
+	                            null,
+	                            this.state.article.hit_count
+	                        )
+	                    )
+	                ),
+	                _react2.default.createElement(_ArticleCommentBox2.default, { id: this.props.params.id,
+	                    comment_count: this.state.article.comment_count })
+	            );
+	        }
+	    }]);
+
+	    return ArticleShowBox;
+	}(_react2.default.Component);
+
+	var mapStateToProps = function mapStateToProps(state) {
+	    return {
+	        authentication: state.authentication
+	    };
+	};
+
+	ArticleShowBox.propTypes = {};
+
+	exports.default = (0, _reactRedux.connect)(mapStateToProps, undefined)(ArticleShowBox);
+
+/***/ },
+/* 674 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(299);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _axios = __webpack_require__(536);
+
+	var _axios2 = _interopRequireDefault(_axios);
+
+	var _ArticleComment = __webpack_require__(675);
+
+	var _ArticleComment2 = _interopRequireDefault(_ArticleComment);
+
+	var _CommentInput = __webpack_require__(604);
+
+	var _CommentInput2 = _interopRequireDefault(_CommentInput);
+
+	var _reactAddonsUpdate = __webpack_require__(605);
+
+	var _reactAddonsUpdate2 = _interopRequireDefault(_reactAddonsUpdate);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var ArticleCommentBox = function (_React$Component) {
+	    _inherits(ArticleCommentBox, _React$Component);
+
+	    function ArticleCommentBox(props) {
+	        _classCallCheck(this, ArticleCommentBox);
+
+	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(ArticleCommentBox).call(this, props));
+
+	        _this.displayName = 'ArticleCommentBox';
+	        _this.state = {
+	            comments: []
+	        };
+	        _this._onCreateComment = _this._onCreateComment.bind(_this);
+	        _this._handleReplyCount = _this._handleReplyCount.bind(_this);
+	        return _this;
+	    }
+
+	    _createClass(ArticleCommentBox, [{
+	        key: '_handleReplyCount',
+	        value: function _handleReplyCount(id) {
+	            var index = this.state.comments.findIndex(function (comment) {
+	                return comment.comment_id == id;
+	            });
+	            this.setState({
+	                comments: (0, _reactAddonsUpdate2.default)(this.state.comments, _defineProperty({}, index, {
+	                    reply_count: { $set: this.state.comments[index].reply_count + 1 }
+	                }))
+	            });
+	        }
+	    }, {
+	        key: '_onCreateComment',
+	        value: function _onCreateComment(content) {
+	            var _this2 = this;
+
+	            return (0, _axios2.default)({
+	                method: "POST",
+	                url: "http://bad.watch/api/article-comment/write",
+	                data: {
+	                    content: content,
+	                    article_id: parseInt(this.props.id)
+	                }
+	            }).then(function (response) {
+	                var data = response.data;
+	                if (data.responseCode == 28) {
+	                    _this2.setState({
+	                        comments: (0, _reactAddonsUpdate2.default)(_this2.state.comments, {
+	                            $push: [data.commentData]
+	                        })
+	                    });
+	                    return true;
+	                } else {
+	                    sweetAlert('댓글 등록에 실패했습니다.', 'error');
+	                    return false;
+	                }
+	            });
+	        }
+	    }, {
+	        key: 'componentDidMount',
+	        value: function componentDidMount() {
+	            var _this3 = this;
+
+	            var url = 'http://bad.watch/api/article-comment/' + this.props.id;
+
+	            _axios2.default.get(url).then(function (response) {
+	                var data = response.data;
+	                if (data.responseCode == 26) {
+	                    _this3.setState({
+	                        comments: data.commentData
+	                    });
+	                } else {
+	                    sweetAlert('댓글을 불러오는데 오류가 발생했습니다.', 'error');
+	                    return;
+	                }
+	            });
+	        }
+	    }, {
+	        key: 'render',
+	        value: function render() {
+	            var _this4 = this;
+
+	            return _react2.default.createElement(
+	                'div',
+	                { className: 'comment-container' },
+	                _react2.default.createElement(
+	                    'div',
+	                    { className: 'comment-box' },
+	                    _react2.default.createElement('img', { src: '/asset/images/comment-icon.png' }),
+	                    '댓글 ',
+	                    this.props.comment_count,
+	                    ' 개'
+	                ),
+	                _react2.default.createElement(
+	                    'div',
+	                    null,
+	                    this.state.comments.map(function (comment) {
+	                        return _react2.default.createElement(_ArticleComment2.default, { key: comment.comment_id,
+	                            comment: comment,
+	                            handleReplyCount: _this4._handleReplyCount });
+	                    })
+	                ),
+	                _react2.default.createElement(_CommentInput2.default, { onCreateComment: this._onCreateComment })
+	            );
+	        }
+	    }]);
+
+	    return ArticleCommentBox;
+	}(_react2.default.Component);
+
+	ArticleCommentBox.propTypes = {
+	    comment_count: _react2.default.PropTypes.number,
+	    id: _react2.default.PropTypes.string
+	};
+
+	exports.default = ArticleCommentBox;
+
+/***/ },
+/* 675 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(299);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _ArticleReply = __webpack_require__(676);
+
+	var _ArticleReply2 = _interopRequireDefault(_ArticleReply);
+
+	var _axios = __webpack_require__(536);
+
+	var _axios2 = _interopRequireDefault(_axios);
+
+	var _CommentInput = __webpack_require__(604);
+
+	var _CommentInput2 = _interopRequireDefault(_CommentInput);
+
+	var _reactAddonsUpdate = __webpack_require__(605);
+
+	var _reactAddonsUpdate2 = _interopRequireDefault(_reactAddonsUpdate);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var ArticleComment = function (_React$Component) {
+	    _inherits(ArticleComment, _React$Component);
+
+	    function ArticleComment(props) {
+	        _classCallCheck(this, ArticleComment);
+
+	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(ArticleComment).call(this, props));
+
+	        _this.displayName = 'ArticleComment';
+	        _this.state = {
+	            isOpen: false,
+	            replies: []
+	        };
+	        _this._handleReplyOpen = _this._handleReplyOpen.bind(_this);
+	        _this._onCreateReply = _this._onCreateReply.bind(_this);
+	        return _this;
+	    }
+
+	    _createClass(ArticleComment, [{
+	        key: '_dateFormat',
+	        value: function _dateFormat(date) {
+	            var today = new Date();
+
+	            var dateObj = new Date(date);
+	            var month = Math.floor((today.getTime() - dateObj.getTime()) / 1000 / 60 / 60 / 24 / 30);
+	            var day = Math.floor((today.getTime() - dateObj.getTime()) / 1000 / 60 / 60 / 24);
+	            var hour = Math.floor((today.getTime() - dateObj.getTime()) / 1000 / 60 / 60);
+	            var minute = Math.floor((today.getTime() - dateObj.getTime()) / 1000 / 60);
+
+	            if (month == 0) {
+	                if (day != 0) {
+	                    if (day == 1) return "어제";else return day + "일 전";
+	                } else {
+	                    if (hour != 0) return hour + "시간 전";else return minute + "분 전";
+	                }
+	            } else if (minute <= 0) {
+	                return "방금";
+	            } else {
+	                return month + "달 전";
+	            }
+	        }
+	    }, {
+	        key: '_onCreateReply',
+	        value: function _onCreateReply(content) {
+	            var _this2 = this;
+
+	            return (0, _axios2.default)({
+	                method: "POST",
+	                url: "http://bad.watch/api/article-reply/write",
+	                data: {
+	                    content: content,
+	                    comment_id: this.props.comment.comment_id
+	                }
+	            }).then(function (response) {
+	                var data = response.data;
+	                if (data.responseCode == 36) {
+	                    _this2.setState({
+	                        replies: (0, _reactAddonsUpdate2.default)(_this2.state.replies, {
+	                            $push: [data.commentData]
+	                        })
+	                    });
+	                    _this2.props.handleReplyCount(_this2.props.comment.comment_id);
+	                    return true;
+	                } else {
+	                    sweetAlert('답글 등록에 실패했습니다.', 'error');
+	                    return false;
+	                }
+	            }).catch(function (err) {
+	                console.log(err);
+	                sweetAlert('', '답글 등록에 실패했습니다.', 'error');
+	                return false;
+	            });
+	        }
+	    }, {
+	        key: '_handleReplyOpen',
+	        value: function _handleReplyOpen() {
+	            var _this3 = this;
+
+	            if (this.state.isOpen) {
+	                this.setState({
+	                    isOpen: false
+	                });
+	                return;
+	            } else {
+	                if (this.state.replies.length) {
+	                    this.setState({
+	                        isOpen: true
+	                    });
+	                    return;
+	                }
+	            }
+	            var url = 'http://bad.watch/api/article-reply/' + this.props.comment.comment_id;
+	            _axios2.default.get(url).then(function (response) {
+	                var data = response.data;
+	                if (data.responseCode == 34) {
+	                    _this3.setState({
+	                        replies: data.commentData,
+	                        isOpen: true
+	                    });
+	                } else {
+	                    sweetAlert('답글을 불러오는데 오류가 발생했습니다.', 'error');
+	                    return;
+	                }
+	            });
+	        }
+	    }, {
+	        key: 'render',
+	        value: function render() {
+	            var comment = this.props.comment;
+	            var replyStatus = _react2.default.createElement(
+	                'div',
+	                { className: 'comment-reply' },
+	                comment.reply_count == 0 ? "[답글]" : "[답글 " + comment.reply_count + "개]"
+	            );
+	            var replyInfo = _react2.default.createElement(
+	                'div',
+	                null,
+	                this.state.replies.map(function (reply) {
+	                    return _react2.default.createElement(_ArticleReply2.default, { key: reply.reply_id,
+	                        reply: reply });
+	                }),
+	                _react2.default.createElement(
+	                    'div',
+	                    { onClick: this._handleReplyOpen, className: 'comment-reply' },
+	                    this.state.isOpen ? "[답글접기]" : undefined
+	                ),
+	                _react2.default.createElement(_CommentInput2.default, { onCreateComment: this._onCreateReply })
+	            );
+	            var avatar = _react2.default.createElement('img', { src: comment.avatar, className: 'comment-avatar' });
+	            var anonymous_avatar = _react2.default.createElement('img', { src: '/asset/images/logo.png', className: 'comment-avatar' });
+
+	            return _react2.default.createElement(
+	                'div',
+	                { className: 'comment' },
+	                _react2.default.createElement(
+	                    'div',
+	                    null,
+	                    comment.avatar ? avatar : anonymous_avatar,
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'right-comment-div' },
+	                        _react2.default.createElement(
+	                            'span',
+	                            { className: 'comment-name' },
+	                            comment.name ? comment.name : "익명"
+	                        ),
+	                        _react2.default.createElement(
+	                            'span',
+	                            { className: 'meta' },
+	                            this._dateFormat(comment.written_time)
+	                        ),
+	                        _react2.default.createElement(
+	                            'span',
+	                            { className: 'red-text ip' },
+	                            '[',
+	                            comment.ip,
+	                            ']'
+	                        ),
+	                        _react2.default.createElement(
+	                            'div',
+	                            null,
+	                            comment.content
+	                        )
+	                    ),
+	                    _react2.default.createElement(
+	                        'div',
+	                        { onClick: this._handleReplyOpen },
+	                        this.state.isOpen ? undefined : replyStatus
+	                    ),
+	                    this.state.isOpen ? replyInfo : undefined
+	                )
+	            );
+	        }
+	    }]);
+
+	    return ArticleComment;
+	}(_react2.default.Component);
+
+	ArticleComment.propTypes = {
+	    comment: _react2.default.PropTypes.object,
+	    handleReplyCount: _react2.default.PropTypes.func
+	};
+
+	exports.default = ArticleComment;
+
+/***/ },
+/* 676 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	   value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(299);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var ArticleReply = function (_React$Component) {
+	   _inherits(ArticleReply, _React$Component);
+
+	   function ArticleReply(props) {
+	      _classCallCheck(this, ArticleReply);
+
+	      var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(ArticleReply).call(this, props));
+
+	      _this.displayName = 'ArticleReply';
+	      return _this;
+	   }
+
+	   _createClass(ArticleReply, [{
+	      key: '_dateFormat',
+	      value: function _dateFormat(date) {
+	         var today = new Date();
+
+	         var dateObj = new Date(date);
+	         var month = Math.floor((today.getTime() - dateObj.getTime()) / 1000 / 60 / 60 / 24 / 30);
+	         var day = Math.floor((today.getTime() - dateObj.getTime()) / 1000 / 60 / 60 / 24);
+	         var hour = Math.floor((today.getTime() - dateObj.getTime()) / 1000 / 60 / 60);
+	         var minute = Math.floor((today.getTime() - dateObj.getTime()) / 1000 / 60);
+
+	         if (month == 0) {
+	            if (day != 0) {
+	               if (day == 1) return "어제";else return day + "일 전";
+	            } else {
+	               if (hour != 0) return hour + "시간 전";else return minute + "분 전";
+	            }
+	         } else if (minute <= 0) {
+	            return "방금";
+	         } else {
+	            return month + "달 전";
+	         }
+	      }
+	   }, {
+	      key: 'render',
+	      value: function render() {
+	         var reply = this.props.reply;
+	         var avatar = _react2.default.createElement('img', { src: reply.avatar, className: 'comment-avatar' });
+	         var anonymous_avatar = _react2.default.createElement('img', { src: '/asset/images/logo.png', className: 'comment-avatar' });
+	         return _react2.default.createElement(
+	            'div',
+	            { className: 'reply' },
+	            _react2.default.createElement(
+	               'div',
+	               null,
+	               reply.avatar ? avatar : anonymous_avatar,
+	               _react2.default.createElement(
+	                  'div',
+	                  { className: 'right-comment-div' },
+	                  _react2.default.createElement(
+	                     'span',
+	                     { className: 'comment-name' },
+	                     reply.name ? reply.name : "익명"
+	                  ),
+	                  _react2.default.createElement(
+	                     'span',
+	                     { className: 'meta' },
+	                     this._dateFormat(reply.written_time)
+	                  ),
+	                  _react2.default.createElement(
+	                     'span',
+	                     { className: 'red-text ip' },
+	                     '[',
+	                     reply.ip,
+	                     ']'
+	                  ),
+	                  _react2.default.createElement(
+	                     'div',
+	                     null,
+	                     reply.content
+	                  )
+	               )
+	            )
+	         );
+	      }
+	   }]);
+
+	   return ArticleReply;
+	}(_react2.default.Component);
+
+	ArticleReply.propTypes = {
+	   reply: _react2.default.PropTypes.object
+	};
+
+	exports.default = ArticleReply;
+
+/***/ },
+/* 677 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
 		value: true
 	});
 
@@ -50938,6 +52434,11 @@
 				return month + "/" + day + " " + hour + ":" + minute;
 			}
 		}, {
+			key: 'shouldComponentUpdate',
+			value: function shouldComponentUpdate(nextProps, nextState) {
+				return nextProps.article.article_id !== this.props.article.article_id;
+			}
+		}, {
 			key: 'render',
 			value: function render() {
 				var article = this.props.article;
@@ -50955,13 +52456,13 @@
 						_react2.default.createElement(
 							_reactRouter.Link,
 							{ to: "/board/" + this.props.boardType + "/page/" + this.props.pageId + "/article/" + article.article_id },
-							article.title,
-							_react2.default.createElement(
-								'span',
-								{ className: 'article-comment-count' },
-								'+',
-								article.comment_count
-							)
+							article.title
+						),
+						_react2.default.createElement(
+							'span',
+							{ className: 'article-comment-count' },
+							'+',
+							article.comment_count
 						)
 					),
 					_react2.default.createElement(
@@ -50991,10 +52492,14 @@
 		return ArticleBox;
 	}(_react2.default.Component);
 
+	ArticleBox.propTypes = {
+		article: _react2.default.PropTypes.object
+	};
+
 	exports.default = ArticleBox;
 
 /***/ },
-/* 672 */
+/* 678 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -51013,7 +52518,7 @@
 
 	var _axios2 = _interopRequireDefault(_axios);
 
-	var _ResponseCode = __webpack_require__(673);
+	var _ResponseCode = __webpack_require__(679);
 
 	var _reactRouter = __webpack_require__(469);
 
@@ -51083,12 +52588,15 @@
 					var data = response.data;
 
 					if (data.responseCode == _ResponseCode.CREATE_ARTICLE_SUCCESS) {
-						var query = '/board/';
+						var query = '/article/';
 						query += _this2.state.boardType;
-						query += '/page/';
+						query += '?page=';
 						query += 1;
 						_reactRouter.browserHistory.push(query);
-					} else {}
+					} else {
+						sweetAlert('', '글 등록에 실패했습니다.', 'error');
+						return false;
+					}
 				});
 			}
 		}, {
@@ -51099,7 +52607,7 @@
 					null,
 					_react2.default.createElement(
 						'select',
-						{ className: 'browser-default', onChange: this._changeBoardType, value: this.state.boardType },
+						{ className: 'browser-default article-write-select', onChange: this._changeBoardType, value: this.state.boardType },
 						_react2.default.createElement(
 							'option',
 							{ value: 'free' },
@@ -51135,7 +52643,7 @@
 	exports.default = ArticleWrite;
 
 /***/ },
-/* 673 */
+/* 679 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -51201,7 +52709,7 @@
 	var RENEW_USER_FAIL = exports.RENEW_USER_FAIL = 55;
 
 /***/ },
-/* 674 */
+/* 680 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -51222,7 +52730,7 @@
 
 	var _reactRouter = __webpack_require__(469);
 
-	var _ResponseCode = __webpack_require__(673);
+	var _ResponseCode = __webpack_require__(679);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -51384,1401 +52892,6 @@
 	exports.default = ArticleModify;
 
 /***/ },
-/* 675 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	var _react = __webpack_require__(299);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _reactRouter = __webpack_require__(469);
-
-	var _axios = __webpack_require__(536);
-
-	var _axios2 = _interopRequireDefault(_axios);
-
-	var _ArticleBox = __webpack_require__(671);
-
-	var _ArticleBox2 = _interopRequireDefault(_ArticleBox);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	var BoardBox = function (_React$Component) {
-		_inherits(BoardBox, _React$Component);
-
-		function BoardBox(props) {
-			_classCallCheck(this, BoardBox);
-
-			var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(BoardBox).call(this, props));
-
-			_this.state = {
-				articles: [],
-				currentPageNumber: _this.props.params.pageId,
-				numberOfPages: 1,
-				startPageNumber: 1,
-				endPageNumber: 1,
-				pageNumbers: [],
-				numberOfPagesPerView: 10,
-				numberOfArticlesPerPage: 16,
-				boardType: _this.props.params.boardType
-			};
-			_this.displayName = 'BoardBox';
-
-			_this._getData = _this._getData.bind(_this);
-			_this._setPageNumbers = _this._setPageNumbers.bind(_this);
-			_this._before = _this._before.bind(_this);
-			_this._next = _this._next.bind(_this);
-			return _this;
-		}
-
-		_createClass(BoardBox, [{
-			key: '_changeBoardType',
-			value: function _changeBoardType(board) {
-				var _this2 = this;
-
-				if (this.state.boardType === board) ;else {
-					this.setState({
-						boardType: board
-					}, function () {
-						return _this2._changePage(1);
-					});
-				}
-			}
-		}, {
-			key: '_changePage',
-			value: function _changePage(pageNumber) {
-				var _this3 = this;
-
-				var query = '/board/';
-				query += this.state.boardType;
-				query += '/page/';
-				query += pageNumber;
-
-				_reactRouter.browserHistory.push(query);
-				this.setState({
-					currentPageNumber: pageNumber
-				}, function () {
-					return _this3._getData();
-				});
-			}
-		}, {
-			key: '_before',
-			value: function _before() {
-				if (this.state.startPageNumber < this.state.numberOfPagesPerView) ;else this._changePage(Number(this.state.startPageNumber) - Number(1));
-			}
-		}, {
-			key: '_next',
-			value: function _next() {
-				if (this.state.endPageNumber >= this.state.numberOfPages) ;else this._changePage(Number(this.state.endPageNumber) + Number(1));
-			}
-		}, {
-			key: '_setPageNumbers',
-			value: function _setPageNumbers() {
-
-				var tempPageNumbers = [];
-				tempPageNumbers.push(_react2.default.createElement(
-					'li',
-					{ onClick: this._before, key: -1 },
-					_react2.default.createElement(
-						'a',
-						null,
-						_react2.default.createElement(
-							'i',
-							{ className: 'material-icons' },
-							'chevron_left'
-						)
-					)
-				));
-				for (var i = this.state.startPageNumber; i <= this.state.endPageNumber; i++) {
-					tempPageNumbers.push(_react2.default.createElement(
-						'li',
-						{ className: 'waves-effect ' + (this.state.currentPageNumber == i ? 'active' : ''), onClick: this._changePage.bind(this, i), key: i },
-						_react2.default.createElement(
-							'a',
-							null,
-							i
-						)
-					));
-				}
-				tempPageNumbers.push(_react2.default.createElement(
-					'li',
-					{ onClick: this._next, key: -2 },
-					_react2.default.createElement(
-						'a',
-						null,
-						_react2.default.createElement(
-							'i',
-							{ className: 'material-icons' },
-							'chevron_right'
-						)
-					)
-				));
-
-				this.setState({
-					pageNumbers: tempPageNumbers
-				});
-			}
-		}, {
-			key: 'componentDidMount',
-			value: function componentDidMount() {
-				this._getData();
-			}
-		}, {
-			key: '_getData',
-			value: function _getData() {
-				var _this4 = this;
-
-				var query = 'http://bad.watch/api/article/';
-				query += this.state.boardType;
-				query += '?page=';
-				query += this.state.currentPageNumber;
-
-				_axios2.default.get(query).then(function (response) {
-					var data = response.data;
-					if (data.responseCode == 18) {
-						var endNumber = void 0,
-						    startNumber = void 0;
-						var numberOfPagesFromServer = parseInt((data.articleCount + Number(_this4.state.numberOfArticlesPerPage) - 1) / Number(_this4.state.numberOfArticlesPerPage));
-
-						for (startNumber = _this4.state.currentPageNumber;; startNumber--) {
-							if (startNumber <= 1) break;
-							if (startNumber <= _this4.state.currentPageNumber - _this4.state.numberOfPagesPerView + 1) break;
-							if (startNumber % _this4.state.numberOfPagesPerView == 1) break;
-						}
-
-						for (endNumber = _this4.state.currentPageNumber;; endNumber++) {
-							if (endNumber >= numberOfPagesFromServer) break;
-							if (endNumber >= _this4.state.currentPage + _this4.state.numberOfPagesPerView - 1) break;
-							if (endNumber % _this4.state.numberOfPagesPerView == 0) break;
-						}
-
-						_this4.setState({
-							articles: data.articleData,
-							numberOfPages: numberOfPagesFromServer,
-							startPageNumber: startNumber,
-							endPageNumber: endNumber
-						}, function () {
-							return _this4._setPageNumbers();
-						});
-					} else {
-						sweetAlert('데이터를 불러오는데 오류가 발생했습니다.', '잠시후 다시시도해주세요.', 'error');
-						return;
-					}
-				});
-			}
-		}, {
-			key: 'render',
-			value: function render() {
-				var _this5 = this;
-
-				return _react2.default.createElement(
-					'div',
-					{ className: 'board-top' },
-					_react2.default.createElement(
-						'a',
-						{ className: 'waves-effect btn', onClick: this._changeBoardType.bind(this, 'free') },
-						'자유게시판'
-					),
-					_react2.default.createElement(
-						'a',
-						{ className: 'waves-effect btn', onClick: this._changeBoardType.bind(this, 'strategy') },
-						'전략게시판'
-					),
-					_react2.default.createElement('p', null),
-					_react2.default.createElement(
-						'div',
-						null,
-						_react2.default.createElement(
-							'table',
-							{ className: 'article-table' },
-							_react2.default.createElement(
-								'thead',
-								null,
-								_react2.default.createElement(
-									'tr',
-									null,
-									_react2.default.createElement(
-										'td',
-										{ className: 'mobile-hide' },
-										'카테고리'
-									),
-									_react2.default.createElement(
-										'td',
-										null,
-										'제목'
-									),
-									_react2.default.createElement(
-										'td',
-										null,
-										'작성자'
-									),
-									_react2.default.createElement(
-										'td',
-										{ className: 'mobile-hide' },
-										'조회수'
-									),
-									_react2.default.createElement(
-										'td',
-										{ className: 'mobile-hide' },
-										'추천수'
-									),
-									_react2.default.createElement(
-										'td',
-										{ className: 'mobile-hide' },
-										'등록일'
-									)
-								)
-							),
-							_react2.default.createElement(
-								'tbody',
-								null,
-								this.state.articles.map(function (article) {
-									return _react2.default.createElement(_ArticleBox2.default, { key: article.article_id,
-										article: article,
-										pageId: _this5.props.params.pageId,
-										boardType: _this5.state.boardType
-									});
-								})
-							)
-						)
-					),
-					_react2.default.createElement('p', null),
-					_react2.default.createElement(
-						'center',
-						null,
-						_react2.default.createElement(
-							'ul',
-							{ className: 'pagination' },
-							this.state.pageNumbers
-						)
-					),
-					_react2.default.createElement('p', null),
-					_react2.default.createElement(
-						_reactRouter.Link,
-						{ to: '/board/write', className: 'modal-trigger waves-effect waves-light btn' },
-						'글쓰기'
-					)
-				);
-			}
-		}]);
-
-		return BoardBox;
-	}(_react2.default.Component);
-
-	exports.default = BoardBox;
-
-/***/ },
-/* 676 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	var _react = __webpack_require__(299);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _axios = __webpack_require__(536);
-
-	var _axios2 = _interopRequireDefault(_axios);
-
-	var _BoardCommentBox = __webpack_require__(677);
-
-	var _BoardCommentBox2 = _interopRequireDefault(_BoardCommentBox);
-
-	var _ResponseCode = __webpack_require__(673);
-
-	var _reactRouter = __webpack_require__(469);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	var BoardShowBox = function (_React$Component) {
-		_inherits(BoardShowBox, _React$Component);
-
-		function BoardShowBox(props) {
-			_classCallCheck(this, BoardShowBox);
-
-			var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(BoardShowBox).call(this, props));
-
-			_this.displayName = 'BoardShowBox';
-			_this.state = {
-				boardType: _this.props.params.boardType,
-				articleId: _this.props.params.articleId,
-				authentication: false,
-				name: "",
-				title: "",
-				content: "",
-				comment_count: 0,
-				hit_count: 0,
-				like_count: 0,
-				like_status: false,
-				year: 2016,
-				month: 8,
-				day: 22,
-				hour: 0,
-				minute: 0,
-				second: 0,
-				authenticationActions: [],
-				written_time: ""
-			};
-			_this._getData = _this._getData.bind(_this);
-			_this._toMyDate = _this._toMyDate.bind(_this);
-			_this._toLeftPad = _this._toLeftPad.bind(_this);
-			_this._like = _this._like.bind(_this);
-			_this._dislike = _this._dislike.bind(_this);
-			_this._addComment = _this._addComment.bind(_this);
-			_this._modify = _this._modify.bind(_this);
-			_this._delete = _this._delete.bind(_this);
-			_this._setAuthenticationActions = _this._setAuthenticationActions.bind(_this);
-			return _this;
-		}
-
-		_createClass(BoardShowBox, [{
-			key: '_dateFormat',
-			value: function _dateFormat(date) {
-				var now = new Date(date);
-				var year = "" + now.getFullYear();
-				var month = "" + (now.getMonth() + 1);if (month.length == 1) {
-					month = "0" + month;
-				}
-				var day = "" + now.getDate();if (day.length == 1) {
-					day = "0" + day;
-				}
-				var hour = "" + now.getHours();if (hour.length == 1) {
-					hour = "0" + hour;
-				}
-				var minute = "" + now.getMinutes();if (minute.length == 1) {
-					minute = "0" + minute;
-				}
-				var second = "" + now.getSeconds();if (second.length == 1) {
-					second = "0" + second;
-				}
-				return year + "-" + month + "-" + day + " " + hour + ":" + minute + ":" + second;
-			}
-		}, {
-			key: '_toMyDate',
-			value: function _toMyDate(written_time) {
-				var date = new Date(written_time);
-
-				this.setState({
-					year: date.getUTCFullYear(),
-					month: this._toLeftPad(Number(date.getUTCMonth()) + Number(1)),
-					day: this._toLeftPad(date.getUTCDate()),
-					hour: this._toLeftPad(date.getUTCHours()),
-					minute: this._toLeftPad(date.getUTCMinutes()),
-					second: this._toLeftPad(date.getUTCSeconds())
-				});
-			}
-		}, {
-			key: '_toLeftPad',
-			value: function _toLeftPad(number) {
-				return number < 10 ? '0' + number : number;
-			}
-		}, {
-			key: '_setAuthenticationActions',
-			value: function _setAuthenticationActions() {
-				var actions = [];
-				actions.push(_react2.default.createElement(
-					'button',
-					{ onClick: this._modify },
-					'수정'
-				));
-				action.push(_react2.default.createElement(
-					'button',
-					{ onClick: this._delete },
-					'삭제'
-				));
-			}
-		}, {
-			key: '_modify',
-			value: function _modify() {
-				var url = "/board/modify/";
-				url += this.state.boardType;
-				url += "/";
-				url += this.state.articleId;
-
-				_reactRouter.browserHistory.push(url);
-				/*if(this.state.authentication === true){
-	   	
-	   	}
-	   else{
-	   	sweetAlert("글 수정에 실패했습니다");
-	   }*/
-			}
-		}, {
-			key: '_delete',
-			value: function _delete() {
-				var _this2 = this;
-
-				if (this.state.authentication === true) {
-					var query = "http://bad.watch/api/article/";
-					query += this.state.articleId;
-					query += "/delete";
-
-					_axios2.default.get(query).then(function (response) {
-						var data = response.data;
-
-						if (data.responseCode === _ResponseCode.DELETE_ARTICLE_SUCCESS) {
-							var url = '/board/';
-							url += _this2.state.boardType;
-							url += '/page/';
-							url += 1;
-							_reactRouter.browserHistory.push(url);
-						} else {
-							sweetAlert("글 삭제에 실패했습니다.");
-						}
-					});
-				} else {
-					sweetAlert("글 삭제에 실패했습니다.");
-				}
-			}
-		}, {
-			key: '_like',
-			value: function _like() {
-				var _this3 = this;
-
-				if (this.state.like_status === true) {
-					var query = "http://bad.watch/api/article-like/";
-					query += this.state.articleId;
-
-					_axios2.default.get(query).then(function (response) {
-						var data = response.data;
-						if (data.responseCode == _ResponseCode.LIKE_SUCCESS) {
-							_this3.setState({
-								like_count: _this3.like_count + 1
-							});
-						} else {
-							sweetAlert("이미 좋아요를 누르셨습니다");
-						}
-					});
-				} else {
-					sweetAlert("로그인 후 이용가능합니다.");
-				}
-			}
-		}, {
-			key: '_dislike',
-			value: function _dislike() {
-				var _this4 = this;
-
-				if (this.state.like_status === true) {
-					var query = "http://bad.watch/api/article-dislike/";
-					query += this.state.articleId;
-
-					_axios2.default.get(query).then(function (response) {
-						var data = response.data;
-
-						if (data.responseCode == _ResponseCode.DISLIKE_SUCCESS) {
-							_this4.setState({
-								like_count: _this4.like_count - 1
-							});
-						} else {
-							sweetAlert("이전에 좋아요를 누르시지 않았습니다");
-						}
-					});
-				} else {
-					sweetAlert("로그인 후 이용가능합니다.");
-				}
-			}
-		}, {
-			key: '_addComment',
-			value: function _addComment(content) {
-				var _this5 = this;
-
-				return (0, _axios2.default)({
-					method: "POST",
-					url: 'http://bad.watch/api/article-comment/write',
-					data: {
-						content: content,
-						article_id: parseInt(this.state.articleId)
-					}
-				}).then(function (response) {
-					var data = response.data;
-					if (data.responseCode == 28) {
-						_this5.setState({
-							comment_count: _this5.state.comment_count + 1
-						});
-						return true;
-					} else {
-						sweetAlert('댓글 등록에 실패했습니다.', 'error');
-						return false;
-					}
-				});
-			}
-		}, {
-			key: 'componentDidMount',
-			value: function componentDidMount() {
-				this._getData();
-			}
-		}, {
-			key: '_getData',
-			value: function _getData() {
-				var _this6 = this;
-
-				var query = 'http://bad.watch/api/article/';
-				query += this.state.boardType;
-				query += '/';
-				query += this.state.articleId;
-
-				_axios2.default.get(query).then(function (response) {
-					var data = response.data;
-
-					if (data.responseCode == 18) {
-						var writter;
-
-						(function () {
-							var articleData = data.articleData;
-
-							writter = articleData.name;
-
-							if (writter === null) {
-								writter = "익명";
-							}
-
-							if (articleData.authentication === true) _this6._setAuthenticationActions();
-
-							_this6.setState({
-								authentication: articleData.authentication,
-								name: writter,
-								title: articleData.title,
-								content: articleData.content,
-								comment_count: articleData.comment_count,
-								hit_count: articleData.hit_count,
-								like_count: articleData.like_count,
-								like_status: articleData.like_status,
-								written_time: articleData.written_time
-							}, function () {
-								return _this6._toMyDate(articleData.written_time);
-							});
-						})();
-					} else {
-						sweetAlert('데이터를 불러오는데 오류가 발생했습니다.', '잠시후 다시시도해주세요.', 'error');
-						return;
-					}
-				});
-			}
-		}, {
-			key: 'render',
-			value: function render() {
-				var like_true = _react2.default.createElement(
-					'div',
-					{ className: 'right' },
-					_react2.default.createElement(
-						'a',
-						{ onClick: this._like, className: 'pointer' },
-						_react2.default.createElement('img', { src: '/asset/images/like-on.png' })
-					)
-				);
-				var like_false = _react2.default.createElement(
-					'div',
-					{ className: 'right' },
-					_react2.default.createElement(
-						'a',
-						{ onClick: this._dislike, className: 'pointer' },
-						_react2.default.createElement('img', { src: '/asset/images/like-off.png' })
-					)
-				);
-				return _react2.default.createElement(
-					'div',
-					null,
-					_react2.default.createElement(
-						'div',
-						{ className: 'youtube-title' },
-						this.state.title
-					),
-					_react2.default.createElement(
-						'div',
-						{ className: 'youtube-writer' },
-						_react2.default.createElement(
-							'span',
-							null,
-							'글쓴이 : '
-						),
-						' ',
-						this.state.name ? this.state.name : "익명",
-						_react2.default.createElement(
-							'span',
-							{ className: 'youtube-date' },
-							this._dateFormat(this.state.written_time)
-						)
-					),
-					_react2.default.createElement(
-						'div',
-						{ className: 'youtube-container' },
-						this.state.content
-					),
-					_react2.default.createElement(
-						'div',
-						{ className: 'like-status' },
-						this.state.like_status ? like_true : like_false,
-						_react2.default.createElement(
-							'div',
-							{ className: 'siba' },
-							_react2.default.createElement(
-								'span',
-								{ className: 'like-count' },
-								_react2.default.createElement('img', { src: '/asset/images/like-icon.png' })
-							),
-							_react2.default.createElement(
-								'span',
-								null,
-								this.state.like_count
-							),
-							_react2.default.createElement(
-								'span',
-								{ className: 'hit-count' },
-								_react2.default.createElement('img', { src: '/asset/images/hit-icon.png' })
-							),
-							_react2.default.createElement(
-								'span',
-								null,
-								this.state.hit_count
-							)
-						)
-					),
-					_react2.default.createElement(_BoardCommentBox2.default, { articleId: this.state.articleId, addComment: this._addComment,
-						comment_count: this.state.comment_count })
-				);
-			}
-		}]);
-
-		return BoardShowBox;
-	}(_react2.default.Component);
-
-	exports.default = BoardShowBox;
-
-/***/ },
-/* 677 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	var _react = __webpack_require__(299);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _axios = __webpack_require__(536);
-
-	var _axios2 = _interopRequireDefault(_axios);
-
-	var _BoardComment = __webpack_require__(678);
-
-	var _BoardComment2 = _interopRequireDefault(_BoardComment);
-
-	var _BoardCommentInput = __webpack_require__(680);
-
-	var _BoardCommentInput2 = _interopRequireDefault(_BoardCommentInput);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	var BoardCommentBox = function (_React$Component) {
-	    _inherits(BoardCommentBox, _React$Component);
-
-	    function BoardCommentBox(props) {
-	        _classCallCheck(this, BoardCommentBox);
-
-	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(BoardCommentBox).call(this, props));
-
-	        _this.displayName = 'CommentBox';
-	        _this.state = {
-	            comments: [],
-	            numberOfComments: 0,
-	            numberOfCommentsPerPage: 20,
-	            numberOfPagesPerView: 10,
-	            numberOfPages: 0,
-	            startPageNumber: 1,
-	            endPageNumber: 1,
-	            currentPageNumber: 1,
-	            pageNumbers: [],
-	            displayedComments: []
-	        };
-
-	        _this._before = _this._before.bind(_this);
-	        _this._next = _this._next.bind(_this);
-	        _this._getData = _this._getData.bind(_this);
-	        _this._setPageNumbers = _this._setPageNumbers.bind(_this);
-	        _this._addComment = _this._addComment.bind(_this);
-	        return _this;
-	    }
-
-	    _createClass(BoardCommentBox, [{
-	        key: '_changePage',
-	        value: function _changePage(pageNumber) {
-	            var _this2 = this;
-
-	            this.setState({
-	                currentPageNumber: pageNumber
-	            }, function () {
-	                return _this2._getData();
-	            });
-	        }
-	    }, {
-	        key: '_before',
-	        value: function _before() {
-	            if (this.state.startPageNumber < this.state.numberOfPagesPerView) ;else this._changePage(Number(this.state.startPageNumber) - Number(1));
-	        }
-	    }, {
-	        key: '_next',
-	        value: function _next() {
-	            if (this.state.endPageNumber >= this.state.numberOfPages) ;else this._changePage(Number(this.state.endPageNumber) + Number(1));
-	        }
-	    }, {
-	        key: '_setPageNumbers',
-	        value: function _setPageNumbers() {
-
-	            var tempPageNumbers = [];
-	            tempPageNumbers.push(_react2.default.createElement(
-	                'button',
-	                { onClick: this._before },
-	                '<'
-	            ));
-	            for (var i = this.state.startPageNumber; i <= this.state.endPageNumber; i++) {
-	                tempPageNumbers.push(_react2.default.createElement(
-	                    'button',
-	                    { onClick: this._changePage.bind(this, i), key: i },
-	                    ' ',
-	                    i,
-	                    ' '
-	                ));
-	            }
-	            tempPageNumbers.push(_react2.default.createElement(
-	                'button',
-	                { onClick: this._next },
-	                '>'
-	            ));
-
-	            this.setState({
-	                pageNumbers: tempPageNumbers
-	            });
-	        }
-	    }, {
-	        key: '_addComment',
-	        value: function _addComment(content) {
-	            var _this3 = this;
-
-	            return this.props.addComment(content).then(function (success) {
-	                if (success) {
-	                    _this3.setState({
-	                        currentPageNumber: 1
-	                    }, function () {
-	                        return _this3._getData();
-	                    });
-	                    return true;
-	                } else {
-	                    return false;
-	                }
-	            });
-	        }
-	    }, {
-	        key: 'componentDidMount',
-	        value: function componentDidMount() {
-	            this._getData();
-	        }
-	    }, {
-	        key: '_getData',
-	        value: function _getData() {
-	            var _this4 = this;
-
-	            var query = 'http://bad.watch/api/article-comment/';
-	            query += this.props.articleId;
-
-	            _axios2.default.get(query).then(function (response) {
-	                var data = response.data;
-	                if (data.responseCode == 26) {
-	                    var endNumber = void 0,
-	                        startNumber = void 0;
-	                    var numberOfComments = data.commentData.length;
-	                    var numberOfPages = parseInt((numberOfComments + Number(_this4.state.numberOfCommentsPerPage) - 1) / Number(_this4.state.numberOfCommentsPerPage));
-
-	                    for (startNumber = _this4.state.currentPageNumber;; startNumber--) {
-	                        if (startNumber <= 1) break;
-	                        if (startNumber <= _this4.state.currentPageNumber - _this4.state.numberOfPagesPerView + 1) break;
-	                        if (startNumber % _this4.state.numberOfPagesPerView == 1) break;
-	                    }
-
-	                    for (endNumber = _this4.state.currentPageNumber;; endNumber++) {
-	                        if (endNumber >= numberOfPages) break;
-	                        if (endNumber >= _this4.state.currentPage + _this4.state.numberOfPagesPerView - 1) break;
-	                        if (endNumber % _this4.state.numberOfPagesPerView == 0) break;
-	                    }
-
-	                    var newDisplayedComments = [];
-	                    var index;
-
-	                    for (index = numberOfComments - 1 - Number(_this4.state.currentPageNumber - Number(1)) * _this4.state.numberOfCommentsPerPage; index > numberOfComments - 1 - Number(_this4.state.currentPageNumber) * _this4.state.numberOfCommentsPerPage; index--) {
-	                        if (index < 0) break;
-	                        newDisplayedComments.push(data.commentData[index]);
-	                    }
-
-	                    _this4.setState({
-	                        comments: data.commentData,
-	                        numberOfComments: numberOfComments,
-	                        numberOfPages: numberOfPages,
-	                        startPageNumber: startNumber,
-	                        endPageNumber: endNumber,
-	                        displayedComments: newDisplayedComments
-	                    }, function () {
-	                        return _this4._setPageNumbers();
-	                    });
-	                } else {
-	                    sweetAlert('데이터를 불러오는데 오류가 발생했습니다.', '잠시후 다시시도해주세요.', 'error');
-	                    return;
-	                }
-	            });
-	        }
-	    }, {
-	        key: 'render',
-	        value: function render() {
-	            return _react2.default.createElement(
-	                'div',
-	                { className: 'comment-container' },
-	                _react2.default.createElement(
-	                    'div',
-	                    { className: 'comment-box' },
-	                    _react2.default.createElement('img', { src: '/asset/images/comment-icon.png' }),
-	                    '댓글 ',
-	                    this.props.comment_count,
-	                    ' 개'
-	                ),
-	                _react2.default.createElement(
-	                    'div',
-	                    null,
-	                    this.state.displayedComments.map(function (comment) {
-	                        return _react2.default.createElement(_BoardComment2.default, { key: comment.comment_id,
-	                            comment: comment
-	                        });
-	                    })
-	                ),
-	                _react2.default.createElement(_BoardCommentInput2.default, { addComment: this._addComment })
-	            );
-	        }
-	    }]);
-
-	    return BoardCommentBox;
-	}(_react2.default.Component);
-
-	exports.default = BoardCommentBox;
-
-/***/ },
-/* 678 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	var _react = __webpack_require__(299);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _axios = __webpack_require__(536);
-
-	var _axios2 = _interopRequireDefault(_axios);
-
-	var _BoardCommentReplyWriteBox = __webpack_require__(679);
-
-	var _BoardCommentReplyWriteBox2 = _interopRequireDefault(_BoardCommentReplyWriteBox);
-
-	var _ResponseCode = __webpack_require__(673);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	var BoardComment = function (_React$Component) {
-	    _inherits(BoardComment, _React$Component);
-
-	    function BoardComment(props) {
-	        _classCallCheck(this, BoardComment);
-
-	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(BoardComment).call(this, props));
-
-	        _this.displayName = 'BoardComment';
-	        _this.state = {
-	            comment: _this.props.comment,
-	            written_time: _this._toMyDate(_this.props.comment.written_time),
-	            reply_count: 0,
-	            replys: [],
-	            replyWriteBox: [],
-	            isOpenReplyBox: false,
-	            isOpenReplyWriteBox: false
-	        };
-
-	        _this._toMyDate = _this._toMyDate.bind(_this);
-	        _this._changeIsOpenReplyBox = _this._changeIsOpenReplyBox.bind(_this);
-	        _this._setReplyBox = _this._setReplyBox.bind(_this);
-	        _this._changeIsOpenReplyWriteBox = _this._changeIsOpenReplyWriteBox.bind(_this);
-	        _this._setReplyWriteBox = _this._setReplyWriteBox.bind(_this);
-	        _this._addReply = _this._addReply.bind(_this);
-	        _this._getData = _this._getData.bind(_this);
-	        return _this;
-	    }
-
-	    _createClass(BoardComment, [{
-	        key: '_dateFormat',
-	        value: function _dateFormat(date) {
-	            var now = new Date(date);
-	            var year = "" + now.getFullYear();
-	            var month = "" + (now.getMonth() + 1);if (month.length == 1) {
-	                month = "0" + month;
-	            }
-	            var day = "" + now.getDate();if (day.length == 1) {
-	                day = "0" + day;
-	            }
-	            var hour = "" + now.getHours();if (hour.length == 1) {
-	                hour = "0" + hour;
-	            }
-	            var minute = "" + now.getMinutes();if (minute.length == 1) {
-	                minute = "0" + minute;
-	            }
-	            var second = "" + now.getSeconds();if (second.length == 1) {
-	                second = "0" + second;
-	            }
-	            return year + "-" + month + "-" + day + " " + hour + ":" + minute + ":" + second;
-	        }
-	    }, {
-	        key: '_changeIsOpenReplyBox',
-	        value: function _changeIsOpenReplyBox() {
-	            var _this2 = this;
-
-	            if (this.state.comment.reply_count === 0) {
-	                this.setState({
-	                    isOpenReplyBox: false,
-	                    replys: []
-	                });
-	            } else {
-	                if (this.state.isOpenReplyBox === true) {
-	                    this.setState({
-	                        isOpenReplyBox: false,
-	                        replys: []
-	                    });
-	                } else {
-	                    this.setState({
-	                        isOpenReplyBox: true
-	                    }, function () {
-	                        return _this2._setReplyBox();
-	                    });
-	                }
-	            }
-	        }
-	    }, {
-	        key: '_changeIsOpenReplyWriteBox',
-	        value: function _changeIsOpenReplyWriteBox() {
-	            var _this3 = this;
-
-	            if (this.state.isOpenReplyWriteBox === false) {
-	                this.setState({
-	                    isOpenReplyWriteBox: true
-	                }, function () {
-	                    return _this3._setReplyWriteBox();
-	                });
-	            } else {
-	                this.setState({
-	                    isOpenReplyWriteBox: false,
-	                    replyWriteBox: []
-	                });
-	            }
-	        }
-	    }, {
-	        key: '_setReplyWriteBox',
-	        value: function _setReplyWriteBox() {
-	            var newReplyWriteBox = [];
-	            newReplyWriteBox.push(_react2.default.createElement(_BoardCommentReplyWriteBox2.default, { createReply: this._addReply }));
-
-	            this.setState({
-	                replyWriteBox: newReplyWriteBox
-	            });
-	        }
-	    }, {
-	        key: '_addReply',
-	        value: function _addReply(content) {
-	            var _this4 = this;
-
-	            return (0, _axios2.default)({
-	                method: "POST",
-	                url: 'http://bad.watch/api/article-reply/write',
-	                data: {
-	                    content: content,
-	                    comment_id: parseInt(this.state.comment.comment_id)
-	                }
-	            }).then(function (response) {
-	                var data = response.data;
-
-	                if (data.responseCode == _ResponseCode.CREATE_REPLY_SUCCESS) {
-	                    _this4._setReplyBox();
-	                    return true;
-	                } else {
-	                    sweetAlert('답글 등록에 실패했습니다.', 'error');
-	                    return false;
-	                }
-	            });
-	        }
-	    }, {
-	        key: 'componentDidMount',
-	        value: function componentDidMount() {
-	            this._getData();
-	        }
-	    }, {
-	        key: '_getData',
-	        value: function _getData() {
-	            var _this5 = this;
-
-	            var query = 'http://bad.watch/api/article-reply/';
-	            query += this.state.comment.comment_id;
-
-	            _axios2.default.get(query).then(function (response) {
-	                var data = response.data;
-	                if (data.responseCode == 34) {
-	                    var replyData = data.commentData;
-
-	                    _this5.setState({
-	                        reply_count: replyData.length
-	                    });
-	                } else {}
-	            });
-	        }
-	    }, {
-	        key: '_setReplyBox',
-	        value: function _setReplyBox() {
-	            var _this6 = this;
-
-	            var query = 'http://bad.watch/api/article-reply/';
-	            query += this.state.comment.comment_id;
-
-	            _axios2.default.get(query).then(function (response) {
-	                var data = response.data;
-	                if (data.responseCode == 34) {
-	                    var replyData = data.commentData;
-
-	                    var newReplyData = [];
-	                    var index;
-	                    for (index = 0; index < replyData.length; index++) {
-	                        newReplyData.push(_react2.default.createElement(
-	                            'pre',
-	                            { key: i },
-	                            replyData[index].content,
-	                            '      ',
-	                            _this6._toMyDate(replyData[index].written_time)
-	                        ));
-	                    }
-
-	                    _this6.setState({
-	                        reply_count: replyData.length,
-	                        replys: newReplyData
-	                    });
-	                } else {}
-	            });
-	        }
-	    }, {
-	        key: '_toMyDate',
-	        value: function _toMyDate(written_time) {
-	            var date = new Date(written_time);
-	            var dateToString = "";
-
-	            dateToString += date.getUTCFullYear();
-	            dateToString += '/';
-	            dateToString += this._toLeftPad(Number(date.getUTCMonth()) + Number(1));
-	            dateToString += '/';
-	            dateToString += this._toLeftPad(date.getUTCDate());
-	            dateToString += '  ';
-	            dateToString += this._toLeftPad(date.getUTCHours());
-	            dateToString += ':';
-	            dateToString += this._toLeftPad(date.getUTCMinutes());
-	            dateToString += ':';
-	            dateToString += this._toLeftPad(date.getUTCSeconds());
-
-	            return dateToString;
-	        }
-	    }, {
-	        key: '_toLeftPad',
-	        value: function _toLeftPad(number) {
-	            return number < 10 ? '0' + number : number;
-	        }
-	    }, {
-	        key: 'render',
-	        value: function render() {
-	            var comment = this.props.comment;
-	            var replyStatus = _react2.default.createElement(
-	                'div',
-	                { className: 'comment-reply' },
-	                comment.reply_count == 0 ? "[답글]" : "[답글 " + comment.reply_count + "개]"
-	            );
-
-	            return _react2.default.createElement(
-	                'div',
-	                { className: 'comment' },
-	                _react2.default.createElement(
-	                    'div',
-	                    null,
-	                    _react2.default.createElement('img', { src: comment.avatar, className: 'comment-avatar' }),
-	                    _react2.default.createElement(
-	                        'div',
-	                        { className: 'right-comment-div' },
-	                        _react2.default.createElement(
-	                            'span',
-	                            { className: 'comment-name' },
-	                            comment.name ? comment.name : "익명"
-	                        ),
-	                        _react2.default.createElement(
-	                            'span',
-	                            { className: 'meta' },
-	                            this._dateFormat(comment.written_time)
-	                        ),
-	                        _react2.default.createElement(
-	                            'div',
-	                            null,
-	                            comment.content
-	                        )
-	                    ),
-	                    this.state.isOpenReplyBox ? replyInfo : undefined,
-	                    _react2.default.createElement(
-	                        'div',
-	                        { className: 'comment-reply', onClick: this._changeIsOpenReplyWriteBox },
-	                        '[답글',
-	                        this.state.reply_count,
-	                        '개]'
-	                    ),
-	                    this.state.replys,
-	                    this.state.replyWriteBox
-	                )
-	            );
-	        }
-	    }]);
-
-	    return BoardComment;
-	}(_react2.default.Component);
-
-	exports.default = BoardComment;
-
-/***/ },
-/* 679 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	var _react = __webpack_require__(299);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _axios = __webpack_require__(536);
-
-	var _axios2 = _interopRequireDefault(_axios);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	var BoardCommentReplyWriteBox = function (_React$Component) {
-	    _inherits(BoardCommentReplyWriteBox, _React$Component);
-
-	    function BoardCommentReplyWriteBox(props) {
-	        _classCallCheck(this, BoardCommentReplyWriteBox);
-
-	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(BoardCommentReplyWriteBox).call(this, props));
-
-	        _this.displayName = 'BoardCommentReplyWriteBox';
-	        _this.state = {
-	            content: ""
-	        };
-	        _this._handleChange = _this._handleChange.bind(_this);
-	        _this._handleWrite = _this._handleWrite.bind(_this);
-	        return _this;
-	    }
-
-	    _createClass(BoardCommentReplyWriteBox, [{
-	        key: '_handleChange',
-	        value: function _handleChange(e) {
-	            this.setState({
-	                content: e.target.value
-	            });
-	        }
-	    }, {
-	        key: '_handleWrite',
-	        value: function _handleWrite() {
-	            var _this2 = this;
-
-	            this.props.createReply(this.state.content).then(function (success) {
-
-	                if (success) {
-	                    _this2.setState({
-	                        content: ''
-	                    });
-	                }
-	            });
-	        }
-	    }, {
-	        key: 'render',
-	        value: function render() {
-	            return _react2.default.createElement(
-	                'div',
-	                { className: 'comment-input' },
-	                _react2.default.createElement('input', { type: 'text',
-	                    name: 'reply_input',
-	                    value: this.state.content,
-	                    onChange: this._handleChange,
-	                    placeholder: '답글입력' }),
-	                _react2.default.createElement(
-	                    'a',
-	                    { className: 'waves-effect btn',
-	                        onClick: this._handleWrite },
-	                    '등록'
-	                )
-	            );
-	        }
-	    }]);
-
-	    return BoardCommentReplyWriteBox;
-	}(_react2.default.Component);
-
-	exports.default = BoardCommentReplyWriteBox;
-
-/***/ },
-/* 680 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	var _react = __webpack_require__(299);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _axios = __webpack_require__(536);
-
-	var _axios2 = _interopRequireDefault(_axios);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	var BoardCommentInput = function (_React$Component) {
-	    _inherits(BoardCommentInput, _React$Component);
-
-	    function BoardCommentInput(props) {
-	        _classCallCheck(this, BoardCommentInput);
-
-	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(BoardCommentInput).call(this, props));
-
-	        _this.displayName = 'BoardCommentInput';
-	        _this.state = {
-	            content: ""
-	        };
-
-	        _this._handleChange = _this._handleChange.bind(_this);
-	        _this._handleCreate = _this._handleCreate.bind(_this);
-	        return _this;
-	    }
-
-	    _createClass(BoardCommentInput, [{
-	        key: '_handleChange',
-	        value: function _handleChange(e) {
-	            this.setState({
-	                content: e.target.value
-	            });
-	        }
-	    }, {
-	        key: '_handleCreate',
-	        value: function _handleCreate() {
-	            var _this2 = this;
-
-	            this.props.addComment(this.state.content).then(function (success) {
-	                if (success) {
-	                    _this2.setState({
-	                        content: ''
-	                    });
-	                }
-	            });
-	        }
-	    }, {
-	        key: 'render',
-	        value: function render() {
-	            return _react2.default.createElement(
-	                'div',
-	                { className: 'comment-input' },
-	                _react2.default.createElement('input', { type: 'text',
-	                    name: 'comment_input',
-	                    value: this.state.content,
-	                    onChange: this._handleChange,
-	                    placeholder: '답글입력' }),
-	                _react2.default.createElement(
-	                    'a',
-	                    { className: 'waves-effect btn',
-	                        onClick: this._handleCreate },
-	                    '등록'
-	                )
-	            );
-	        }
-	    }]);
-
-	    return BoardCommentInput;
-	}(_react2.default.Component);
-
-	exports.default = BoardCommentInput;
-
-/***/ },
 /* 681 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -52787,6 +52900,8 @@
 	Object.defineProperty(exports, "__esModule", {
 	    value: true
 	});
+
+	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -52797,6 +52912,10 @@
 	var _reactRouter = __webpack_require__(469);
 
 	var _components = __webpack_require__(534);
+
+	var _axios = __webpack_require__(536);
+
+	var _axios2 = _interopRequireDefault(_axios);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -52816,7 +52935,8 @@
 
 	        _this.displayName = 'Home';
 	        _this.state = {
-	            userName: ""
+	            userName: "",
+	            status: 'INIT'
 	        };
 	        _this._handleChange = _this._handleChange.bind(_this);
 	        _this._handleKeyPress = _this._handleKeyPress.bind(_this);
@@ -52841,6 +52961,8 @@
 	    }, {
 	        key: '_onSearchUser',
 	        value: function _onSearchUser() {
+	            var _this2 = this;
+
 	            if (!this.state.userName) {
 	                sweetAlert('', '올바른 형식이 아닙니다.', 'error');
 	                return;
@@ -52848,13 +52970,41 @@
 
 	            /* //////// # 포함시 배틀태그 포함 -로 변환후 url 요청 \\\\\\\\\  */
 	            if (this.state.userName.includes("#")) {
-	                var userName = this.state.userName.replace("#", "-");
-	                if (userName.includes("#")) {
-	                    sweetAlert('', '올바른 형식이 아닙니다.', 'error');
-	                    return;
-	                }
+	                var _ret = function () {
+	                    var userName = _this2.state.userName.replace("#", "-");
+	                    if (userName.includes("#")) {
+	                        sweetAlert('', '올바른 형식이 아닙니다.', 'error');
+	                        return {
+	                            v: void 0
+	                        };
+	                    }
 
-	                _reactRouter.browserHistory.push('/user/' + userName);
+	                    _this2.setState({
+	                        status: 'WAITING'
+	                    }, function () {
+	                        var _this3 = this;
+
+	                        var url = "http://bad.watch/api/user/" + encodeURIComponent(userName);
+	                        _axios2.default.get(url).then(function (response) {
+	                            var data = response.data;
+	                            if (data.responseCode == 2) {
+	                                _this3.setState({
+	                                    status: 'INIT'
+	                                }, function () {
+	                                    _reactRouter.browserHistory.push('/user/' + data.user_id);
+	                                });
+	                            } else {
+	                                sweetAlert('', '유저가 존재하지 않습니다.', 'error');
+	                                _this3.setState({
+	                                    status: 'INIT'
+	                                });
+	                                return;
+	                            }
+	                        });
+	                    });
+	                }();
+
+	                if ((typeof _ret === 'undefined' ? 'undefined' : _typeof(_ret)) === "object") return _ret.v;
 	            } else {
 	                _reactRouter.browserHistory.push('/userByName/' + this.state.userName);
 	            }
@@ -52862,80 +53012,74 @@
 	    }, {
 	        key: 'render',
 	        value: function render() {
+	            var status_inactive = _react2.default.createElement('img', { src: '/asset/images/main-search-icon.png',
+	                className: 'main-search-icon',
+	                onClick: this._onSearchUser });
+	            var status_active = _react2.default.createElement(
+	                'div',
+	                { className: 'preloader-wrapper small active search-preloader' },
+	                _react2.default.createElement(
+	                    'div',
+	                    { className: 'spinner-layer spinner-blue-only' },
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'circle-clipper left' },
+	                        _react2.default.createElement('div', { className: 'circle' })
+	                    ),
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'gap-patch' },
+	                        _react2.default.createElement('div', { className: 'circle' })
+	                    ),
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'circle-clipper right' },
+	                        _react2.default.createElement('div', { className: 'circle' })
+	                    )
+	                )
+	            );
+	            var submit_button = null;
+	            if (this.state.status == 'INIT') submit_button = status_inactive;else submit_button = status_active;
 	            return _react2.default.createElement(
 	                'div',
 	                null,
 	                _react2.default.createElement(
-	                    'div',
-	                    { className: 'right-align mobile-hide' },
-	                    _react2.default.createElement(_components.LoginButton, null)
-	                ),
-	                _react2.default.createElement(
 	                    'center',
 	                    { className: 'main-center' },
+	                    _react2.default.createElement('img', { src: '/asset/images/main-typo.png', className: 'logo' }),
 	                    _react2.default.createElement(
-	                        'p',
-	                        null,
-	                        '안녕하세요. 배드워치입니다. 저희는 사실 아직 개발이 완료되지 않아 계속 개발이 진행되고 있는 상황입니다.',
-	                        _react2.default.createElement('br', null),
-	                        '본의아니게 개발과정과 내용들을 외부에 발표하게 되면서 몇몇분에게 도메인이 알려지면서, 유저분들이 방문해주시고 있는 상황입니다.',
-	                        _react2.default.createElement('br', null),
-	                        '원래 계획으로는, 안드로이드 버전 앱과, 아이폰버전 앱을 동시에 오픈하려고 하였습니다. 아직 디자인이나 개발적인 내용이 완벽히 다듬어지지 않아, 오류가 적지 않습니다.'
+	                        'span',
+	                        { className: 'main-letter' },
+	                        '* 이제는 영웅별 평가까지 매일 바뀝니다 !'
 	                    ),
-	                    _react2.default.createElement(
-	                        'p',
-	                        null,
-	                        '평가시스템은 곧 대규모 업데이트가 있을 예정이며, 베타버전으로 아직까지 부족한게 사실입니다. 여러개의 평가기준과 알고리즘을 이용하여 재밌는 요소들을 더욱넣어 재밌는 사이트가 되도록 노력하겠습니다.',
-	                        _react2.default.createElement('br', null),
-	                        '베타버전이지만 이용해주셔셔 감사합니다.'
-	                    ),
-	                    _react2.default.createElement(
-	                        'p',
-	                        { className: 'right-align' },
-	                        '-개발자 일동 올림'
-	                    ),
-	                    _react2.default.createElement('img', { src: '/asset/images/logo.png', className: 'logo' }),
-	                    _react2.default.createElement('span', { className: 'main-divider' }),
 	                    _react2.default.createElement(
 	                        'div',
 	                        { className: 'input-wrapper' },
 	                        _react2.default.createElement('input', { type: 'text',
 	                            name: 'user',
 	                            className: 'search-input',
-	                            placeholder: '닉네임#배틀태그',
+	                            placeholder: '닉네임#배틀태그를 입력하세요.',
 	                            onChange: this._handleChange,
 	                            onKeyPress: this._handleKeyPress }),
-	                        _react2.default.createElement('img', { src: '/asset/images/search-icon.png',
-	                            className: 'search-icon',
-	                            onClick: this._onSearchUser })
+	                        submit_button
 	                    ),
 	                    _react2.default.createElement('br', null),
+	                    _react2.default.createElement('img', { src: '/asset/images/transparent-logo.png', className: 'transparent-logo' }),
 	                    _react2.default.createElement(
-	                        'span',
-	                        { className: 'main-letter' },
-	                        '최초검색 1회후 닉네임으로만 검색할 수 있습니다.'
+	                        'div',
+	                        { className: 'main-sub-text' },
+	                        '나쁜 시계'
 	                    ),
+	                    _react2.default.createElement('span', { className: 'main-divider' }),
 	                    _react2.default.createElement('br', null),
 	                    _react2.default.createElement(
-	                        _reactRouter.Link,
-	                        { to: '/', className: 'main-link link-left' },
-	                        '전적검색'
-	                    ),
-	                    _react2.default.createElement(
-	                        _reactRouter.Link,
-	                        { to: 'chat', className: 'main-link link-right' },
-	                        '파티매칭'
-	                    ),
-	                    _react2.default.createElement('br', null),
-	                    _react2.default.createElement(
-	                        _reactRouter.Link,
-	                        { to: 'youtube', className: 'main-link link-left' },
-	                        '동영상'
-	                    ),
-	                    _react2.default.createElement(
-	                        _reactRouter.Link,
-	                        { to: 'board/free/page/1', className: 'main-link link-right' },
-	                        '커뮤니티'
+	                        'p',
+	                        { className: 'main-p' },
+	                        '나쁜시계는 나쁜 말로 여러분의 오버워치 전적을 적나라하게 표현해드립니다.',
+	                        _react2.default.createElement('br', null),
+	                        ' 실제 전적을 기반으로 평가하니 너무 기분나빠 하지 마시길 바래요.',
+	                        _react2.default.createElement('br', null),
+	                        '나쁜시계로부터 좋은 말을 듣는 그날까지..'
 	                    )
 	                ),
 	                _react2.default.createElement('br', null),
@@ -53106,6 +53250,7 @@
 	        };
 	        _this._onQuick = _this._onQuick.bind(_this);
 	        _this._onRank = _this._onRank.bind(_this);
+	        _this._getUserQuickData = _this._getUserQuickData.bind(_this);
 	        return _this;
 	    }
 
@@ -53156,14 +53301,27 @@
 	    }, {
 	        key: 'componentDidMount',
 	        value: function componentDidMount() {
+	            this._getUserQuickData();
+	        }
+	    }, {
+	        key: 'componentDidUpdate',
+	        value: function componentDidUpdate(prevProps, prevState) {
+	            if (prevProps.params.id != this.props.params.id) {
+	                this._getUserQuickData();
+	            }
+	        }
+	    }, {
+	        key: '_getUserQuickData',
+	        value: function _getUserQuickData() {
 	            var _this3 = this;
 
-	            _axios2.default.get('http://bad.watch/api/user/quick/' + this.props.params.userName).then(function (response) {
+	            _axios2.default.get('http://bad.watch/api/user-id/quick/' + this.props.params.id).then(function (response) {
 	                var data = response.data;
 	                if (data.responseCode == 2) {
 	                    _this3.setState({
 	                        quickUserData: data.userData
 	                    });
+	                    Materialize.toast('오버워치 홈페이지 문제로 빠른대전 기록이 정확하지 않습니다.', 4000);
 	                } else {
 	                    sweetAlert('', '유저 정보가 존재하지 않습니다..', 'error');
 	                    _reactRouter.browserHistory.push('/');
@@ -53177,7 +53335,7 @@
 	    }, {
 	        key: '_getUserRankData',
 	        value: function _getUserRankData() {
-	            return _axios2.default.get('http://bad.watch/api/user/rank/' + this.props.params.userName).then(function (response) {
+	            return _axios2.default.get('http://bad.watch/api/user-id/rank/' + this.props.params.id).then(function (response) {
 	                var data = response.data;
 	                if (data.responseCode == 2) {
 	                    return data.userData;
@@ -53196,7 +53354,6 @@
 	            return _react2.default.createElement(
 	                'div',
 	                null,
-	                _react2.default.createElement(_components.SearchUserInput, null),
 	                _react2.default.createElement(_components.UserDataBox, { userData: this.state.quick_mode ? this.state.quickUserData : this.state.rankUserData,
 	                    onQuick: this._onQuick,
 	                    onRank: this._onRank,
@@ -53304,6 +53461,11 @@
 	    }
 
 	    _createClass(Chat, [{
+	        key: 'componentDidMount',
+	        value: function componentDidMount() {
+	            parent.history.back();
+	        }
+	    }, {
 	        key: 'render',
 	        value: function render() {
 	            return _react2.default.createElement(
@@ -53432,7 +53594,7 @@
 	            var _this4 = this;
 
 	            var MAX_SAFE_INTEGER = 9007199254740991;
-	            var url = "http://bad.watch/api/user?name=" + nextProps.params.userName + "&value=" + MAX_SAFE_INTEGER;
+	            var url = "http://bad.watch/api/user?name=" + encodeURIComponent(nextProps.params.userName) + "&value=" + MAX_SAFE_INTEGER;
 	            _axios2.default.get(url).then(function (response) {
 	                var data = response.data;
 	                if (data.responseCode == 2) {
@@ -53471,7 +53633,6 @@
 	            return _react2.default.createElement(
 	                'div',
 	                null,
-	                _react2.default.createElement(_components.SearchUserInput, null),
 	                _react2.default.createElement(
 	                    'div',
 	                    { className: 'user-list-box' },
@@ -53498,18 +53659,70 @@
 	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(299);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var Article = function (_React$Component) {
+	    _inherits(Article, _React$Component);
+
+	    function Article(props) {
+	        _classCallCheck(this, Article);
+
+	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Article).call(this, props));
+
+	        _this.displayName = 'Article';
+	        return _this;
+	    }
+
+	    _createClass(Article, [{
+	        key: 'render',
+	        value: function render() {
+	            return _react2.default.createElement(
+	                'div',
+	                null,
+	                this.props.children
+	            );
+	        }
+	    }]);
+
+	    return Article;
+	}(_react2.default.Component);
+
+	exports.default = Article;
+
+/***/ },
+/* 689 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
 		value: true
 	});
 
-	var _authentication = __webpack_require__(689);
+	var _authentication = __webpack_require__(690);
 
 	var _authentication2 = _interopRequireDefault(_authentication);
 
-	var _youtubes = __webpack_require__(690);
+	var _youtubes = __webpack_require__(691);
 
 	var _youtubes2 = _interopRequireDefault(_youtubes);
 
-	var _chat = __webpack_require__(691);
+	var _chat = __webpack_require__(692);
 
 	var _chat2 = _interopRequireDefault(_chat);
 
@@ -53524,7 +53737,7 @@
 	});
 
 /***/ },
-/* 689 */
+/* 690 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -53604,7 +53817,7 @@
 	}
 
 /***/ },
-/* 690 */
+/* 691 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -53725,7 +53938,7 @@
 	}
 
 /***/ },
-/* 691 */
+/* 692 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -53858,7 +54071,7 @@
 	}
 
 /***/ },
-/* 692 */
+/* 693 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -53886,7 +54099,7 @@
 	exports['default'] = thunk;
 
 /***/ },
-/* 693 */
+/* 694 */
 /***/ function(module, exports) {
 
 	/* WEBPACK VAR INJECTION */(function(__dirname) {'use strict';

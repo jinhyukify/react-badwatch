@@ -6,6 +6,11 @@ class Chat extends React.Component {
         this.displayName = 'Chat';
     }
 
+    componentDidMount()
+    {
+        parent.history.back();
+    }
+
 
     render() {
         return (
