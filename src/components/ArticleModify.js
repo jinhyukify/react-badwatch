@@ -39,6 +39,8 @@ class ArticleModify extends React.Component {
 		});
 	}
 
+	
+
 	componentDidMount(){
 		this._getData();
 	}

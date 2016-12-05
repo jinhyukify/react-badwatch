@@ -48,32 +48,39 @@ class ArticleWrite extends React.Component{
 			let data = response.data;
 
 			if(data.responseCode == CREATE_ARTICLE_SUCCESS){
-				var query = '/board/';
+				var query = '/article/';
 					query += this.state.boardType;
-					query += '/page/';
+					query += '?page=';
 					query += 1;
 				browserHistory.push(query);
 			}
 			else{
-
+				sweetAlert(
+						'',
+				       '글 등록에 실패했습니다.',
+				        'error'
+				)
+				return false;
 			}
 		})
 	}
 
+	
+
 	render(){
 		return(
-			<div>
-				<select className = "browser-default" onChange={this._changeBoardType} value={this.state.boardType}>
+			<div> 
+				<select className = "browser-default article-write-select" onChange={this._changeBoardType} value={this.state.boardType}>
     				<option value="free">자유게시판</option>
     				<option value="strategy">전략게시판</option>
   				</select>
 
   				제목 <input type="text" name="title" value={this.state.title} onChange={this._handleChangeTitle}/>
-  				내용 <textarea name="content" value={this.state.content} onChange={this._handleChangeContent}/>
+  				내용 <textarea name="content" className="article-textarea" value={this.state.content} onChange={this._handleChangeContent}/>
   				
                         <div className="modal-footer">
                           <a onClick={this._writeArticle} 
-                             className="waves-effect waves-light btn">작성</a>
+                             className="waves-effect btn">작성</a>
                         </div>
   			</div>
 		);

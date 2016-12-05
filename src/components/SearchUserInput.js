@@ -1,12 +1,13 @@
 import React from 'react';
 import { Link, browserHistory } from 'react-router';
-
+import axios from 'axios';
 class SearchUserInput extends React.Component {
     constructor(props) {
         super(props);
         this.displayName = 'SearchUserInput';
         this.state = {
-        	userName: ''
+        	userName: '',
+            status: 'INIT'
         };
         this._handleChange = this._handleChange.bind(this);
         this._handleKeyPress = this._handleKeyPress.bind(this);
@@ -53,8 +54,33 @@ class SearchUserInput extends React.Component {
 				)
     			return;
     		}
-			    		
-    		browserHistory.push('/user/' + userName);
+			this.setState({
+                status: 'WAITING'
+            }, function(){
+                let url = "http://localhost:3000/api/user/"+userName;  
+                axios.get(url)
+                    .then((response) => {
+                        let data = response.data;
+                        if(data.responseCode == 2)
+                        {
+                            this.setState({
+                                status: 'INIT'
+                            }, function(){
+                                browserHistory.push('/user/' + data.user_id);
+                            });
+                        }
+                        else 
+                        {
+                            sweetAlert(
+                              '',
+                              '유저가 존재하지 않습니다.',
+                              'error'
+                            )
+                            return;
+                        }
+                    })
+            });  
+            
     	}
     	else
     	{
@@ -63,14 +89,37 @@ class SearchUserInput extends React.Component {
     }
 
     render() {
+        const status_inactive = (
+                <img src="/asset/images/nav-search-icon.png"
+                         className="nav-search-icon"/>
+            );
+        const status_active = (
+               <div className="preloader-wrapper small active search-preloader">
+                <div className="spinner-layer spinner-blue-only">
+                  <div className="circle-clipper left">
+                    <div className="circle"></div>
+                  </div><div className="gap-patch">
+                    <div className="circle"></div>
+                  </div><div className="circle-clipper right">
+                    <div className="circle"></div>
+                  </div>
+                </div>
+              </div>
+            );
+        let submit_button = null;
+        if(this.state.status == 'INIT')
+            submit_button = status_inactive;
+        else
+            submit_button = status_active;
         return (
-        		<div className="top-input-div">
-        			<input className="topSearchInput"
-        				   onChange={this._handleChange}
-        				   onKeyPress={this._handleKeyPress}/>
-        			<img src="/asset/images/search-icon.png"
-        				 className="search-icon"
-        				 onClick={this._onSearchUser}/>
+        		<div className="input-wrapper">
+        			<input type="text"
+                           className="nav-search-input"
+                           placeholder="닉네임#배틀태그를 입력하세요."
+                           value={this.state.userName}
+                           onChange={this._handleChange}
+                           onKeyPress={this._handleKeyPress}/>
+                    {submit_button}
         		</div>
         	);
     }

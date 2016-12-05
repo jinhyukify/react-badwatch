@@ -48,6 +48,17 @@ class UserProfile extends React.Component {
       }
     }
 
+    _renewAble(date)
+    {
+       var today = new Date();  
+       var dateObj = new Date(date);
+       var minute = Math.floor((today.getTime() - dateObj.getTime()) / 1000 / 60);
+       if(minute < 11)
+          return false;
+       else
+         return true; 
+    }
+
     _onRenew()
     {
     	this.setState({
@@ -84,56 +95,48 @@ class UserProfile extends React.Component {
 
     render() {
     	let renewState = undefined;
-    	if(this.state.renewStart)
+    	if(this._renewAble(this.props.userData.last_renew))
     	{
     		renewState = (
-    				<div className="preloader-wrapper renew-loader active">
-					    <div className="spinner-layer spinner-white-only">
-					      <div className="circle-clipper left">
-					        <div className="circle"></div>
-					      </div><div className="gap-patch">
-					        <div className="circle"></div>
-					      </div><div className="circle-clipper right">
-					        <div className="circle"></div>
-					      </div>
-					    </div>
-					  </div>
+    				<div className="renew-box" onClick={this._onRenew}>
+                <img src="/asset/images/renew-available.png" className="renew-available"/>
+                  갱신하기
+             </div>
     			);
     	}
     	else 
     	{
     		renewState = (
-    				<img src="/asset/images/renew.png" className="renew-icon"/>
+    				<div className="renew-box-disabled">
+                <img src="/asset/images/renew-disable.png" className="renew-available"/>
+                갱신됨
+             </div>
     			);
     	}
         return (
 	        	<div>
-	        		<div>
+	        		<div className="user-profile">
 		        		<img className="user-profile-img"
 		        			 src={this.props.userData.avatar} />
 		        		<div className="profile-battletag">
-		        			{this.props.userData.name} # {this.props.userData.battletag}
-                  <br className="computer-hide"/>
-		        			<span className="meta">최근 갱신시간 : {this._dateFormat(this.props.userData.last_renew)}</span>
-		        		</div>
-		        		<div className="profile-info">
-		        			<span>레벨 {this.props.userData.level}</span><br/>
-		        			<span>경쟁전 점수 {this.props.userData.point}</span>
-                  <br className="computer-hide"/><br className="computer-hide"/>
-		        			<span className="renew-box" onClick={this._onRenew}>
-		        				{renewState}
-		        			</span><br className="computer-hide"/>
-		        			<span className="renew-ment">
-		        				! 게임종료 후 갱신해야 최신 기록이 업데이트됩니다.
-		        			</span>
-		        		</div>
+		        			<span className="profile-user-name">{this.props.userData.name}</span>
+                  <span className="profile-user-level">경쟁전 점수 <span className="red-text">{this.props.userData.point}</span></span>
+                  <span className="profile-user-level">레벨 <span className="red-text">{this.props.userData.level}</span></span>
+                  <div className="profile-absolute">
+                    <span className="meta">최근 갱신시간 : {this._dateFormat(this.props.userData.last_renew)}</span>
+  		        		  {renewState}
+                  </div>
+                </div>
 	        		</div>
 	        		<div className="clear">
-						<div className="reputation-title">배드워치 평가</div>
-						<div className="reputation">
-							{this.props.userData.reputation}
-						</div>
-					</div>
+  						<div className="reputation">
+                <img src="/asset/images/quot-left.png" className="quot-left"/>
+  							<div className="reputation-text-top">
+                  {this.props.userData.reputation}
+                </div>
+                <img src="/asset/images/quot-right.png" className="quot-right"/>
+  						</div>
+  					</div>
 	        	</div>	
         	);
     }

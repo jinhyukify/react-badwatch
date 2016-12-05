@@ -2,8 +2,8 @@ import "babel-polyfill";
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Router, Route, browserHistory, IndexRoute } from 'react-router';
-import { App, Home, Login, Register, User, Youtube, Board, Chat, UserByName } from './containers';
-import { YoutubeBox, YoutubeShowBox, YoutubeEditBox, ChatRoom, RoomList, ArticleWrite, ArticleModify, BoardBox, BoardShowBox} from './components';
+import { App, Home, Login, Register, User, Youtube, Chat, UserByName, Article } from './containers';
+import { YoutubeBox, YoutubeShowBox, YoutubeEditBox, ChatRoom, RoomList, ArticleWrite, ArticleModify, ArticleList, ArticleShowBox } from './components';
 //Redux
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
@@ -19,7 +19,7 @@ ReactDOM.render(
 				<Route path="/" component={App}>
 					<IndexRoute component={Home}/>
 					<Route path="home" component={Home}/>
-					<Route path="user/:userName" component={User} />
+					<Route path="user/:id" component={User} />
 					<Route path="userByName/:userName" component={UserByName} />
 					<Route path="login" component={Login}/>
 					<Route path="chat" component={Chat}>
@@ -31,11 +31,10 @@ ReactDOM.render(
 						<Route path="show/:id" component={YoutubeShowBox}/>
 						<Route path="edit/:id" component={YoutubeEditBox} />
 					</Route>
-					<Route path="board" component={Board}>
-						<Route path=":boardType/page/:pageId" component={BoardBox}/>
-						<Route path=":boardType/page/:pageId/article/:articleId" component={BoardShowBox}/>
-						<Route path="write" component={ArticleWrite}/>
-						<Route path="modify/:boardType/:articleId" component={ArticleModify}/>
+					<Route path="article" component={Article}>
+						<Route path=":boardType" component={ArticleList}/>
+						<Route path=":boardType/show/:id" component={ArticleShowBox} />
+						<Route path=":boardType/write" component={ArticleWrite}/>
 					</Route>
 				</Route>
 			</Router>

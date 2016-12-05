@@ -6,4 +6,5 @@ import User from './User';
 import Youtube from './Youtube';
 import Chat from './Chat';
 import UserByName from './UserByName';
-export { App, Home, Login, Register, User, Youtube, Chat, UserByName };
+import Article from './Article';
+export { App, Home, Login, Register, User, Youtube, Chat, UserByName, Article };

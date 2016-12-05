@@ -9,8 +9,8 @@ class UserList extends React.Component {
 
     _goToUser()
     {
-    	let battletag = this.props.user.name + "-" + this.props.user.battletag;
-    	browserHistory.push('/user/'+battletag);
+    	let user_id = this.props.user.user_id;
+    	browserHistory.push('/user/'+ user_id);
     }
 
     render() {
@@ -30,7 +30,7 @@ class UserList extends React.Component {
         			<img src={user.avatar} className="avatar"/>
         			<div>
         				<div className="width-50 list-battletag">
-        					{user.name}#{user.battletag}	
+        					{user.name}
         				</div><div className="width-50 mobile-hide">
         					승률 {win_rate}%
         				</div><div className="width-50 list-point">

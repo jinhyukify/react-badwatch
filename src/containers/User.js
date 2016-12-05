@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import { browserHistory } from 'react-router';
 import { UserDataBox, SearchUserInput } from '../components';
 class User extends React.Component {
     constructor(props) {
@@ -16,6 +17,7 @@ class User extends React.Component {
         };
         this._onQuick = this._onQuick.bind(this);
         this._onRank = this._onRank.bind(this);
+        this._getUserQuickData = this._getUserQuickData.bind(this);
     }
 
     _onQuick()
@@ -85,7 +87,20 @@ class User extends React.Component {
 
     componentDidMount()	
     {
-    	axios.get('http://bad.watch/api/user/quick/' + this.props.params.userName)
+    	this._getUserQuickData();
+    }
+
+    componentDidUpdate(prevProps, prevState)
+    {
+    	if(prevProps.params.id != this.props.params.id)
+    	{
+    		this._getUserQuickData();
+    	}
+    }
+
+    _getUserQuickData()
+    {
+    	axios.get('http://bad.watch/api/user-id/quick/' + this.props.params.id)
  			 .then( response => { 
  			 	let data = response.data;
  			 	 if(data.responseCode == 2)
@@ -98,10 +113,11 @@ class User extends React.Component {
  			 	 else
  			 	 {
  			 	 	sweetAlert(
-					  '데이터를 불러오는데 오류가 발생했습니다.',
-					  '잠시후 다시시도해주세요.',
+					  '',
+					  '유저 정보가 존재하지 않습니다..',
 					  'error'
 					)
+					browserHistory.push('/');
 					return;
  			 	 }
  			 })
@@ -112,12 +128,12 @@ class User extends React.Component {
 					  'error'
 					)
 					return;
- 			  })   	
+ 			  })
     }
 
     _getUserRankData()
     {
-    	return axios.get('http://bad.watch/api/user/rank/' + this.props.params.userName)
+    	return axios.get('http://bad.watch/api/user-id/rank/' + this.props.params.id)
 	 			 .then( response => { 
 	 			 	let data = response.data;
 	 			 	 if(data.responseCode == 2)
@@ -148,7 +164,7 @@ class User extends React.Component {
     render() {
         return (
         		<div>
-	        		<SearchUserInput />
+	        		
 	        		<UserDataBox userData={this.state.quick_mode? this.state.quickUserData: this.state.rankUserData} 
         				     onQuick={this._onQuick} 
         				     onRank={this._onRank} 

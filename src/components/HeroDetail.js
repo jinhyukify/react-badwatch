@@ -73,21 +73,21 @@ class HeroDetail extends React.Component {
         			<div className="hero-data-div">
         				<div className="hero-detail-1">
 	        				<div>
-	        					<div>
+	        					<div className="inline">
 	        						<span className="list-circle"></span>
 	        						<span className="list-title">메달</span>
 	        					</div>
 	        					<div className="medal">
 	        						<span className="left inline">
-	        							<img src="/asset/images/gold-medal.png" className="gold-medal" /><br/>
+	        							<img src="/asset/images/gold-icon.png" className="gold-medal" />
 	        							{this.props.quick_mode? hero.quick_gold_medal: hero.rank_gold_medal}
 	        						</span>
 	        						<span className="inline">	
-	        							<img src="/asset/images/silver-medal.png" className="silver-medal" /><br/>
+	        							<img src="/asset/images/silver-icon.png" className="silver-medal" />
 	        							{this.props.quick_mode? hero.quick_silver_medal: hero.rank_silver_medal}
 	        						</span>
 	        						<span className="right inline">
-	        							<img src="/asset/images/bronze-medal.png" className="bronze-medal" /><br/>
+	        							<img src="/asset/images/bronze-icon.png" className="bronze-medal" />
 	        							{this.props.quick_mode? hero.quick_bronze_medal: hero.rank_bronze_medal}
 	        						</span>
 	        					</div>

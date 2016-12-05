@@ -47,7 +47,7 @@ class YoutubeShowBox extends React.Component {
                 {
                      sweetAlert(
                       '',
-                      '실패했습니다.',
+                      '로그인이 필요합니다.',
                       'error'
                     )
                      return;
@@ -148,13 +148,15 @@ class YoutubeShowBox extends React.Component {
                        like_count={this.state.youtube.like_count}
                        written_time={this.state.youtube.written_time} 
                        name={this.state.youtube.name}/>
-        		<div className="video-container">
-		           <iframe width="853" height="480" src={"//www.youtube.com/embed/"+this.state.youtube.youtube_key} frameBorder="0" allowFullScreen></iframe>
-		        </div>
+        		<div className="youtube-container">
+		           <iframe width="546" height="321" src={"//www.youtube.com/embed/"+this.state.youtube.youtube_key} frameBorder="0" allowFullScreen></iframe>
+		          
+            </div>
                 <LikeBox like_count={this.state.youtube.like_count} 
                          handleLike={this._onLike} 
                          handleDisLike={this._onDisLike}
-                         like_status={this.state.youtube.like_status} />
+                         like_status={this.state.youtube.like_status} 
+                         hit_count={this.state.youtube.hit_count}/>
                 {this.state.youtube.authentication? auth_box: undefined}
                 <YoutubeCommentBox id={this.props.params.id} />
             </div>               

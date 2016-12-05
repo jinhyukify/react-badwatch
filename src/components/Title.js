@@ -5,16 +5,29 @@ class Title extends React.Component {
         super(props);
         this.displayName = 'Title';
     }
+
+    _dateFormat(date) 
+    {
+      let now = new Date(date);
+      let year = "" + now.getFullYear();
+      let month = "" + (now.getMonth() + 1); if (month.length == 1) { month = "0" + month; }
+      let day = "" + now.getDate(); if (day.length == 1) { day = "0" + day; }
+      let hour = "" + now.getHours(); if (hour.length == 1) { hour = "0" + hour; }
+      let minute = "" + now.getMinutes(); if (minute.length == 1) { minute = "0" + minute; }
+      let second = "" + now.getSeconds(); if (second.length == 1) { second = "0" + second; }
+      return year + "-" + month + "-" + day + " " + hour + ":" + minute + ":" + second;
+    }
     render() {
         return (
-        		<div className="card-panel red lighten-4">
-        			제목 : {this.props.title} <br/>
-        			댓글수 : {this.props.comment_count}개 <br/>
-        			좋아요 : {this.props.like_count}개 <br/>
-        			조회수 : {this.props.hit_count} <br/>
-        			작성시간 : {this.props.written_time} <br/>
-                    작성자 : {this.props.name? this.props.name: "익명"}
-        		</div>
+            <div>
+                <div className="youtube-title">
+                    {this.props.title}
+                </div>
+                <div className="youtube-writer">
+                    <span>글쓴이 : </span> {this.props.name? this.props.name: "익명"}<span className="youtube-date">{this._dateFormat(this.props.written_time)}</span>
+                </div>
+        		
+            </div> 
         	);
     }
 }

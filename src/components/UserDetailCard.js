@@ -7,7 +7,9 @@ class UserDetailCard extends React.Component {
     }
     render() {
         return (
-        		<div className="col s6 h2 user-detail">
+        		<div className="user-detail-card">
+                    <img src={"/asset/images/"+this.props.img+".png"} 
+                         className="summary-icon"/>
                     <div className="data-title">
         			{this.props.children}
                     </div>
@@ -27,7 +29,8 @@ class UserDetailCard extends React.Component {
 
 UserDetailCard.propTypes = {
 	data: React.PropTypes.any,
-	average: React.PropTypes.any
+	average: React.PropTypes.any,
+    img: React.PropTypes.string
 };
 
 export default UserDetailCard;

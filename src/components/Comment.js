@@ -16,6 +16,44 @@ class Comment extends React.Component {
     	this._onCreateComment = this._onCreateComment.bind(this);
     }
 
+    _dateFormat(date)
+    {
+      var today = new Date();   
+
+      var dateObj = new Date(date);
+      var month = Math.floor((today.getTime() - dateObj.getTime()) / 1000 / 60 / 60/ 24 /30);
+      var day = Math.floor((today.getTime() - dateObj.getTime()) / 1000 / 60 / 60/ 24);
+      var hour = Math.floor((today.getTime() - dateObj.getTime()) / 1000 / 60 / 60);
+      var minute = Math.floor((today.getTime() - dateObj.getTime()) / 1000 / 60);
+
+      if( month == 0 )
+      {
+         if( day != 0 )
+         {
+            if( day == 1 )
+               return "어제";
+            else
+               return day+"일 전";
+         }
+         else
+         {
+            if( hour !=0 )
+               return hour+"시간 전";
+            else
+               return minute+"분 전";
+         }
+
+      }
+      else if( minute <= 0 )
+      {
+         return "방금";
+      }
+      else
+      {
+         return month+"달 전"
+      }
+    }
+
     _onCreateComment(content)
     {
     	return axios({
@@ -94,8 +132,8 @@ class Comment extends React.Component {
     render() {
     	const comment = this.props.comment;
     	const replyStatus = (
-    			<div>
-    				{comment.reply_count == 0? "답글달기": "답글 "+comment.reply_count + "개"}
+    			<div className="comment-reply">
+    				{comment.reply_count == 0? "[답글]": "[답글 "+comment.reply_count + "개]"}
     			</div>
     		);
     	const replyInfo = (
@@ -106,8 +144,8 @@ class Comment extends React.Component {
         							   reply={reply}/>
         					);
         			})}
-        			<div onClick={this._handleReplyOpen}>
-        				{this.state.isOpen? "답글접기": undefined}
+        			<div onClick={this._handleReplyOpen} className="comment-reply">
+        				{this.state.isOpen? "[답글접기]": undefined}
         			</div>
         			<CommentInput onCreateComment={this._onCreateComment}/>
     			</div>
@@ -115,10 +153,15 @@ class Comment extends React.Component {
 
 
         return (
-        	<div className="blue-grey">
-        		<div className="white-text">
-        			{comment.content}{comment.written_time}<span className="red-text">[{comment.ip}]</span>
-                    {comment.name? comment.name: "익명"}
+        	<div className="comment">
+        		<div className="">
+                <img src={comment.avatar} className="comment-avatar"/>
+                <div className="right-comment-div">
+                     <span className="comment-name">{comment.name? comment.name: "익명"}</span>
+                     <span className="meta">{this._dateFormat(comment.written_time)}</span>
+                     <span className="red-text ip">[{comment.ip}]</span>
+                     <div>{comment.content}</div>
+                </div>
         			<div onClick={this._handleReplyOpen}>
         				{this.state.isOpen? undefined: replyStatus}
         			</div>
